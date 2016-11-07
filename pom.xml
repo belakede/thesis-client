@@ -9,11 +9,6 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <modules>
-        <module>suspect-chat-client</module>
-        <module>suspect-client-common</module>
-    </modules>
-
     <properties>
         <java.version>1.8</java.version>
     </properties>
