@@ -17,6 +17,7 @@ public class MainFrameController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            loadContent("game");
             loadContent("auth");
         } catch (IOException e) {
             throw new RuntimeException("Can't load auth.fxml");
@@ -25,7 +26,6 @@ public class MainFrameController implements Initializable {
 
     private void loadContent(String key) throws IOException {
         Pane load = FXMLLoader.load(getClass().getResource("../" + key + ".fxml"));
-        parent.getChildren().clear();
         parent.getChildren().add(load);
     }
 }
