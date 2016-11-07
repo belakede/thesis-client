@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
-<StackPane xmlns:fx="http://javafx.com/fxml"
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:id="parent"
            fx:controller="me.belakede.thesis.client.boundary.javafx.controller.MainFrameController">
-    <Pane fx:id="parent"/>
 </StackPane>
