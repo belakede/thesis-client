@@ -35,9 +35,9 @@ public class GameController implements Initializable {
                 boardPane.getChildren().add(new Rectangle(15, 15, Color.web("#cccccc")));
             }
         }
-        Rotate horizontalRotate = new Rotate(0, Rotate.Y_AXIS);
-        Rotate verticalRotate = new Rotate(0, Rotate.X_AXIS);
-        Rotate theThirdOneRotate = new Rotate(0, Rotate.Z_AXIS);
+        Rotate horizontalRotate = new Rotate(0, 202.5, 202.5, 0, Rotate.X_AXIS);
+        Rotate verticalRotate = new Rotate(0, 202.5, 202.5, 0, Rotate.Y_AXIS);
+        Rotate theThirdOneRotate = new Rotate(0, 202.5, 202.5, 202.5, Rotate.Z_AXIS);
         horizontalRotate.angleProperty().bind(sliderHorizontal.valueProperty());
         verticalRotate.angleProperty().bind(sliderVertical.valueProperty());
         theThirdOneRotate.angleProperty().bind(sliderTheThirdOne.valueProperty());

@@ -57,15 +57,15 @@
                     </HBox>
                     <VBox styleClass="slider-container">
                         <HBox>
-                            <Slider min="-40" max="40" showTickMarks="true" value="2" fx:id="sliderHorizontal"/>
+                            <Slider min="-40" max="40" showTickMarks="true" value="1" fx:id="sliderHorizontal"/>
                             <Label fx:id="sliderHorizontalLabel"/>
                         </HBox>
                         <HBox>
-                            <Slider min="-40" max="40" showTickMarks="true" value="36" fx:id="sliderVertical"/>
+                            <Slider min="-40" max="40" showTickMarks="true" value="1" fx:id="sliderVertical"/>
                             <Label fx:id="sliderVerticalLabel"/>
                         </HBox>
                         <HBox>
-                            <Slider min="-40" max="40" showTickMarks="true" value="8" fx:id="sliderTheThirdOne"/>
+                            <Slider min="-90" max="90" showTickMarks="true" value="14" fx:id="sliderTheThirdOne"/>
                             <Label fx:id="sliderTheThirdOneLabel"/>
                         </HBox>
                     </VBox>
