@@ -30,11 +30,8 @@
             <version>${guava.version}</version>
         </dependency>
         <dependency>
-                
             <groupId>org.controlsfx</groupId>
-                
             <artifactId>controlsfx</artifactId>
-                
             <version>${controlsfx.version}</version>
         </dependency>
         <dependency>
@@ -62,6 +59,15 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
