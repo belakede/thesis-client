@@ -1,4 +1,4 @@
-package me.belakede.thesis.client.boundary.javafx;
+package me.belakede.thesis.client.boundary.javafx.util;
 
 import com.google.common.base.CaseFormat;
 import javafx.fxml.FXMLLoader;
