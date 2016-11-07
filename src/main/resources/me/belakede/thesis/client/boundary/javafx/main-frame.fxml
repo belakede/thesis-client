@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.layout.BorderPane?>
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="me.belakede.thesis.client.boundary.javafx.controller.MainFrameController">
-    <top>
-        <ToolBar fx:id="toolBar">
-            <Button text="Hello World!"></Button>
-        </ToolBar>
-    </top>
-    <center></center>
-</BorderPane>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="me.belakede.thesis.client.boundary.javafx.controller.MainFrameController">
+    <Pane fx:id="parent"/>
+</StackPane>
