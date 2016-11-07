@@ -15,8 +15,8 @@ public class ControlLoader {
     public static <T> void load(T instance) {
         boolean pane = Pane.class.isAssignableFrom(instance.getClass());
         if (pane) {
-            String fxmlFile = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, instance.getClass().getSimpleName());
-            FXMLLoader fxmlLoader = new FXMLLoader(ControlLoader.class.getResource(fxmlFile));
+            String fxmlFile = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, instance.getClass().getSimpleName()).concat(".fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(instance.getClass().getResource(fxmlFile));
             fxmlLoader.setRoot(instance);
             fxmlLoader.setController(instance);
             try {
