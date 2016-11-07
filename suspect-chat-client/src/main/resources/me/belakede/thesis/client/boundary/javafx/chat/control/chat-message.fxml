@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml" styleClass="content-container" prefWidth="220" minWidth="220" maxWidth="220">
+    <Label fx:id="details" styleClass="content-sender">adam @ 17:20</Label>
+    <Label fx:id="content" styleClass="content-content" wrapText="true">content content content content content content content</Label>
+</fx:root>
