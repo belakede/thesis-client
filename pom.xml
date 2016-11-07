@@ -11,6 +11,7 @@
 
     <modules>
         <module>suspect-chat-client</module>
+        <module>suspect-client-common</module>
     </modules>
 
     <properties>
