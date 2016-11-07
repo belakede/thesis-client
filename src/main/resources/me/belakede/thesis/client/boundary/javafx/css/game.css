@@ -1,18 +1,22 @@
 .card-container {
-    -fx-background-color: aquamarine;
     -fx-padding: -75 0 0 0;
 }
 
-.card-container .card Rectangle {
-    -fx-fill: #cccccc;
-    -fx-stroke: #333333;
-    -fx-stroke-width: 2;
+.card-container .card {
+    -fx-opacity: 0.65;
 }
 
 .card-container .card:hover {
     -fx-scale-x: 1.2;
     -fx-scale-y: 1.2;
     -fx-scale-z: 1.2;
+    -fx-opacity: 1.0;
+}
+
+.card-container .card Rectangle {
+    -fx-fill: #cccccc;
+    -fx-stroke: #333333;
+    -fx-stroke-width: 1;
 }
 
 .card-container .card:hover Rectangle {
