@@ -4,12 +4,11 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import me.belakede.thesis.client.boundary.javafx.chat.model.Message;
+import me.belakede.thesis.client.javafx.ControlLoader;
 
-import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
 public class ChatMessage extends VBox {
@@ -32,14 +31,7 @@ public class ChatMessage extends VBox {
     }
 
     private void loadFxml() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("chat-message.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
-        try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+        ControlLoader.load(this);
     }
 
     private void hookupChangeListeners() {
