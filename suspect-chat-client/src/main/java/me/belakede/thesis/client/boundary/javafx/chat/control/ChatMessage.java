@@ -10,9 +10,11 @@ import javafx.scene.layout.VBox;
 import me.belakede.thesis.client.boundary.javafx.chat.model.Message;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 public class ChatMessage extends VBox {
 
+    private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("hh:mm");
     private final ObjectProperty<Message> messageProperty = new SimpleObjectProperty<>();
     @FXML
     private Label details;
@@ -41,7 +43,7 @@ public class ChatMessage extends VBox {
     }
 
     private void hookupChangeListeners() {
-        details.textProperty().bind(Bindings.concat(messageProperty.getValue().getSender(), " @ ", messageProperty.getValue().getTime().toLocalTime()));
+        details.textProperty().bind(Bindings.concat(messageProperty.getValue().getSender(), " @ ", FORMATTER.format(messageProperty.getValue().getTime().toLocalTime())));
         content.textProperty().bind(messageProperty.getValue().contentProperty());
     }
 
