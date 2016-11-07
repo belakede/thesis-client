@@ -68,3 +68,11 @@
     -fx-padding: 0 0 0 -20;
     -fx-rotate: 10;
 }
+
+.board-container Rectangle:hover {
+    -fx-fill: #1e90ff;
+}
+
+.slider-container {
+    -fx-padding: -30 0 0 50;
+}
