@@ -1,10 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<BorderPane xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="@css/game.css"
             fx:controller="me.belakede.thesis.client.boundary.javafx.controller.GameController">
     <center>
         <Label text="It's the game!"></Label>
     </center>
+    <bottom>
+        <StackPane minHeight="45" maxHeight="45" prefHeight="45">
+            <children>
+                <HBox styleClass="card-container">
+                    <StackPane styleClass="card, first">
+                        <Rectangle width="75" height="125"/>
+                        <Text>Card 1</Text>
+                    </StackPane>
+                    <StackPane styleClass="card, second">
+                        <Rectangle width="75" height="125"/>
+                        <Text>Card 2</Text>
+                    </StackPane>
+                    <StackPane styleClass="card, third">
+                        <Rectangle width="75" height="125"/>
+                        <Text>Card 3</Text>
+                    </StackPane>
+                    <StackPane styleClass="card, fourth">
+                        <Rectangle width="75" height="125"/>
+                        <Text>Card 4</Text>
+                    </StackPane>
+                    <StackPane styleClass="card, fifth">
+                        <Rectangle width="75" height="125"/>
+                        <Text>Card 5</Text>
+                    </StackPane>
+                    <StackPane styleClass="card, sixth">
+                        <Rectangle width="75" height="125"/>
+                        <Text>Card 6</Text>
+                    </StackPane>
+                    <StackPane styleClass="card, seventh">
+                        <Rectangle width="75" height="125"/>
+                        <Text>Card 7</Text>
+                    </StackPane>
+                    <StackPane styleClass="card, eighth">
+                        <Rectangle width="75" height="125"/>
+                        <Text>Card 8</Text>
+                    </StackPane>
+                    <StackPane styleClass="card, ninth">
+                        <Rectangle width="75" height="125"/>
+                        <Text>Card 9</Text>
+                    </StackPane>
+                </HBox>
+            </children>
+        </StackPane>
+    </bottom>
 </BorderPane>

@@ -1,0 +1,66 @@
+.card-container {
+    -fx-background-color: aquamarine;
+    -fx-padding: -75 0 0 0;
+}
+
+.card-container .card Rectangle {
+    -fx-fill: #cccccc;
+    -fx-stroke: #333333;
+    -fx-stroke-width: 2;
+}
+
+.card-container .card:hover {
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+    -fx-scale-z: 1.2;
+}
+
+.card-container .card:hover Rectangle {
+    -fx-fill: #aaaaaa;
+    -fx-stroke: #1e90ff;
+}
+
+.card-container .card.first {
+    -fx-padding: 20 0 0 10;
+    -fx-rotate: -10;
+}
+
+.card-container .card.second {
+    -fx-padding: -5 0 0 -20;
+    -fx-rotate: 5;
+}
+
+.card-container .card.third {
+    -fx-padding: -5 0 0 -20;
+    -fx-rotate: -5;
+}
+
+.card-container .card.fourth {
+    -fx-padding: -20 0 0 -20;
+    -fx-rotate: 4;
+}
+
+.card-container .card.fifth {
+    -fx-padding: 0 0 0 -25;
+    -fx-rotate: -10;
+}
+
+.card-container .card.sixth {
+    -fx-padding: -10 0 0 -20;
+    -fx-rotate: 10;
+}
+
+.card-container .card.seventh {
+    -fx-padding: 0 0 0 -20;
+    -fx-rotate: -5;
+}
+
+.card-container .card.eighth {
+    -fx-padding: 10 0 0 -20;
+    -fx-rotate: -10;
+}
+
+.card-container .card.ninth {
+    -fx-padding: 0 0 0 -20;
+    -fx-rotate: 10;
+}
