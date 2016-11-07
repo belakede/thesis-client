@@ -11,12 +11,12 @@ public class Message {
 
     private final StringProperty sender;
     private final ObjectProperty<LocalDateTime> time;
-    private final StringProperty message;
+    private final StringProperty content;
 
-    public Message(String sender, LocalDateTime time, String message) {
+    public Message(String sender, LocalDateTime time, String content) {
         this.sender = new SimpleStringProperty(sender);
         this.time = new SimpleObjectProperty<>(time);
-        this.message = new SimpleStringProperty(message);
+        this.content = new SimpleStringProperty(content);
     }
 
     public String getSender() {
@@ -43,15 +43,15 @@ public class Message {
         this.time.set(time);
     }
 
-    public String getMessage() {
-        return message.get();
+    public String getContent() {
+        return content.get();
     }
 
-    public StringProperty messageProperty() {
-        return message;
+    public StringProperty contentProperty() {
+        return content;
     }
 
-    public void setMessage(String message) {
-        this.message.set(message);
+    public void setContent(String content) {
+        this.content.set(content);
     }
 }
