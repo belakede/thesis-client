@@ -2,11 +2,13 @@
 .board-container {
     -fx-border-color: #000000;
     -fx-border-style: solid;
-    -fx-border-width: 2;
+    -fx-border-width: 10px;
 }
 
 .board-container.default {
     -fx-background-image: url("../img/default.png");
+    -fx-background-size: 405px 405px;
+    -fx-background-position: 10px 10px;
 }
 
 .slider-container {
