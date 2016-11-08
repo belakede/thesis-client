@@ -12,7 +12,7 @@ public class CardPane extends StackPane {
 
     private final ObjectProperty<Card> card = new SimpleObjectProperty<>();
     @FXML
-    private Pane rectangle;
+    private Pane content;
 
     public CardPane(Card card) {
         load();
@@ -23,7 +23,7 @@ public class CardPane extends StackPane {
     }
 
     private void setBindings() {
-        rectangle.getStyleClass().addAll(card.getValue().getCard().name().toLowerCase());
+        content.getStyleClass().addAll(card.getValue().getCard().name().toLowerCase());
     }
 
     public Card getCard() {
@@ -47,7 +47,7 @@ public class CardPane extends StackPane {
     }
 
     private void rotate() {
-        rectangle.rotateProperty().setValue(Math.random() * 40 - 20);
+        content.rotateProperty().setValue(Math.random() * 40 - 20);
     }
 
 }
