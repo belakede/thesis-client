@@ -35,6 +35,11 @@ public class GameController implements Initializable {
                 boardPane.getChildren().add(new Rectangle(15, 15, Color.web("#cccccc")));
             }
         }
+        hookupChangeListeners();
+        addRotation();
+    }
+
+    private void addRotation() {
         Rotate horizontalRotate = new Rotate(0, 202.5, 202.5, 0, Rotate.X_AXIS);
         Rotate verticalRotate = new Rotate(0, 202.5, 202.5, 0, Rotate.Y_AXIS);
         Rotate theThirdOneRotate = new Rotate(0, 202.5, 202.5, 202.5, Rotate.Z_AXIS);
@@ -46,4 +51,17 @@ public class GameController implements Initializable {
         sliderTheThirdOneLabel.textProperty().bind(sliderTheThirdOne.valueProperty().asString("%.2f"));
         boardPane.getTransforms().addAll(horizontalRotate, verticalRotate, theThirdOneRotate);
     }
+
+    private void hookupChangeListeners() {
+        sliderHorizontal.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliderHorizontal.setValue(Math.round(newValue.doubleValue()));
+        });
+        sliderVertical.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliderVertical.setValue(Math.round(newValue.doubleValue()));
+        });
+        sliderTheThirdOne.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliderTheThirdOne.setValue(Math.round(newValue.doubleValue()));
+        });
+    }
+
 }
