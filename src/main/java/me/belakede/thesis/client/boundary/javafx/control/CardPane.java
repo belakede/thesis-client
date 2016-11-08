@@ -3,9 +3,8 @@ package me.belakede.thesis.client.boundary.javafx.control;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import me.belakede.thesis.client.boundary.javafx.model.Card;
 import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
 
@@ -13,9 +12,7 @@ public class CardPane extends StackPane {
 
     private final ObjectProperty<Card> card = new SimpleObjectProperty<>();
     @FXML
-    private Rectangle rectangle;
-    @FXML
-    private Text text;
+    private Pane rectangle;
 
     public CardPane(Card card) {
         load();
@@ -23,6 +20,10 @@ public class CardPane extends StackPane {
         setBindings();
         setOnMouseEnteredEvent();
         rotate();
+    }
+
+    private void setBindings() {
+        rectangle.getStyleClass().addAll(card.getValue().getCard().name().toLowerCase());
     }
 
     public Card getCard() {
@@ -39,10 +40,6 @@ public class CardPane extends StackPane {
 
     private void load() {
         ControlLoader.load(this);
-    }
-
-    private void setBindings() {
-        text.textProperty().bind(cardProperty().get().cardProperty().asString());
     }
 
     private void setOnMouseEnteredEvent() {

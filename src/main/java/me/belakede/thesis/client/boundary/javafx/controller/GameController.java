@@ -11,7 +11,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import me.belakede.thesis.client.boundary.javafx.control.CardPane;
 import me.belakede.thesis.client.boundary.javafx.model.Card;
-import me.belakede.thesis.game.equipment.Room;
 import me.belakede.thesis.game.equipment.Suspect;
 import me.belakede.thesis.game.equipment.Weapon;
 
@@ -52,15 +51,15 @@ public class GameController implements Initializable {
 
     private void addCards() {
         List<CardPane> cardPanes = Arrays.asList(
-                new CardPane(new Card(Room.BATHROOM)),
+                new CardPane(new Card(Suspect.GREEN)),
                 new CardPane(new Card(Suspect.MUSTARD)),
                 new CardPane(new Card(Suspect.PLUM)),
-                new CardPane(new Card(Weapon.KNIFE)),
-                new CardPane(new Card(Room.HALL)),
-                new CardPane(new Card(Room.LIBRARY)),
+                new CardPane(new Card(Suspect.PEACOCK)),
+                new CardPane(new Card(Suspect.WHITE)),
+                new CardPane(new Card(Suspect.SCARLET)),
                 new CardPane(new Card(Weapon.ROPE)),
-                new CardPane(new Card(Room.DINING_ROOM)),
-                new CardPane(new Card(Suspect.PEACOCK))
+                new CardPane(new Card(Weapon.LEAD_PIPE)),
+                new CardPane(new Card(Weapon.REVOLVER))
         );
         double result = 10.0;
         for (int i = 0; i < cardPanes.size(); i++) {

@@ -3,10 +3,69 @@
     -fx-scale-y: 1.1;
     -fx-scale-z: 1.1;
 }
-.card-container .card {
-    -fx-fill: #cccccc;
-    -fx-stroke: #333333;
-    -fx-stroke-width: 1;
+.card-container .card.ballroom {
+    -fx-background-image: url("../img/ballroom.jpg");
+}
+.card-container .card.bathroom {
+    -fx-background-image: url("../img/bathroom.jpg");
+}
+.card-container .card.bedroom {
+    -fx-background-image: url("../img/bedroom.jpg");
+}
+.card-container .card.billiard_room {
+    -fx-background-image: url("../img/billiard_room.jpg");
+}
+.card-container .card.candlestick {
+    -fx-background-image: url("../img/candlestick.jpg");
+}
+
+.card-container .card.dining_room {
+    -fx-background-image: url("../img/dining_room.jpg");
+}
+.card-container .card.green {
+    -fx-background-image: url("../img/green.jpg");
+}
+.card-container .card.hall {
+    -fx-background-image: url("../img/hall.jpg");
+}
+.card-container .card.kitchen {
+    -fx-background-image: url("../img/kitchen.jpg");
+}
+.card-container .card.knife {
+    -fx-background-image: url("../img/knife.jpg");
+}
+.card-container .card.lead_pipe {
+    -fx-background-image: url("../img/lead_pipe.jpg");
+}
+.card-container .card.library {
+    -fx-background-image: url("../img/library.jpg");
+}
+.card-container .card.mustard {
+    -fx-background-image: url("../img/mustard.jpg");
+}
+.card-container .card.peacock {
+    -fx-background-image: url("../img/peacock.jpg");
+}
+.card-container .card.plum {
+    -fx-background-image: url("../img/plum.jpg");
+}
+.card-container .card.revolver {
+    -fx-background-image: url("../img/revolver.jpg");
+}
+.card-container .card.rope {
+    -fx-background-image: url("../img/rope.jpg");
+}
+.card-container .card.scarlet {
+    -fx-background-image: url("../img/scarlet.jpg");
+}
+.card-container .card.white {
+    -fx-background-image: url("../img/white.jpg");
+}
+.card-container .card.workroom {
+    -fx-background-image: url("../img/workroom.jpg");
+}
+.card-container .card.wrench {
+    -fx-background-image: url("../img/wrench.jpg");
 }
 .card-container:hover .card {
     -fx-fill: #aaaaaa;
