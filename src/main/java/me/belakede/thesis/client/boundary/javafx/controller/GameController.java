@@ -4,20 +4,28 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
+import me.belakede.thesis.client.boundary.javafx.control.CardPane;
+import me.belakede.thesis.client.boundary.javafx.model.Card;
+import me.belakede.thesis.game.equipment.Room;
+import me.belakede.thesis.game.equipment.Suspect;
+import me.belakede.thesis.game.equipment.Weapon;
 
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
 
     @FXML
     private TilePane boardPane;
+    @FXML
+    private AnchorPane cardContainer;
     @FXML
     private Slider sliderHorizontal;
     @FXML
@@ -37,8 +45,30 @@ public class GameController implements Initializable {
                 boardPane.getChildren().add(new Rectangle(15, 15, Color.web("#cccccc")));
             }
         }
+        addCards();
         hookupChangeListeners();
         addRotation();
+    }
+
+    private void addCards() {
+        List<CardPane> cardPanes = Arrays.asList(
+                new CardPane(new Card(Room.BATHROOM)),
+                new CardPane(new Card(Suspect.MUSTARD)),
+                new CardPane(new Card(Suspect.PLUM)),
+                new CardPane(new Card(Weapon.KNIFE)),
+                new CardPane(new Card(Room.HALL)),
+                new CardPane(new Card(Room.LIBRARY)),
+                new CardPane(new Card(Weapon.ROPE)),
+                new CardPane(new Card(Room.DINING_ROOM)),
+                new CardPane(new Card(Suspect.PEACOCK))
+        );
+        double result = 10.0;
+        for (int i = 0; i < cardPanes.size(); i++) {
+            AnchorPane.setLeftAnchor(cardPanes.get(i), result);
+            AnchorPane.setBottomAnchor(cardPanes.get(i), Math.random() * 30 - 15);
+            result = result + 55.0;
+        }
+        cardContainer.getChildren().addAll(cardPanes);
     }
 
     private void addRotation() {
@@ -64,9 +94,5 @@ public class GameController implements Initializable {
         sliderTheThirdOne.valueProperty().addListener((observable, oldValue, newValue) -> {
             sliderTheThirdOne.setValue(Math.round(newValue.doubleValue()));
         });
-    }
-
-    public void toFront(MouseEvent mouseEvent) {
-        ((StackPane) mouseEvent.getSource()).toFront();
     }
 }

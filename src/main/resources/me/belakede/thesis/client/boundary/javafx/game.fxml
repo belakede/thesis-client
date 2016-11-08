@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import me.belakede.thesis.client.boundary.javafx.control.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="@css/game.css"
             fx:controller="me.belakede.thesis.client.boundary.javafx.controller.GameController">
     <top>
@@ -16,17 +15,7 @@
         <StackPane minHeight="45" maxHeight="45" prefHeight="45">
             <children>
                 <HBox>
-                    <AnchorPane styleClass="card-container" prefHeight="100">
-                        <CardPane AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="0" onMouseEntered="#toFront"/>
-                        <CardPane AnchorPane.leftAnchor="60" AnchorPane.bottomAnchor="-10" onMouseEntered="#toFront"/>
-                        <CardPane AnchorPane.leftAnchor="110" AnchorPane.bottomAnchor="-5" onMouseEntered="#toFront"/>
-                        <CardPane AnchorPane.leftAnchor="160" AnchorPane.bottomAnchor="5" onMouseEntered="#toFront"/>
-                        <CardPane AnchorPane.leftAnchor="210" AnchorPane.bottomAnchor="-5" onMouseEntered="#toFront"/>
-                        <CardPane AnchorPane.leftAnchor="260" AnchorPane.bottomAnchor="-10" onMouseEntered="#toFront"/>
-                        <CardPane AnchorPane.leftAnchor="310" AnchorPane.bottomAnchor="0" onMouseEntered="#toFront"/>
-                        <CardPane AnchorPane.leftAnchor="360" AnchorPane.bottomAnchor="-5" onMouseEntered="#toFront"/>
-                        <CardPane AnchorPane.leftAnchor="410" AnchorPane.bottomAnchor="0" onMouseEntered="#toFront"/>
-                    </AnchorPane>
+                    <AnchorPane styleClass="card-container" prefHeight="100" fx:id="cardContainer"/>
                     <VBox styleClass="slider-container">
                         <HBox>
                             <Slider min="-40" max="40" showTickMarks="true" value="1" fx:id="sliderHorizontal"/>
