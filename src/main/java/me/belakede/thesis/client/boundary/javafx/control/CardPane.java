@@ -17,13 +17,13 @@ public class CardPane extends StackPane {
     public CardPane(Card card) {
         load();
         setCard(card);
-        setBindings();
+        setStyleClass();
         setOnMouseEnteredEvent();
         rotate();
     }
 
-    private void setBindings() {
-        content.getStyleClass().addAll(card.getValue().getCard().name().toLowerCase());
+    private void setStyleClass() {
+        content.getStyleClass().add(card.getValue().getCard().name().toLowerCase());
     }
 
     public Card getCard() {
