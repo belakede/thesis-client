@@ -6,14 +6,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import me.belakede.thesis.client.boundary.javafx.control.CardPane;
+import me.belakede.thesis.client.boundary.javafx.control.FieldPane;
 import me.belakede.thesis.client.boundary.javafx.model.Card;
+import me.belakede.thesis.client.boundary.javafx.model.Field;
+import me.belakede.thesis.game.Game;
+import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Suspect;
 import me.belakede.thesis.game.equipment.Weapon;
+import me.belakede.thesis.internal.game.util.GameBuilder;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -39,14 +43,23 @@ public class GameController implements Initializable {
     private Label sliderTheThirdOneLabel;
 
     public void initialize(URL location, ResourceBundle resources) {
-        for (int i = 0; i < 27; i++) {
-            for (int j = 0; j < 27; j++) {
-                boardPane.getChildren().add(new Rectangle(15, 15, Color.web("#cccccc")));
+        try {
+            Game game = GameBuilder.create().boardType(BoardType.DEFAULT).mystery().players(4).positions().build();
+            addFields(game, BoardType.DEFAULT.getSize());
+            addCards();
+            hookupChangeListeners();
+            addRotation();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addFields(Game game, int size) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                boardPane.getChildren().add(new FieldPane(new Field(game.getBoard().getField(i, j))));
             }
         }
-        addCards();
-        hookupChangeListeners();
-        addRotation();
     }
 
     private void addCards() {
