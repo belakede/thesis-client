@@ -20,8 +20,10 @@ import me.belakede.thesis.internal.game.util.GameBuilder;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class GameController implements Initializable {
 
@@ -45,8 +47,9 @@ public class GameController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             Game game = GameBuilder.create().boardType(BoardType.DEFAULT).mystery().players(4).positions().build();
+            List<me.belakede.thesis.game.equipment.Card> cards = Arrays.asList(Suspect.MUSTARD, Suspect.PLUM, Weapon.CANDLESTICK, Weapon.KNIFE, Weapon.WRENCH);
             addFields(game, BoardType.DEFAULT.getSize());
-            addCards();
+            addCards(cards);
             hookupChangeListeners();
             addRotation();
         } catch (IOException e) {
@@ -62,18 +65,8 @@ public class GameController implements Initializable {
         }
     }
 
-    private void addCards() {
-        List<CardPane> cardPanes = Arrays.asList(
-                new CardPane(new Card(Suspect.GREEN)),
-                new CardPane(new Card(Suspect.MUSTARD)),
-                new CardPane(new Card(Suspect.PLUM)),
-                new CardPane(new Card(Suspect.PEACOCK)),
-                new CardPane(new Card(Suspect.WHITE)),
-                new CardPane(new Card(Suspect.SCARLET)),
-                new CardPane(new Card(Weapon.ROPE)),
-                new CardPane(new Card(Weapon.LEAD_PIPE)),
-                new CardPane(new Card(Weapon.REVOLVER))
-        );
+    private void addCards(Collection<me.belakede.thesis.game.equipment.Card> cards) {
+        List<CardPane> cardPanes = cards.stream().map(c -> new CardPane(new Card(c))).collect(Collectors.toList());
         double result = 10.0;
         for (int i = 0; i < cardPanes.size(); i++) {
             AnchorPane.setLeftAnchor(cardPanes.get(i), result);
