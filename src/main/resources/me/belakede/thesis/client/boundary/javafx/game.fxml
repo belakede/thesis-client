@@ -17,15 +17,15 @@
             <children>
                 <HBox>
                     <AnchorPane styleClass="card-container" prefHeight="100">
-                        <Card AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="0" onMouseEntered="#toFront"/>
-                        <Card AnchorPane.leftAnchor="60" AnchorPane.bottomAnchor="-10" onMouseEntered="#toFront"/>
-                        <Card AnchorPane.leftAnchor="110" AnchorPane.bottomAnchor="-5" onMouseEntered="#toFront"/>
-                        <Card AnchorPane.leftAnchor="160" AnchorPane.bottomAnchor="5" onMouseEntered="#toFront"/>
-                        <Card AnchorPane.leftAnchor="210" AnchorPane.bottomAnchor="-5" onMouseEntered="#toFront"/>
-                        <Card AnchorPane.leftAnchor="260" AnchorPane.bottomAnchor="-10" onMouseEntered="#toFront"/>
-                        <Card AnchorPane.leftAnchor="310" AnchorPane.bottomAnchor="0" onMouseEntered="#toFront"/>
-                        <Card AnchorPane.leftAnchor="360" AnchorPane.bottomAnchor="-5" onMouseEntered="#toFront"/>
-                        <Card AnchorPane.leftAnchor="410" AnchorPane.bottomAnchor="0" onMouseEntered="#toFront"/>
+                        <CardPane AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="0" onMouseEntered="#toFront"/>
+                        <CardPane AnchorPane.leftAnchor="60" AnchorPane.bottomAnchor="-10" onMouseEntered="#toFront"/>
+                        <CardPane AnchorPane.leftAnchor="110" AnchorPane.bottomAnchor="-5" onMouseEntered="#toFront"/>
+                        <CardPane AnchorPane.leftAnchor="160" AnchorPane.bottomAnchor="5" onMouseEntered="#toFront"/>
+                        <CardPane AnchorPane.leftAnchor="210" AnchorPane.bottomAnchor="-5" onMouseEntered="#toFront"/>
+                        <CardPane AnchorPane.leftAnchor="260" AnchorPane.bottomAnchor="-10" onMouseEntered="#toFront"/>
+                        <CardPane AnchorPane.leftAnchor="310" AnchorPane.bottomAnchor="0" onMouseEntered="#toFront"/>
+                        <CardPane AnchorPane.leftAnchor="360" AnchorPane.bottomAnchor="-5" onMouseEntered="#toFront"/>
+                        <CardPane AnchorPane.leftAnchor="410" AnchorPane.bottomAnchor="0" onMouseEntered="#toFront"/>
                     </AnchorPane>
                     <VBox styleClass="slider-container">
                         <HBox>

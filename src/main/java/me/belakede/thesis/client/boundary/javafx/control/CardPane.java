@@ -6,19 +6,19 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
 
-public class Card extends StackPane {
+public class CardPane extends StackPane {
 
     @FXML
     private Rectangle rectangle;
     @FXML
     private Text text;
 
-    public Card() {
+    public CardPane() {
         load();
         rotate();
     }
 
-    public Card(me.belakede.thesis.game.equipment.Card card) {
+    public CardPane(me.belakede.thesis.game.equipment.Card card) {
         load();
         setLabel(card);
         rotate();
