@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -64,4 +66,7 @@ public class GameController implements Initializable {
         });
     }
 
+    public void toFront(MouseEvent mouseEvent) {
+        ((StackPane) mouseEvent.getSource()).toFront();
+    }
 }

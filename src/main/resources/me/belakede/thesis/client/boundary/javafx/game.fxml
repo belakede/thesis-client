@@ -17,44 +17,53 @@
         <StackPane minHeight="45" maxHeight="45" prefHeight="45">
             <children>
                 <HBox>
-                    <HBox styleClass="card-container">
-                        <StackPane styleClass="card, first">
+                    <AnchorPane styleClass="card-container" prefHeight="100">
+                        <StackPane styleClass="card, first" AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="0"
+                                   onMouseEntered="#toFront">
                             <Rectangle width="75" height="125"/>
                             <Text>Card 1</Text>
                         </StackPane>
-                        <StackPane styleClass="card, second">
+                        <StackPane styleClass="card, second" AnchorPane.leftAnchor="45" AnchorPane.bottomAnchor="-10"
+                                   onMouseEntered="#toFront">
                             <Rectangle width="75" height="125"/>
                             <Text>Card 2</Text>
                         </StackPane>
-                        <StackPane styleClass="card, third">
+                        <StackPane styleClass="card, third" AnchorPane.leftAnchor="105" AnchorPane.bottomAnchor="-5"
+                                   onMouseEntered="#toFront">
                             <Rectangle width="75" height="125"/>
                             <Text>Card 3</Text>
                         </StackPane>
-                        <StackPane styleClass="card, fourth">
+                        <StackPane styleClass="card, fourth" AnchorPane.leftAnchor="165" AnchorPane.bottomAnchor="5"
+                                   onMouseEntered="#toFront">
                             <Rectangle width="75" height="125"/>
                             <Text>Card 4</Text>
                         </StackPane>
-                        <StackPane styleClass="card, fifth">
+                        <StackPane styleClass="card, fifth" AnchorPane.leftAnchor="220" AnchorPane.bottomAnchor="-5"
+                                   onMouseEntered="#toFront">
                             <Rectangle width="75" height="125"/>
                             <Text>Card 5</Text>
                         </StackPane>
-                        <StackPane styleClass="card, sixth">
+                        <StackPane styleClass="card, sixth" AnchorPane.leftAnchor="270" AnchorPane.bottomAnchor="-10"
+                                   onMouseEntered="#toFront">
                             <Rectangle width="75" height="125"/>
                             <Text>Card 6</Text>
                         </StackPane>
-                        <StackPane styleClass="card, seventh">
+                        <StackPane styleClass="card, seventh" AnchorPane.leftAnchor="320" AnchorPane.bottomAnchor="0"
+                                   onMouseEntered="#toFront">
                             <Rectangle width="75" height="125"/>
                             <Text>Card 7</Text>
                         </StackPane>
-                        <StackPane styleClass="card, eighth">
+                        <StackPane styleClass="card, eighth" AnchorPane.leftAnchor="365" AnchorPane.bottomAnchor="-5"
+                                   onMouseEntered="#toFront">
                             <Rectangle width="75" height="125"/>
                             <Text>Card 8</Text>
                         </StackPane>
-                        <StackPane styleClass="card, ninth">
+                        <StackPane styleClass="card, ninth" AnchorPane.leftAnchor="410" AnchorPane.bottomAnchor="0"
+                                   onMouseEntered="#toFront">
                             <Rectangle width="75" height="125"/>
                             <Text>Card 9</Text>
                         </StackPane>
-                    </HBox>
+                    </AnchorPane>
                     <VBox styleClass="slider-container">
                         <HBox>
                             <Slider min="-40" max="40" showTickMarks="true" value="1" fx:id="sliderHorizontal"/>
