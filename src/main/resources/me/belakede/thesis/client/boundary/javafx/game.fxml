@@ -2,8 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import me.belakede.thesis.client.boundary.javafx.control.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="@css/game.css"
             fx:controller="me.belakede.thesis.client.boundary.javafx.controller.GameController">
     <top>
@@ -18,51 +17,15 @@
             <children>
                 <HBox>
                     <AnchorPane styleClass="card-container" prefHeight="100">
-                        <StackPane styleClass="card, first" AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="0"
-                                   onMouseEntered="#toFront">
-                            <Rectangle width="75" height="125"/>
-                            <Text>Card 1</Text>
-                        </StackPane>
-                        <StackPane styleClass="card, second" AnchorPane.leftAnchor="45" AnchorPane.bottomAnchor="-10"
-                                   onMouseEntered="#toFront">
-                            <Rectangle width="75" height="125"/>
-                            <Text>Card 2</Text>
-                        </StackPane>
-                        <StackPane styleClass="card, third" AnchorPane.leftAnchor="105" AnchorPane.bottomAnchor="-5"
-                                   onMouseEntered="#toFront">
-                            <Rectangle width="75" height="125"/>
-                            <Text>Card 3</Text>
-                        </StackPane>
-                        <StackPane styleClass="card, fourth" AnchorPane.leftAnchor="165" AnchorPane.bottomAnchor="5"
-                                   onMouseEntered="#toFront">
-                            <Rectangle width="75" height="125"/>
-                            <Text>Card 4</Text>
-                        </StackPane>
-                        <StackPane styleClass="card, fifth" AnchorPane.leftAnchor="220" AnchorPane.bottomAnchor="-5"
-                                   onMouseEntered="#toFront">
-                            <Rectangle width="75" height="125"/>
-                            <Text>Card 5</Text>
-                        </StackPane>
-                        <StackPane styleClass="card, sixth" AnchorPane.leftAnchor="270" AnchorPane.bottomAnchor="-10"
-                                   onMouseEntered="#toFront">
-                            <Rectangle width="75" height="125"/>
-                            <Text>Card 6</Text>
-                        </StackPane>
-                        <StackPane styleClass="card, seventh" AnchorPane.leftAnchor="320" AnchorPane.bottomAnchor="0"
-                                   onMouseEntered="#toFront">
-                            <Rectangle width="75" height="125"/>
-                            <Text>Card 7</Text>
-                        </StackPane>
-                        <StackPane styleClass="card, eighth" AnchorPane.leftAnchor="365" AnchorPane.bottomAnchor="-5"
-                                   onMouseEntered="#toFront">
-                            <Rectangle width="75" height="125"/>
-                            <Text>Card 8</Text>
-                        </StackPane>
-                        <StackPane styleClass="card, ninth" AnchorPane.leftAnchor="410" AnchorPane.bottomAnchor="0"
-                                   onMouseEntered="#toFront">
-                            <Rectangle width="75" height="125"/>
-                            <Text>Card 9</Text>
-                        </StackPane>
+                        <Card AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="0" onMouseEntered="#toFront"/>
+                        <Card AnchorPane.leftAnchor="60" AnchorPane.bottomAnchor="-10" onMouseEntered="#toFront"/>
+                        <Card AnchorPane.leftAnchor="110" AnchorPane.bottomAnchor="-5" onMouseEntered="#toFront"/>
+                        <Card AnchorPane.leftAnchor="160" AnchorPane.bottomAnchor="5" onMouseEntered="#toFront"/>
+                        <Card AnchorPane.leftAnchor="210" AnchorPane.bottomAnchor="-5" onMouseEntered="#toFront"/>
+                        <Card AnchorPane.leftAnchor="260" AnchorPane.bottomAnchor="-10" onMouseEntered="#toFront"/>
+                        <Card AnchorPane.leftAnchor="310" AnchorPane.bottomAnchor="0" onMouseEntered="#toFront"/>
+                        <Card AnchorPane.leftAnchor="360" AnchorPane.bottomAnchor="-5" onMouseEntered="#toFront"/>
+                        <Card AnchorPane.leftAnchor="410" AnchorPane.bottomAnchor="0" onMouseEntered="#toFront"/>
                     </AnchorPane>
                     <VBox styleClass="slider-container">
                         <HBox>
