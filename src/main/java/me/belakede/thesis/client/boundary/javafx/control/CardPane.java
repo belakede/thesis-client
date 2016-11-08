@@ -21,6 +21,7 @@ public class CardPane extends StackPane {
         load();
         setCard(card);
         setBindings();
+        setOnMouseEnteredEvent();
         rotate();
     }
 
@@ -42,6 +43,10 @@ public class CardPane extends StackPane {
 
     private void setBindings() {
         text.textProperty().bind(cardProperty().get().cardProperty().asString());
+    }
+
+    private void setOnMouseEnteredEvent() {
+        setOnMouseEntered(event -> ((CardPane) event.getSource()).toFront());
     }
 
     private void rotate() {
