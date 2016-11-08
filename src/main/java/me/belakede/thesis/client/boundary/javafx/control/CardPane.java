@@ -17,10 +17,6 @@ public class CardPane extends StackPane {
     @FXML
     private Text text;
 
-    public CardPane() {
-        this(new Card());
-    }
-
     public CardPane(Card card) {
         load();
         setCard(card);
