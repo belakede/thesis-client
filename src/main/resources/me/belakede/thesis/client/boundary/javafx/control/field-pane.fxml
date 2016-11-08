@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane" stylesheets="@../css/field.css"
+         styleClass="field-container">
+    <Pane fx:id="content" styleClass="field" minWidth="15" minHeight="15" maxWidth="15" maxHeight="15"
+          prefWidth="15" prefHeight="15"/>
+</fx:root>

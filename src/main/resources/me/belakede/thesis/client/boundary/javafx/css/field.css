@@ -1,0 +1,24 @@
+
+.field-container .field {
+    -fx-border-color: #999999;
+    -fx-border-style: inside;
+    -fx-border-width: 0.5;
+}
+.field-container .field.null {
+    -fx-background-color: #000000;
+}
+.field-container .field.simple {
+    -fx-background-color: #D59E4C;
+}
+.field-container .field.wall {
+    -fx-background-color: #000000;
+}
+.field-container .field.room {
+    -fx-background-color: #D7DBE6;
+}
+.field-container .field.start {
+    -fx-background-color: #FFE74B;
+}
+.field-container .field.end {
+    -fx-background-color: #31902C;
+}
