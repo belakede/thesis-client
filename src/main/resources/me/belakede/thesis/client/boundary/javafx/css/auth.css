@@ -1,5 +1,5 @@
 .login-frame {
-    -fx-background-image: url("../img/background.jpg");
+    -fx-background-color: #ffffff;
 }
 
 .login-frame .label {
