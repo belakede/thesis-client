@@ -8,8 +8,8 @@
         <Label text="It's the game!"></Label>
     </top>
     <center>
-        <TilePane styleClass="board-container" fx:id="boardPane" minWidth="405" maxWidth="405" minHeight="405"
-                  maxHeight="405"/>
+        <TilePane styleClass="board-container" fx:id="boardPane" minWidth="409" maxWidth="409" minHeight="409"
+                  maxHeight="409" />
     </center>
     <bottom>
         <StackPane minHeight="45" maxHeight="45" prefHeight="45">

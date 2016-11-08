@@ -48,13 +48,18 @@ public class GameController implements Initializable {
         try {
             Game game = GameBuilder.create().boardType(BoardType.DEFAULT).mystery().players(4).positions().build();
             List<me.belakede.thesis.game.equipment.Card> cards = Arrays.asList(Suspect.MUSTARD, Suspect.PLUM, Weapon.CANDLESTICK, Weapon.KNIFE, Weapon.WRENCH);
-            addFields(game, BoardType.DEFAULT.getSize());
+            loadBoard(game.getBoard().getBoardType());
+            addFields(game, game.getBoard().getBoardType().getSize());
             addCards(cards);
             hookupChangeListeners();
             addRotation();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void loadBoard(BoardType boardType) {
+        boardPane.getStyleClass().add(boardType.name().toLowerCase());
     }
 
     private void addFields(Game game, int size) {

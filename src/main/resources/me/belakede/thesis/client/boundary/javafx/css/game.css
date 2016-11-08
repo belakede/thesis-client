@@ -1,6 +1,12 @@
 
-.board-container Rectangle:hover {
-    -fx-fill: #1e90ff;
+.board-container {
+    -fx-border-color: #000000;
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+}
+
+.board-container.default {
+    -fx-background-image: url("../img/default.png");
 }
 
 .slider-container {
