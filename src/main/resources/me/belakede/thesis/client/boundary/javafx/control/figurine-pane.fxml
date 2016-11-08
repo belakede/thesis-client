@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane" stylesheets="@../css/figurine.css"
+         styleClass="figurine-container">
+    <Circle fx:id="content" radius="6" stroke="black" strokeWidth="1"/>
+</fx:root>
