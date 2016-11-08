@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane" stylesheets="@../css/card.css"
+         styleClass="card-container">
+    <Rectangle width="75" height="125" styleClass="card" fx:id="rectangle"/>
+    <Text fx:id="text" text="Card Label"/>
+</fx:root>
