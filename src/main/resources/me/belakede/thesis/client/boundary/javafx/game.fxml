@@ -7,10 +7,6 @@
             fx:controller="me.belakede.thesis.client.boundary.javafx.controller.GameController">
     <center>
         <HiddenSidesPane fx:id="pane">
-            <content>
-                <TilePane styleClass="board-container" fx:id="boardPane" minWidth="425" maxWidth="425" minHeight="425"
-                          maxHeight="425"/>
-            </content>
             <right>
                 <BorderPane minHeight="425" fx:id="hiddenPane">
                     <center>

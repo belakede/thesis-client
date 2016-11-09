@@ -1,5 +1,6 @@
 package me.belakede.thesis.client.boundary.javafx.controller;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
@@ -7,20 +8,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.transform.Rotate;
+import me.belakede.thesis.client.boundary.javafx.control.BoardPane;
 import me.belakede.thesis.client.boundary.javafx.control.CardPane;
-import me.belakede.thesis.client.boundary.javafx.control.FieldPane;
 import me.belakede.thesis.client.boundary.javafx.model.Card;
-import me.belakede.thesis.client.boundary.javafx.model.Field;
-import me.belakede.thesis.game.Game;
 import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Suspect;
 import me.belakede.thesis.game.equipment.Weapon;
-import me.belakede.thesis.internal.game.util.GameBuilder;
 import org.controlsfx.control.HiddenSidesPane;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
@@ -30,8 +26,6 @@ import java.util.stream.Collectors;
 
 public class GameController implements Initializable {
 
-    @FXML
-    private TilePane boardPane;
     @FXML
     private AnchorPane cardContainer;
     @FXML
@@ -52,29 +46,17 @@ public class GameController implements Initializable {
     private Label sliderTheThirdOneLabel;
 
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            Game game = GameBuilder.create().boardType(BoardType.DEFAULT).mystery().players(4).positions().build();
-            List<me.belakede.thesis.game.equipment.Card> cards = Arrays.asList(Suspect.MUSTARD, Suspect.PLUM, Weapon.CANDLESTICK, Weapon.KNIFE, Weapon.WRENCH);
-            loadBoard(game.getBoard().getBoardType());
-            addFields(game, game.getBoard().getBoardType().getSize());
-            addCards(cards);
-            hookupChangeListeners();
-            addRotation();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        List<me.belakede.thesis.game.equipment.Card> cards = Arrays.asList(Suspect.MUSTARD, Suspect.PLUM, Weapon.CANDLESTICK, Weapon.KNIFE, Weapon.WRENCH);
+        loadBoard(BoardType.DEFAULT);
+        addCards(cards);
+        hookupChangeListeners();
     }
 
     private void loadBoard(BoardType boardType) {
+        BoardPane boardPane = new BoardPane(boardType, FXCollections.observableHashMap());
         boardPane.getStyleClass().add(boardType.name().toLowerCase());
-    }
-
-    private void addFields(Game game, int size) {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                boardPane.getChildren().add(new FieldPane(new Field(game.getBoard().getField(i, j))));
-            }
-        }
+        addRotation(boardPane);
+        pane.contentProperty().set(boardPane);
     }
 
     private void addCards(Collection<me.belakede.thesis.game.equipment.Card> cards) {
@@ -88,7 +70,7 @@ public class GameController implements Initializable {
         cardContainer.getChildren().addAll(cardPanes);
     }
 
-    private void addRotation() {
+    private void addRotation(BoardPane boardPane) {
         Rotate horizontalRotate = new Rotate(0, 202.5, 202.5, 0, Rotate.X_AXIS);
         Rotate verticalRotate = new Rotate(0, 202.5, 202.5, 0, Rotate.Y_AXIS);
         Rotate theThirdOneRotate = new Rotate(0, 202.5, 202.5, 202.5, Rotate.Z_AXIS);
