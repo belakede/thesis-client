@@ -4,8 +4,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import me.belakede.thesis.client.boundary.javafx.model.Field;
 import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
+import me.belakede.thesis.game.field.Field;
 
 public class FieldPane extends StackPane {
 
