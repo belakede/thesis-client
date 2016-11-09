@@ -2,34 +2,46 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import org.controlsfx.control.HiddenSidesPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="@css/game.css"
             fx:controller="me.belakede.thesis.client.boundary.javafx.controller.GameController">
     <top>
         <Label text="It's the game!"></Label>
     </top>
     <center>
-        <TilePane styleClass="board-container" fx:id="boardPane" minWidth="425" maxWidth="425" minHeight="425"
-                  maxHeight="425" />
+        <HiddenSidesPane fx:id="pane">
+            <content>
+                <TilePane styleClass="board-container" fx:id="boardPane" minWidth="425" maxWidth="425" minHeight="425"
+                          maxHeight="425"/>
+            </content>
+            <right>
+                <BorderPane minHeight="425" fx:id="hiddenPane">
+                    <center>
+                        <Label>Hello World!</Label>
+                        <VBox styleClass="slider-container">
+                            <HBox>
+                                <Slider min="-40" max="40" showTickMarks="true" value="1" fx:id="sliderHorizontal"/>
+                                <Label fx:id="sliderHorizontalLabel"/>
+                            </HBox>
+                            <HBox>
+                                <Slider min="-40" max="40" showTickMarks="true" value="1" fx:id="sliderVertical"/>
+                                <Label fx:id="sliderVerticalLabel"/>
+                            </HBox>
+                            <HBox>
+                                <Slider min="-90" max="90" showTickMarks="true" value="14" fx:id="sliderTheThirdOne"/>
+                                <Label fx:id="sliderTheThirdOneLabel"/>
+                            </HBox>
+                        </VBox>
+                    </center>
+                </BorderPane>
+            </right>
+        </HiddenSidesPane>
     </center>
     <bottom>
         <StackPane minHeight="45" maxHeight="45" prefHeight="45">
             <children>
                 <HBox>
                     <AnchorPane styleClass="card-container" prefHeight="100" fx:id="cardContainer"/>
-                    <VBox styleClass="slider-container">
-                        <HBox>
-                            <Slider min="-40" max="40" showTickMarks="true" value="1" fx:id="sliderHorizontal"/>
-                            <Label fx:id="sliderHorizontalLabel"/>
-                        </HBox>
-                        <HBox>
-                            <Slider min="-40" max="40" showTickMarks="true" value="1" fx:id="sliderVertical"/>
-                            <Label fx:id="sliderVerticalLabel"/>
-                        </HBox>
-                        <HBox>
-                            <Slider min="-90" max="90" showTickMarks="true" value="14" fx:id="sliderTheThirdOne"/>
-                            <Label fx:id="sliderTheThirdOneLabel"/>
-                        </HBox>
-                    </VBox>
                 </HBox>
             </children>
         </StackPane>

@@ -2,9 +2,11 @@ package me.belakede.thesis.client.boundary.javafx.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.transform.Rotate;
 import me.belakede.thesis.client.boundary.javafx.control.CardPane;
@@ -16,6 +18,7 @@ import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Suspect;
 import me.belakede.thesis.game.equipment.Weapon;
 import me.belakede.thesis.internal.game.util.GameBuilder;
+import org.controlsfx.control.HiddenSidesPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,6 +34,10 @@ public class GameController implements Initializable {
     private TilePane boardPane;
     @FXML
     private AnchorPane cardContainer;
+    @FXML
+    private HiddenSidesPane pane;
+    @FXML
+    private BorderPane hiddenPane;
     @FXML
     private Slider sliderHorizontal;
     @FXML
@@ -104,5 +111,7 @@ public class GameController implements Initializable {
         sliderTheThirdOne.valueProperty().addListener((observable, oldValue, newValue) -> {
             sliderTheThirdOne.setValue(Math.round(newValue.doubleValue()));
         });
+        hiddenPane.setOnMouseEntered(event -> pane.setPinnedSide(Side.RIGHT));
+        hiddenPane.setOnMouseExited(event -> pane.setPinnedSide(null));
     }
 }
