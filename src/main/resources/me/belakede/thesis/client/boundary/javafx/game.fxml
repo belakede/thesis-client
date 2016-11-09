@@ -5,9 +5,6 @@
 <?import org.controlsfx.control.HiddenSidesPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="@css/game.css"
             fx:controller="me.belakede.thesis.client.boundary.javafx.controller.GameController">
-    <top>
-        <Label text="It's the game!"></Label>
-    </top>
     <center>
         <HiddenSidesPane fx:id="pane">
             <content>
@@ -17,7 +14,6 @@
             <right>
                 <BorderPane minHeight="425" fx:id="hiddenPane">
                     <center>
-                        <Label>Hello World!</Label>
                         <VBox styleClass="slider-container">
                             <HBox>
                                 <Slider min="-40" max="40" showTickMarks="true" value="1" fx:id="sliderHorizontal"/>
