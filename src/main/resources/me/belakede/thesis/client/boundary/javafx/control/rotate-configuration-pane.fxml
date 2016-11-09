@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" minWidth="250" maxWidth="250"
+         styleClass="rotate-configuration-container">
+    <GridPane>
+        <padding>
+            <Insets top="25" right="25" bottom="10" left="25"/>
+        </padding>
+        <Text text="Roll" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label fx:id="rollValue" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Slider fx:id="roll" min="-180" max="180" value="0" showTickMarks="true" GridPane.columnIndex="1"
+                GridPane.rowIndex="1"/>
+        <Text text="Pitch" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Label fx:id="pitchValue" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <Slider fx:id="pitch" min="-180" max="180" value="0" showTickMarks="true" GridPane.columnIndex="1"
+                GridPane.rowIndex="3"/>
+    </GridPane>
+</fx:root>
