@@ -40,6 +40,7 @@ public class GamePane extends BorderPane {
         setFigurine(figurine);
         setCards(FXCollections.observableArrayList(cards));
         setGame(game);
+        transformBoard();
     }
 
     public Game getGame() {
@@ -93,14 +94,17 @@ public class GamePane extends BorderPane {
             if (null != newValue) {
                 boardPane.setBoardType(newValue.getBoard().getBoardType());
                 boardPane.setFigurines(FXCollections.observableMap(newValue.getPositions()));
+                sideBar.bindSize(boardPane.widthProperty());
             }
         });
     }
-
 
     private void load() {
         ControlLoader.load(this);
     }
 
+    private void transformBoard() {
+        boardPane.getTransforms().addAll(sideBar.getRotates());
+    }
 
 }
