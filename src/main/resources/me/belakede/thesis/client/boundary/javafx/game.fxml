@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.StackPane?>
 <?import me.belakede.thesis.client.boundary.javafx.control.GamePane?>
-<StackPane xmlns:fx="http://javafx.com/fxml" stylesheets="@css/game.css"
-           fx:controller="me.belakede.thesis.client.boundary.javafx.controller.GameController">
-    <GamePane/>
-</StackPane>
+<?import me.belakede.thesis.client.boundary.javafx.control.ChatPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" stylesheets="@css/game.css"
+            fx:controller="me.belakede.thesis.client.boundary.javafx.controller.GameController">
+    <GamePane AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" minWidth="1280" minHeight="800"/>
+    <ChatPane AnchorPane.bottomAnchor="15" AnchorPane.rightAnchor="15" />
+</AnchorPane>
