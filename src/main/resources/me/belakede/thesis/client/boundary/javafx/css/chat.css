@@ -1,0 +1,25 @@
+@import "colors.css";
+
+.chat-container .chat-button {
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+}
+.chat-container .chat-button.green:hover Glyph {
+    -fx-text-fill: derive(-fx-green, -20%);
+}
+.chat-container .chat-button.mustard:hover Glyph {
+    -fx-text-fill: derive(-fx-mustard, -20%);
+}
+.chat-container .chat-button.peacock:hover Glyph {
+    -fx-text-fill: derive(-fx-peacock, -20%);
+}
+.chat-container .chat-button.plum:hover Glyph {
+    -fx-text-fill: derive(-fx-plum, -20%);
+}
+.chat-container .chat-button.scarlet:hover Glyph {
+    -fx-text-fill: derive(-fx-scarlet, -20%);
+}
+.chat-container .chat-button.white:hover Glyph {
+    -fx-text-fill: derive(-fx-white, -20%);
+}
