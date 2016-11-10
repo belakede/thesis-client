@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
@@ -16,5 +18,13 @@
                 <Circle radius="62.5" centerX="62.5" centerY="65"/>
             </clip>
         </ImageView>
+        <Separator AnchorPane.topAnchor="165" AnchorPane.leftAnchor="10" minWidth="230" halignment="CENTER"
+                   orientation="HORIZONTAL"/>
+        <VBox AnchorPane.topAnchor="185" AnchorPane.leftAnchor="25" alignment="TOP_CENTER" styleClass="actions"
+              minWidth="200" maxWidth="200" prefHeight="200" spacing="10">
+            <Button minWidth="180" minHeight="40" text="Roll"/>
+            <Button minWidth="180" minHeight="40" text="Suspect"/>
+            <Button minWidth="180" minHeight="40" text="Accuse"/>
+        </VBox>
     </AnchorPane>
 </fx:root>
