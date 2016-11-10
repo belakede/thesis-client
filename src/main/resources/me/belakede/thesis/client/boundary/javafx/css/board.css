@@ -1,9 +1,5 @@
 .board-container {
-    -fx-border-color: #000000;
-    -fx-border-style: solid;
-    -fx-border-width: 10px;
-    -fx-background-size: 405px 405px;
-    -fx-background-position: 10px 10px;
+    -fx-background-size: 674px 674px;
 }
 .board-container.default {
     -fx-background-image: url("../img/default.png");

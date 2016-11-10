@@ -103,7 +103,7 @@ public class BoardPane extends TilePane {
     }
 
     private void setDimension(BoardType newValue) {
-        int newSize = newValue.getSize() * 25 + 2 * 10;
+        int newSize = newValue.getSize() * 25;
         setMinSize(newSize, newSize);
         setMaxSize(newSize, newSize);
         setPrefSize(newSize, newSize);
