@@ -3,12 +3,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/chat.css"
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/chat.css" spacing="5"
          minWidth="180" maxWidth="180" minHeight="60" styleClass="chat-message">
-    <HBox styleClass="content">
+    <HBox styleClass="content" alignment="BASELINE_LEFT">
         <Text fx:id="messageText" wrappingWidth="180"/>
     </HBox>
-    <HBox styleClass="sender">
+    <HBox styleClass="sender" alignment="BASELINE_RIGHT">
         <Text fx:id="senderText"></Text>
     </HBox>
 </fx:root>

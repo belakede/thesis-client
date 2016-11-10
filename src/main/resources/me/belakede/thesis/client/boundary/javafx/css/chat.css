@@ -33,7 +33,7 @@
     -fx-border-width: 0;
 }
 
-.chat-container .message-container {
+.chat-container .message-container .chat-message {
     -fx-padding: 10;
 }
 
