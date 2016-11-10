@@ -1,0 +1,28 @@
+.sidebar {
+    -fx-background-color: #dedede;
+}
+.sidebar .logo  {
+    -fx-border-color: #000000;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-radius: 75;
+}
+.sidebar .logo.mustard {
+    -fx-effect: dropshadow(three-pass-box, #f5d04c, 10, 0, 0, 0);
+}
+.sidebar .logo.green {
+    -fx-effect: dropshadow(three-pass-box, #00FF00, 10, 0, 0, 0);
+}
+.sidebar .logo.peacock {
+    -fx-effect: dropshadow(three-pass-box, #326872, 10, 0, 0, 0);
+}
+.sidebar .logo.plum {
+    -fx-effect: dropshadow(three-pass-box, #8e4585, 10, 0, 0, 0);
+}
+.sidebar .logo.white {
+    -fx-effect: dropshadow(three-pass-box, #ffffff, 10, 0, 0, 0);
+}
+.sidebar .logo.scarlet {
+    -fx-effect: dropshadow(three-pass-box, #ff2400, 10, 0, 0, 0);
+}
+

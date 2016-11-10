@@ -3,13 +3,18 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/sidebar.css"
          prefWidth="250" minWidth="250" maxWidth="250" styleClass="sidebar">
     <AnchorPane>
-        <ImageView AnchorPane.topAnchor="25" AnchorPane.leftAnchor="75">
+        <ImageView AnchorPane.topAnchor="25" AnchorPane.leftAnchor="60" fitWidth="125" fitHeight="125"
+                   styleClass="logo, mustard">
             <image>
                 <Image url="@../img/logo.png"/>
             </image>
+            <clip>
+                <Circle radius="62.5" centerX="62.5" centerY="65"/>
+            </clip>
         </ImageView>
     </AnchorPane>
 </fx:root>
