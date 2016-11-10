@@ -17,11 +17,12 @@ public class JavaFXApplicationRunner extends Application implements CommandLineR
 
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("boundary/javafx/main-frame.fxml"));
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 1280, 800);
 
         stage.setTitle("Test Application");
-        stage.setMinWidth(800);
-        stage.setMinHeight(600);
+        stage.setMinWidth(1280);
+        stage.setMinHeight(800);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
