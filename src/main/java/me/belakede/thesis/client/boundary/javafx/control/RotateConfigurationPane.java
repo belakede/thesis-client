@@ -21,11 +21,7 @@ public class RotateConfigurationPane extends VBox {
     @FXML
     private Slider roll;
     @FXML
-    private Slider pitch;
-    @FXML
     private Label rollValue;
-    @FXML
-    private Label pitchValue;
 
     public RotateConfigurationPane() {
         load();
@@ -62,7 +58,7 @@ public class RotateConfigurationPane extends VBox {
     }
 
     private void uploadRotates() {
-        rotates.addAll(createRotation(roll, Rotate.Z_AXIS), createRotation(pitch, Rotate.X_AXIS));
+        rotates.addAll(createRotation(roll, Rotate.Z_AXIS));
     }
 
     private Rotate createRotation(Slider slider, Point3D point3D) {
@@ -77,8 +73,6 @@ public class RotateConfigurationPane extends VBox {
     private void hookupChangeListeners() {
         pivot.bind(sizeProperty().divide(2.0));
         roll.valueProperty().addListener((observable, oldValue, newValue) -> roll.setValue(newValue.intValue()));
-        pitch.valueProperty().addListener((observable, oldValue, newValue) -> pitch.setValue(newValue.intValue()));
         rollValue.textProperty().bind(roll.valueProperty().asString("Roll with %.0f deg"));
-        pitchValue.textProperty().bind(pitch.valueProperty().asString("Pitch with %.0f deg"));
     }
 }
