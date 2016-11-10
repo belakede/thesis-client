@@ -24,11 +24,11 @@
     -fx-text-fill: derive(-fx-white, -20%);
 }
 
-.chat-container .chat-writer {
+.chat-container .message-composer {
     -fx-padding: 5;
 }
 
-.chat-container .chat-writer Button {
+.chat-container .message-composer Button {
     -fx-background-color: transparent;
     -fx-border-width: 0;
 }

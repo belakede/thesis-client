@@ -9,7 +9,7 @@
          minWidth="250" maxWidth="250" prefWidth="250" minHeight="400" maxHeight="400" prefHeight="400"
          styleClass="chat-box">
     <bottom>
-        <HBox styleClass="chat-writer">
+        <HBox styleClass="message-composer">
             <TextArea maxHeight="60" minHeight="60" maxWidth="200" minWidth="200" fx:id="textArea"/>
             <Button>
                 <graphic>
