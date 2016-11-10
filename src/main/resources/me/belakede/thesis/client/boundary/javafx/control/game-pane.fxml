@@ -2,8 +2,12 @@
 
 <?import javafx.scene.layout.BorderPane?>
 <?import me.belakede.thesis.client.boundary.javafx.control.BoardPane?>
+<?import me.belakede.thesis.client.boundary.javafx.control.SideBar?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.BorderPane" stylesheets="@../css/game.css"
          styleClass="game-container">
+    <left>
+        <SideBar/>
+    </left>
     <center>
         <BoardPane fx:id="boardPane"/>
     </center>
