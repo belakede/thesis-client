@@ -13,11 +13,11 @@
         </padding>
         <Text text="Roll" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
         <Label fx:id="rollValue" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <Slider fx:id="roll" min="-180" max="180" value="0" showTickMarks="true" GridPane.columnIndex="1"
+        <Slider fx:id="roll" min="-90" max="90" value="0" showTickMarks="true" GridPane.columnIndex="1"
                 GridPane.rowIndex="1"/>
         <Text text="Pitch" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
         <Label fx:id="pitchValue" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-        <Slider fx:id="pitch" min="-180" max="180" value="0" showTickMarks="true" GridPane.columnIndex="1"
+        <Slider fx:id="pitch" min="-90" max="90" value="0" showTickMarks="true" GridPane.columnIndex="1"
                 GridPane.rowIndex="3"/>
     </GridPane>
 </fx:root>
