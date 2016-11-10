@@ -81,6 +81,7 @@ public class BoardPane extends TilePane {
                 setBoardSafely(newValue);
                 setFields(newValue);
                 setDimension(newValue);
+                setStyleClass(oldValue, newValue);
             }
         });
     }
@@ -106,6 +107,13 @@ public class BoardPane extends TilePane {
         setMinSize(newSize, newSize);
         setMaxSize(newSize, newSize);
         setPrefSize(newSize, newSize);
+    }
+
+    private void setStyleClass(BoardType oldValue, BoardType newValue) {
+        if (oldValue != null) {
+            getStyleClass().remove(oldValue.name().toLowerCase());
+        }
+        getStyleClass().add(newValue.name().toLowerCase());
     }
 
 
