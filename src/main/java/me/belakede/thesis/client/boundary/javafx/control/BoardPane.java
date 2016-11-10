@@ -80,8 +80,16 @@ public class BoardPane extends TilePane {
             if (null != newValue) {
                 setBoardSafety(newValue);
                 setFields(newValue);
+                setDimension(newValue);
             }
         });
+    }
+
+    private void setDimension(BoardType newValue) {
+        int newSize = newValue.getSize() * 25 + 2 * 10;
+        setMinSize(newSize, newSize);
+        setMaxSize(newSize, newSize);
+        setPrefSize(newSize, newSize);
     }
 
     private void setBoardSafety(BoardType newValue) {
