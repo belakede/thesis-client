@@ -6,7 +6,7 @@
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.BorderPane" stylesheets="@../css/game.css"
          styleClass="game-container">
     <left>
-        <SideBar/>
+        <SideBar fx:id="sideBar"/>
     </left>
     <center>
         <BoardPane fx:id="boardPane"/>

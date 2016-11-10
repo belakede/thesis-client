@@ -26,6 +26,8 @@ public class GamePane extends BorderPane {
     private final ListProperty<Card> cards = new SimpleListProperty<>();
 
     @FXML
+    private SideBar sideBar;
+    @FXML
     private BoardPane boardPane;
 
     public GamePane() throws IOException {
