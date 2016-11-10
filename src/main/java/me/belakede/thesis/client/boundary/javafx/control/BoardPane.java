@@ -85,13 +85,6 @@ public class BoardPane extends TilePane {
         });
     }
 
-    private void setDimension(BoardType newValue) {
-        int newSize = newValue.getSize() * 25 + 2 * 10;
-        setMinSize(newSize, newSize);
-        setMaxSize(newSize, newSize);
-        setPrefSize(newSize, newSize);
-    }
-
     private void setBoardSafety(BoardType newValue) {
         try {
             setBoard(Boards.getBoardByType(newValue));
@@ -107,5 +100,13 @@ public class BoardPane extends TilePane {
                         .collect(Collectors.toList()))
                 .forEach(fieldPanes -> getChildren().addAll(fieldPanes));
     }
+
+    private void setDimension(BoardType newValue) {
+        int newSize = newValue.getSize() * 25 + 2 * 10;
+        setMinSize(newSize, newSize);
+        setMaxSize(newSize, newSize);
+        setPrefSize(newSize, newSize);
+    }
+
 
 }
