@@ -32,3 +32,17 @@
     -fx-background-color: transparent;
     -fx-border-width: 0;
 }
+
+.chat-message .content {
+    -fx-background-color: derive(-fx-mustard, 50%);
+    -fx-background-radius: 9;
+    -fx-border-radius: 9;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-border-color: -fx-mustard;
+    -fx-padding: 5;
+}
+
+.chat-message .sender {
+    -fx-text-fill: -fx-mustard;
+}
