@@ -68,6 +68,7 @@ public class RotateConfigurationPane extends VBox {
     private Rotate createRotation(Slider slider, Point3D point3D) {
         Rotate rotate = new Rotate(0, 0, 0, 0, point3D);
         rotate.pivotXProperty().bind(pivot);
+        rotate.pivotYProperty().bind(pivot);
         rotate.pivotZProperty().bind(pivot);
         rotate.angleProperty().bind(slider.valueProperty());
         return rotate;
