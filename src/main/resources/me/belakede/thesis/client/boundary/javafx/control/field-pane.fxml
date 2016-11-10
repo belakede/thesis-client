@@ -4,6 +4,6 @@
 <?import javafx.scene.layout.StackPane?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane" stylesheets="@../css/field.css"
          styleClass="field-container">
-    <Pane fx:id="content" styleClass="field" minWidth="15" minHeight="15" maxWidth="15" maxHeight="15"
-          prefWidth="15" prefHeight="15"/>
+    <Pane fx:id="content" styleClass="field" minWidth="25" minHeight="25" maxWidth="25" maxHeight="25"
+          prefWidth="25" prefHeight="25"/>
 </fx:root>
