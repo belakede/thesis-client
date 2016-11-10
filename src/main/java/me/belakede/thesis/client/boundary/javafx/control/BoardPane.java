@@ -78,14 +78,14 @@ public class BoardPane extends TilePane {
     private void hookupChangeListeners() {
         boardType.addListener((observable, oldValue, newValue) -> {
             if (null != newValue) {
-                setBoardSafety(newValue);
+                setBoardSafely(newValue);
                 setFields(newValue);
                 setDimension(newValue);
             }
         });
     }
 
-    private void setBoardSafety(BoardType newValue) {
+    private void setBoardSafely(BoardType newValue) {
         try {
             setBoard(Boards.getBoardByType(newValue));
         } catch (IOException e) {
