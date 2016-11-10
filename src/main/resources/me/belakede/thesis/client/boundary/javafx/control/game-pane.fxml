@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import me.belakede.thesis.client.boundary.javafx.control.BoardPane?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.BorderPane" stylesheets="@../css/game.css"
+         styleClass="game-container">
+    <center>
+        <BoardPane fx:id="boardPane"/>
+    </center>
+</fx:root>
