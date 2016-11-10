@@ -17,7 +17,7 @@
     </center>
     <bottom>
         <HBox styleClass="message-composer">
-            <TextArea maxHeight="60" minHeight="60" maxWidth="200" minWidth="200" fx:id="textArea"/>
+            <TextArea maxHeight="60" minHeight="60" maxWidth="200" minWidth="200" wrapText="true" fx:id="textArea"/>
             <Button>
                 <graphic>
                     <Glyph fontFamily="FontAwesome" icon="SEND" fontSize="20"/>
