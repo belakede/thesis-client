@@ -75,5 +75,9 @@ public class RotateConfigurationPane extends VBox {
 
     private void hookupChangeListeners() {
         pivot.bind(sizeProperty().divide(2.0));
+        roll.valueProperty().addListener((observable, oldValue, newValue) -> roll.setValue(newValue.intValue()));
+        pitch.valueProperty().addListener((observable, oldValue, newValue) -> pitch.setValue(newValue.intValue()));
+        rollValue.textProperty().bind(roll.valueProperty().asString("Roll with %.0f deg"));
+        pitchValue.textProperty().bind(pitch.valueProperty().asString("Pitch with %.0f deg"));
     }
 }
