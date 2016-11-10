@@ -2,5 +2,5 @@
 
 <?import javafx.scene.layout.TilePane?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.TilePane" stylesheets="@../css/board.css"
-         minWidth="425" maxWidth="425" minHeight="425" maxHeight="425" styleClass="board-container">
+         minWidth="695" maxWidth="695" minHeight="695" maxHeight="695" styleClass="board-container">
 </fx:root>
