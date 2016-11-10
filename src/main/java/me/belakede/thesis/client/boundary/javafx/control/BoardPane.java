@@ -23,6 +23,11 @@ public class BoardPane extends TilePane {
     private final ObjectProperty<Board> board = new SimpleObjectProperty<>();
     private final MapProperty<Figurine, Field> figurines = new SimpleMapProperty<>();
 
+    public BoardPane() {
+        load();
+        hookupChangeListeners();
+    }
+
     public BoardPane(BoardType boardType, ObservableMap<Figurine, Field> figurines) {
         load();
         hookupChangeListeners();
