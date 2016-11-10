@@ -23,3 +23,12 @@
 .chat-container .chat-button.white:hover Glyph {
     -fx-text-fill: derive(-fx-white, -20%);
 }
+
+.chat-container .chat-writer {
+    -fx-padding: 5;
+}
+
+.chat-container .chat-writer Button {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
