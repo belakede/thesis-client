@@ -28,7 +28,7 @@
         </VBox>
         <Separator AnchorPane.topAnchor="345" AnchorPane.leftAnchor="10" minWidth="230" halignment="CENTER"
                    orientation="HORIZONTAL"/>
-        <RotateConfigurationPane AnchorPane.topAnchor="365" AnchorPane.leftAnchor="25" minWidth="200" prefWidth="200"
-                                 maxWidth="200"/>
+        <RotateConfigurationPane AnchorPane.topAnchor="365" AnchorPane.leftAnchor="25" alignment="TOP_CENTER"
+                                 minWidth="200" prefWidth="200" maxWidth="200"/>
     </AnchorPane>
 </fx:root>
