@@ -33,6 +33,10 @@
     -fx-border-width: 0;
 }
 
+.chat-container .message-container {
+    -fx-padding: 10;
+}
+
 .chat-message .content {
     -fx-background-color: derive(-fx-mustard, 50%);
     -fx-background-radius: 9;

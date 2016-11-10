@@ -12,7 +12,7 @@
          styleClass="chat-box">
     <center>
         <ScrollPane fx:id="scrollPane" vbarPolicy="AS_NEEDED" hbarPolicy="NEVER" minWidth="250" maxWidth="250">
-            <VBox fx:id="messageContainer"></VBox>
+            <VBox fx:id="messageContainer" styleClass="message-container"></VBox>
         </ScrollPane>
     </center>
     <bottom>
