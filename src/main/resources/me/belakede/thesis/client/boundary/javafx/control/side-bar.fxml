@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/sidebar.css"
+         prefWidth="250" minWidth="250" maxWidth="250" styleClass="sidebar">
+    <AnchorPane>
+        <ImageView AnchorPane.topAnchor="25" AnchorPane.leftAnchor="75">
+            <image>
+                <Image url="@../img/logo.png"/>
+            </image>
+        </ImageView>
+    </AnchorPane>
+</fx:root>
