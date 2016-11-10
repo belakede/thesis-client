@@ -1,5 +1,7 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,12 +12,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.transform.Rotate;
 import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
 
-import java.math.BigDecimal;
-
 public class RotateConfigurationPane extends VBox {
 
     private final ObservableList<Rotate> rotates = FXCollections.observableArrayList();
-    private BigDecimal size;
+    private final DoubleProperty size = new SimpleDoubleProperty();
+    private final DoubleProperty pivot = new SimpleDoubleProperty();
+
     @FXML
     private Slider roll;
     @FXML
@@ -26,13 +28,14 @@ public class RotateConfigurationPane extends VBox {
     private Label pitchValue;
 
     public RotateConfigurationPane() {
-        this.size = BigDecimal.valueOf(getScene().getWidth());
         load();
+        hookupChangeListeners();
     }
 
     public RotateConfigurationPane(double size) {
-        this.size = BigDecimal.valueOf(size);
         load();
+        hookupChangeListeners();
+        setSize(size);
     }
 
     public ObservableList<Rotate> getRotates() {
@@ -40,6 +43,18 @@ public class RotateConfigurationPane extends VBox {
             uploadRotates();
         }
         return rotates;
+    }
+
+    public double getSize() {
+        return size.get();
+    }
+
+    public void setSize(double size) {
+        this.size.set(size);
+    }
+
+    public DoubleProperty sizeProperty() {
+        return size;
     }
 
     private void load() {
@@ -51,9 +66,14 @@ public class RotateConfigurationPane extends VBox {
     }
 
     private Rotate createRotation(Slider slider, Point3D point3D) {
-        double center = size.divide(BigDecimal.valueOf(2)).doubleValue();
-        Rotate rotate = new Rotate(0, center, center, 0, point3D);
+        Rotate rotate = new Rotate(0, 0, 0, 0, point3D);
+        rotate.pivotXProperty().bind(pivot);
+        rotate.pivotZProperty().bind(pivot);
         rotate.angleProperty().bind(slider.valueProperty());
         return rotate;
+    }
+
+    private void hookupChangeListeners() {
+        pivot.bind(sizeProperty().divide(2.0));
     }
 }
