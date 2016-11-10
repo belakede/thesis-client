@@ -95,7 +95,7 @@ public class BoardPane extends TilePane {
     }
 
     private void setFields(BoardType boardType) {
-        IntStream.range(0, boardType.getSize()).parallel()
+        IntStream.range(0, boardType.getSize())
                 .mapToObj(i -> IntStream.range(0, getBoardType().getSize())
                         .mapToObj(j -> new FieldPane(getBoard().getField(i, j)))
                         .collect(Collectors.toList()))
