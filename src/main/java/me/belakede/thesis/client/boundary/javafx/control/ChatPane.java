@@ -2,9 +2,7 @@ package me.belakede.thesis.client.boundary.javafx.control;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
 import org.controlsfx.control.PopOver;
 
@@ -25,7 +23,11 @@ public class ChatPane extends StackPane {
     }
 
     private void setupPopover() {
-        popOver = new PopOver(new VBox(new Label("Hello World!")));
+        popOver = new PopOver(new ChatBox());
+        popOver.setAnimated(true);
+        popOver.setTitle("Chat");
+        popOver.setHeaderAlwaysVisible(true);
+        popOver.setArrowLocation(PopOver.ArrowLocation.BOTTOM_RIGHT);
     }
 
     private void hookupChangeListeners() {
