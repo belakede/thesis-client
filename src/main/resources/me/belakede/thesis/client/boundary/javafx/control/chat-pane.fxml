@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.StackPane?>
+<?import org.controlsfx.glyphfont.Glyph?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane" stylesheets="@../css/chat.css"
+         styleClass="chat-container">
+    <Button>
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="COMMENTS" fontSize="70"/>
+        </graphic>
+    </Button>
+</fx:root>
