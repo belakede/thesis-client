@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import org.controlsfx.control.HiddenSidesPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="@css/game.css"
             fx:controller="me.belakede.thesis.client.boundary.javafx.controller.GameController">
-    <center>
-        <HiddenSidesPane fx:id="pane"></HiddenSidesPane>
-    </center>
-    <bottom>
-        <StackPane minHeight="45" maxHeight="45" prefHeight="45">
-            <children>
-                <HBox>
-                    <AnchorPane styleClass="card-container" prefHeight="100" fx:id="cardContainer"/>
-                </HBox>
-            </children>
-        </StackPane>
-    </bottom>
 </BorderPane>
