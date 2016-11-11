@@ -31,17 +31,13 @@ public class HistoryPane extends StackPane {
         popOver.setAnimated(true);
         popOver.setTitle("History");
         popOver.setHeaderAlwaysVisible(true);
+        popOver.setDetachable(false);
+        popOver.setDetached(false);
         popOver.setArrowLocation(PopOver.ArrowLocation.BOTTOM_RIGHT);
     }
 
     private void hookupChangeListeners() {
-        historyButton.setOnAction(event -> {
-            if (popOver.isShowing()) {
-                popOver.hide();
-            } else {
-                popOver.show(this);
-            }
-        });
+        historyButton.setOnAction(event -> popOver.show(this));
     }
 
 }
