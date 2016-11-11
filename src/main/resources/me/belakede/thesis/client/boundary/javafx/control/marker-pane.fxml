@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import org.controlsfx.glyphfont.*?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.HBox" stylesheets="@../css/marker.css"
+         styleClass="marker-container">
+    <Button styleClass="marker, yes">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="CHECK"/>
+        </graphic>
+    </Button>
+    <Button styleClass="marker, not">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="TIMES"/>
+        </graphic>
+    </Button>
+    <Button styleClass="marker, question">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="QUESTION"/>
+        </graphic>
+    </Button>
+    <Button styleClass="marker, maybe-yes">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="PLUS"/>
+        </graphic>
+    </Button>
+    <Button styleClass="marker, maybe-not">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="MINUS"/>
+        </graphic>
+    </Button>
+</fx:root>
