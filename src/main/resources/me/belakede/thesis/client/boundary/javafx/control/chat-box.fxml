@@ -16,7 +16,7 @@
         </ScrollPane>
     </center>
     <bottom>
-        <HBox styleClass="message-composer">
+        <HBox styleClass="message-composer" alignment="CENTER">
             <TextArea maxHeight="60" minHeight="60" maxWidth="200" minWidth="200" wrapText="true" fx:id="textArea"/>
             <Button>
                 <graphic>
