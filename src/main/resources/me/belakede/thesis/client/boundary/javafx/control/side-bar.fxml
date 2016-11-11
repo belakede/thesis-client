@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Circle?>
+<?import me.belakede.thesis.client.boundary.javafx.control.ActionPane?>
 <?import me.belakede.thesis.client.boundary.javafx.control.RotateConfigurationPane?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/sidebar.css"
          prefWidth="250" minWidth="250" maxWidth="250" styleClass="sidebar">
@@ -17,13 +18,7 @@
             <Image url="@../img/logo.png"/>
         </ImageView>
         <Separator AnchorPane.topAnchor="165" AnchorPane.leftAnchor="10" minWidth="230"/>
-        <VBox AnchorPane.topAnchor="185" AnchorPane.leftAnchor="25" alignment="TOP_CENTER" styleClass="actions"
-              minWidth="200" maxWidth="200" prefHeight="200" spacing="10">
-            <Button minWidth="180" minHeight="40" text="Roll"/>
-            <Button minWidth="180" minHeight="40" text="Suspect"/>
-            <Button minWidth="180" minHeight="40" text="Show"/>
-            <Button minWidth="180" minHeight="40" text="Accuse"/>
-        </VBox>
+        <ActionPane AnchorPane.topAnchor="185" AnchorPane.leftAnchor="25" minWidth="200" maxWidth="200"/>
         <Separator AnchorPane.topAnchor="395" AnchorPane.leftAnchor="10" minWidth="230"/>
         <RotateConfigurationPane AnchorPane.topAnchor="415" AnchorPane.leftAnchor="25" alignment="TOP_CENTER"
                                  minWidth="200" prefWidth="200" maxWidth="200" fx:id="rotateConfiguration"/>
