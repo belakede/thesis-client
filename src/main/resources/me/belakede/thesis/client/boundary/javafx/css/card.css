@@ -66,3 +66,13 @@
     -fx-fill: #aaaaaa;
     -fx-stroke: #1e90ff;
 }
+
+.card-box Rectangle {
+    -fx-strokeType: INSIDE;
+    -fx-stroke: #000000;
+    -fx-fill: #ffffff;
+}
+.card-box Text {
+    -fx-fill: #000000;
+    -fx-font-weight: bold;
+}
