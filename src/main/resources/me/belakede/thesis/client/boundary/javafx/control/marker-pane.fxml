@@ -5,27 +5,27 @@
 <?import org.controlsfx.glyphfont.*?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.HBox" stylesheets="@../css/marker.css"
          styleClass="marker-container">
-    <Button styleClass="marker, yes">
+    <Button fx:id="yesButton" styleClass="marker, yes">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="CHECK" fontSize="12"/>
         </graphic>
     </Button>
-    <Button styleClass="marker, not">
+    <Button fx:id="notButton" styleClass="marker, not">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="TIMES" fontSize="12"/>
         </graphic>
     </Button>
-    <Button styleClass="marker, question">
+    <Button fx:id="questionButton" styleClass="marker, question">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="QUESTION" fontSize="12"/>
         </graphic>
     </Button>
-    <Button styleClass="marker, maybe-yes">
+    <Button fx:id="maybeYesButton" styleClass="marker, maybe-yes">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="PLUS" fontSize="12"/>
         </graphic>
     </Button>
-    <Button styleClass="marker, maybe-not">
+    <Button fx:id="maybeNotButton" styleClass="marker, maybe-not">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="MINUS" fontSize="12"/>
         </graphic>
