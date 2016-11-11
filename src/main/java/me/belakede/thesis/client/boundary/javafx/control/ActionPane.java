@@ -1,9 +1,11 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
+import javafx.beans.property.ListProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
+import me.belakede.thesis.game.equipment.Card;
 import org.controlsfx.control.PopOver;
 
 public class ActionPane extends VBox {
@@ -18,6 +20,10 @@ public class ActionPane extends VBox {
         setupCardPane();
         setupCardPopOver();
         setupActionEvents();
+    }
+
+    public ListProperty<Card> cardsProperty() {
+        return cardPane.cardsProperty();
     }
 
     private void load() {
