@@ -1,0 +1,25 @@
+@import "colors.css";
+
+.note-container .note-button {
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+}
+.note-container .note-button.green:hover Glyph {
+    -fx-text-fill: derive(-fx-green, -20%);
+}
+.note-container .note-button.mustard:hover Glyph {
+    -fx-text-fill: derive(-fx-mustard, -20%);
+}
+.note-container .note-button.peacock:hover Glyph {
+    -fx-text-fill: derive(-fx-peacock, -20%);
+}
+.note-container .note-button.plum:hover Glyph {
+    -fx-text-fill: derive(-fx-plum, -20%);
+}
+.note-container .note-button.scarlet:hover Glyph {
+    -fx-text-fill: derive(-fx-scarlet, -20%);
+}
+.note-container .note-button.white:hover Glyph {
+    -fx-text-fill: derive(-fx-white, -20%);
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.StackPane?>
+<?import org.controlsfx.glyphfont.Glyph?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane" stylesheets="@../css/note.css"
+         minWidth="80" maxWidth="80" prefWidth="80" minHeight="80" maxHeight="80" prefHeight="80"
+         styleClass="note-container">
+    <Button styleClass="note-button" fx:id="noteButton">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="BOOK" fontSize="48"/>
+        </graphic>
+    </Button>
+</fx:root>
