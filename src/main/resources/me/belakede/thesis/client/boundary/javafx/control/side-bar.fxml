@@ -21,11 +21,12 @@
               minWidth="200" maxWidth="200" prefHeight="200" spacing="10">
             <Button minWidth="180" minHeight="40" text="Roll"/>
             <Button minWidth="180" minHeight="40" text="Suspect"/>
+            <Button minWidth="180" minHeight="40" text="Show"/>
             <Button minWidth="180" minHeight="40" text="Accuse"/>
         </VBox>
-        <Separator AnchorPane.topAnchor="345" AnchorPane.leftAnchor="10" minWidth="230"/>
-        <RotateConfigurationPane AnchorPane.topAnchor="365" AnchorPane.leftAnchor="25" alignment="TOP_CENTER"
+        <Separator AnchorPane.topAnchor="395" AnchorPane.leftAnchor="10" minWidth="230"/>
+        <RotateConfigurationPane AnchorPane.topAnchor="415" AnchorPane.leftAnchor="25" alignment="TOP_CENTER"
                                  minWidth="200" prefWidth="200" maxWidth="200" fx:id="rotateConfiguration"/>
-        <Separator AnchorPane.topAnchor="440" AnchorPane.leftAnchor="10" minWidth="230"/>
+        <Separator AnchorPane.topAnchor="485" AnchorPane.leftAnchor="10" minWidth="230"/>
     </AnchorPane>
 </fx:root>
