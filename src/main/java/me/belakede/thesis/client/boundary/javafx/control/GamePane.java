@@ -81,7 +81,7 @@ public class GamePane extends BorderPane {
         sideBar.figurineProperty().bind(figurineProperty());
         cardsProperty().addListener((observable, oldValue, newValue) -> {
             if (null != newValue) {
-                // TODO create card stack
+                sideBar.setCards(cards);
             }
         });
         gameProperty().addListener((observable, oldValue, newValue) -> {
