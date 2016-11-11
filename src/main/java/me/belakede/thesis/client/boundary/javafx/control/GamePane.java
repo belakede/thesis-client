@@ -80,11 +80,7 @@ public class GamePane extends BorderPane {
     }
 
     private void hookupChangeListeners() {
-        figurineProperty().addListener((observable, oldValue, newValue) -> {
-            if (null != newValue) {
-                // TODO change sidebar color
-            }
-        });
+        sideBar.figurineProperty().bind(figurineProperty());
         cardsProperty().addListener((observable, oldValue, newValue) -> {
             if (null != newValue) {
                 // TODO create card stack
