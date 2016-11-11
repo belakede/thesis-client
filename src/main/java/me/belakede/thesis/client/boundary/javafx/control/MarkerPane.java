@@ -32,12 +32,16 @@ public class MarkerPane extends HBox {
     private Button maybeNotButton;
 
     public MarkerPane(String owner, Card card) {
+        this(owner, card, Marker.NONE);
+    }
+
+    public MarkerPane(String owner, Card card, Marker marker) {
         load(this);
         setupActionEvents();
         hookupChangeListeners();
         setOwner(owner);
         setCard(card);
-        setMarker(Marker.NONE);
+        setMarker(marker);
     }
 
     public String getOwner() {
