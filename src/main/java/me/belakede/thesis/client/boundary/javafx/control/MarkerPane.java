@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Marker;
+import org.controlsfx.glyphfont.FontAwesome;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +20,7 @@ public class MarkerPane extends HBox {
     private final ObjectProperty<String> owner = new SimpleObjectProperty<>();
     private final ObjectProperty<Card> card = new SimpleObjectProperty<>();
     private final ObjectProperty<Marker> marker = new SimpleObjectProperty<>();
+    private final ObjectProperty<Object> icon = new SimpleObjectProperty<>();
 
     @FXML
     private Button yesButton;
@@ -80,6 +82,14 @@ public class MarkerPane extends HBox {
         return marker;
     }
 
+    public ObjectProperty<Object> iconProperty() {
+        return icon;
+    }
+
+    private void setIcon(Object icon) {
+        this.icon.set(icon);
+    }
+
     private void setupActionEvents() {
         yesButton.setOnAction(event -> setMarker(Marker.YES));
         notButton.setOnAction(event -> setMarker(Marker.NOT));
@@ -90,7 +100,25 @@ public class MarkerPane extends HBox {
 
     private void hookupChangeListeners() {
         marker.addListener((observable, oldValue, newValue) -> {
+            setIcon(mapToIcon(newValue));
             LOGGER.info("Marker {}'s {} card with {}", owner.getValue(), card.getValue(), newValue.name());
         });
+    }
+
+    private Object mapToIcon(Marker marker) {
+        switch (marker) {
+            case YES:
+                return FontAwesome.Glyph.CHECK;
+            case NOT:
+                return FontAwesome.Glyph.TIMES;
+            case QUESTION:
+                return FontAwesome.Glyph.QUESTION;
+            case MAYBE:
+                return FontAwesome.Glyph.PLUS;
+            case MAYBE_NOT:
+                return FontAwesome.Glyph.MINUS;
+            default:
+                return " ";
+        }
     }
 }
