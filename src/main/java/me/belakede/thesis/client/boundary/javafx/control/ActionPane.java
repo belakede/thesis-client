@@ -14,15 +14,19 @@ public class ActionPane extends VBox {
     private Button suspect;
     @FXML
     private Button show;
+    @FXML
+    private Button accuse;
     private CardPane cardPane;
     private PopOver cardPopOver;
     private PopOver suspectPopOver;
+    private PopOver accusePopOver;
 
     public ActionPane() {
         load();
         setupCardPane();
         setupCardPopOver();
         setupSuspectPopOver();
+        setupAccusePopOver();
         setupActionEvents();
     }
 
@@ -48,9 +52,15 @@ public class ActionPane extends VBox {
         setupPopOver(suspectPopOver);
     }
 
+    private void setupAccusePopOver() {
+        accusePopOver = new PopOver(new SuggestionPane(SuggestionPane.Type.ACCUSE));
+        setupPopOver(accusePopOver);
+    }
+
     private void setupActionEvents() {
         suspect.setOnAction(event -> suspectPopOver.show(suspect));
         show.setOnAction(event -> cardPopOver.show(show));
+        accuse.setOnAction(event -> accusePopOver.show(accuse));
     }
 
     private void setupPopOver(PopOver popOver) {
