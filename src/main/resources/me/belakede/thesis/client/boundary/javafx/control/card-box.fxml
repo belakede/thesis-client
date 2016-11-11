@@ -2,7 +2,6 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
@@ -13,6 +12,5 @@
         <TextFlow layoutX="5" layoutY="5" minWidth="80" maxWidth="80" prefWidth="80" textAlignment="CENTER">
             <Text fx:id="label"></Text>
         </TextFlow>
-        <Circle radius="5" centerX="80" centerY="10"/>
     </Group>
 </fx:root>

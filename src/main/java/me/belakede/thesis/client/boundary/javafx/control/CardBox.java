@@ -43,7 +43,12 @@ public class CardBox extends StackPane {
     }
 
     private void hookupChangeListeners() {
-        label.textProperty().bind(cardProperty().asString());
+        cardProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                String cardTitle = newValue.name().toLowerCase().replace('_', ' ');
+                label.setText(cardTitle);
+            }
+        });
     }
 
 }
