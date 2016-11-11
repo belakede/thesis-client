@@ -4,8 +4,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import org.controlsfx.glyphfont.Glyph?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane" stylesheets="@../css/chat.css"
-        minWidth="80" maxWidth="80" prefWidth="80" minHeight="80" maxHeight="80" prefHeight="80" styleClass="chat-container">
-    <Button styleClass="chat-button, mustard" fx:id="chatButton">
+         minWidth="80" maxWidth="80" prefWidth="80" minHeight="80" maxHeight="80" prefHeight="80"
+         styleClass="chat-container">
+    <Button styleClass="chat-button" fx:id="chatButton">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="COMMENTS" fontSize="48"/>
         </graphic>
