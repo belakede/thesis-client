@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/history.css"
+         minWidth="250" maxWidth="250" prefWidth="250" minHeight="400" maxHeight="400" prefHeight="400"
+         styleClass="history-box">
+    <ListView fx:id="eventList"/>
+</fx:root>
