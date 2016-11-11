@@ -7,11 +7,14 @@ import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
 import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Marker;
 import org.controlsfx.control.PopOver;
+import org.controlsfx.glyphfont.Glyph;
 
 public class NoteField extends Pane {
 
     @FXML
     private Button markerButton;
+    @FXML
+    private Glyph markerGlyph;
     private PopOver popOver;
     private MarkerPane markerPane;
 
@@ -20,6 +23,7 @@ public class NoteField extends Pane {
         setupMarkerPane(owner, card, marker);
         setupPopOver();
         setupActionEvents();
+        hookupChangeListeners();
     }
 
     private void load() {
@@ -41,5 +45,9 @@ public class NoteField extends Pane {
 
     private void setupActionEvents() {
         markerButton.setOnAction(event -> popOver.show(this));
+    }
+
+    private void hookupChangeListeners() {
+        markerGlyph.iconProperty().bind(markerPane.iconProperty());
     }
 }
