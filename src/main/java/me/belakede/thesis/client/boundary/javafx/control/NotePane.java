@@ -1,7 +1,10 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
+import javafx.beans.property.MapProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleMapProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,11 +12,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
 import me.belakede.thesis.game.equipment.Figurine;
+import me.belakede.thesis.game.equipment.Suspect;
 import org.controlsfx.control.PopOver;
 
 public class NotePane extends StackPane {
 
     private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
+    private final MapProperty<Suspect, String> users = new SimpleMapProperty<>();
     @FXML
     private Button noteButton;
     private PopOver popOver;
@@ -41,6 +46,18 @@ public class NotePane extends StackPane {
 
     public ObjectProperty<Figurine> figurineProperty() {
         return figurine;
+    }
+
+    public ObservableMap<Suspect, String> getUsers() {
+        return users.get();
+    }
+
+    public void setUsers(ObservableMap<Suspect, String> users) {
+        this.users.set(users);
+    }
+
+    public MapProperty<Suspect, String> usersProperty() {
+        return users;
     }
 
     private void load() {
