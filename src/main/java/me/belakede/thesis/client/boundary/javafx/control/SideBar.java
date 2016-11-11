@@ -1,14 +1,13 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyDoubleProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.transform.Rotate;
 import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
+import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Figurine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +17,8 @@ public class SideBar extends VBox {
     private static final Logger LOGGER = LoggerFactory.getLogger(SideBar.class);
 
     private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
+    private final ListProperty<Card> cards = new SimpleListProperty<>();
+
     @FXML
     private ImageView imageView;
     @FXML
@@ -28,10 +29,11 @@ public class SideBar extends VBox {
         hookupChangeListeners();
     }
 
-    public SideBar(Figurine figurine) {
+    public SideBar(Figurine figurine, ObservableList<Card> cards) {
         load();
         hookupChangeListeners();
         setFigurine(figurine);
+        setCards(cards);
     }
 
     public Figurine getFigurine() {
@@ -44,6 +46,18 @@ public class SideBar extends VBox {
 
     public ObjectProperty<Figurine> figurineProperty() {
         return figurine;
+    }
+
+    public ObservableList<Card> getCards() {
+        return cards.get();
+    }
+
+    public void setCards(ObservableList<Card> cards) {
+        this.cards.set(cards);
+    }
+
+    public ListProperty<Card> cardsProperty() {
+        return cards;
     }
 
     public void bindSize(ReadOnlyDoubleProperty value) {
