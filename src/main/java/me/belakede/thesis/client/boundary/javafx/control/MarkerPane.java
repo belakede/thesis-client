@@ -2,6 +2,8 @@ package me.belakede.thesis.client.boundary.javafx.control;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Marker;
@@ -18,8 +20,20 @@ public class MarkerPane extends HBox {
     private final ObjectProperty<Card> card = new SimpleObjectProperty<>();
     private final ObjectProperty<Marker> marker = new SimpleObjectProperty<>();
 
+    @FXML
+    private Button yesButton;
+    @FXML
+    private Button notButton;
+    @FXML
+    private Button questionButton;
+    @FXML
+    private Button maybeYesButton;
+    @FXML
+    private Button maybeNotButton;
+
     public MarkerPane(String owner, Card card) {
         load(this);
+        setupActionEvents();
         hookupChangeListeners();
         setOwner(owner);
         setCard(card);
@@ -62,9 +76,17 @@ public class MarkerPane extends HBox {
         return marker;
     }
 
+    private void setupActionEvents() {
+        yesButton.setOnAction(event -> setMarker(Marker.YES));
+        notButton.setOnAction(event -> setMarker(Marker.NOT));
+        questionButton.setOnAction(event -> setMarker(Marker.QUESTION));
+        maybeYesButton.setOnAction(event -> setMarker(Marker.MAYBE));
+        maybeNotButton.setOnAction(event -> setMarker(Marker.MAYBE_NOT));
+    }
+
     private void hookupChangeListeners() {
         marker.addListener((observable, oldValue, newValue) -> {
-            LOGGER.info("Marke {}'s {} card with {}", newValue);
+            LOGGER.info("Marker {}'s {} card with {}", owner.getValue(), card.getValue(), newValue.name());
         });
     }
 }
