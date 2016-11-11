@@ -1,0 +1,10 @@
+
+.history-container .history-button {
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+}
+
+.history-box {
+    -fx-padding: 15;
+}
