@@ -9,8 +9,12 @@ import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
 import me.belakede.thesis.game.equipment.Room;
 import me.belakede.thesis.game.equipment.Suspect;
 import me.belakede.thesis.game.equipment.Weapon;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SuggestionPane extends GridPane {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SuggestionPane.class);
 
     @FXML
     private ChoiceBox<Suspect> suspect;
@@ -25,6 +29,7 @@ public class SuggestionPane extends GridPane {
         load();
         fillChoiceBoxes();
         updateSubmitButton(type);
+        setupActionListeners();
     }
 
     private void load() {
@@ -39,6 +44,15 @@ public class SuggestionPane extends GridPane {
 
     private void updateSubmitButton(Type type) {
         submit.setText(type.getLabel());
+    }
+
+    private void setupActionListeners() {
+        submit.setOnAction(event -> {
+            LOGGER.info("I suggest it was {}, in the {}, with the {}.", suspect.getValue(), room.getValue(), weapon.getValue());
+            suspect.getSelectionModel().clearSelection();
+            room.getSelectionModel().clearSelection();
+            weapon.getSelectionModel().clearSelection();
+        });
     }
 
     public enum Type {
