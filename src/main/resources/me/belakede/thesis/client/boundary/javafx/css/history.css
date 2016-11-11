@@ -1,3 +1,4 @@
+@import "colors.css";
 
 .history-container .history-button {
     -fx-cursor: hand;
@@ -7,4 +8,22 @@
 
 .history-box {
     -fx-padding: 15;
+}
+.history-container .history-button.green:hover Glyph {
+    -fx-text-fill: derive(-fx-green, -20%);
+}
+.history-container .history-button.mustard:hover Glyph {
+    -fx-text-fill: derive(-fx-mustard, -20%);
+}
+.history-container .history-button.peacock:hover Glyph {
+    -fx-text-fill: derive(-fx-peacock, -20%);
+}
+.history-container .history-button.plum:hover Glyph {
+    -fx-text-fill: derive(-fx-plum, -20%);
+}
+.history-container .history-button.scarlet:hover Glyph {
+    -fx-text-fill: derive(-fx-scarlet, -20%);
+}
+.history-container .history-button.white:hover Glyph {
+    -fx-text-fill: derive(-fx-white, -20%);
 }
