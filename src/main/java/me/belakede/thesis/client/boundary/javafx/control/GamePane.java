@@ -10,13 +10,9 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
 import me.belakede.thesis.game.Game;
-import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Figurine;
-import me.belakede.thesis.game.equipment.Suspect;
-import me.belakede.thesis.internal.game.util.GameBuilder;
 
-import java.io.IOException;
 import java.util.Collection;
 
 public class GamePane extends BorderPane {
@@ -30,8 +26,10 @@ public class GamePane extends BorderPane {
     @FXML
     private BoardPane boardPane;
 
-    public GamePane() throws IOException {
-        this(GameBuilder.create().boardType(BoardType.DEFAULT).mystery().players(4).positions().build(), Suspect.MUSTARD, FXCollections.emptyObservableList());
+    public GamePane() {
+        load();
+        hookupChangeListeners();
+        transformBoard();
     }
 
     public GamePane(Game game, Figurine figurine, Collection<Card> cards) {
