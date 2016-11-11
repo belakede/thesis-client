@@ -1,31 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Group?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.HBox" stylesheets="@../css/card.css"
          spacing="15" styleClass="card-container">
     <padding>
         <Insets top="15" right="15" bottom="15" left="15"/>
     </padding>
-    <Group>
-        <Rectangle width="90" height="160" strokeType="INSIDE" stroke="black" fill="white" arcHeight="15"
-                   arcWidth="15"/>
-        <TextFlow layoutX="5" layoutY="5" minWidth="80" maxWidth="80" prefWidth="80" textAlignment="CENTER">
-            <Text>Hello World!</Text>
-        </TextFlow>
-        <Circle radius="5" fill="red" centerX="80" centerY="10"/>
-    </Group>
-    <Group>
-        <Rectangle width="90" height="160" strokeType="INSIDE" stroke="black" fill="white" arcHeight="15"
-                   arcWidth="15"/>
-        <TextFlow layoutX="5" layoutY="5" minWidth="80" maxWidth="80" prefWidth="80" textAlignment="CENTER">
-            <Text>Hello World!</Text>
-        </TextFlow>
-        <Circle radius="5" fill="red" centerX="80" centerY="10"/>
-    </Group>
 </fx:root>
