@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import me.belakede.thesis.client.boundary.javafx.control.ChatPane;
 import me.belakede.thesis.client.boundary.javafx.control.GamePane;
+import me.belakede.thesis.client.boundary.javafx.control.HistoryPane;
 import me.belakede.thesis.client.boundary.javafx.control.NotePane;
 import me.belakede.thesis.game.Game;
 import me.belakede.thesis.game.equipment.*;
@@ -23,6 +24,8 @@ public class GameController implements Initializable {
     @FXML
     private NotePane notePane;
     @FXML
+    private HistoryPane historyPane;
+    @FXML
     private ChatPane chatPane;
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -30,9 +33,10 @@ public class GameController implements Initializable {
             Game game = GameBuilder.create().boardType(BoardType.DEFAULT).mystery().players(4).positions().build();
             ObservableList<Card> cards = FXCollections.observableList(Arrays.asList(Weapon.CANDLESTICK, Room.DINING_ROOM, Weapon.LEAD_PIPE, Suspect.PEACOCK, Room.BILLIARD_ROOM));
             gamePane.setGame(game);
-            gamePane.setFigurine(Suspect.PLUM);
             gamePane.setCards(cards);
+            gamePane.setFigurine(Suspect.PLUM);
             notePane.setFigurine(Suspect.PLUM);
+            historyPane.setFigurine(Suspect.PLUM);
             chatPane.setFigurine(Suspect.PLUM);
         } catch (IOException e) {
             e.printStackTrace();
