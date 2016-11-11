@@ -56,6 +56,14 @@ public class HistoryPane extends StackPane {
     }
 
     private void hookupChangeListeners() {
+        figurine.addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                if (oldValue != null) {
+                    historyButton.getStyleClass().remove(oldValue.name().toLowerCase());
+                }
+                historyButton.getStyleClass().add(newValue.name().toLowerCase());
+            }
+        });
         historyButton.setOnAction(event -> popOver.show(this));
     }
 
