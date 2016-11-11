@@ -30,5 +30,6 @@
                    orientation="HORIZONTAL"/>
         <RotateConfigurationPane AnchorPane.topAnchor="365" AnchorPane.leftAnchor="25" alignment="TOP_CENTER"
                                  minWidth="200" prefWidth="200" maxWidth="200" fx:id="rotateConfiguration"/>
+        <Separator AnchorPane.topAnchor="440" AnchorPane.leftAnchor="10" minWidth="230" halignment="CENTER"/>
     </AnchorPane>
 </fx:root>
