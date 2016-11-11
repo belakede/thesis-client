@@ -24,7 +24,8 @@ public class GameController implements Initializable {
         try {
             Game game = GameBuilder.create().boardType(BoardType.DEFAULT).mystery().players(4).positions().build();
             gamePane.setGame(game);
-            gamePane.setFigurine(Suspect.PEACOCK);
+            gamePane.setFigurine(Suspect.PLUM);
+            chatPane.setFigurine(Suspect.PLUM);
         } catch (IOException e) {
             e.printStackTrace();
         }
