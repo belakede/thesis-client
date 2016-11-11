@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import me.belakede.thesis.client.boundary.javafx.control.ChatPane;
 import me.belakede.thesis.client.boundary.javafx.control.GamePane;
+import me.belakede.thesis.client.boundary.javafx.control.NotePane;
 import me.belakede.thesis.game.Game;
 import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Suspect;
@@ -18,6 +19,8 @@ public class GameController implements Initializable {
     @FXML
     private GamePane gamePane;
     @FXML
+    private NotePane notePane;
+    @FXML
     private ChatPane chatPane;
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -25,6 +28,7 @@ public class GameController implements Initializable {
             Game game = GameBuilder.create().boardType(BoardType.DEFAULT).mystery().players(4).positions().build();
             gamePane.setGame(game);
             gamePane.setFigurine(Suspect.PLUM);
+            notePane.setFigurine(Suspect.PLUM);
             chatPane.setFigurine(Suspect.PLUM);
         } catch (IOException e) {
             e.printStackTrace();

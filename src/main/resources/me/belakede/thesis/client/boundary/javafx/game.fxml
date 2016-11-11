@@ -3,8 +3,10 @@
 <?import javafx.scene.layout.*?>
 <?import me.belakede.thesis.client.boundary.javafx.control.ChatPane?>
 <?import me.belakede.thesis.client.boundary.javafx.control.GamePane?>
+<?import me.belakede.thesis.client.boundary.javafx.control.NotePane?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" stylesheets="@css/game.css"
             fx:controller="me.belakede.thesis.client.boundary.javafx.controller.GameController">
     <GamePane fx:id="gamePane" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" minWidth="1280" minHeight="800"/>
+    <NotePane fx:id="notePane" AnchorPane.bottomAnchor="15" AnchorPane.leftAnchor="265"/>
     <ChatPane fx:id="chatPane" AnchorPane.bottomAnchor="15" AnchorPane.rightAnchor="15"/>
 </AnchorPane>
