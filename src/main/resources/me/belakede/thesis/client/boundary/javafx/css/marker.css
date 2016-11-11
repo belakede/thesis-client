@@ -1,0 +1,87 @@
+* {
+    -fx-hover-text: #ffffff;
+    -fx-marker-yes: #007f00;
+    -fx-marker-not: #7f0000;
+    -fx-marker-question: #696969;
+    -fx-marker-maybe-yes: derive(-fx-marker-yes, 90%);
+    -fx-marker-maybe-not: derive(-fx-marker-not, 90%);
+}
+
+.marker-container {
+    -fx-padding: 10px;
+    -fx-spacing: 5px;
+}
+.marker-container .marker {
+    -fx-border-radius: 16;
+    -fx-border-width: 2;
+    -fx-border-color: #000000;
+    -fx-background-radius: 16;
+    -fx-background-color: transparent;
+    -fx-pref-width: 32;
+    -fx-pref-height: 32;
+    -fx-min-width: 32;
+    -fx-min-height: 32;
+    -fx-max-width: 32;
+    -fx-max-height: 32;
+    -fx-alignment: center;
+}
+.marker-container .marker.yes {
+    -fx-border-color: -fx-marker-yes;
+}
+.marker-container .marker.yes Glyph {
+    -fx-text-fill: -fx-marker-yes;
+}
+.marker-container .marker.yes:hover {
+    -fx-background-color: -fx-marker-yes;
+}
+.marker-container .marker.yes:hover Glyph {
+    -fx-text-fill: -fx-hover-text;
+}
+.marker-container .marker.not {
+    -fx-border-color: -fx-marker-not;
+}
+.marker-container .marker.not Glyph {
+    -fx-text-fill: -fx-marker-not;
+}
+.marker-container .marker.not:hover {
+    -fx-background-color: -fx-marker-not;
+}
+.marker-container .marker.not:hover Glyph {
+    -fx-text-fill: -fx-hover-text;
+}
+.marker-container .marker.question {
+    -fx-border-color: -fx-marker-question;
+}
+.marker-container .marker.question Glyph {
+    -fx-text-fill: -fx-marker-question;
+}
+.marker-container .marker.question:hover {
+    -fx-background-color: -fx-marker-question;
+}
+.marker-container .marker.question:hover Glyph {
+    -fx-text-fill: -fx-hover-text;
+}
+.marker-container .marker.maybe-yes {
+    -fx-border-color: -fx-marker-maybe-yes;
+}
+.marker-container .marker.maybe-yes Glyph {
+    -fx-text-fill: -fx-marker-maybe-yes;
+}
+.marker-container .marker.maybe-yes:hover {
+    -fx-background-color: -fx-marker-maybe-yes;
+}
+.marker-container .marker.maybe-yes:hover Glyph {
+    -fx-text-fill: -fx-hover-text;
+}
+.marker-container .marker.maybe-not {
+    -fx-border-color: -fx-marker-maybe-not;
+}
+.marker-container .marker.maybe-not Glyph {
+    -fx-text-fill: -fx-marker-maybe-not;
+}
+.marker-container .marker.maybe-not:hover {
+    -fx-background-color: -fx-marker-maybe-not;
+}
+.marker-container .marker.maybe-not:hover Glyph {
+    -fx-text-fill: -fx-hover-text;
+}

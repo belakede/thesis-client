@@ -7,27 +7,27 @@
          styleClass="marker-container">
     <Button styleClass="marker, yes">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="CHECK"/>
+            <Glyph fontFamily="FontAwesome" icon="CHECK" fontSize="12"/>
         </graphic>
     </Button>
     <Button styleClass="marker, not">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="TIMES"/>
+            <Glyph fontFamily="FontAwesome" icon="TIMES" fontSize="12"/>
         </graphic>
     </Button>
     <Button styleClass="marker, question">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="QUESTION"/>
+            <Glyph fontFamily="FontAwesome" icon="QUESTION" fontSize="12"/>
         </graphic>
     </Button>
     <Button styleClass="marker, maybe-yes">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="PLUS"/>
+            <Glyph fontFamily="FontAwesome" icon="PLUS" fontSize="12"/>
         </graphic>
     </Button>
     <Button styleClass="marker, maybe-not">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="MINUS"/>
+            <Glyph fontFamily="FontAwesome" icon="MINUS" fontSize="12"/>
         </graphic>
     </Button>
 </fx:root>
