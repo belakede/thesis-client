@@ -49,5 +49,6 @@ public class NoteField extends Pane {
 
     private void hookupChangeListeners() {
         markerGlyph.iconProperty().bind(markerPane.iconProperty());
+        markerGlyph.iconProperty().addListener((observable, oldValue, newValue) -> popOver.hide());
     }
 }
