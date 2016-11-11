@@ -18,6 +18,6 @@
     <ChoiceBox fx:id="room" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
     <Label text="with the" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
     <ChoiceBox fx:id="weapon" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
-    <Button fx:id="submit" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+    <Button fx:id="submit" GridPane.columnIndex="2" GridPane.rowIndex="5" GridPane.halignment="RIGHT"/>
 
 </fx:root>
