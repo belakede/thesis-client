@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.HBox" stylesheets="@../css/card.css"
-         styleClass="card-container">
+         spacing="15" styleClass="card-container">
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
     <StackPane minWidth="85" maxWidth="85" minHeight="150" maxHeight="150">
-        <Rectangle width="150" height="85" fill="black"/>
+        <Rectangle width="85" height="150" fill="black"/>
+    </StackPane>
+    <StackPane minWidth="85" maxWidth="85" minHeight="150" maxHeight="150">
+        <Rectangle width="85" height="150" fill="black"/>
+    </StackPane>
+    <StackPane minWidth="85" maxWidth="85" minHeight="150" maxHeight="150">
+        <Rectangle width="85" height="150" fill="black"/>
+    </StackPane>
+    <StackPane minWidth="85" maxWidth="85" minHeight="150" maxHeight="150">
+        <Rectangle width="85" height="150" fill="black"/>
     </StackPane>
 </fx:root>
