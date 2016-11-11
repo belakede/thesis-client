@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/actions.css"
+         alignment="TOP_CENTER" styleClass="actions" spacing="10">
+    <Button minWidth="180" minHeight="40" text="Roll"/>
+    <Button minWidth="180" minHeight="40" text="Suspect"/>
+    <Button minWidth="180" minHeight="40" text="Show"/>
+    <Button minWidth="180" minHeight="40" text="Accuse"/>
+</fx:root>
