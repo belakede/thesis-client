@@ -20,7 +20,7 @@ public class MainFrameController implements Initializable {
             loadContent("game");
             loadContent("auth");
         } catch (IOException e) {
-            throw new RuntimeException("Can't load auth.fxml");
+            throw new RuntimeException("Can't load fxml: ", e);
         }
     }
 
