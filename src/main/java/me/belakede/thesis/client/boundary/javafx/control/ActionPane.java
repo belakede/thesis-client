@@ -11,14 +11,18 @@ import org.controlsfx.control.PopOver;
 public class ActionPane extends VBox {
 
     @FXML
+    private Button suspect;
+    @FXML
     private Button show;
     private CardPane cardPane;
     private PopOver cardPopOver;
+    private PopOver suspectPopOver;
 
     public ActionPane() {
         load();
         setupCardPane();
         setupCardPopOver();
+        setupSuspectPopOver();
         setupActionEvents();
     }
 
@@ -36,13 +40,16 @@ public class ActionPane extends VBox {
 
     private void setupCardPopOver() {
         cardPopOver = new PopOver(cardPane);
-        cardPopOver.setAnimated(true);
-        cardPopOver.setArrowLocation(PopOver.ArrowLocation.LEFT_CENTER);
-        cardPopOver.setDetachable(false);
-        cardPopOver.setDetached(false);
+        setupPopOver(cardPopOver);
+    }
+
+    private void setupSuspectPopOver() {
+        suspectPopOver = new PopOver(new SuggestionPane(SuggestionPane.Type.SUSPECT));
+        setupPopOver(suspectPopOver);
     }
 
     private void setupActionEvents() {
+        suspect.setOnAction(event -> suspectPopOver.show(suspect));
         show.setOnAction(event -> {
             if (cardPopOver.isShowing()) {
                 cardPopOver.hide();
@@ -50,6 +57,13 @@ public class ActionPane extends VBox {
                 cardPopOver.show(show);
             }
         });
+    }
+
+    private void setupPopOver(PopOver popOver) {
+        popOver.setAnimated(true);
+        popOver.setArrowLocation(PopOver.ArrowLocation.LEFT_CENTER);
+        popOver.setDetachable(false);
+        popOver.setDetached(false);
     }
 
 }
