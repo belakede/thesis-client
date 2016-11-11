@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.GridPane" stylesheets="@../css/suggestion.css"
+         hgap="10" vgap="15"
+         styleClass="suggestion-container">
+    <padding>
+        <Insets top="25" right="25" bottom="10" left="25"/>
+    </padding>
+    <Text text="I suggest" styleClass="welcome-text" GridPane.columnIndex="0" GridPane.rowIndex="0"
+          GridPane.columnSpan="3"/>
+    <Label text="it was" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <ChoiceBox fx:id="suspect" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+    <Label text="in the" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <ChoiceBox fx:id="room" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+    <Label text="with the" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    <ChoiceBox fx:id="weapon" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+    <Button fx:id="submit" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+
+</fx:root>
