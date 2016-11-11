@@ -50,13 +50,7 @@ public class ActionPane extends VBox {
 
     private void setupActionEvents() {
         suspect.setOnAction(event -> suspectPopOver.show(suspect));
-        show.setOnAction(event -> {
-            if (cardPopOver.isShowing()) {
-                cardPopOver.hide();
-            } else {
-                cardPopOver.show(show);
-            }
-        });
+        show.setOnAction(event -> cardPopOver.show(show));
     }
 
     private void setupPopOver(PopOver popOver) {
