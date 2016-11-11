@@ -18,10 +18,11 @@
             <Image url="@../img/logo.png"/>
         </ImageView>
         <Separator AnchorPane.topAnchor="165" AnchorPane.leftAnchor="10" minWidth="230"/>
-        <ActionPane AnchorPane.topAnchor="185" AnchorPane.leftAnchor="25" minWidth="200" maxWidth="200"/>
+        <ActionPane fx:id="actionPane" AnchorPane.topAnchor="185" AnchorPane.leftAnchor="25" minWidth="200"
+                    maxWidth="200"/>
         <Separator AnchorPane.topAnchor="395" AnchorPane.leftAnchor="10" minWidth="230"/>
-        <RotateConfigurationPane AnchorPane.topAnchor="415" AnchorPane.leftAnchor="25" alignment="TOP_CENTER"
-                                 minWidth="200" prefWidth="200" maxWidth="200" fx:id="rotateConfiguration"/>
+        <RotateConfigurationPane fx:id="rotateConfiguration" AnchorPane.topAnchor="415" AnchorPane.leftAnchor="25"
+                                 alignment="TOP_CENTER" minWidth="200" prefWidth="200" maxWidth="200"/>
         <Separator AnchorPane.topAnchor="485" AnchorPane.leftAnchor="10" minWidth="230"/>
     </AnchorPane>
 </fx:root>
