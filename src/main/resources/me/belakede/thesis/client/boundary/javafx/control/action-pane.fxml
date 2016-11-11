@@ -4,8 +4,8 @@
 <?import javafx.scene.layout.VBox?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/actions.css"
          alignment="TOP_CENTER" styleClass="actions" spacing="10">
-    <Button minWidth="180" minHeight="40" text="Roll"/>
-    <Button minWidth="180" minHeight="40" text="Suspect"/>
-    <Button minWidth="180" minHeight="40" text="Show"/>
-    <Button minWidth="180" minHeight="40" text="Accuse"/>
+    <Button fx:id="roll" minWidth="180" minHeight="40" text="Roll"/>
+    <Button fx:id="suspect" minWidth="180" minHeight="40" text="Suspect"/>
+    <Button fx:id="show" minWidth="180" minHeight="40" text="Show"/>
+    <Button fx:id="accuse" minWidth="180" minHeight="40" text="Accuse"/>
 </fx:root>
