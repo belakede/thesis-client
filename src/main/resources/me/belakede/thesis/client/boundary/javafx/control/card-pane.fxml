@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane" stylesheets="@../css/card.css"
+<?import javafx.scene.shape.Rectangle?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.HBox" stylesheets="@../css/card.css"
          styleClass="card-container">
-    <Pane fx:id="content" styleClass="card" minWidth="84" minHeight="130" maxWidth="84" maxHeight="130" prefWidth="84"
-          prefHeight="130"/>
+    <StackPane minWidth="85" maxWidth="85" minHeight="150" maxHeight="150">
+        <Rectangle width="150" height="85" fill="black"/>
+    </StackPane>
 </fx:root>
