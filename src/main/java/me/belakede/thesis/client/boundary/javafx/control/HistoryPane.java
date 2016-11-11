@@ -22,6 +22,13 @@ public class HistoryPane extends StackPane {
         hookupChangeListeners();
     }
 
+    public HistoryPane(Figurine figurine) {
+        load();
+        setupPopover();
+        hookupChangeListeners();
+        setFigurine(figurine);
+    }
+
     public Figurine getFigurine() {
         return figurine.get();
     }
