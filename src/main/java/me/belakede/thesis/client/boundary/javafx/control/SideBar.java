@@ -22,6 +22,8 @@ public class SideBar extends VBox {
     @FXML
     private ImageView imageView;
     @FXML
+    private ActionPane actionPane;
+    @FXML
     private RotateConfigurationPane rotateConfiguration;
 
     public SideBar() {
@@ -83,5 +85,6 @@ public class SideBar extends VBox {
                 imageView.getStyleClass().add(newValue.name().toLowerCase());
             }
         });
+        actionPane.cardsProperty().bind(cardsProperty());
     }
 }
