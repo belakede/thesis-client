@@ -29,13 +29,6 @@ public class NotePane extends StackPane {
         hookupChangeListeners();
     }
 
-    public NotePane(Figurine figurine) {
-        load();
-        setupPopover();
-        hookupChangeListeners();
-        setFigurine(figurine);
-    }
-
     public Figurine getFigurine() {
         return figurine.get();
     }
