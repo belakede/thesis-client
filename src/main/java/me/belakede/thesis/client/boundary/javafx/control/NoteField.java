@@ -14,12 +14,6 @@ public class NoteField extends Pane {
     private Button markerButton;
     private PopOver popOver;
 
-    public NoteField() {
-        load();
-        setupPopOver();
-        setupActionEvents();
-    }
-
     public NoteField(String owner, Card card) {
         load();
         setupPopOver();
