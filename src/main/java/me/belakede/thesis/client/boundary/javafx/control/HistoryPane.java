@@ -22,6 +22,18 @@ public class HistoryPane extends StackPane {
         hookupChangeListeners();
     }
 
+    public Figurine getFigurine() {
+        return figurine.get();
+    }
+
+    public void setFigurine(Figurine figurine) {
+        this.figurine.set(figurine);
+    }
+
+    public ObjectProperty<Figurine> figurineProperty() {
+        return figurine;
+    }
+
     private void load() {
         ControlLoader.load(this);
     }
