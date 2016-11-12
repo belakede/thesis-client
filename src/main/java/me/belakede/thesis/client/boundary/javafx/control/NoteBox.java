@@ -7,8 +7,11 @@ import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import me.belakede.thesis.client.boundary.javafx.model.Note;
 import me.belakede.thesis.game.equipment.Suspect;
+
+import java.util.Map;
 
 import static me.belakede.thesis.client.boundary.javafx.util.ControlLoader.load;
 
@@ -21,6 +24,7 @@ public class NoteBox extends GridPane {
         load(this);
         setPlayers(players);
         setNotes(notes);
+        displayHeadlines();
     }
 
     public ObservableMap<Suspect, String> getPlayers() {
@@ -47,4 +51,14 @@ public class NoteBox extends GridPane {
         return notes;
     }
 
+    private void displayHeadlines() {
+        int columnIndex = 1;
+        for (Map.Entry<Suspect, String> entry : players.entrySet()) {
+            Text player = new Text(entry.getValue());
+            player.getStyleClass().add(entry.getKey().name().toLowerCase());
+            player.setRotate(75);
+            add(player, columnIndex, 1);
+            columnIndex++;
+        }
+    }
 }
