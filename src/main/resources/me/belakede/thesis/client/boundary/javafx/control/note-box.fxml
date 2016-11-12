@@ -3,7 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.GridPane?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.GridPane" stylesheets="@../css/note.css"
-         hgap="15" vgap="15" styleClass="note-box">
+         styleClass="note-box">
     <padding>
         <Insets top="25" right="25" bottom="25" left="25"/>
     </padding>
