@@ -5,8 +5,7 @@
 <?import org.controlsfx.glyphfont.Glyph?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.Pane" stylesheets="@../css/note.css"
          styleClass="note-field">
-    <Button fx:id="markerButton" minWidth="32" maxWidth="32" prefWidth="32" minHeight="32" maxHeight="32"
-            prefHeight="32">
+    <Button fx:id="markerButton" styleClass="note-box-button">
         <graphic>
             <Glyph fx:id="markerGlyph" fontFamily="FontAwesome" icon="" fontSize="12"/>
         </graphic>
