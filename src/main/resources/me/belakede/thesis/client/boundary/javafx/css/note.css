@@ -23,3 +23,17 @@
 .note-container .note-button.white:hover Glyph {
     -fx-text-fill: derive(-fx-white, -20%);
 }
+
+.note-field,
+.note-field .note-box-button {
+    -fx-pref-height: 24;
+    -fx-min-height: 24;
+    -fx-max-height: 24;
+    -fx-min-width: 50;
+    -fx-pref-width: 50;
+    -fx-max-width: 50;
+}
+
+.note-field .note-box-button {
+    -fx-background-color: transparent;
+}
