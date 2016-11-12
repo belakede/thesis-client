@@ -11,7 +11,9 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import me.belakede.thesis.client.boundary.javafx.model.Note;
 import me.belakede.thesis.game.equipment.*;
@@ -74,7 +76,9 @@ public class NoteBox extends GridPane {
     private void displayCardHeadlines() {
         int rowIndex = 2;
         rowIndex = createCardHeaderBoxes(rowIndex, Suspect.values());
+        add(createSeparator(), 0, rowIndex - 1, players.getSize() + 1, 1);
         rowIndex = createCardHeaderBoxes(rowIndex, Room.values());
+        add(createSeparator(), 0, rowIndex - 1, players.getSize() + 1, 1);
         rowIndex = createCardHeaderBoxes(rowIndex, Weapon.values());
     }
 
@@ -93,6 +97,15 @@ public class NoteBox extends GridPane {
         result.setMaxHeight(fontWidth);
         result.setAlignment(Pos.CENTER);
         result.setPadding(new Insets(0, 0, 10, 0));
+        return result;
+    }
+
+    private HBox createSeparator() {
+        Separator separator = new Separator();
+        HBox result = new HBox(separator);
+        result.setAlignment(Pos.CENTER);
+        separator.prefWidthProperty().bind(result.widthProperty().subtract(50));
+        result.setPadding(new Insets(10, 0, 10, 0));
         return result;
     }
 
