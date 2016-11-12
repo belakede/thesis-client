@@ -8,8 +8,6 @@ import javafx.beans.property.MapProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -29,39 +27,31 @@ public class NoteBox extends GridPane {
     private final MapProperty<Card, Integer> cardsOrder = new SimpleMapProperty<>();
     private final ListProperty<Note> notes = new SimpleListProperty<>();
 
-    public NoteBox(ObservableMap<Suspect, String> players, ObservableList<Note> notes) {
+    public NoteBox() {
         load(this);
-        setPlayers(players);
-        setNotes(notes);
-        displayHeadlines();
-        displayCardHeadlines();
-        displayNoteFields();
-    }
-
-    public ObservableMap<Suspect, String> getPlayers() {
-        return players.get();
-    }
-
-    public void setPlayers(ObservableMap<Suspect, String> players) {
-        this.players.set(players);
-        this.playersOrder.set(FXCollections.observableMap(new HashMap<>()));
-        this.cardsOrder.set(FXCollections.observableMap(new HashMap<>()));
+        hookupChangeListeners();
     }
 
     public MapProperty<Suspect, String> playersProperty() {
         return players;
     }
 
-    public ObservableList<Note> getNotes() {
-        return notes.get();
-    }
-
-    public void setNotes(ObservableList<Note> notes) {
-        this.notes.set(notes);
-    }
-
     public ListProperty<Note> notesProperty() {
         return notes;
+    }
+
+    private void hookupChangeListeners() {
+        players.addListener((observable, oldValue, newValue) -> {
+            playersOrder.set(FXCollections.observableMap(new HashMap<>()));
+            cardsOrder.set(FXCollections.observableMap(new HashMap<>()));
+            displayHeadlines();
+            displayCardHeadlines();
+            displayNoteFields();
+        });
+        notes.addListener((observable, oldValue, newValue) -> {
+            displayCardHeadlines();
+            displayNoteFields();
+        });
     }
 
     private void displayHeadlines() {
