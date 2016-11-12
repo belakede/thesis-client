@@ -1,6 +1,7 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
@@ -16,11 +17,18 @@ public class ChatBox extends BorderPane {
     private VBox messageContainer;
     @FXML
     private TextArea textArea;
+    @FXML
+    private Button sendButton;
 
     public ChatBox() {
         load();
+        setupActionEvents();
         hookupChangeListeners();
         fixElementsWidth();
+    }
+
+    private void setupActionEvents() {
+        sendButton.setOnAction(event -> sendMessage());
     }
 
     private void load() {
@@ -30,11 +38,15 @@ public class ChatBox extends BorderPane {
     private void hookupChangeListeners() {
         textArea.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                String text = textArea.getText().trim();
-                messageContainer.getChildren().add(new ChatMessage(text, "admin"));
-                textArea.setText("");
+                sendMessage();
             }
         });
+    }
+
+    private void sendMessage() {
+        String text = textArea.getText().trim();
+        messageContainer.getChildren().add(new ChatMessage(text, "admin"));
+        textArea.setText("");
     }
 
     private void fixElementsWidth() {
