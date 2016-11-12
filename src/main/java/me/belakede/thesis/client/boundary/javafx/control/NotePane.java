@@ -92,13 +92,7 @@ public class NotePane extends StackPane {
                 noteButton.getStyleClass().add(newValue.name().toLowerCase());
             }
         });
-        noteButton.setOnAction(event -> {
-            if (popOver.isShowing()) {
-                popOver.hide();
-            } else {
-                popOver.show(this);
-            }
-        });
+        noteButton.setOnAction(event -> popOver.show(this));
     }
 
 }
