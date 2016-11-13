@@ -10,7 +10,6 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 public class MessageSenderTask extends Task<Void> {
@@ -29,12 +28,14 @@ public class MessageSenderTask extends Task<Void> {
         Client client = ClientBuilder.newClient();
         WebTarget webTarget = client.target(configuration.getBaseUrl() + "/chat/send");
         LOGGER.debug("WebTarget: {}", webTarget);
-        Response response = webTarget.request().accept(MediaType.APPLICATION_JSON_TYPE)
+        Response response = webTarget.request()
+                .header("Authorization", "Bearer " + configuration.getToken().getAccessToken())
                 .post(Entity.json(new ChatRequest(configuration.getRoomId(), message)));
         if (response.getStatus() == 200) {
             LOGGER.info("User was successfully created!");
         } else {
             LOGGER.warn("HTTP error code : {}", response.getStatus());
+            LOGGER.info("Response: {}", response.toString());
             throw new RuntimeException("Authentication failed!");
         }
         return null;
