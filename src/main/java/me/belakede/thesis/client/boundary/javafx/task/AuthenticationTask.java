@@ -10,10 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.MediaType;
-import java.util.Base64;
 
-import static me.belakede.thesis.client.configuration.ClientConfiguration.CLIENT_APP;
-import static me.belakede.thesis.client.configuration.ClientConfiguration.CLIENT_SECRET;
+import static me.belakede.thesis.client.configuration.ClientConfiguration.*;
 
 public class AuthenticationTask extends Task<Token> {
 
@@ -44,7 +42,7 @@ public class AuthenticationTask extends Task<Token> {
         ClientResponse response = webResource
                 .type(MediaType.APPLICATION_FORM_URLENCODED_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .header("Authorization", createBasicAccessAuthentication())
+                .header("Authorization", getBasicAccessAuthenticationHeader())
                 .post(ClientResponse.class, request);
 
         if (response.getStatus() != 200) {
@@ -60,7 +58,4 @@ public class AuthenticationTask extends Task<Token> {
         return result;
     }
 
-    private String createBasicAccessAuthentication() {
-        return "Basic " + Base64.getEncoder().encodeToString((CLIENT_APP + ":" + CLIENT_SECRET).getBytes());
-    }
 }
