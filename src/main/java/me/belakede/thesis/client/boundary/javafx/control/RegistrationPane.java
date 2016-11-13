@@ -1,10 +1,12 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import me.belakede.thesis.client.boundary.javafx.task.RegistrationTask;
 import org.controlsfx.control.NotificationPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +48,22 @@ public class RegistrationPane extends VBox {
                 notificationPane.setText("Missing or wrong password!");
                 notificationPane.show();
             } else {
-                LOGGER.info("Register user!");
+                Task task = new RegistrationTask(serverAddress.getText(), username.getText(), password.getText());
+                task.setOnFailed(failedEvent -> {
+                    LOGGER.info("Registration failed!");
+                    notificationPane.setText("Registration failed!");
+                    notificationPane.show();
+                });
+                task.setOnSucceeded(succeededEvent -> {
+                    LOGGER.info("Registration succeeded!");
+                    submit.setDisable(true);
+                    notificationPane.setText("Registration succeeded!");
+                    notificationPane.getContent().setDisable(true);
+                    notificationPane.show();
+                });
+                Thread thread = new Thread(task);
+                thread.setDaemon(true);
+                thread.start();
             }
         });
     }
