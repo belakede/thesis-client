@@ -58,9 +58,9 @@ public class AuthController implements Initializable {
     }
 
     public void submit(ActionEvent actionEvent) {
-        String usernameText = username.getText();
-        String passwordText = password.getText();
-        String serverAddressText = serverAddress.getText();
+        String usernameText = username.getText().trim();
+        String passwordText = password.getText().trim();
+        String serverAddressText = serverAddress.getText().trim();
 
         Task task = new AuthenticationTask(serverAddressText, usernameText, passwordText);
         task.setOnFailed(event -> {
@@ -69,6 +69,7 @@ public class AuthController implements Initializable {
             notificationPane.show();
         });
         task.setOnSucceeded(event -> {
+
             LOGGER.info("Authentication succeed!");
             hide();
         });
