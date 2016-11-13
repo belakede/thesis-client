@@ -86,6 +86,7 @@ public class AuthController implements Initializable {
     private void hide() {
         TranslateTransition transition = new TranslateTransition(new Duration(400), parent);
         transition.setToY(-(parent.getHeight()));
+        transition.setOnFinished(event -> parent.setVisible(false));
         transition.play();
     }
 }
