@@ -38,15 +38,64 @@
 }
 
 .chat-message .content {
-    -fx-background-color: derive(-fx-mustard, 50%);
     -fx-background-radius: 9;
     -fx-border-radius: 9;
     -fx-border-width: 1;
     -fx-border-style: solid;
-    -fx-border-color: -fx-mustard;
     -fx-padding: 5;
 }
 
-.chat-message .sender {
+.chat-message .content.green:hover {
+    -fx-background-color: derive(-fx-green, 25%);
+    -fx-border-color: -fx-green;
+}
+
+.chat-message .content.mustard:hover {
+    -fx-background-color: derive(-fx-mustard, 25%);
+    -fx-border-color: -fx-mustard;
+}
+
+.chat-message .content.peacock:hover {
+    -fx-background-color: derive(-fx-peacock, 25%);
+    -fx-border-color: -fx-peacock;
+}
+
+.chat-message .content.plum:hover {
+    -fx-background-color: derive(-fx-plum, 25%);
+    -fx-border-color: -fx-plum;
+}
+
+.chat-message .content.scarlet:hover {
+    -fx-background-color: derive(-fx-scarlet, 25%);
+    -fx-border-color: -fx-scarlet;
+}
+
+.chat-message .content.white:hover {
+    -fx-background-color: derive(-fx-white, 25%);
+    -fx-border-color: -fx-white;
+}
+
+.chat-message .sender.green {
+    -fx-text-fill: -fx-green;
+}
+
+.chat-message .sender.mustard {
     -fx-text-fill: -fx-mustard;
 }
+
+.chat-message .sender.peacock {
+    -fx-text-fill: -fx-peacock;
+}
+
+.chat-message .sender.plum {
+    -fx-text-fill: -fx-plum;
+}
+
+.chat-message .sender.scarlet {
+    -fx-text-fill: -fx-scarlet;
+}
+
+.chat-message .sender.white {
+    -fx-text-fill: -fx-white;
+}
+
