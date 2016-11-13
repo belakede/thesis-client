@@ -1,5 +1,6 @@
 package me.belakede.thesis.client.boundary.javafx.controller;
 
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainFrameController implements Initializable {
@@ -21,26 +21,27 @@ public class MainFrameController implements Initializable {
     private StackPane parent;
 
     public void initialize(URL location, ResourceBundle resources) {
-        nestedLoader("auth", Optional.of("game"));
+        nestedLoader("auth", ((observable, oldValue, newValue) -> {
+            parent.getChildren().clear();
+            nestedLoader("lobby", (observable1, oldValue1, newValue1) -> {
+                parent.getChildren().clear();
+                parent.getChildren().add(loadContent("game"));
+            });
+        }));
     }
 
-    private void nestedLoader(String first, Optional<String> second) {
+    private void nestedLoader(String name, ChangeListener<Boolean> changeListener) {
+        LOGGER.info("Loading {}", name);
+        Pane pane = loadContent(name);
+        parent.getChildren().add(pane);
+        pane.visibleProperty().addListener(changeListener);
+    }
+
+    private Pane loadContent(String key) {
         try {
-            LOGGER.info("Try to load {}", first);
-            Pane pane = loadContent(first);
-            parent.getChildren().add(pane);
-            if (second.isPresent()) {
-                pane.visibleProperty().addListener((observable, oldValue, newValue) -> {
-                    parent.getChildren().remove(pane);
-                    nestedLoader(second.get(), Optional.empty());
-                });
-            }
+            return FXMLLoader.load(getClass().getResource("../" + key + ".fxml"));
         } catch (IOException e) {
             throw new RuntimeException("Can't load fxml: ", e);
         }
-    }
-
-    private Pane loadContent(String key) throws IOException {
-        return FXMLLoader.load(getClass().getResource("../" + key + ".fxml"));
     }
 }
