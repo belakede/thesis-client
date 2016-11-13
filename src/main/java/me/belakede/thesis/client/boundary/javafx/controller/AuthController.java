@@ -5,12 +5,15 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import me.belakede.thesis.client.boundary.javafx.control.RegistrationPane;
 import me.belakede.thesis.client.boundary.javafx.task.AuthenticationTask;
 import org.controlsfx.control.NotificationPane;
+import org.controlsfx.control.PopOver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,10 +34,27 @@ public class AuthController implements Initializable {
     private TextField username;
     @FXML
     private PasswordField password;
+    private PopOver popOver;
 
     public void initialize(URL location, ResourceBundle resources) {
+        setupNotificationPane();
+        setupPopOver();
+    }
+
+    private void setupNotificationPane() {
         notificationPane.setShowFromTop(true);
         notificationPane.prefHeightProperty().bind(parent.heightProperty());
+    }
+
+    private void setupPopOver() {
+        popOver = new PopOver(new RegistrationPane());
+        popOver.setTitle("Register");
+        popOver.setDetachable(false);
+        popOver.setDetached(false);
+        popOver.setArrowLocation(PopOver.ArrowLocation.BOTTOM_CENTER);
+        popOver.setHeaderAlwaysVisible(true);
+        popOver.setArrowIndent(15.0);
+        popOver.setArrowSize(0.0);
     }
 
     public void submit(ActionEvent actionEvent) {
@@ -57,10 +77,13 @@ public class AuthController implements Initializable {
         thread.start();
     }
 
+    public void register(ActionEvent event) {
+        popOver.show((Node) event.getSource());
+    }
+
     private void hide() {
         TranslateTransition transition = new TranslateTransition(new Duration(400), parent);
         transition.setToY(-(parent.getHeight()));
         transition.play();
     }
-
 }
