@@ -21,7 +21,7 @@
                 <Label text="Repeat password:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
                 <PasswordField fx:id="passwordAgain" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
                 <HBox spacing="10" alignment="BOTTOM_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                    <Button text="Sign In"/>
+                    <Button fx:id="submit" text="Sign In"/>
                 </HBox>
             </GridPane>
         </content>
