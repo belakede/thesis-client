@@ -41,11 +41,6 @@ public class AuthController implements Initializable {
         setupPopOver();
     }
 
-    private void setupNotificationPane() {
-        notificationPane.setShowFromTop(true);
-        notificationPane.prefHeightProperty().bind(parent.heightProperty());
-    }
-
     private void setupPopOver() {
         popOver = new PopOver(new RegistrationPane());
         popOver.setTitle("Register");
@@ -55,6 +50,11 @@ public class AuthController implements Initializable {
         popOver.setHeaderAlwaysVisible(true);
         popOver.setArrowIndent(15.0);
         popOver.setArrowSize(0.0);
+    }
+
+    private void setupNotificationPane() {
+        notificationPane.setShowFromTop(true);
+        notificationPane.prefHeightProperty().bind(parent.heightProperty());
     }
 
     public void submit(ActionEvent actionEvent) {
