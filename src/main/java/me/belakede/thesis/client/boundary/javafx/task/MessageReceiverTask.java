@@ -43,10 +43,10 @@ public class MessageReceiverTask extends Task<List<UserMessage>> {
         UserConfiguration configuration = UserConfiguration.getInstance();
         Client client = ClientBuilder.newBuilder().register(JacksonContextResolver.class, SseFeature.class).build();
         WebTarget webTarget = client.target(configuration.getBaseUrl() + "/chat/join");
+        LOGGER.debug("WebTarget: {}", webTarget);
         EventInput eventInput = webTarget.request().accept(MediaType.APPLICATION_JSON_TYPE)
                 .header("Authorization", "Bearer " + configuration.getToken().getAccessToken())
                 .post(Entity.json(new ChatRequest(configuration.getRoomId())), EventInput.class);
-        LOGGER.info("EventInput: {}", eventInput);
         while (!eventInput.isClosed()) {
             final InboundEvent inboundEvent = eventInput.read();
             if (inboundEvent == null) {
