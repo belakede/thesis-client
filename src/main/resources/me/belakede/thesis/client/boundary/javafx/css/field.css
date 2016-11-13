@@ -2,5 +2,23 @@
 .field-container .field {
     -fx-border-color: #000000;
     -fx-border-style: solid;
-    -fx-border-width: 0.5;
+    -fx-border-width: 0.25;
+}
+
+.field-container .field.wall,
+.field-container .field.room {
+    -fx-border-color: transparent;
+    -fx-border-style: solid;
+    -fx-border-width: 0.25;
+}
+
+.field-container .field.end {
+    -fx-border-color: #000000;
+    -fx-border-style: solid;
+    -fx-border-width: 0.25;
+}
+
+.field-container .field.end:hover,
+.field-container .field.simple:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.5);
 }
