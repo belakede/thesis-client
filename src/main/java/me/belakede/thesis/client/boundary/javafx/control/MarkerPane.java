@@ -1,10 +1,13 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import me.belakede.thesis.client.boundary.javafx.task.NoteWriterTask;
 import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Marker;
 import org.controlsfx.glyphfont.FontAwesome;
@@ -100,8 +103,12 @@ public class MarkerPane extends HBox {
 
     private void hookupChangeListeners() {
         marker.addListener((observable, oldValue, newValue) -> {
-            setIcon(mapToIcon(newValue));
-            LOGGER.trace("Marker {}'s {} card with {}", owner.getValue(), card.getValue(), newValue.name());
+            Task task = new NoteWriterTask(getCard(), getOwner(), newValue);
+            task.setOnSucceeded(event -> {
+                LOGGER.info("Mark {}'s {} card with {}", getOwner(), getCard(), newValue);
+                Platform.runLater(() -> setIcon(mapToIcon(newValue)));
+            });
+            new Thread(task).start();
         });
     }
 
