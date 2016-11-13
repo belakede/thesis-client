@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import me.belakede.thesis.client.boundary.javafx.model.UserMessage;
+import me.belakede.thesis.client.configuration.UserConfiguration;
 import me.belakede.thesis.game.equipment.Suspect;
 import me.belakede.thesis.jackson.JacksonContextResolver;
 import me.belakede.thesis.server.chat.request.ChatRequest;
@@ -39,11 +40,12 @@ public class MessageReceiverTask extends Task<List<UserMessage>> {
 
     @Override
     protected List<UserMessage> call() throws Exception {
+        UserConfiguration configuration = UserConfiguration.getInstance();
         Client client = ClientBuilder.newBuilder().register(JacksonContextResolver.class, SseFeature.class).build();
-        WebTarget webTarget = client.target("http://localhost:8080/chat/join");
+        WebTarget webTarget = client.target(configuration.getBaseUrl() + "/chat/join");
         EventInput eventInput = webTarget.request().accept(MediaType.APPLICATION_JSON_TYPE)
-                .header("Authorization", "Bearer b2716839-b6c4-44a4-81e6-ede06cc73b72")
-                .post(Entity.json(new ChatRequest("test-room")), EventInput.class);
+                .header("Authorization", "Bearer " + configuration.getToken().getAccessToken())
+                .post(Entity.json(new ChatRequest(configuration.getRoomId())), EventInput.class);
         LOGGER.info("EventInput: {}", eventInput);
         while (!eventInput.isClosed()) {
             final InboundEvent inboundEvent = eventInput.read();
