@@ -1,6 +1,8 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import me.belakede.thesis.client.boundary.javafx.model.UserMessage;
 import me.belakede.thesis.client.boundary.javafx.task.MessageReceiverTask;
+import me.belakede.thesis.client.boundary.javafx.task.MessageSenderTask;
 import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,8 +34,8 @@ public class ChatBox extends BorderPane {
         load();
         setupActionEvents();
         hookupChangeListeners();
-        fixElementsWidth();
         openCommunicationChannel();
+        fixElementsWidth();
     }
 
     private void load() {
@@ -64,12 +67,11 @@ public class ChatBox extends BorderPane {
             LOGGER.info("UserMessage(s) arrived: {}", c);
             while (c.next()) {
                 if (c.wasAdded()) {
-                    c.getAddedSubList().forEach(m -> appendChatMessage(m));
+                    Platform.runLater(() -> c.getAddedSubList().forEach(m -> appendChatMessage(m)));
                 }
             }
         });
         Thread thread = new Thread(messageReceiverTask);
-        thread.setDaemon(true);
         thread.start();
     }
 
@@ -81,7 +83,9 @@ public class ChatBox extends BorderPane {
 
     private void sendMessage() {
         String text = textArea.getText().trim();
-        messageContainer.getChildren().add(new ChatMessage(text, "admin"));
-        textArea.setText("");
+        Task task = new MessageSenderTask(text);
+        task.setOnSucceeded(event -> textArea.setText(""));
+        Thread thread = new Thread(task);
+        thread.start();
     }
 }
