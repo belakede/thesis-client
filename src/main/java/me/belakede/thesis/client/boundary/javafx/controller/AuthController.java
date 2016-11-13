@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.control.RegistrationPane;
 import me.belakede.thesis.client.boundary.javafx.task.AuthenticationTask;
+import me.belakede.thesis.client.configuration.UserConfiguration;
 import org.controlsfx.control.NotificationPane;
 import org.controlsfx.control.PopOver;
 import org.slf4j.Logger;
@@ -69,7 +70,7 @@ public class AuthController implements Initializable {
             notificationPane.show();
         });
         task.setOnSucceeded(event -> {
-
+            UserConfiguration.getInstance().setBaseUrl(serverAddressText);
             LOGGER.info("Authentication succeed!");
             hide();
         });
