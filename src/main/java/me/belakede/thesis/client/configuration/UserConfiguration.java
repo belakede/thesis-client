@@ -5,6 +5,7 @@ import me.belakede.thesis.client.domain.Token;
 public class UserConfiguration {
 
     private String baseUrl;
+    private String roomId;
     private Token token;
 
     private UserConfiguration() {
@@ -20,6 +21,14 @@ public class UserConfiguration {
 
     public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
+    }
+
+    public String getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
     }
 
     public Token getToken() {
