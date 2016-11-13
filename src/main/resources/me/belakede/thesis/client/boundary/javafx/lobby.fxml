@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:id="parent"
+      fx:controller="me.belakede.thesis.client.boundary.javafx.controller.LobbyController">
+    <NotificationPane fx:id="notificationPane">
+        <content>
+            <BorderPane>
+                <padding>
+                    <Insets top="25" right="25" bottom="10" left="25"/>
+                </padding>
+                <top>
+                    <Label>Hello World!</Label>
+                </top>
+                <bottom>
+                    <Button text="Join" onAction="#join"/>
+                </bottom>
+            </BorderPane>
+        </content>
+    </NotificationPane>
+</VBox>
