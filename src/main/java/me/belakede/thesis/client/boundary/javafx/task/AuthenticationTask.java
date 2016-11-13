@@ -50,7 +50,7 @@ public class AuthenticationTask extends Task<Token> {
         if (response.getStatus() != 200) {
             LOGGER.warn("HTTP error code : {}", response.getStatus());
             LOGGER.warn("{}", response.toString());
-            failed();
+            throw new RuntimeException("Authentication failed!");
         } else {
             result = response.getEntity(Token.class);
             LOGGER.info("Access Token: {}", result.getAccessToken());
@@ -58,12 +58,6 @@ public class AuthenticationTask extends Task<Token> {
             LOGGER.info("Token has been stored!");
         }
         return result;
-    }
-
-    @Override
-    protected void failed() {
-        super.failed();
-        updateMessage("Authentication failed!");
     }
 
     private String createBasicAccessAuthentication() {
