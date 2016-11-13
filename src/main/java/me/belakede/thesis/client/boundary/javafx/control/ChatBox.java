@@ -72,6 +72,7 @@ public class ChatBox extends BorderPane {
             }
         });
         Thread thread = new Thread(messageReceiverTask);
+        thread.setDaemon(true);
         thread.start();
     }
 
