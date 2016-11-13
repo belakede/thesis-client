@@ -101,7 +101,7 @@ public class MarkerPane extends HBox {
     private void hookupChangeListeners() {
         marker.addListener((observable, oldValue, newValue) -> {
             setIcon(mapToIcon(newValue));
-            LOGGER.info("Marker {}'s {} card with {}", owner.getValue(), card.getValue(), newValue.name());
+            LOGGER.trace("Marker {}'s {} card with {}", owner.getValue(), card.getValue(), newValue.name());
         });
     }
 
