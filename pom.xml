@@ -13,6 +13,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <guava.version>20.0</guava.version>
+        <jersey-client.version>1.19.2</jersey-client.version>
+        <javax.ws.rs-api.version>2.0.1</javax.ws.rs-api.version>
+        <jersey-media-sse.version>2.23.2</jersey-media-sse.version>
+        <jersey-media-json-jackson.version>2.23.2</jersey-media-json-jackson.version>
         <spring-boot-dependencies.version>1.4.1.RELEASE</spring-boot-dependencies.version>
         <controlsfx.version>8.40.12</controlsfx.version>
     </properties>
@@ -37,6 +41,26 @@
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
             <version>${controlsfx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>${javax.ws.rs-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey-client.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-sse</artifactId>
+            <version>${jersey-media-sse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>${jersey-media-json-jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
