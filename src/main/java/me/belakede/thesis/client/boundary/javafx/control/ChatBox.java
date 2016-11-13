@@ -1,5 +1,6 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,9 +8,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import me.belakede.thesis.client.boundary.javafx.model.UserMessage;
+import me.belakede.thesis.client.boundary.javafx.task.MessageReceiverTask;
 import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ChatBox extends BorderPane {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ChatBox.class);
 
     @FXML
     private ScrollPane scrollPane;
@@ -25,14 +32,15 @@ public class ChatBox extends BorderPane {
         setupActionEvents();
         hookupChangeListeners();
         fixElementsWidth();
-    }
-
-    private void setupActionEvents() {
-        sendButton.setOnAction(event -> sendMessage());
+        openCommunicationChannel();
     }
 
     private void load() {
         ControlLoader.load(this);
+    }
+
+    private void setupActionEvents() {
+        sendButton.setOnAction(event -> sendMessage());
     }
 
     private void hookupChangeListeners() {
@@ -43,16 +51,37 @@ public class ChatBox extends BorderPane {
         });
     }
 
-    private void sendMessage() {
-        String text = textArea.getText().trim();
-        messageContainer.getChildren().add(new ChatMessage(text, "admin"));
-        textArea.setText("");
-    }
-
     private void fixElementsWidth() {
         scrollPane.viewportBoundsProperty().addListener((ov, oldBounds, bounds) -> {
             messageContainer.setPrefWidth(bounds.getWidth());
             messageContainer.setPrefHeight(bounds.getHeight());
         });
+    }
+
+    private void openCommunicationChannel() {
+        MessageReceiverTask messageReceiverTask = new MessageReceiverTask();
+        messageReceiverTask.getUserMessages().addListener((ListChangeListener.Change<? extends UserMessage> c) -> {
+            LOGGER.info("UserMessage(s) arrived: {}", c);
+            while (c.next()) {
+                if (c.wasAdded()) {
+                    c.getAddedSubList().forEach(m -> appendChatMessage(m));
+                }
+            }
+        });
+        Thread thread = new Thread(messageReceiverTask);
+        thread.setDaemon(true);
+        thread.start();
+    }
+
+    private void appendChatMessage(UserMessage m) {
+        ChatMessage chatMessage = new ChatMessage(m.getMessage(), m.getSender());
+        chatMessage.getStyleClass().add(m.getFigurine().name().toLowerCase());
+        messageContainer.getChildren().add(chatMessage);
+    }
+
+    private void sendMessage() {
+        String text = textArea.getText().trim();
+        messageContainer.getChildren().add(new ChatMessage(text, "admin"));
+        textArea.setText("");
     }
 }
