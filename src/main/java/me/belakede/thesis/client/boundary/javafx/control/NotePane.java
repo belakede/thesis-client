@@ -1,12 +1,16 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
+import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import me.belakede.thesis.client.boundary.javafx.model.Note;
+import me.belakede.thesis.client.boundary.javafx.task.NoteDownloaderTask;
+import me.belakede.thesis.client.boundary.javafx.task.NoteRegistrationTask;
 import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
 import me.belakede.thesis.game.equipment.Figurine;
 import me.belakede.thesis.game.equipment.Suspect;
@@ -27,6 +31,17 @@ public class NotePane extends StackPane {
         setupNoteBox();
         setupPopover();
         hookupChangeListeners();
+        registerNoteRoom();
+    }
+
+    private void registerNoteRoom() {
+        Task registrationTask = new NoteRegistrationTask();
+        registrationTask.setOnSucceeded(event -> {
+            NoteDownloaderTask downloadTask = new NoteDownloaderTask();
+            downloadTask.setOnSucceeded(downloadEvent -> Platform.runLater(() -> setNotes(downloadTask.getValue())));
+            new Thread(downloadTask).start();
+        });
+        new Thread(registrationTask).start();
     }
 
     public Figurine getFigurine() {
