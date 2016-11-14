@@ -71,4 +71,8 @@ public class GameSummary {
         return players;
     }
 
+    @Override
+    public String toString() {
+        return "#" + getId() + ", " + getBoardType();
+    }
 }
