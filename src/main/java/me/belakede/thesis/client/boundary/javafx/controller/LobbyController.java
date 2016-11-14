@@ -6,6 +6,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +17,7 @@ import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.control.GameDetailsPane;
 import me.belakede.thesis.client.boundary.javafx.control.PlayersPane;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
+import me.belakede.thesis.client.boundary.javafx.task.CreateGameTask;
 import me.belakede.thesis.game.equipment.BoardType;
 import org.controlsfx.glyphfont.FontAwesome;
 import org.controlsfx.glyphfont.Glyph;
@@ -23,7 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -91,7 +92,9 @@ public class LobbyController implements Initializable {
         if (optionalBoardType.isPresent()) {
             Optional<ObservableList<String>> optionalPlayers = addPlayers();
             if (optionalPlayers.isPresent()) {
-                games.getItems().add(new GameSummary(1L, LocalDateTime.now(), optionalBoardType.get(), optionalPlayers.get()));
+                Task<GameSummary> task = new CreateGameTask(optionalBoardType.get(), optionalPlayers.get());
+                task.setOnSucceeded(event -> Platform.runLater(() -> games.getItems().add(task.getValue())));
+                new Thread(task).start();
             }
         }
     }
