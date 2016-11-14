@@ -2,7 +2,8 @@ package me.belakede.thesis.client.boundary.javafx.controller;
 
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.control.GameDetailsPane;
+import me.belakede.thesis.client.boundary.javafx.control.PlayersPane;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
 import me.belakede.thesis.game.equipment.BoardType;
 import org.controlsfx.glyphfont.FontAwesome;
@@ -28,6 +30,7 @@ import java.util.ResourceBundle;
 public class LobbyController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LobbyController.class);
+    private final ListProperty<String> players = new SimpleListProperty<>();
 
     @FXML
     private ListView<GameSummary> games;
@@ -38,10 +41,29 @@ public class LobbyController implements Initializable {
     private VBox content;
     @FXML
     private ScrollPane scrollPane;
+    @FXML
+    private PlayersPane playersPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setupBindings();
         hookupChangeListeners();
+    }
+
+    public ObservableList<String> getPlayers() {
+        return players.get();
+    }
+
+    public void setPlayers(ObservableList<String> players) {
+        this.players.set(players);
+    }
+
+    public ListProperty<String> playersProperty() {
+        return players;
+    }
+
+    private void setupBindings() {
+        players.bind(playersPane.playersProperty());
     }
 
     private void hookupChangeListeners() {
@@ -68,7 +90,7 @@ public class LobbyController implements Initializable {
         Optional<BoardType> optionalBoardType = selectBoardType();
         if (optionalBoardType.isPresent()) {
             Optional<ObservableList<String>> optionalPlayers = addPlayers();
-            if (optionalBoardType.isPresent()) {
+            if (optionalPlayers.isPresent()) {
                 games.getItems().add(new GameSummary(1L, LocalDateTime.now(), optionalBoardType.get(), optionalPlayers.get()));
             }
         }
@@ -91,7 +113,7 @@ public class LobbyController implements Initializable {
         ButtonType addButtonType = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
 
-        ListView<String> players = new ListView<>(FXCollections.observableArrayList("Player 1", "Player 2", "Player 3"));
+        ListView<String> players = new ListView<>(getPlayers());
         players.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         Node loginButton = dialog.getDialogPane().lookupButton(addButtonType);
@@ -109,7 +131,7 @@ public class LobbyController implements Initializable {
             if (dialogButton == addButtonType) {
                 return players.getSelectionModel().getSelectedItems();
             }
-            return FXCollections.emptyObservableList();
+            return null;
         });
 
         return dialog.showAndWait();
