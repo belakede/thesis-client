@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.VBox?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/lobby.css"
+         fx:id="parent" spacing="10" styleClass="boards-container">
+    <padding>
+        <Insets top="5" right="0" bottom="10" left="10"/>
+    </padding>
+    <Hyperlink fx:id="defaultBoard">Default</Hyperlink>
+    <Hyperlink fx:id="advancedBoard">Advanced</Hyperlink>
+</fx:root>
