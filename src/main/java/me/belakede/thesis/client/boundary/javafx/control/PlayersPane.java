@@ -30,6 +30,10 @@ public class PlayersPane extends VBox {
         downloadPlayers();
     }
 
+    public ListProperty<String> playersProperty() {
+        return players;
+    }
+
     private void setupActionEvents() {
         refreshButton.setOnAction(event -> downloadPlayers());
     }
