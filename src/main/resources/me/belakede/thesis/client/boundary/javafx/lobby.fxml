@@ -43,7 +43,7 @@
                         <Text text="Boards" styleClass="headline"/>
                         <BoardsPane/>
                         <Text text="Players" styleClass="headline"/>
-                        <PlayersPane/>
+                        <PlayersPane fx:id="playersPane"/>
                     </VBox>
                 </right>
             </BorderPane>
