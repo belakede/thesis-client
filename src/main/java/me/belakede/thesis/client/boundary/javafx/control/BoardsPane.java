@@ -1,7 +1,9 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.PopOver;
 
@@ -42,15 +44,15 @@ public class BoardsPane extends VBox {
     }
 
     private void setupOnMouseEnteredEvents() {
-        defaultBoard.setOnMouseEntered(event -> {
-            content.getStyleClass().remove("advanced");
-            content.getStyleClass().add("default");
-            popOver.show(defaultBoard);
-        });
-        advancedBoard.setOnMouseEntered(event -> {
-            content.getStyleClass().remove("default");
-            content.getStyleClass().add("advanced");
-            popOver.show(advancedBoard);
-        });
+        defaultBoard.setOnMouseEntered(createEventHandler("advanced", "default", defaultBoard));
+        advancedBoard.setOnMouseEntered(createEventHandler("default", "advanced", advancedBoard));
+    }
+
+    private EventHandler<MouseEvent> createEventHandler(String removeClass, String addClass, Hyperlink parent) {
+        return event -> {
+            content.getStyleClass().remove(removeClass);
+            content.getStyleClass().add(addClass);
+            popOver.show(parent);
+        };
     }
 }
