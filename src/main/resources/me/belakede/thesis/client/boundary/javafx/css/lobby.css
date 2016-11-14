@@ -1,0 +1,58 @@
+.lobby-container .headline {
+    -fx-font-size: 24px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #818181;
+    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
+}
+.lobby-container .games {
+    -fx-max-width: Infinity;
+}
+
+.boards-container .board-preview {
+    -fx-padding: 10;
+    -fx-min-width: 300;
+    -fx-pref-width: 300;
+    -fx-max-width: 300;
+    -fx-min-height: 300;
+    -fx-pref-height: 300;
+    -fx-max-height: 300;
+    -fx-border-size: 10;
+    -fx-border-color: transparent;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+.boards-container .board-preview.default {
+    -fx-background-image: url("../img/default.png");
+}
+.boards-container .board-preview.advanced {
+    -fx-background-image: url("../img/advanced.png");
+}
+
+.game-details-container .title {
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #818181;
+    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
+}
+.game-details-container .subtitle {
+    -fx-font-size: 12px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #b3b3b3;
+    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
+}
+.game-details-container .board {
+    -fx-min-width: 500;
+    -fx-min-height: 500;
+    -fx-pref-width: 500;
+    -fx-pref-height: 500;
+    -fx-max-width: 500;
+    -fx-max-height: 500;
+    -fx-background-size: 500 500;
+}
+.game-details-container .board.default {
+    -fx-background-image: url("../img/default.png");
+}
+.game-details-container .board.advanced {
+    -fx-background-image: url("../img/advanced.png");
+}
+
