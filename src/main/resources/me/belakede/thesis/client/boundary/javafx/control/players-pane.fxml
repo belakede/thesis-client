@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/lobby.css"
+         fx:id="parent" spacing="10" styleClass="players-container">
+    <padding>
+        <Insets top="5" right="0" bottom="10" left="10"/>
+    </padding>
+    <ListView fx:id="players" prefHeight="300" minHeight="300"/>
+    <HBox>
+        <Button>Refresh</Button>
+        <Button>Add</Button>
+    </HBox>
+</fx:root>
