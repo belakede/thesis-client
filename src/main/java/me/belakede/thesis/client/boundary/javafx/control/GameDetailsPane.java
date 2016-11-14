@@ -2,13 +2,14 @@ package me.belakede.thesis.client.boundary.javafx.control;
 
 
 import javafx.beans.property.*;
-import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import me.belakede.thesis.game.equipment.BoardType;
+import me.belakede.thesis.game.equipment.Suspect;
 
 import java.time.LocalDateTime;
 
@@ -19,7 +20,7 @@ public class GameDetailsPane extends BorderPane {
     private final LongProperty gameId = new SimpleLongProperty();
     private final ObjectProperty<LocalDateTime> created = new SimpleObjectProperty<>();
     private final ObjectProperty<BoardType> boardType = new SimpleObjectProperty<>();
-    private final ListProperty<String> players = new SimpleListProperty<>();
+    private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
 
     @FXML
     private Text idText;
@@ -30,7 +31,7 @@ public class GameDetailsPane extends BorderPane {
     @FXML
     private FlowPane playersPane;
 
-    public GameDetailsPane(long gameId, LocalDateTime created, BoardType boardType, ObservableList<String> players) {
+    public GameDetailsPane(long gameId, LocalDateTime created, BoardType boardType, ObservableMap<Suspect, String> players) {
         load(this);
         setupBinginds();
         hookupChangeListeners();
@@ -76,15 +77,15 @@ public class GameDetailsPane extends BorderPane {
         return boardType;
     }
 
-    public ObservableList<String> getPlayers() {
+    public ObservableMap<Suspect, String> getPlayers() {
         return players.get();
     }
 
-    public void setPlayers(ObservableList<String> players) {
+    public void setPlayers(ObservableMap<Suspect, String> players) {
         this.players.set(players);
     }
 
-    public ListProperty<String> playersProperty() {
+    public MapProperty<Suspect, String> playersProperty() {
         return players;
     }
 
@@ -98,7 +99,11 @@ public class GameDetailsPane extends BorderPane {
             boardBox.getStyleClass().removeAll("default", "advanced");
             boardBox.getStyleClass().add(newValue.name().toLowerCase());
         });
-        playersProperty().addListener((observable, oldValue, newValue) -> newValue.stream().map(Text::new).forEach(player -> playersPane.getChildren().add(player)));
+        playersProperty().addListener((observable, oldValue, newValue) -> newValue.entrySet().stream().map(player -> {
+            Text text = new Text(player.getValue());
+            text.getStyleClass().addAll("player", player.getKey().name().toLowerCase());
+            return text;
+        }).forEach(player -> playersPane.getChildren().add(player)));
     }
 
 }
