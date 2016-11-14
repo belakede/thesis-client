@@ -41,6 +41,6 @@ public class CreateGameTask extends Task<GameSummary> {
                 .header("Authorization", "Bearer " + configuration.getToken().getAccessToken())
                 .post(Entity.json(new GamesRequest(boardType, players)), GamesResponse.class);
         LOGGER.info("Game has been successful created!");
-        return new GameSummary(response.getId(), now, response.getBoardType(), FXCollections.observableArrayList(response.getUsers()));
+        return new GameSummary(response.getId(), now, response.getBoardType(), FXCollections.observableMap(response.getUsers()));
     }
 }
