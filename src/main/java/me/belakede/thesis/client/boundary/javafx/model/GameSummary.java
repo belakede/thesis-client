@@ -1,8 +1,9 @@
 package me.belakede.thesis.client.boundary.javafx.model;
 
 import javafx.beans.property.*;
-import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import me.belakede.thesis.game.equipment.BoardType;
+import me.belakede.thesis.game.equipment.Suspect;
 
 import java.time.LocalDateTime;
 
@@ -11,12 +12,12 @@ public class GameSummary {
     private final LongProperty id = new SimpleLongProperty();
     private final ObjectProperty<LocalDateTime> created = new SimpleObjectProperty<>();
     private final ObjectProperty<BoardType> boardType = new SimpleObjectProperty<>();
-    private final ListProperty<String> players = new SimpleListProperty<>();
+    private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
 
     public GameSummary() {
     }
 
-    public GameSummary(Long id, LocalDateTime created, BoardType boardType, ObservableList<String> players) {
+    public GameSummary(Long id, LocalDateTime created, BoardType boardType, ObservableMap<Suspect, String> players) {
         setId(id);
         setCreated(created);
         setBoardType(boardType);
@@ -59,15 +60,15 @@ public class GameSummary {
         return boardType;
     }
 
-    public ObservableList<String> getPlayers() {
+    public ObservableMap<Suspect, String> getPlayers() {
         return players.get();
     }
 
-    public void setPlayers(ObservableList<String> players) {
+    public void setPlayers(ObservableMap<Suspect, String> players) {
         this.players.set(players);
     }
 
-    public ListProperty<String> playersProperty() {
+    public MapProperty<Suspect, String> playersProperty() {
         return players;
     }
 
