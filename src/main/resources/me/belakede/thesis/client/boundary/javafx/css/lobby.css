@@ -1,3 +1,5 @@
+@import "colors.css";
+
 .lobby-container .headline {
     -fx-font-size: 24px;
     -fx-font-family: "Arial Black";
@@ -56,3 +58,30 @@
     -fx-background-image: url("../img/advanced.png");
 }
 
+.game-details-container .player.green {
+
+}
+
+.game-details-container .player.green {
+    -fx-fill: derive(-fx-green, -20%);
+}
+
+.game-details-container .player.mustard {
+    -fx-fill: derive(-fx-mustard, -20%);
+}
+
+.game-details-container .player.peacock {
+    -fx-fill: derive(-fx-peacock, -20%);
+}
+
+.game-details-container .player.plum {
+    -fx-fill: derive(-fx-plum, -20%);
+}
+
+.game-details-container .player.scarlet {
+    -fx-fill: derive(-fx-scarlet, -20%);
+}
+
+.game-details-container .player.white {
+    -fx-fill: derive(-fx-white, -20%);
+}
