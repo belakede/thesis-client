@@ -121,10 +121,11 @@ public class GameDetailsPane extends BorderPane {
             Task<Void> task = new RemoveGameTask(getGameId());
             task.setOnSucceeded(e -> {
                 start.setDisable(true);
-                Text removed = new Text("Removed");
-                removed.getStyleClass().addAll("removed");
-                removed.setRotate(45);
-                boardBox.getChildren().add(removed);
+                removed.set(true);
+                Text removedText = new Text("Removed");
+                removedText.getStyleClass().addAll("removed");
+                removedText.setRotate(45);
+                boardBox.getChildren().add(removedText);
             });
             new Thread(task).start();
         });
