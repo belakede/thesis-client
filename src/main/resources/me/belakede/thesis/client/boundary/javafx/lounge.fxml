@@ -1,13 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.NotificationPane?>
 <?import org.controlsfx.glyphfont.Glyph?>
-<FlowPane xmlns:fx="http://javafx.com/fxml" stylesheets="@css/lounge.css"
-          fx:controller="me.belakede.thesis.client.boundary.javafx.controller.LoungeController">
-    <StackPane fx:id="sorryPane" minWidth="1280" minHeight="800" styleClass="sorry-pane">
-        <Glyph fontFamily="FontAwesome" icon="FROWN_ALT" fontSize="600"/>
-        <Text>Sorry, it's not your game.</Text>
-    </StackPane>
-</FlowPane>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:id="parent" stylesheets="@css/lounge.css"
+      fx:controller="me.belakede.thesis.client.boundary.javafx.controller.LoungeController">
+    <NotificationPane fx:id="notificationPane">
+        <content>
+            <StackPane>
+                <HBox prefWidth="1280" prefHeight="800" spacing="50" alignment="CENTER">
+                    <VBox styleClass="player, mustard, online">
+                        <VBox styleClass="icon"/>
+                        <Text>Player 1</Text>
+                    </VBox>
+                    <VBox styleClass="player, plum">
+                        <VBox styleClass="icon"/>
+                        <Text>Player 1</Text>
+                    </VBox>
+                    <VBox styleClass="player, green">
+                        <VBox styleClass="icon"/>
+                        <Text>Player 1</Text>
+                    </VBox>
+                    <VBox styleClass="player, white">
+                        <VBox styleClass="icon"/>
+                        <Text>Player 1</Text>
+                    </VBox>
+                    <VBox styleClass="player, peacock">
+                        <VBox styleClass="icon"/>
+                        <Text>Player 1</Text>
+                    </VBox>
+                    <VBox styleClass="player, scarlet">
+                        <VBox styleClass="icon"/>
+                        <Text>Player 1</Text>
+                    </VBox>
+                </HBox>
+                <StackPane fx:id="sorryPane" styleClass="sorry-pane" visible="false" prefWidth="1280" prefHeight="800">
+                    <Glyph fontFamily="FontAwesome" icon="FROWN_ALT" fontSize="600"/>
+                    <Text>Sorry, it's not your game.</Text>
+                </StackPane>
+            </StackPane>
+        </content>
+    </NotificationPane>
+</VBox>

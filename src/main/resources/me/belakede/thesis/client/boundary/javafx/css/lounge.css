@@ -1,3 +1,5 @@
+@import "colors.css";
+
 .sorry-pane Glyph {
     -fx-text-fill: #d3d3d3;
     -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
@@ -8,4 +10,67 @@
     -fx-font-family: "Arial Black";
     -fx-fill: #818181;
     -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
+}
+
+.player {
+    -fx-opacity: 25%;
+}
+
+.player.online {
+    -fx-opacity: 100%;
+}
+
+.player Text {
+    -fx-font-size: 16;
+}
+
+.player,
+.player .icon {
+    -fx-min-width: 100;
+    -fx-pref-width: 100;
+    -fx-max-width: 100;
+    -fx-min-height: 100;
+    -fx-pref-height: 120;
+    -fx-max-height: 130;
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+    -fx-alignment: center;
+    -fx-spacing: 15;
+}
+
+.player .icon {
+    -fx-background-image: url("../img/logo-circle.png");
+    -fx-background-size: cover;
+    -fx-pref-height: 100;
+    -fx-max-height: 100;
+    -fx-border-color: black;
+    -fx-border-radius: 100;
+    -fx-border-width: 3;
+}
+
+.player.mustard .icon {
+    -fx-effect: dropshadow(three-pass-box, -fx-mustard, 10, 0, 0, 0);
+}
+
+.player.mustard.online .icon {
+}
+
+.player.green .icon {
+    -fx-effect: dropshadow(three-pass-box, -fx-green, 10, 0, 0, 0);
+}
+
+.player.peacock .icon {
+    -fx-effect: dropshadow(three-pass-box, -fx-peacock, 10, 0, 0, 0);
+}
+
+.player.plum .icon {
+    -fx-effect: dropshadow(three-pass-box, -fx-plum, 10, 0, 0, 0);
+}
+
+.player.white .icon {
+    -fx-effect: dropshadow(three-pass-box, -fx-white, 10, 0, 0, 0);
+}
+
+.player.scarlet .icon {
+    -fx-effect: dropshadow(three-pass-box, -fx-scarlet, 10, 0, 0, 0);
 }
