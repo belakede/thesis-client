@@ -38,7 +38,7 @@ public class LobbyController implements Initializable {
         gamesPane.selectedGameProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 content.getChildren().clear();
-                content.getChildren().add(new GameDetailsPane(newValue));
+                content.getChildren().add(new GameDetailsPane(newValue, gamesPane.removedProperty()));
             }
         });
     }

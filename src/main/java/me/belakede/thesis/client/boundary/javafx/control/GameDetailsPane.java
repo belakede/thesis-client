@@ -40,21 +40,20 @@ public class GameDetailsPane extends BorderPane {
     @FXML
     private Button start;
 
-    public GameDetailsPane(GameSummary game) {
-        this(game.getId(), game.getCreated(), game.getBoardType(), game.getPlayers());
+    public GameDetailsPane(GameSummary game, BooleanProperty removed) {
+        this(game.getId(), game.getCreated(), game.getBoardType(), game.getPlayers(), removed);
     }
 
-    public GameDetailsPane(long gameId, LocalDateTime created, BoardType boardType, ObservableMap<Suspect, String> players) {
+    private GameDetailsPane(long gameId, LocalDateTime created, BoardType boardType, ObservableMap<Suspect, String> players, BooleanProperty removed) {
         load(this);
         setupActionEvents();
-        setupBinginds();
+        setupBinginds(removed);
         hookupChangeListeners();
         setGameId(gameId);
         setCreated(created);
         setBoardType(boardType);
         setPlayers(players);
     }
-
 
     public long getGameId() {
         return gameId.get();
@@ -131,9 +130,10 @@ public class GameDetailsPane extends BorderPane {
         });
     }
 
-    private void setupBinginds() {
+    private void setupBinginds(BooleanProperty removed) {
         idText.textProperty().bind(gameIdProperty().asString("#%d"));
         createdText.textProperty().bind(createdProperty().asString());
+        removed.bind(this.removed);
     }
 
     private void hookupChangeListeners() {
