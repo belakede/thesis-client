@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.glyphfont.Glyph?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/lobby.css"
          fx:id="parent" spacing="10" styleClass="players-container">
     <padding>
@@ -12,7 +13,11 @@
     </padding>
     <ListView fx:id="playersView" prefHeight="300" minHeight="300"/>
     <HBox styleClass="actions">
-        <Button fx:id="refreshButton">Refresh</Button>
-        <Button fx:id="addButton" disable="true">Add</Button>
+        <Button fx:id="refreshButton">
+            Refresh
+            <graphic>
+                <Glyph fontFamily="FontAwesome" icon="REFRESH"/>
+            </graphic>
+        </Button>
     </HBox>
 </fx:root>
