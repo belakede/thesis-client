@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<FlowPane xmlns:fx="http://javafx.com/fxml" stylesheets="@css/game.css"
+          fx:controller="me.belakede.thesis.client.boundary.javafx.controller.LoungeController">
+    <Label>Lounge</Label>
+</FlowPane>
