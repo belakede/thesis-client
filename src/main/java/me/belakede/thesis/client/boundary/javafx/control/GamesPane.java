@@ -1,10 +1,7 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
 import javafx.application.Platform;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -28,6 +25,7 @@ public class GamesPane extends VBox {
     private final ListProperty<GameSummary> games = new SimpleListProperty<>();
     private final ListProperty<String> players = new SimpleListProperty<>();
     private final ObjectProperty<GameSummary> selectedGame = new SimpleObjectProperty<>();
+    private final BooleanProperty removed = new SimpleBooleanProperty(false);
 
     @FXML
     private VBox parent;
@@ -81,6 +79,18 @@ public class GamesPane extends VBox {
         return selectedGame;
     }
 
+    public boolean isRemoved() {
+        return removed.get();
+    }
+
+    public void setRemoved(boolean removed) {
+        this.removed.set(removed);
+    }
+
+    public BooleanProperty removedProperty() {
+        return removed;
+    }
+
     private void setupActionEvents() {
         createButton.setOnAction(event -> createGame());
         refreshButton.setOnAction(event -> downloadGames());
@@ -90,6 +100,11 @@ public class GamesPane extends VBox {
         gamesView.itemsProperty().bind(games);
         gamesView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         selectedGame.bind(gamesView.getSelectionModel().selectedItemProperty());
+        removed.addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && newValue) {
+                games.remove(getSelectedGame());
+            }
+        });
     }
 
     private void downloadGames() {
