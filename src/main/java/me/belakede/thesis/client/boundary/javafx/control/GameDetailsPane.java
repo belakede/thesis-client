@@ -4,6 +4,7 @@ package me.belakede.thesis.client.boundary.javafx.control;
 import javafx.beans.property.*;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -31,6 +32,10 @@ public class GameDetailsPane extends BorderPane {
     private VBox boardBox;
     @FXML
     private FlowPane playersPane;
+    @FXML
+    private Button remove;
+    @FXML
+    private Button start;
 
     public GameDetailsPane(GameSummary game) {
         this(game.getId(), game.getCreated(), game.getBoardType(), game.getPlayers());
