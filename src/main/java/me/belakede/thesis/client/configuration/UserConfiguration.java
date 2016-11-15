@@ -4,6 +4,7 @@ import me.belakede.thesis.client.domain.Token;
 
 public class UserConfiguration {
 
+    private String username;
     private String baseUrl;
     private String roomId;
     private Token token;
@@ -13,6 +14,14 @@ public class UserConfiguration {
 
     public static UserConfiguration getInstance() {
         return UserConfigurationHolder.INSTANCE;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getBaseUrl() {
