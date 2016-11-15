@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.FlowPane?>
-<FlowPane xmlns:fx="http://javafx.com/fxml" stylesheets="@css/game.css"
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
+<?import org.controlsfx.glyphfont.Glyph?>
+<FlowPane xmlns:fx="http://javafx.com/fxml" stylesheets="@css/lounge.css"
           fx:controller="me.belakede.thesis.client.boundary.javafx.controller.LoungeController">
-    <Label>Lounge</Label>
+    <StackPane fx:id="sorryPane" minWidth="1280" minHeight="800" styleClass="sorry-pane">
+        <Glyph fontFamily="FontAwesome" icon="FROWN_ALT" fontSize="600"/>
+        <Text>Sorry, it's not your game.</Text>
+    </StackPane>
 </FlowPane>
