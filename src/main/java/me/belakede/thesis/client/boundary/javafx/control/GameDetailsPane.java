@@ -157,15 +157,17 @@ public class GameDetailsPane extends BorderPane {
         start.setOnAction(event -> {
             Task<Void> task = new StartGameTask(getGameId());
             task.setOnSucceeded(e -> setStatus(Status.IN_PROGRESS));
-            task.setOnFailed(e -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Another game is already running!", ButtonType.OK);
-                alert.setTitle("Game starting error");
-                alert.setHeaderText("Can't start the specified game because an other game is already running.");
-                alert.setGraphic(new Glyph("FontAwesome", FontAwesome.Glyph.EXCLAMATION_CIRCLE));
-                alert.showAndWait();
-            });
+            task.setOnFailed(e -> showAndWaitAlert());
             new Thread(task).start();
         });
+    }
+
+    private void showAndWaitAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Another game is already running!", ButtonType.OK);
+        alert.setTitle("Game starting error");
+        alert.setHeaderText("Can't start the specified game because an other game is already running.");
+        alert.setGraphic(new Glyph("FontAwesome", FontAwesome.Glyph.EXCLAMATION_CIRCLE));
+        alert.showAndWait();
     }
 
     private void setupBinginds(BooleanProperty removed) {
@@ -194,9 +196,9 @@ public class GameDetailsPane extends BorderPane {
         statusProperty().addListener((observable, oldValue, newValue) -> {
             statusGlyph.setIcon(statusToIcon(newValue));
             if (Status.IN_PROGRESS.equals(newValue)) {
-                RotateTransition rotateTransition = new RotateTransition(Duration.millis(4000), statusGlyph);
+                RotateTransition rotateTransition = new RotateTransition(Duration.millis(2500), statusGlyph);
                 rotateTransition.setFromAngle(0);
-                rotateTransition.setToAngle(720);
+                rotateTransition.setToAngle(360);
                 rotateTransition.setDelay(Duration.ZERO);
                 rotateTransition.setCycleCount(Timeline.INDEFINITE);
                 rotateTransition.play();
