@@ -70,6 +70,7 @@ public class AuthController implements Initializable {
             notificationPane.show();
         });
         task.setOnSucceeded(event -> {
+            UserConfiguration.getInstance().setUsername(usernameText);
             UserConfiguration.getInstance().setBaseUrl(serverAddressText);
             LOGGER.info("Authentication succeed!");
             hide();
