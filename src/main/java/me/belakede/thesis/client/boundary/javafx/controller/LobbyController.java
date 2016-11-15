@@ -27,10 +27,14 @@ public class LobbyController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupBindings();
+        hookupChangeListeners();
     }
 
     private void setupBindings() {
         gamesPane.playersProperty().bind(playersPane.playersProperty());
+    }
+
+    private void hookupChangeListeners() {
         gamesPane.selectedGameProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 content.getChildren().clear();
