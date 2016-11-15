@@ -197,8 +197,10 @@ public class GameDetailsPane extends BorderPane {
         statusProperty().addListener((observable, oldValue, newValue) -> {
             statusGlyph.setIcon(statusToIcon(newValue));
             if (Status.IN_PROGRESS.equals(newValue)) {
-                RotateTransition rotateTransition = new RotateTransition(Duration.millis(3000), statusGlyph);
-                rotateTransition.setToAngle(360);
+                RotateTransition rotateTransition = new RotateTransition(Duration.millis(4000), statusGlyph);
+                rotateTransition.setFromAngle(0);
+                rotateTransition.setToAngle(720);
+                rotateTransition.setDelay(Duration.ZERO);
                 rotateTransition.setCycleCount(Timeline.INDEFINITE);
                 rotateTransition.play();
                 double x = statusGlyph.widthProperty().divide(2).doubleValue();
@@ -217,7 +219,7 @@ public class GameDetailsPane extends BorderPane {
             case FINISHED:
                 return FontAwesome.Glyph.STOP;
             case IN_PROGRESS:
-                return FontAwesome.Glyph.SPINNER;
+                return FontAwesome.Glyph.CIRCLE_ALT_NOTCH;
             case PAUSED:
                 return FontAwesome.Glyph.PAUSE;
             default:

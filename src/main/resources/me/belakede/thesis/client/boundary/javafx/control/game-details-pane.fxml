@@ -8,10 +8,19 @@
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.BorderPane" stylesheets="@../css/lobby.css"
          styleClass="game-details-container">
     <top>
-        <VBox>
-            <Text fx:id="idText" styleClass="title"/>
-            <Text fx:id="createdText" styleClass="subtitle"/>
-        </VBox>
+        <AnchorPane>
+            <VBox AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+                <Text fx:id="idText" styleClass="title"/>
+                <Text fx:id="createdText" styleClass="subtitle"/>
+            </VBox>
+            <HBox AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0">
+                <Button styleClass="statusButton">
+                    <graphic>
+                        <Glyph fontFamily="FontAwesome" fontSize="26" fx:id="statusGlyph"/>
+                    </graphic>
+                </Button>
+            </HBox>
+        </AnchorPane>
     </top>
     <center>
         <VBox spacing="15">
@@ -36,6 +45,13 @@
                 Start
                 <graphic>
                     <Glyph fontFamily="FontAwesome" icon="PLAY"/>
+                </graphic>
+            </Button>
+            <Button visible="false" disable="true" prefWidth="75" fx:id="join" AnchorPane.topAnchor="10"
+                    AnchorPane.rightAnchor="10">
+                Join
+                <graphic>
+                    <Glyph fontFamily="FontAwesome" icon="SIGN_IN"/>
                 </graphic>
             </Button>
         </AnchorPane>
