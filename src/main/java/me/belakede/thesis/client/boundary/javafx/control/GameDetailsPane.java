@@ -1,6 +1,9 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
 
+import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.ObservableMap;
 import javafx.concurrent.Task;
@@ -12,9 +15,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Translate;
+import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
 import me.belakede.thesis.client.boundary.javafx.task.RemoveGameTask;
 import me.belakede.thesis.client.boundary.javafx.task.StartGameTask;
+import me.belakede.thesis.client.configuration.UserConfiguration;
 import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Suspect;
 import me.belakede.thesis.server.game.domain.Status;
@@ -38,6 +44,8 @@ public class GameDetailsPane extends BorderPane {
     private Text idText;
     @FXML
     private Text createdText;
+    @FXML
+    private Glyph statusGlyph;
     @FXML
     private VBox boardBox;
     @FXML
@@ -169,6 +177,10 @@ public class GameDetailsPane extends BorderPane {
     private void setupBinginds(BooleanProperty removed) {
         idText.textProperty().bind(gameIdProperty().asString("#%d"));
         createdText.textProperty().bind(createdProperty().asString());
+        start.visibleProperty().bind(start.disableProperty().not());
+        start.disableProperty().bind(statusProperty().isEqualTo(Status.IN_PROGRESS));
+        join.visibleProperty().bind(start.disableProperty());
+        join.disableProperty().bind(Bindings.createBooleanBinding(() -> playersProperty().getValue().values().contains(UserConfiguration.getInstance().getUsername()), playersProperty()).not());
         removed.bind(this.removed);
     }
 
@@ -182,6 +194,35 @@ public class GameDetailsPane extends BorderPane {
             text.getStyleClass().addAll("player", player.getKey().name().toLowerCase());
             return text;
         }).forEach(player -> playersPane.getChildren().add(player)));
+        statusProperty().addListener((observable, oldValue, newValue) -> {
+            statusGlyph.setIcon(statusToIcon(newValue));
+            if (Status.IN_PROGRESS.equals(newValue)) {
+                RotateTransition rotateTransition = new RotateTransition(Duration.millis(3000), statusGlyph);
+                rotateTransition.setToAngle(360);
+                rotateTransition.setCycleCount(Timeline.INDEFINITE);
+                rotateTransition.play();
+                double x = statusGlyph.widthProperty().divide(2).doubleValue();
+                double y = statusGlyph.heightProperty().divide(2).doubleValue();
+                statusGlyph.getTransforms().add(new Translate(-x, -y));
+                statusGlyph.setTranslateX(x);
+                statusGlyph.setTranslateY(y);
+            }
+        });
+    }
+
+    private FontAwesome.Glyph statusToIcon(Status status) {
+        switch (status) {
+            case CREATED:
+                return FontAwesome.Glyph.ASTERISK;
+            case FINISHED:
+                return FontAwesome.Glyph.STOP;
+            case IN_PROGRESS:
+                return FontAwesome.Glyph.SPINNER;
+            case PAUSED:
+                return FontAwesome.Glyph.PAUSE;
+            default:
+                return FontAwesome.Glyph.EXCLAMATION_TRIANGLE;
+        }
     }
 
 }
