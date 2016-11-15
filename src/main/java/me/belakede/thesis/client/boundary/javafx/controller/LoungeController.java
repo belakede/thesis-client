@@ -8,10 +8,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import me.belakede.thesis.client.configuration.GameConfiguration;
 import me.belakede.thesis.client.configuration.UserConfiguration;
+import me.belakede.thesis.game.equipment.Suspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class LoungeController implements Initializable {
@@ -25,11 +27,13 @@ public class LoungeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        GameConfiguration.getInstance().getPlayers().entrySet().forEach(entry -> {
+        String username = UserConfiguration.getInstance().getUsername();
+        Map<Suspect, String> players = GameConfiguration.getInstance().getPlayers();
+        players.entrySet().forEach(entry -> {
             LOGGER.info("waiting for user: {}", entry.getValue());
             VBox playerBox = new VBox();
             playerBox.getStyleClass().addAll("player", entry.getKey().name().toLowerCase());
-            if (UserConfiguration.getInstance().getUsername().equals(entry.getValue())) {
+            if (username.equals(entry.getValue())) {
                 LOGGER.info("{} online", entry.getValue());
                 playerBox.getStyleClass().add("online");
             }
@@ -40,5 +44,8 @@ public class LoungeController implements Initializable {
             playerBox.getChildren().addAll(iconBox, text);
             playerContainer.getChildren().add(playerBox);
         });
+        if (!players.containsValue(username)) {
+            sorryPane.setVisible(true);
+        }
     }
 }
