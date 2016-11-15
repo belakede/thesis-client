@@ -1,6 +1,9 @@
 package me.belakede.thesis.client.boundary.javafx.controller;
 
 import javafx.animation.TranslateTransition;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,15 +13,18 @@ import me.belakede.thesis.client.boundary.javafx.control.GameDetailsPane;
 import me.belakede.thesis.client.boundary.javafx.control.GamesPane;
 import me.belakede.thesis.client.boundary.javafx.control.PlayersPane;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
+import me.belakede.thesis.server.game.domain.Status;
 
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class LobbyController implements Initializable {
 
     private final Map<GameSummary, GameDetailsPane> cache = new HashMap<>();
+    private final ObjectProperty<Optional<GameSummary>> runningGame = new SimpleObjectProperty<>();
 
     @FXML
     private VBox parent;
@@ -37,6 +43,7 @@ public class LobbyController implements Initializable {
 
     private void setupBindings() {
         gamesPane.playersProperty().bind(playersPane.playersProperty());
+        runningGame.bind(Bindings.createObjectBinding(() -> gamesPane.gamesProperty().stream().filter(g -> Status.IN_PROGRESS.equals(g.getStatus())).findFirst(), gamesPane.gamesProperty()));
     }
 
     private void hookupChangeListeners() {
@@ -47,6 +54,11 @@ public class LobbyController implements Initializable {
                     cache.put(newValue, new GameDetailsPane(newValue, gamesPane.removedProperty()));
                 }
                 content.getChildren().add(cache.get(newValue));
+            }
+        });
+        runningGame.addListener((observable, oldValue, newValue) -> {
+            if (newValue.isPresent()) {
+                hide();
             }
         });
     }
