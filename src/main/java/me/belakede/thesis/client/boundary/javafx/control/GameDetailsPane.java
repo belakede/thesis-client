@@ -144,27 +144,31 @@ public class GameDetailsPane extends BorderPane {
         remove.setOnAction(event -> {
             Task<Void> task = new RemoveGameTask(getGameId());
             task.setOnSucceeded(e -> {
-                start.setDisable(true);
-                removed.set(true);
-                Text removedText = new Text("Removed");
-                removedText.getStyleClass().addAll("removed");
-                removedText.setRotate(45);
-                boardBox.getChildren().add(removedText);
+                setRemoved(true);
+                addRemovedText();
             });
+            task.setOnFailed(e -> showAndWaitAlert("Game deletion error", "Can't remove the specified game because an other game is still running."));
             new Thread(task).start();
         });
         start.setOnAction(event -> {
             Task<Void> task = new StartGameTask(getGameId());
             task.setOnSucceeded(e -> setStatus(Status.IN_PROGRESS));
-            task.setOnFailed(e -> showAndWaitAlert());
+            task.setOnFailed(e -> showAndWaitAlert("Game starting error", "Can't start the specified game because an other game is already running."));
             new Thread(task).start();
         });
     }
 
-    private void showAndWaitAlert() {
-        Alert alert = new Alert(Alert.AlertType.ERROR, "Another game is already running!", ButtonType.OK);
-        alert.setTitle("Game starting error");
-        alert.setHeaderText("Can't start the specified game because an other game is already running.");
+    private void addRemovedText() {
+        Text removedText = new Text("Removed");
+        removedText.getStyleClass().addAll("removed");
+        removedText.setRotate(45);
+        boardBox.getChildren().add(removedText);
+    }
+
+    private void showAndWaitAlert(String title, String header) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Game in progress!", ButtonType.OK);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
         alert.setGraphic(new Glyph("FontAwesome", FontAwesome.Glyph.EXCLAMATION_CIRCLE));
         alert.showAndWait();
     }
@@ -173,7 +177,7 @@ public class GameDetailsPane extends BorderPane {
         idText.textProperty().bind(gameIdProperty().asString("#%d"));
         createdText.textProperty().bind(createdProperty().asString());
         start.visibleProperty().bind(start.disableProperty().not());
-        start.disableProperty().bind(statusProperty().isEqualTo(Status.IN_PROGRESS));
+        start.disableProperty().bind(statusProperty().isEqualTo(Status.IN_PROGRESS).or(removedProperty()));
         remove.disableProperty().bind(statusProperty().isEqualTo(Status.IN_PROGRESS));
         join.visibleProperty().bind(start.disableProperty());
         if (null != getPlayers()) {
