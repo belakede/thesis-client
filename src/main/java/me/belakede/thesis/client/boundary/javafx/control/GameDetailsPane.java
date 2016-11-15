@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
 import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Suspect;
 
@@ -30,6 +31,10 @@ public class GameDetailsPane extends BorderPane {
     private VBox boardBox;
     @FXML
     private FlowPane playersPane;
+
+    public GameDetailsPane(GameSummary game) {
+        this(game.getId(), game.getCreated(), game.getBoardType(), game.getPlayers());
+    }
 
     public GameDetailsPane(long gameId, LocalDateTime created, BoardType boardType, ObservableMap<Suspect, String> players) {
         load(this);
