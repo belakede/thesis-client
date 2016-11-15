@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -30,7 +29,7 @@ public class StartGameTask extends Task<Void> {
         LOGGER.debug("WebTarget: {}", webTarget);
         Response response = webTarget.request().accept(MediaType.APPLICATION_JSON_TYPE)
                 .header("Authorization", "Bearer " + configuration.getToken().getAccessToken())
-                .post(Entity.json(null));
+                .post(null);
         if (response.getStatus() != 200) {
             LOGGER.warn("HTTP error code : {}", response.getStatus());
             LOGGER.warn("{}", response.toString());
