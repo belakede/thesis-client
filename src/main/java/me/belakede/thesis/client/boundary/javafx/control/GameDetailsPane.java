@@ -174,16 +174,16 @@ public class GameDetailsPane extends BorderPane {
     }
 
     private void setupBinginds(BooleanProperty removed) {
+        removed.bind(this.removed);
         idText.textProperty().bind(gameIdProperty().asString("#%d"));
         createdText.textProperty().bind(createdProperty().asString());
-        start.visibleProperty().bind(start.disableProperty().not());
+        start.visibleProperty().bind(start.disableProperty().not().or(removedProperty()));
         start.disableProperty().bind(statusProperty().isEqualTo(Status.IN_PROGRESS).or(removedProperty()));
-        remove.disableProperty().bind(statusProperty().isEqualTo(Status.IN_PROGRESS));
-        join.visibleProperty().bind(start.disableProperty());
+        remove.disableProperty().bind(statusProperty().isEqualTo(Status.IN_PROGRESS).or(removedProperty()));
+        join.visibleProperty().bind(start.visibleProperty().not());
         if (null != getPlayers()) {
             join.disableProperty().bind(Bindings.createBooleanBinding(() -> playersProperty().getValue().values().contains(UserConfiguration.getInstance().getUsername()), playersProperty()).not());
         }
-        removed.bind(this.removed);
     }
 
     private void hookupChangeListeners() {
