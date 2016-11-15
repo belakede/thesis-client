@@ -5,15 +5,20 @@ import javafx.beans.property.*;
 import javafx.collections.ObservableMap;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
 import me.belakede.thesis.client.boundary.javafx.task.RemoveGameTask;
+import me.belakede.thesis.client.boundary.javafx.task.StartGameTask;
 import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Suspect;
+import org.controlsfx.glyphfont.FontAwesome;
+import org.controlsfx.glyphfont.Glyph;
 
 import java.time.LocalDateTime;
 
@@ -39,6 +44,8 @@ public class GameDetailsPane extends BorderPane {
     private Button remove;
     @FXML
     private Button start;
+    @FXML
+    private Button join;
 
     public GameDetailsPane(GameSummary game, BooleanProperty removed) {
         this(game.getId(), game.getCreated(), game.getBoardType(), game.getPlayers(), removed);
@@ -125,6 +132,24 @@ public class GameDetailsPane extends BorderPane {
                 removedText.getStyleClass().addAll("removed");
                 removedText.setRotate(45);
                 boardBox.getChildren().add(removedText);
+            });
+            new Thread(task).start();
+        });
+        start.setOnAction(event -> {
+            Task<Void> task = new StartGameTask(getGameId());
+            task.setOnSucceeded(e -> {
+                remove.setDisable(true);
+                start.setDisable(true);
+                start.setVisible(false);
+                join.setDisable(false);
+                join.setVisible(true);
+            });
+            task.setOnFailed(e -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Another game is already running!", ButtonType.OK);
+                alert.setTitle("Game starting error");
+                alert.setHeaderText("Can't start the specified game because an other game is already running.");
+                alert.setGraphic(new Glyph("FontAwesome", FontAwesome.Glyph.EXCLAMATION_CIRCLE));
+                alert.showAndWait();
             });
             new Thread(task).start();
         });
