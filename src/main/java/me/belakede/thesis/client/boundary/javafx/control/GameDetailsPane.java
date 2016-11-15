@@ -3,6 +3,7 @@ package me.belakede.thesis.client.boundary.javafx.control;
 
 import javafx.beans.property.*;
 import javafx.collections.ObservableMap;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -10,6 +11,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
+import me.belakede.thesis.client.boundary.javafx.task.RemoveGameTask;
 import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Suspect;
 
@@ -43,6 +45,7 @@ public class GameDetailsPane extends BorderPane {
 
     public GameDetailsPane(long gameId, LocalDateTime created, BoardType boardType, ObservableMap<Suspect, String> players) {
         load(this);
+        setupActionEvents();
         setupBinginds();
         hookupChangeListeners();
         setGameId(gameId);
@@ -50,6 +53,7 @@ public class GameDetailsPane extends BorderPane {
         setBoardType(boardType);
         setPlayers(players);
     }
+
 
     public long getGameId() {
         return gameId.get();
@@ -97,6 +101,20 @@ public class GameDetailsPane extends BorderPane {
 
     public MapProperty<Suspect, String> playersProperty() {
         return players;
+    }
+
+    private void setupActionEvents() {
+        remove.setOnAction(event -> {
+            Task<Void> task = new RemoveGameTask(getGameId());
+            task.setOnSucceeded(e -> {
+                start.setDisable(true);
+                Text removed = new Text("Removed");
+                removed.getStyleClass().addAll("removed");
+                removed.setRotate(45);
+                boardBox.getChildren().add(removed);
+            });
+            new Thread(task).start();
+        });
     }
 
     private void setupBinginds() {

@@ -43,6 +43,7 @@
     -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
 }
 .game-details-container .board {
+    -fx-alignment: center;
     -fx-min-width: 500;
     -fx-min-height: 500;
     -fx-pref-width: 500;
@@ -58,8 +59,11 @@
     -fx-background-image: url("../img/advanced.png");
 }
 
-.game-details-container .player.green {
-
+.game-details-container .board .removed {
+    -fx-font-size: 48px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #e50000;
+    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
 }
 
 .game-details-container .player.green {
