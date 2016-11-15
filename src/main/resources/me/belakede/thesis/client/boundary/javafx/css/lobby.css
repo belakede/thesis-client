@@ -44,6 +44,7 @@
 }
 .game-details-container .statusButton {
     -fx-background-color: transparent;
+    -fx-alignment: center;
 }
 .game-details-container .board {
     -fx-alignment: center;

@@ -15,7 +15,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
 import me.belakede.thesis.client.boundary.javafx.task.RemoveGameTask;
@@ -196,19 +195,18 @@ public class GameDetailsPane extends BorderPane {
         statusProperty().addListener((observable, oldValue, newValue) -> {
             statusGlyph.setIcon(statusToIcon(newValue));
             if (Status.IN_PROGRESS.equals(newValue)) {
-                RotateTransition rotateTransition = new RotateTransition(Duration.millis(2500), statusGlyph);
-                rotateTransition.setFromAngle(0);
-                rotateTransition.setToAngle(360);
-                rotateTransition.setDelay(Duration.ZERO);
-                rotateTransition.setCycleCount(Timeline.INDEFINITE);
-                rotateTransition.play();
-                double x = statusGlyph.widthProperty().divide(2).doubleValue();
-                double y = statusGlyph.heightProperty().divide(2).doubleValue();
-                statusGlyph.getTransforms().add(new Translate(-x, -y));
-                statusGlyph.setTranslateX(x);
-                statusGlyph.setTranslateY(y);
+                rotateStatusGlyph();
             }
         });
+    }
+
+    private void rotateStatusGlyph() {
+        RotateTransition rotateTransition = new RotateTransition(Duration.millis(2500), statusGlyph);
+        rotateTransition.setFromAngle(0);
+        rotateTransition.setToAngle(360);
+        rotateTransition.setDelay(Duration.ZERO);
+        rotateTransition.setCycleCount(Timeline.INDEFINITE);
+        rotateTransition.play();
     }
 
     private FontAwesome.Glyph statusToIcon(Status status) {

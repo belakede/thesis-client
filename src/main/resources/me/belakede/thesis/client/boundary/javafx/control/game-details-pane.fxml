@@ -16,7 +16,7 @@
             <HBox AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0">
                 <Button styleClass="statusButton">
                     <graphic>
-                        <Glyph fontFamily="FontAwesome" fontSize="26" fx:id="statusGlyph"/>
+                        <Glyph fontFamily="FontAwesome" fontSize="32" fx:id="statusGlyph"/>
                     </graphic>
                 </Button>
             </HBox>
