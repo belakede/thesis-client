@@ -9,11 +9,16 @@ import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.control.GameDetailsPane;
 import me.belakede.thesis.client.boundary.javafx.control.GamesPane;
 import me.belakede.thesis.client.boundary.javafx.control.PlayersPane;
+import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class LobbyController implements Initializable {
+
+    private final Map<GameSummary, GameDetailsPane> cache = new HashMap<>();
 
     @FXML
     private VBox parent;
@@ -38,7 +43,10 @@ public class LobbyController implements Initializable {
         gamesPane.selectedGameProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 content.getChildren().clear();
-                content.getChildren().add(new GameDetailsPane(newValue, gamesPane.removedProperty()));
+                if (!cache.containsKey(newValue)) {
+                    cache.put(newValue, new GameDetailsPane(newValue, gamesPane.removedProperty()));
+                }
+                content.getChildren().add(cache.get(newValue));
             }
         });
     }
