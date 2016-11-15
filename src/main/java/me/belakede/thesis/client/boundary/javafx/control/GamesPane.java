@@ -69,6 +69,18 @@ public class GamesPane extends VBox {
         return players;
     }
 
+    public GameSummary getSelectedGame() {
+        return selectedGame.get();
+    }
+
+    public void setSelectedGame(GameSummary selectedGame) {
+        this.selectedGame.set(selectedGame);
+    }
+
+    public ObjectProperty<GameSummary> selectedGameProperty() {
+        return selectedGame;
+    }
+
     private void setupActionEvents() {
         createButton.setOnAction(event -> createGame());
         refreshButton.setOnAction(event -> downloadGames());
