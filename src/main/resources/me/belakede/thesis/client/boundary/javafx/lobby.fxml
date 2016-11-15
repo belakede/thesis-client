@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import me.belakede.thesis.client.boundary.javafx.control.BoardsPane?>
+<?import me.belakede.thesis.client.boundary.javafx.control.GamesPane?>
 <?import me.belakede.thesis.client.boundary.javafx.control.PlayersPane?>
 <?import org.controlsfx.control.NotificationPane?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:id="parent" stylesheets="@css/lobby.css" styleClass="lobby-container"
@@ -22,8 +21,7 @@
                             <Insets top="10" right="10" bottom="10" left="10"/>
                         </padding>
                         <Text text="Games" styleClass="headline"/>
-                        <ListView fx:id="games" styleClass="games"/>
-                        <Button onAction="#create" styleClass="create">Create game</Button>
+                        <GamesPane fx:id="gamesPane"/>
                     </VBox>
                 </left>
                 <center>
