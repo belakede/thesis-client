@@ -6,6 +6,7 @@ import javafx.concurrent.Task;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
 import me.belakede.thesis.client.configuration.UserConfiguration;
 import me.belakede.thesis.game.equipment.BoardType;
+import me.belakede.thesis.jackson.JacksonContextResolver;
 import me.belakede.thesis.server.game.request.GamesRequest;
 import me.belakede.thesis.server.game.response.GamesResponse;
 import org.slf4j.Logger;
@@ -33,7 +34,7 @@ public class CreateGameTask extends Task<GameSummary> {
     @Override
     protected GameSummary call() throws Exception {
         UserConfiguration configuration = UserConfiguration.getInstance();
-        Client client = ClientBuilder.newClient();
+        Client client = ClientBuilder.newBuilder().register(JacksonContextResolver.class).build();
         WebTarget webTarget = client.target(configuration.getBaseUrl() + "/games");
         LocalDateTime now = LocalDateTime.now();
         LOGGER.debug("WebTarget: {}", webTarget);
