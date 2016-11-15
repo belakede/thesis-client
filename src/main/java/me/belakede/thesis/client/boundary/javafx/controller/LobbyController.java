@@ -4,7 +4,6 @@ import javafx.animation.TranslateTransition;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
@@ -13,6 +12,7 @@ import me.belakede.thesis.client.boundary.javafx.control.GameDetailsPane;
 import me.belakede.thesis.client.boundary.javafx.control.GamesPane;
 import me.belakede.thesis.client.boundary.javafx.control.PlayersPane;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
+import me.belakede.thesis.client.configuration.GameConfiguration;
 import me.belakede.thesis.server.game.domain.Status;
 
 import java.net.URL;
@@ -58,13 +58,12 @@ public class LobbyController implements Initializable {
         });
         runningGame.addListener((observable, oldValue, newValue) -> {
             if (newValue.isPresent()) {
+                GameConfiguration.getInstance().setGameId(newValue.get().getId());
+                GameConfiguration.getInstance().setRoomId(newValue.get().getRoomId());
+                GameConfiguration.getInstance().setPlayers(newValue.get().getPlayers());
                 hide();
             }
         });
-    }
-
-    public void join(ActionEvent event) {
-        hide();
     }
 
     private void hide() {
