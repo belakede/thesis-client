@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import me.belakede.thesis.client.boundary.javafx.control.GameDetailsPane;
 import me.belakede.thesis.client.boundary.javafx.control.GamesPane;
 import me.belakede.thesis.client.boundary.javafx.control.PlayersPane;
 
@@ -30,6 +31,12 @@ public class LobbyController implements Initializable {
 
     private void setupBindings() {
         gamesPane.playersProperty().bind(playersPane.playersProperty());
+        gamesPane.selectedGameProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                content.getChildren().clear();
+                content.getChildren().add(new GameDetailsPane(newValue));
+            }
+        });
     }
 
     public void join(ActionEvent event) {
