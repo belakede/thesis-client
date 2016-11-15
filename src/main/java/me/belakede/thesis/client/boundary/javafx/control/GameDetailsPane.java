@@ -25,6 +25,7 @@ public class GameDetailsPane extends BorderPane {
     private final ObjectProperty<LocalDateTime> created = new SimpleObjectProperty<>();
     private final ObjectProperty<BoardType> boardType = new SimpleObjectProperty<>();
     private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
+    private final BooleanProperty removed = new SimpleBooleanProperty(false);
 
     @FXML
     private Text idText;
@@ -101,6 +102,18 @@ public class GameDetailsPane extends BorderPane {
 
     public MapProperty<Suspect, String> playersProperty() {
         return players;
+    }
+
+    public boolean isRemoved() {
+        return removed.get();
+    }
+
+    public void setRemoved(boolean removed) {
+        this.removed.set(removed);
+    }
+
+    public BooleanProperty removedProperty() {
+        return removed;
     }
 
     private void setupActionEvents() {
