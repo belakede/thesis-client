@@ -156,13 +156,7 @@ public class GameDetailsPane extends BorderPane {
         });
         start.setOnAction(event -> {
             Task<Void> task = new StartGameTask(getGameId());
-            task.setOnSucceeded(e -> {
-                remove.setDisable(true);
-                start.setDisable(true);
-                start.setVisible(false);
-                join.setDisable(false);
-                join.setVisible(true);
-            });
+            task.setOnSucceeded(e -> setStatus(Status.IN_PROGRESS));
             task.setOnFailed(e -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Another game is already running!", ButtonType.OK);
                 alert.setTitle("Game starting error");
@@ -179,8 +173,11 @@ public class GameDetailsPane extends BorderPane {
         createdText.textProperty().bind(createdProperty().asString());
         start.visibleProperty().bind(start.disableProperty().not());
         start.disableProperty().bind(statusProperty().isEqualTo(Status.IN_PROGRESS));
+        remove.disableProperty().bind(statusProperty().isEqualTo(Status.IN_PROGRESS));
         join.visibleProperty().bind(start.disableProperty());
-        join.disableProperty().bind(Bindings.createBooleanBinding(() -> playersProperty().getValue().values().contains(UserConfiguration.getInstance().getUsername()), playersProperty()).not());
+        if (null != getPlayers()) {
+            join.disableProperty().bind(Bindings.createBooleanBinding(() -> playersProperty().getValue().values().contains(UserConfiguration.getInstance().getUsername()), playersProperty()).not());
+        }
         removed.bind(this.removed);
     }
 
