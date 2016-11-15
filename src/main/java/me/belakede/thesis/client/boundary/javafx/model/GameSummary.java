@@ -11,13 +11,15 @@ import java.time.LocalDateTime;
 public class GameSummary {
 
     private final LongProperty id = new SimpleLongProperty();
+    private final StringProperty roomId = new SimpleStringProperty();
     private final ObjectProperty<LocalDateTime> created = new SimpleObjectProperty<>();
     private final ObjectProperty<BoardType> boardType = new SimpleObjectProperty<>();
     private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
     private final ObjectProperty<Status> status = new SimpleObjectProperty<>();
 
-    public GameSummary(Long id, LocalDateTime created, BoardType boardType, Status status, ObservableMap<Suspect, String> players) {
+    public GameSummary(Long id, String roomId, LocalDateTime created, BoardType boardType, Status status, ObservableMap<Suspect, String> players) {
         setId(id);
+        setRoomId(roomId);
         setStatus(status);
         setCreated(created);
         setBoardType(boardType);
@@ -34,6 +36,18 @@ public class GameSummary {
 
     public LongProperty idProperty() {
         return id;
+    }
+
+    public String getRoomId() {
+        return roomId.get();
+    }
+
+    public void setRoomId(String roomId) {
+        this.roomId.set(roomId);
+    }
+
+    public StringProperty roomIdProperty() {
+        return roomId;
     }
 
     public LocalDateTime getCreated() {
