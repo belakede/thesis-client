@@ -17,6 +17,7 @@ import me.belakede.thesis.client.boundary.javafx.task.RemoveGameTask;
 import me.belakede.thesis.client.boundary.javafx.task.StartGameTask;
 import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Suspect;
+import me.belakede.thesis.server.game.domain.Status;
 import org.controlsfx.glyphfont.FontAwesome;
 import org.controlsfx.glyphfont.Glyph;
 
@@ -31,6 +32,7 @@ public class GameDetailsPane extends BorderPane {
     private final ObjectProperty<BoardType> boardType = new SimpleObjectProperty<>();
     private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
     private final BooleanProperty removed = new SimpleBooleanProperty(false);
+    private final ObjectProperty<Status> status = new SimpleObjectProperty<>();
 
     @FXML
     private Text idText;
@@ -48,18 +50,15 @@ public class GameDetailsPane extends BorderPane {
     private Button join;
 
     public GameDetailsPane(GameSummary game, BooleanProperty removed) {
-        this(game.getId(), game.getCreated(), game.getBoardType(), game.getPlayers(), removed);
-    }
-
-    private GameDetailsPane(long gameId, LocalDateTime created, BoardType boardType, ObservableMap<Suspect, String> players, BooleanProperty removed) {
         load(this);
         setupActionEvents();
         setupBinginds(removed);
         hookupChangeListeners();
-        setGameId(gameId);
-        setCreated(created);
-        setBoardType(boardType);
-        setPlayers(players);
+        setGameId(game.getId());
+        setCreated(game.getCreated());
+        setBoardType(game.getBoardType());
+        setPlayers(game.getPlayers());
+        setStatus(game.getStatus());
     }
 
     public long getGameId() {
@@ -108,6 +107,18 @@ public class GameDetailsPane extends BorderPane {
 
     public MapProperty<Suspect, String> playersProperty() {
         return players;
+    }
+
+    public Status getStatus() {
+        return status.get();
+    }
+
+    public void setStatus(Status status) {
+        this.status.set(status);
+    }
+
+    public ObjectProperty<Status> statusProperty() {
+        return status;
     }
 
     public boolean isRemoved() {
