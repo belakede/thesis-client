@@ -40,7 +40,7 @@ public class DownloadGamesTask extends Task<ObservableList<GameSummary>> {
     }
 
     private GameSummary transform(GamesResponse game) {
-        return new GameSummary(game.getId(), game.getTime(), game.getBoardType(), game.getStatus(), FXCollections.observableMap(game.getUsers()));
+        return new GameSummary(game.getId(), game.getRoomId(), game.getTime(), game.getBoardType(), game.getStatus(), FXCollections.observableMap(game.getUsers()));
     }
 
 }

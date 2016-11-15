@@ -17,7 +17,6 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
-import java.time.LocalDateTime;
 
 public class CreateGameTask extends Task<GameSummary> {
 
@@ -36,12 +35,11 @@ public class CreateGameTask extends Task<GameSummary> {
         UserConfiguration configuration = UserConfiguration.getInstance();
         Client client = ClientBuilder.newBuilder().register(JacksonContextResolver.class).build();
         WebTarget webTarget = client.target(configuration.getBaseUrl() + "/games");
-        LocalDateTime now = LocalDateTime.now();
         LOGGER.debug("WebTarget: {}", webTarget);
         GamesResponse response = webTarget.request().accept(MediaType.APPLICATION_JSON_TYPE)
                 .header("Authorization", "Bearer " + configuration.getToken().getAccessToken())
                 .post(Entity.json(new GamesRequest(boardType, players)), GamesResponse.class);
         LOGGER.info("Game has been successful created!");
-        return new GameSummary(response.getId(), now, response.getBoardType(), response.getStatus(), FXCollections.observableMap(response.getUsers()));
+        return new GameSummary(response.getId(), response.getRoomId(), response.getTime(), response.getBoardType(), response.getStatus(), FXCollections.observableMap(response.getUsers()));
     }
 }
