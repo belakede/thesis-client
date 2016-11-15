@@ -105,11 +105,7 @@ public class GamesPane extends VBox {
             Optional<ObservableList<String>> optionalPlayers = addPlayers();
             if (optionalPlayers.isPresent()) {
                 Task<GameSummary> task = new CreateGameTask(optionalBoardType.get(), optionalPlayers.get());
-                task.setOnSucceeded(event -> {
-                    System.out.println(games);
-                    games.add(task.getValue());
-                    System.out.println(games);
-                });
+                task.setOnSucceeded(event -> games.add(task.getValue()));
                 new Thread(task).start();
             }
         }
