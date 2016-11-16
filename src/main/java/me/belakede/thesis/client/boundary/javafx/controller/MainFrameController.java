@@ -3,15 +3,14 @@ package me.belakede.thesis.client.boundary.javafx.controller;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import me.belakede.thesis.client.service.SpringFxmlLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,6 +18,7 @@ import java.util.ResourceBundle;
 public class MainFrameController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainFrameController.class);
+    private static final SpringFxmlLoader SPRING_FXML_LOADER = new SpringFxmlLoader();
 
     @FXML
     private StackPane parent;
@@ -41,8 +41,8 @@ public class MainFrameController implements Initializable {
 
     private Pane loadContent(String key) {
         try {
-            return FXMLLoader.load(getClass().getResource("../" + key + ".fxml"));
-        } catch (IOException e) {
+            return (Pane) SPRING_FXML_LOADER.load(getClass().getResource("../" + key + ".fxml"));
+        } catch (Exception e) {
             throw new RuntimeException("Can't load fxml: ", e);
         }
     }
