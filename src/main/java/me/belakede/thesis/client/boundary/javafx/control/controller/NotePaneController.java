@@ -1,7 +1,5 @@
 package me.belakede.thesis.client.boundary.javafx.control.controller;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,7 +10,6 @@ import me.belakede.thesis.client.boundary.javafx.service.DownloadNotesService;
 import me.belakede.thesis.client.boundary.javafx.task.NoteRegistrationTask;
 import me.belakede.thesis.client.service.GameService;
 import me.belakede.thesis.client.service.UserService;
-import me.belakede.thesis.game.equipment.Figurine;
 import org.controlsfx.control.PopOver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,8 +19,6 @@ import java.util.ResourceBundle;
 
 @Controller
 public class NotePaneController implements Initializable {
-
-    private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
 
     private final UserService userService;
     private final GameService gameService;
@@ -50,7 +45,7 @@ public class NotePaneController implements Initializable {
     }
 
     private void hookupChangeListeners() {
-        figurine.addListener((observable, oldValue, newValue) -> {
+        gameService.figurineProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue != null) {
                 noteButton.getStyleClass().remove(oldValue.name().toLowerCase());
             }
