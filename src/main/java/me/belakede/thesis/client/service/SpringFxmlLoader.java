@@ -30,7 +30,7 @@ public class SpringFxmlLoader {
         }
     }
 
-    public <T> void load(T instance) {
+    public <T> T load(T instance) {
         boolean pane = Pane.class.isAssignableFrom(instance.getClass());
         if (pane) {
             String filename = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, instance.getClass().getSimpleName()).concat(".fxml");
@@ -40,7 +40,7 @@ public class SpringFxmlLoader {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setRoot(instance);
                 loader.setControllerFactory(APPLICATION_CONTEXT::getBean);
-                loader.load(fxmlStream);
+                return loader.load(fxmlStream);
             } catch (Exception ex) {
                 LOGGER.warn("Cant load {}", fxmlFile, ex);
                 throw new RuntimeException(ex);
