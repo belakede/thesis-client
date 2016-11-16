@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import me.belakede.thesis.client.boundary.javafx.control.BoardsPane?>
@@ -12,37 +11,25 @@
       fx:controller="me.belakede.thesis.client.boundary.javafx.controller.LobbyController">
     <NotificationPane fx:id="notificationPane">
         <content>
-            <BorderPane>
-                <padding>
-                    <Insets top="15" right="15" bottom="15" left="15"/>
-                </padding>
+            <BorderPane styleClass="container">
                 <left>
-                    <VBox spacing="10" minWidth="250" prefWidth="250" maxWidth="250">
-                        <padding>
-                            <Insets top="10" right="10" bottom="10" left="10"/>
-                        </padding>
+                    <VBox styleClass="sidebar">
                         <Text text="Games" styleClass="headline"/>
-                        <GamesPane fx:id="gamesPane"/>
+                        <GamesPane/>
                     </VBox>
                 </left>
                 <center>
-                    <VBox spacing="10">
-                        <padding>
-                            <Insets top="10" right="10" bottom="10" left="10"/>
-                        </padding>
+                    <VBox styleClass="content">
                         <Text text="Details" styleClass="headline"/>
                         <VBox fx:id="content"/>
                     </VBox>
                 </center>
                 <right>
-                    <VBox spacing="10" minWidth="250" prefWidth="250" maxWidth="250">
-                        <padding>
-                            <Insets top="10" right="10" bottom="10" left="10"/>
-                        </padding>
+                    <VBox styleClass="sidebar">
                         <Text text="Boards" styleClass="headline"/>
                         <BoardsPane/>
                         <Text text="Players" styleClass="headline"/>
-                        <PlayersPane fx:id="playersPane"/>
+                        <PlayersPane/>
                     </VBox>
                 </right>
             </BorderPane>
