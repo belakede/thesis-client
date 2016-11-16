@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.GridPane?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.GridPane" stylesheets="@../css/note.css"
-         styleClass="note-box">
-    <padding>
-        <Insets top="25" right="25" bottom="25" left="25"/>
-    </padding>
-
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.GridPane" fx:id="parent"
+         fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.NoteBoxController"
+         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/note.css" styleClass="note-box">
 </fx:root>
