@@ -24,8 +24,44 @@
     -fx-text-fill: derive(-fx-white, -20%);
 }
 
-.chat-container .message-composer {
+.chat-container .message-container .chat-message {
+    -fx-padding: 10;
+}
+
+.chat-box {
+    -fx-min-width: 250;
+    -fx-pref-width: 250;
+    -fx-max-width: 250;
+    -fx-min-height: 400;
+    -fx-pref-height: 400;
+    -fx-max-height: 400;
+}
+
+.chat-box ScrollPane {
+    -fx-min-width: 250;
+    -fx-pref-width: 250;
+    -fx-max-width: 250;
+    -fx-hbar-policy: never;
+}
+
+.chat-box .message-container {
+    -fx-spacing: 10;
+    -fx-spacing: 10;
+}
+
+.chat-box .message-composer {
     -fx-padding: 5;
+    -fx-alignment: center;
+}
+
+.chat-box .message-composer TextArea {
+    -fx-min-height: 60;
+    -fx-pref-height: 60;
+    -fx-max-height: 60;
+    -fx-min-width: 200;
+    -fx-pref-width: 200;
+    -fx-max-width: 200;
+    -fx-wrap-text: true;
 }
 
 .chat-container .message-composer Button {
@@ -33,9 +69,6 @@
     -fx-border-width: 0;
 }
 
-.chat-container .message-container .chat-message {
-    -fx-padding: 10;
-}
 
 .chat-message .content {
     -fx-background-radius: 9;
