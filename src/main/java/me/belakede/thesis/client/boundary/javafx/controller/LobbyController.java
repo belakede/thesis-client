@@ -11,6 +11,7 @@ import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.control.GameDetailsPane;
 import me.belakede.thesis.client.boundary.javafx.control.GamesPane;
 import me.belakede.thesis.client.boundary.javafx.control.PlayersPane;
+import me.belakede.thesis.client.boundary.javafx.control.controller.PlayersPaneController;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
 import me.belakede.thesis.client.service.GameService;
 import me.belakede.thesis.server.game.domain.Status;
@@ -30,6 +31,8 @@ public class LobbyController implements Initializable {
     private final ObjectProperty<Optional<GameSummary>> runningGame = new SimpleObjectProperty<>();
 
     private final GameService gameService;
+    private final PlayersPaneController playersPaneController;
+
     @FXML
     private VBox parent;
     @FXML
@@ -40,8 +43,9 @@ public class LobbyController implements Initializable {
     private GamesPane gamesPane;
 
     @Autowired
-    public LobbyController(GameService gameService) {
+    public LobbyController(GameService gameService, PlayersPaneController playersPaneController) {
         this.gameService = gameService;
+        this.playersPaneController = playersPaneController;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class LobbyController implements Initializable {
     }
 
     private void setupBindings() {
-        gamesPane.playersProperty().bind(playersPane.playersProperty());
+        gamesPane.playersProperty().bind(playersPaneController.playersProperty());
         runningGame.bind(Bindings.createObjectBinding(() -> gamesPane.gamesProperty().stream().filter(g -> Status.IN_PROGRESS.equals(g.getStatus())).findFirst(), gamesPane.gamesProperty()));
     }
 
