@@ -5,6 +5,8 @@ import javafx.collections.ObservableMap;
 import me.belakede.thesis.game.equipment.Suspect;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class GameService {
 
@@ -43,6 +45,7 @@ public class GameService {
 
     public void setPlayers(ObservableMap<Suspect, String> players) {
         this.players.set(players);
+        refreshPlayersOrder();
     }
 
     public MapProperty<Suspect, String> playersProperty() {
@@ -59,5 +62,13 @@ public class GameService {
 
     public MapProperty<String, Integer> playersOrderProperty() {
         return playersOrder;
+    }
+
+    private void refreshPlayersOrder() {
+        int columnIndex = 1;
+        for (Map.Entry<Suspect, String> entry : players.entrySet()) {
+            playersOrder.put(entry.getValue(), columnIndex);
+            columnIndex++;
+        }
     }
 }
