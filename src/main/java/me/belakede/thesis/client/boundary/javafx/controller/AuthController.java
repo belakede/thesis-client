@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.control.RegistrationPane;
 import me.belakede.thesis.client.boundary.javafx.task.AuthenticationTask;
+import me.belakede.thesis.client.domain.Token;
 import me.belakede.thesis.client.service.UserService;
 import org.controlsfx.control.NotificationPane;
 import org.controlsfx.control.PopOver;
@@ -72,13 +73,14 @@ public class AuthController implements Initializable {
         String passwordText = password.getText().trim();
         String serverAddressText = serverAddress.getText().trim();
 
-        Task task = new AuthenticationTask(serverAddressText, usernameText, passwordText);
+        Task<Token> task = new AuthenticationTask(serverAddressText, usernameText, passwordText);
         task.setOnFailed(event -> {
             LOGGER.warn("Authentication failed!");
             notificationPane.setText("Authentication failed! ");
             notificationPane.show();
         });
         task.setOnSucceeded(event -> {
+            userService.setToken(task.getValue());
             userService.setUsername(usernameText);
             userService.setBaseUrl(serverAddressText);
             LOGGER.info("Authentication succeed!");
