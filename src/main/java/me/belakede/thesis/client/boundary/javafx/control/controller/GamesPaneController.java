@@ -4,14 +4,14 @@ import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
+import me.belakede.thesis.client.boundary.javafx.service.DownloadGamesService;
 import me.belakede.thesis.client.boundary.javafx.task.CreateGameTask;
-import me.belakede.thesis.client.boundary.javafx.task.DownloadGamesTask;
+import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.game.equipment.BoardType;
 import org.controlsfx.glyphfont.FontAwesome;
 import org.controlsfx.glyphfont.Glyph;
@@ -29,7 +29,8 @@ public class GamesPaneController implements Initializable {
     private final ListProperty<String> players = new SimpleListProperty<>();
     private final ObjectProperty<GameSummary> selectedGame = new SimpleObjectProperty<>();
     private final BooleanProperty removed = new SimpleBooleanProperty(false);
-    private final DownloadGamesTask downloadGamesTask;
+    private final UserService userService;
+    private final DownloadGamesService downloadGamesService;
 
     @FXML
     private ListView<GameSummary> gamesView;
@@ -40,8 +41,9 @@ public class GamesPaneController implements Initializable {
     private Button refreshButton;
 
     @Autowired
-    public GamesPaneController(DownloadGamesTask downloadGamesTask) {
-        this.downloadGamesTask = downloadGamesTask;
+    public GamesPaneController(UserService userService, DownloadGamesService downloadGamesService) {
+        this.userService = userService;
+        this.downloadGamesService = downloadGamesService;
     }
 
     @Override
@@ -101,7 +103,7 @@ public class GamesPaneController implements Initializable {
 
     private void setupActionEvents() {
         createButton.setOnAction(event -> createGame());
-        refreshButton.setOnAction(event -> downloadGames());
+        refreshButton.setOnAction(event -> downloadGamesService.restart());
     }
 
     private void hookupChangeListeners() {
@@ -116,10 +118,10 @@ public class GamesPaneController implements Initializable {
     }
 
     private void downloadGames() {
-        Task<ObservableList<GameSummary>> task = new DownloadGamesTask();
-        task.setOnSucceeded(event -> games.setValue(task.getValue()));
-        Thread thread = new Thread(task);
-        thread.start();
+        downloadGamesService.setOnSucceeded(event -> games.setValue(downloadGamesService.getValue()));
+        if (games.isEmpty()) {
+            downloadGamesService.start();
+        }
     }
 
     private void createGame() {
@@ -127,7 +129,9 @@ public class GamesPaneController implements Initializable {
         if (optionalBoardType.isPresent()) {
             Optional<ObservableList<String>> optionalPlayers = addPlayers();
             if (optionalPlayers.isPresent()) {
-                Task<GameSummary> task = new CreateGameTask(optionalBoardType.get(), optionalPlayers.get());
+                CreateGameTask task = new CreateGameTask(userService);
+                task.setBoardType(optionalBoardType.get());
+                task.setPlayers(optionalPlayers.get());
                 task.setOnSucceeded(event -> games.add(task.getValue()));
                 new Thread(task).start();
             }
