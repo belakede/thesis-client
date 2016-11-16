@@ -1,5 +1,13 @@
 @import "colors.css";
 
+.note-container {
+    -fx-min-width: 80;
+    -fx-pref-width: 80;
+    -fx-max-width: 80;
+    -fx-min-height: 80;
+    -fx-pref-height: 80;
+    -fx-max-height: 80;
+}
 .note-container .note-button {
     -fx-cursor: hand;
     -fx-border-width: 0;
