@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import me.belakede.thesis.client.boundary.javafx.task.DownloadPlayersTask;
+import me.belakede.thesis.client.boundary.javafx.service.DownloadPlayersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 @Component
 public class PlayersPaneController implements Initializable {
 
-    private final DownloadPlayersTask task;
+    private final DownloadPlayersService service;
     private final ListProperty<String> players = new SimpleListProperty<>();
 
     @FXML
@@ -25,8 +25,8 @@ public class PlayersPaneController implements Initializable {
     private Button refreshButton;
 
     @Autowired
-    public PlayersPaneController(DownloadPlayersTask task) {
-        this.task = task;
+    public PlayersPaneController(DownloadPlayersService service) {
+        this.service = service;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class PlayersPaneController implements Initializable {
     }
 
     private void setupActionEvents() {
-        refreshButton.setOnAction(event -> downloadPlayers());
+        refreshButton.setOnAction(event -> service.restart());
     }
 
     private void hookupChangeListeners() {
@@ -49,9 +49,10 @@ public class PlayersPaneController implements Initializable {
     }
 
     private void downloadPlayers() {
-        task.setOnSucceeded(event -> players.setValue(task.getValue()));
-        Thread thread = new Thread(task);
-        thread.start();
+        service.setOnSucceeded(event -> players.setValue(service.getValue()));
+        if (players.isEmpty()) {
+            service.start();
+        }
     }
 
 }
