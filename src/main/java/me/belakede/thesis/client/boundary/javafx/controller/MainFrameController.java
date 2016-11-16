@@ -9,11 +9,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@Controller
 public class MainFrameController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainFrameController.class);
