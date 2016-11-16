@@ -67,7 +67,7 @@ public class UserService {
         return getBaseUrl().concat(suffix);
     }
 
-    public String getAuthToken() {
+    public String getAccessToken() {
         return getToken().getAccessToken();
     }
 
