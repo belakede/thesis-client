@@ -3,7 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.StackPane?>
 <?import org.controlsfx.glyphfont.Glyph?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane"
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane" fx:id="parent"
          fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.NotePaneController"
          stylesheets="@../css/note.css" styleClass="note-container"
          minWidth="80" maxWidth="80" prefWidth="80" minHeight="80" maxHeight="80" prefHeight="80">
