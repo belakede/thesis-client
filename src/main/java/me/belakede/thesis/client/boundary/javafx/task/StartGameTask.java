@@ -1,7 +1,7 @@
 package me.belakede.thesis.client.boundary.javafx.task;
 
 import javafx.concurrent.Task;
-import me.belakede.thesis.client.configuration.UserConfiguration;
+import me.belakede.thesis.client.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,21 +14,21 @@ import javax.ws.rs.core.Response;
 public class StartGameTask extends Task<Void> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StartGameTask.class);
+    private final UserService userService;
+    private final Long id;
 
-    private final long id;
-
-    public StartGameTask(long id) {
+    public StartGameTask(UserService userService, long id) {
+        this.userService = userService;
         this.id = id;
     }
 
     @Override
     protected Void call() throws Exception {
-        UserConfiguration configuration = UserConfiguration.getInstance();
         Client client = ClientBuilder.newClient();
-        WebTarget webTarget = client.target(configuration.getBaseUrl() + "/games/start").path(String.valueOf(id));
+        WebTarget webTarget = client.target(userService.getUrl("/games/start")).path(String.valueOf(id));
         LOGGER.debug("WebTarget: {}", webTarget);
         Response response = webTarget.request().accept(MediaType.APPLICATION_JSON_TYPE)
-                .header("Authorization", "Bearer " + configuration.getToken().getAccessToken())
+                .header("Authorization", "Bearer " + userService.getAccessToken())
                 .post(null);
         if (response.getStatus() != 200) {
             LOGGER.warn("HTTP error code : {}", response.getStatus());
