@@ -15,8 +15,6 @@ import me.belakede.thesis.server.game.request.GamesRequest;
 import me.belakede.thesis.server.game.response.GamesResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -24,7 +22,6 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 
-@Component
 public class CreateGameTask extends Task<GameSummary> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateGameTask.class);
@@ -33,7 +30,6 @@ public class CreateGameTask extends Task<GameSummary> {
     private final ListProperty<String> players = new SimpleListProperty<>();
     private final UserService userService;
 
-    @Autowired
     public CreateGameTask(UserService userService) {
         this.userService = userService;
     }
