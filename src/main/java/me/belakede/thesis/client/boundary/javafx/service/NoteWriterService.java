@@ -35,6 +35,8 @@ public class NoteWriterService extends javafx.concurrent.Service<Void> {
     public NoteWriterService(UserService userService, GameService gameService) {
         this.userService = userService;
         this.gameService = gameService;
+        setupService();
+        hookupChaneListeners();
     }
 
     public String getOwner() {
