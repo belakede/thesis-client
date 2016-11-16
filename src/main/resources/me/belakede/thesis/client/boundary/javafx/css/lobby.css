@@ -94,7 +94,18 @@
     -fx-fill: derive(-fx-white, -20%);
 }
 
+.games-container,
 .players-container {
     -fx-spacing: 10;
     -fx-padding: 5 0 10 10;
+}
+.games-container ListView {
+    -fx-min-height: 300;
+    -fx-pref-height: 300;
+}
+.games-container .actions {
+    -fx-spacing: 10;
+}
+.games-container .actions Button {
+    -fx-pref-width: 120;
 }
