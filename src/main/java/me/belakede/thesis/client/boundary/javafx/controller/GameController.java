@@ -12,6 +12,7 @@ import me.belakede.thesis.client.boundary.javafx.control.NotePane;
 import me.belakede.thesis.game.Game;
 import me.belakede.thesis.game.equipment.*;
 import me.belakede.thesis.internal.game.util.GameBuilder;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+@Controller
 public class GameController implements Initializable {
 
     @FXML
@@ -39,8 +41,6 @@ public class GameController implements Initializable {
             gamePane.setGame(game);
             gamePane.setCards(cards);
             gamePane.setFigurine(Suspect.GREEN);
-            notePane.setFigurine(Suspect.GREEN);
-            notePane.setUsers(players);
             historyPane.setFigurine(Suspect.GREEN);
             chatPane.setFigurine(Suspect.GREEN);
         } catch (IOException e) {
