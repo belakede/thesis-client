@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.glyphfont.Glyph?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/lobby.css"
-         fx:id="parent" spacing="10" styleClass="games-container">
-    <padding>
-        <Insets top="5" bottom="10" left="10"/>
-    </padding>
-    <ListView fx:id="gamesView" prefHeight="300" minHeight="300"/>
-    <HBox styleClass="actions" spacing="10">
-        <Button fx:id="createButton" prefWidth="120">
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" styleClass="games-container"
+         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/lobby.css"
+         fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.GamesPaneController">
+    <ListView fx:id="gamesView"/>
+    <HBox styleClass="actions">
+        <Button fx:id="createButton">
             Create
             <graphic>
                 <Glyph fontFamily="FontAwesome" icon="PLUS"/>
             </graphic>
         </Button>
-        <Button fx:id="refreshButton" prefWidth="120">
+        <Button fx:id="refreshButton">
             Refresh
             <graphic>
                 <Glyph fontFamily="FontAwesome" icon="REFRESH"/>
