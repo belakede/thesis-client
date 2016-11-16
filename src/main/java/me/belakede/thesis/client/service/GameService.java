@@ -11,6 +11,7 @@ public class GameService {
     private final LongProperty gameId = new SimpleLongProperty();
     private final StringProperty roomId = new SimpleStringProperty();
     private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
+    private final MapProperty<String, Integer> playersOrder = new SimpleMapProperty<>();
 
     public long getGameId() {
         return gameId.get();
@@ -46,5 +47,17 @@ public class GameService {
 
     public MapProperty<Suspect, String> playersProperty() {
         return players;
+    }
+
+    public ObservableMap<String, Integer> getPlayersOrder() {
+        return playersOrder.get();
+    }
+
+    public void setPlayersOrder(ObservableMap<String, Integer> playersOrder) {
+        this.playersOrder.set(playersOrder);
+    }
+
+    public MapProperty<String, Integer> playersOrderProperty() {
+        return playersOrder;
     }
 }
