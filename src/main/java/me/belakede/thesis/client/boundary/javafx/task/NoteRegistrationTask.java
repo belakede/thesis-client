@@ -6,6 +6,8 @@ import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.server.note.request.NoteRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -14,6 +16,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+@Service
 public class NoteRegistrationTask extends Task<Void> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NoteRegistrationTask.class);
@@ -21,6 +24,7 @@ public class NoteRegistrationTask extends Task<Void> {
     private final UserService userService;
     private final GameService gameService;
 
+    @Autowired
     public NoteRegistrationTask(UserService userService, GameService gameService) {
         this.userService = userService;
         this.gameService = gameService;
