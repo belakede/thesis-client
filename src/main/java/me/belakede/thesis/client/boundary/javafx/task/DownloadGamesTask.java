@@ -4,7 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
-import me.belakede.thesis.client.configuration.UserConfiguration;
+import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.jackson.JacksonContextResolver;
 import me.belakede.thesis.server.game.response.GamesResponse;
 import org.slf4j.Logger;
@@ -21,16 +21,21 @@ public class DownloadGamesTask extends Task<ObservableList<GameSummary>> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DownloadGamesTask.class);
 
+    private final UserService userService;
+
+    public DownloadGamesTask(UserService userService) {
+        this.userService = userService;
+    }
+
     @Override
     protected ObservableList<GameSummary> call() throws Exception {
-        UserConfiguration configuration = UserConfiguration.getInstance();
         ObservableList<GameSummary> games = FXCollections.observableArrayList();
 
         Client client = ClientBuilder.newBuilder().register(JacksonContextResolver.class).build();
-        WebTarget webTarget = client.target(configuration.getBaseUrl() + "/games");
+        WebTarget webTarget = client.target(userService.getUrl("/games"));
         LOGGER.debug("WebTarget: {}", webTarget);
         List<GamesResponse> response = webTarget.request().accept(MediaType.APPLICATION_JSON_TYPE)
-                .header("Authorization", "Bearer " + configuration.getToken().getAccessToken())
+                .header("Authorization", "Bearer " + userService.getAccessToken())
                 .get(new GenericType<List<GamesResponse>>() {
                 });
         LOGGER.info("Game list downloaded: {}", response);
