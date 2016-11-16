@@ -7,17 +7,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.glyphfont.Glyph?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.BorderPane" stylesheets="@../css/chat.css"
-         minWidth="250" maxWidth="250" prefWidth="250" minHeight="400" maxHeight="400" prefHeight="400"
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.BorderPane"
+         fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.ChatBoxController"
+         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/chat.css"
          styleClass="chat-box">
     <center>
-        <ScrollPane fx:id="scrollPane" vbarPolicy="AS_NEEDED" hbarPolicy="NEVER" minWidth="250" maxWidth="250">
-            <VBox fx:id="messageContainer" styleClass="message-container" spacing="10"/>
+        <ScrollPane fx:id="scrollPane">
+            <VBox fx:id="messageContainer" styleClass="message-container"/>
         </ScrollPane>
     </center>
     <bottom>
-        <HBox styleClass="message-composer" alignment="CENTER">
-            <TextArea maxHeight="60" minHeight="60" maxWidth="200" minWidth="200" wrapText="true" fx:id="textArea"/>
+        <HBox styleClass="message-composer">
+            <TextArea fx:id="textArea"/>
             <Button fx:id="sendButton">
                 <graphic>
                     <Glyph fontFamily="FontAwesome" icon="SEND" fontSize="20"/>
