@@ -30,17 +30,18 @@ public class SpringFxmlLoader {
         }
     }
 
-    public <T> T load(T instance) {
+    public <T, C> C load(T instance) {
         boolean pane = Pane.class.isAssignableFrom(instance.getClass());
         if (pane) {
             String filename = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, instance.getClass().getSimpleName()).concat(".fxml");
             String fxmlFile = "/".concat(instance.getClass().getPackage().getName().replace(".", "/")).concat("/" + filename);
             LOGGER.info("Try to loading {}", fxmlFile);
-            try (InputStream fxmlStream = getClass().getResourceAsStream(fxmlFile)) {
-                FXMLLoader loader = new FXMLLoader();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
                 loader.setRoot(instance);
                 loader.setControllerFactory(APPLICATION_CONTEXT::getBean);
-                return loader.load(fxmlStream);
+                loader.load();
+                return loader.getController();
             } catch (Exception ex) {
                 LOGGER.warn("Cant load {}", fxmlFile, ex);
                 throw new RuntimeException(ex);
