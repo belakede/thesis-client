@@ -62,4 +62,9 @@ public class UserService {
     public ObjectProperty<Token> tokenProperty() {
         return token;
     }
+
+    public String getUrl(String suffix) {
+        return getBaseUrl().concat(suffix);
+    }
+
 }
