@@ -4,7 +4,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import org.apache.el.parser.Token;
+import me.belakede.thesis.client.domain.Token;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -65,6 +65,10 @@ public class UserService {
 
     public String getUrl(String suffix) {
         return getBaseUrl().concat(suffix);
+    }
+
+    public String getAuthToken() {
+        return getToken().getAccessToken();
     }
 
 }
