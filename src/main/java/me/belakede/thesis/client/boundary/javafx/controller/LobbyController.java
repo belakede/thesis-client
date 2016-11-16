@@ -9,8 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.control.GameDetailsPane;
-import me.belakede.thesis.client.boundary.javafx.control.GamesPane;
-import me.belakede.thesis.client.boundary.javafx.control.PlayersPane;
 import me.belakede.thesis.client.boundary.javafx.control.controller.GamesPaneController;
 import me.belakede.thesis.client.boundary.javafx.control.controller.PlayersPaneController;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
@@ -39,10 +37,6 @@ public class LobbyController implements Initializable {
     private VBox parent;
     @FXML
     private VBox content;
-    @FXML
-    private PlayersPane playersPane;
-    @FXML
-    private GamesPane gamesPane;
 
     @Autowired
     public LobbyController(GameService gameService, GamesPaneController gamesPaneController, PlayersPaneController playersPaneController) {
