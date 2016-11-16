@@ -80,7 +80,10 @@ public class GamesPaneController implements Initializable {
     }
 
     public void remove(GameSummary gameSummary) {
-        games.remove(gameSummary);
+        if (getGames().contains(gameSummary)) {
+            getGames().remove(gameSummary);
+            downloadGamesService.restart();
+        }
     }
 
     public GameSummary getSelectedGame() {
