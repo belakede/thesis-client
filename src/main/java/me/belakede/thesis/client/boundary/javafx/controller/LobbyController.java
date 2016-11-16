@@ -12,8 +12,10 @@ import me.belakede.thesis.client.boundary.javafx.control.GameDetailsPane;
 import me.belakede.thesis.client.boundary.javafx.control.GamesPane;
 import me.belakede.thesis.client.boundary.javafx.control.PlayersPane;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
-import me.belakede.thesis.client.configuration.GameConfiguration;
+import me.belakede.thesis.client.service.GameService;
 import me.belakede.thesis.server.game.domain.Status;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -21,11 +23,13 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+@Controller
 public class LobbyController implements Initializable {
 
     private final Map<GameSummary, GameDetailsPane> cache = new HashMap<>();
     private final ObjectProperty<Optional<GameSummary>> runningGame = new SimpleObjectProperty<>();
 
+    private final GameService gameService;
     @FXML
     private VBox parent;
     @FXML
@@ -34,6 +38,11 @@ public class LobbyController implements Initializable {
     private PlayersPane playersPane;
     @FXML
     private GamesPane gamesPane;
+
+    @Autowired
+    public LobbyController(GameService gameService) {
+        this.gameService = gameService;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,9 +67,9 @@ public class LobbyController implements Initializable {
         });
         runningGame.addListener((observable, oldValue, newValue) -> {
             if (newValue.isPresent()) {
-                GameConfiguration.getInstance().setGameId(newValue.get().getId());
-                GameConfiguration.getInstance().setRoomId(newValue.get().getRoomId());
-                GameConfiguration.getInstance().setPlayers(newValue.get().getPlayers());
+                gameService.setGameId(newValue.get().getId());
+                gameService.setRoomId(newValue.get().getRoomId());
+                gameService.setPlayers(newValue.get().getPlayers());
                 hide();
             }
         });
