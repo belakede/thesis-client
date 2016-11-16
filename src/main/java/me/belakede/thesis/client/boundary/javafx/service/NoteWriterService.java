@@ -10,15 +10,23 @@ import me.belakede.thesis.client.service.GameService;
 import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Marker;
+import org.controlsfx.glyphfont.FontAwesome;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service
+@Scope("prototype")
 public class NoteWriterService extends javafx.concurrent.Service<Void> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(NoteWriterService.class);
 
     private final StringProperty owner = new SimpleStringProperty();
     private final ObjectProperty<Card> card = new SimpleObjectProperty<>();
     private final ObjectProperty<Marker> marker = new SimpleObjectProperty<>();
+    private final ObjectProperty<Object> icon = new SimpleObjectProperty<>();
 
     private final UserService userService;
     private final GameService gameService;
@@ -65,8 +73,51 @@ public class NoteWriterService extends javafx.concurrent.Service<Void> {
         return marker;
     }
 
+    public Object getIcon() {
+        return icon.get();
+    }
+
+    public void setIcon(Object icon) {
+        this.icon.set(icon);
+    }
+
+    public ObjectProperty<Object> iconProperty() {
+        return icon;
+    }
+
     @Override
     protected Task<Void> createTask() {
         return new NoteWriterTask(userService, gameService.getRoomId(), getCard(), getOwner(), getMarker());
+    }
+
+    private void setupService() {
+        setOnSucceeded(event -> {
+            LOGGER.info("Mark {}'s {} card with {}", getOwner(), getCard(), getMarker());
+            setIcon(mapToIcon(getMarker()));
+        });
+    }
+
+    private void hookupChaneListeners() {
+        markerProperty().addListener((observable, oldValue, newValue) -> {
+            LOGGER.info("Try mark {}'s card with {}", getOwner(), getCard(), getMarker());
+            restart();
+        });
+    }
+
+    private Object mapToIcon(Marker marker) {
+        switch (marker) {
+            case YES:
+                return FontAwesome.Glyph.CHECK;
+            case NOT:
+                return FontAwesome.Glyph.TIMES;
+            case QUESTION:
+                return FontAwesome.Glyph.QUESTION;
+            case MAYBE:
+                return FontAwesome.Glyph.PLUS;
+            case MAYBE_NOT:
+                return FontAwesome.Glyph.MINUS;
+            default:
+                return " ";
+        }
     }
 }
