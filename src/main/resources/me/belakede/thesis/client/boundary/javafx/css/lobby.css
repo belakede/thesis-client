@@ -6,6 +6,23 @@
     -fx-fill: #818181;
     -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
 }
+
+.lobby-container .container {
+    -fx-padding: 15;
+}
+
+.lobby-container .sidebar {
+    -fx-spacing: 10;
+    -fx-padding: 10;
+    -fx-min-width: 250;
+    -fx-pref-width: 250;
+    -fx-max-width: 250;
+}
+
+.lobby-container .content {
+    -fx-spacing: 10;
+    -fx-padding: 10;
+}
 .lobby-container .games {
     -fx-max-width: Infinity;
 }
