@@ -6,6 +6,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.glyphfont.Glyph?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.BorderPane" stylesheets="@../css/lobby.css"
+         fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.GameDetailsPaneController"
          styleClass="game-details-container">
     <top>
         <AnchorPane>
