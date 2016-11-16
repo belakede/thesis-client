@@ -3,8 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
 <?import org.controlsfx.glyphfont.*?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.HBox" stylesheets="@../css/marker.css"
-         styleClass="marker-container">
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.HBox" styleClass="marker-container"
+         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/marker.css"
+         fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.MarkerPaneController">
     <Button fx:id="yesButton" styleClass="marker, yes">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="CHECK" fontSize="12"/>
