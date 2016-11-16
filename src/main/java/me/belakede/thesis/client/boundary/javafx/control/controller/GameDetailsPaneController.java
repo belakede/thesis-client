@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.service.RemoveGameService;
 import me.belakede.thesis.client.boundary.javafx.service.StartGameService;
-import me.belakede.thesis.client.configuration.UserConfiguration;
+import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Suspect;
 import me.belakede.thesis.server.game.domain.Status;
@@ -42,6 +42,7 @@ public class GameDetailsPaneController implements Initializable {
     private final ObjectProperty<Status> status = new SimpleObjectProperty<>();
 
     private final BooleanProperty removed = new SimpleBooleanProperty(false);
+    private final UserService userService;
     private final StartGameService startGameService;
     private final RemoveGameService removeGameService;
 
@@ -63,7 +64,8 @@ public class GameDetailsPaneController implements Initializable {
     private Button join;
 
     @Autowired
-    public GameDetailsPaneController(StartGameService startGameService, RemoveGameService removeGameService) {
+    public GameDetailsPaneController(UserService userService, StartGameService startGameService, RemoveGameService removeGameService) {
+        this.userService = userService;
         this.startGameService = startGameService;
         this.removeGameService = removeGameService;
     }
@@ -177,7 +179,7 @@ public class GameDetailsPaneController implements Initializable {
         remove.disableProperty().bind(statusProperty().isEqualTo(Status.IN_PROGRESS).or(removedProperty()));
         join.visibleProperty().bind(start.visibleProperty().not());
         if (null != getPlayers()) {
-            join.disableProperty().bind(Bindings.createBooleanBinding(() -> playersProperty().getValue().values().contains(UserConfiguration.getInstance().getUsername()), playersProperty()).not());
+            join.disableProperty().bind(Bindings.createBooleanBinding(() -> playersProperty().getValue().values().contains(userService.getUsername()), playersProperty()).not());
         }
     }
 
