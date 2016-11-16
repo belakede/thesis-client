@@ -80,7 +80,7 @@ public class GameService {
     }
 
     private void refreshPlayersOrder() {
-        setPlayers(FXCollections.observableHashMap());
+        setPlayersOrder(FXCollections.observableHashMap());
         int columnIndex = 1;
         for (Map.Entry<Suspect, String> entry : players.entrySet()) {
             playersOrder.put(entry.getValue(), columnIndex);
