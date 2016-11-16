@@ -6,10 +6,11 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.NotificationPane?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:id="parent"
+      stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/auth.css"
       fx:controller="me.belakede.thesis.client.boundary.javafx.controller.AuthController">
     <NotificationPane fx:id="notificationPane">
         <content>
-            <GridPane styleClass="login-frame" stylesheets="@css/auth.css"
+            <GridPane styleClass="login-frame"
                       alignment="center" hgap="10" vgap="10">
                 <padding>
                     <Insets top="25" right="25" bottom="10" left="25"/>
