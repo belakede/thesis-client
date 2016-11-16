@@ -4,7 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import me.belakede.thesis.client.boundary.javafx.model.Note;
-import me.belakede.thesis.client.configuration.UserConfiguration;
+import me.belakede.thesis.client.service.GameService;
+import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.internal.game.util.Cards;
 import me.belakede.thesis.server.note.response.NotesResponse;
 
@@ -15,15 +16,22 @@ import javax.ws.rs.core.MediaType;
 
 public class NoteDownloaderTask extends Task<ObservableList<Note>> {
 
+    private final UserService userService;
+    private final GameService gameService;
+
+    public NoteDownloaderTask(UserService userService, GameService gameService) {
+        this.userService = userService;
+        this.gameService = gameService;
+    }
+
     @Override
     protected ObservableList<Note> call() throws Exception {
-        UserConfiguration configuration = UserConfiguration.getInstance();
         ObservableList<Note> notes = FXCollections.observableArrayList();
 
         Client client = ClientBuilder.newClient();
-        WebTarget webTarget = client.target(configuration.getBaseUrl() + "/notes").path(configuration.getRoomId());
+        WebTarget webTarget = client.target(userService.getUrl("/notes")).path(gameService.getRoomId());
         NotesResponse response = webTarget.request().accept(MediaType.APPLICATION_JSON_TYPE)
-                .header("Authorization", "Bearer " + configuration.getToken().getAccessToken())
+                .header("Authorization", "Bearer " + userService.getAccessToken())
                 .get(NotesResponse.class);
 
         response.getNotes().stream()
