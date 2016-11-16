@@ -11,6 +11,7 @@ import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.control.GameDetailsPane;
 import me.belakede.thesis.client.boundary.javafx.control.GamesPane;
 import me.belakede.thesis.client.boundary.javafx.control.PlayersPane;
+import me.belakede.thesis.client.boundary.javafx.control.controller.GamesPaneController;
 import me.belakede.thesis.client.boundary.javafx.control.controller.PlayersPaneController;
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
 import me.belakede.thesis.client.service.GameService;
@@ -31,6 +32,7 @@ public class LobbyController implements Initializable {
     private final ObjectProperty<Optional<GameSummary>> runningGame = new SimpleObjectProperty<>();
 
     private final GameService gameService;
+    private final GamesPaneController gamesPaneController;
     private final PlayersPaneController playersPaneController;
 
     @FXML
@@ -43,8 +45,9 @@ public class LobbyController implements Initializable {
     private GamesPane gamesPane;
 
     @Autowired
-    public LobbyController(GameService gameService, PlayersPaneController playersPaneController) {
+    public LobbyController(GameService gameService, GamesPaneController gamesPaneController, PlayersPaneController playersPaneController) {
         this.gameService = gameService;
+        this.gamesPaneController = gamesPaneController;
         this.playersPaneController = playersPaneController;
     }
 
@@ -55,16 +58,16 @@ public class LobbyController implements Initializable {
     }
 
     private void setupBindings() {
-        gamesPane.playersProperty().bind(playersPaneController.playersProperty());
-        runningGame.bind(Bindings.createObjectBinding(() -> gamesPane.gamesProperty().stream().filter(g -> Status.IN_PROGRESS.equals(g.getStatus())).findFirst(), gamesPane.gamesProperty()));
+        gamesPaneController.playersProperty().bind(playersPaneController.playersProperty());
+        runningGame.bind(Bindings.createObjectBinding(() -> gamesPaneController.gamesProperty().stream().filter(g -> Status.IN_PROGRESS.equals(g.getStatus())).findFirst(), gamesPaneController.gamesProperty()));
     }
 
     private void hookupChangeListeners() {
-        gamesPane.selectedGameProperty().addListener((observable, oldValue, newValue) -> {
+        gamesPaneController.selectedGameProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 content.getChildren().clear();
                 if (!cache.containsKey(newValue)) {
-                    cache.put(newValue, new GameDetailsPane(newValue, gamesPane.removedProperty()));
+                    cache.put(newValue, new GameDetailsPane(newValue, gamesPaneController.removedProperty()));
                 }
                 content.getChildren().add(cache.get(newValue));
             }
