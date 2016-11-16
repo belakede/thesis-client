@@ -24,6 +24,10 @@
     -fx-text-fill: derive(-fx-white, -20%);
 }
 
+.note-box {
+    -fx-padding: 25;
+}
+
 .note-field,
 .note-field .note-box-button {
     -fx-pref-height: 24;
