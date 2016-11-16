@@ -7,7 +7,8 @@
 <?import me.belakede.thesis.client.boundary.javafx.control.GamesPane?>
 <?import me.belakede.thesis.client.boundary.javafx.control.PlayersPane?>
 <?import org.controlsfx.control.NotificationPane?>
-<VBox xmlns:fx="http://javafx.com/fxml" fx:id="parent" stylesheets="@css/lobby.css" styleClass="lobby-container"
+<VBox xmlns:fx="http://javafx.com/fxml" fx:id="parent"
+      stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/lobby.css" styleClass="lobby-container"
       fx:controller="me.belakede.thesis.client.boundary.javafx.controller.LobbyController">
     <NotificationPane fx:id="notificationPane">
         <content>
