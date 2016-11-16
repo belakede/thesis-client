@@ -1,15 +1,11 @@
 package me.belakede.thesis.client.boundary.javafx.control.controller;
 
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import me.belakede.thesis.client.boundary.javafx.control.NoteBox;
-import me.belakede.thesis.client.boundary.javafx.service.DownloadNotesService;
-import me.belakede.thesis.client.boundary.javafx.task.NoteRegistrationTask;
 import me.belakede.thesis.client.service.GameService;
-import me.belakede.thesis.client.service.UserService;
 import org.controlsfx.control.PopOver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,9 +16,7 @@ import java.util.ResourceBundle;
 @Controller
 public class NotePaneController implements Initializable {
 
-    private final UserService userService;
     private final GameService gameService;
-    private final DownloadNotesService downloadNotesService;
 
     @FXML
     private StackPane parent;
@@ -31,17 +25,14 @@ public class NotePaneController implements Initializable {
     private PopOver popOver;
 
     @Autowired
-    public NotePaneController(UserService userService, GameService gameService, DownloadNotesService downloadNotesService) {
-        this.userService = userService;
+    public NotePaneController(GameService gameService) {
         this.gameService = gameService;
-        this.downloadNotesService = downloadNotesService;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupPopover();
         hookupChangeListeners();
-        registerNoteRoom();
     }
 
     private void hookupChangeListeners() {
@@ -52,13 +43,6 @@ public class NotePaneController implements Initializable {
             noteButton.getStyleClass().add(newValue.name().toLowerCase());
         });
         noteButton.setOnAction(event -> popOver.show(parent));
-    }
-
-
-    private void registerNoteRoom() {
-        Task registrationTask = new NoteRegistrationTask(userService, gameService);
-        registrationTask.setOnSucceeded(event -> downloadNotesService.start());
-        new Thread(registrationTask).start();
     }
 
     private void setupPopover() {
