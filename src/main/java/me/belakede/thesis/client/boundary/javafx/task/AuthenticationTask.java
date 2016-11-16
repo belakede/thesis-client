@@ -4,7 +4,6 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import javafx.concurrent.Task;
-import me.belakede.thesis.client.configuration.UserConfiguration;
 import me.belakede.thesis.client.domain.Token;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +51,6 @@ public class AuthenticationTask extends Task<Token> {
         } else {
             result = response.getEntity(Token.class);
             LOGGER.info("Access Token: {}", result.getAccessToken());
-            UserConfiguration.getInstance().setToken(result);
             LOGGER.info("Token has been stored!");
         }
         return result;
