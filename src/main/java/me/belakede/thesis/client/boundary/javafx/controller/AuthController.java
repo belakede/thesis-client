@@ -12,19 +12,23 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.control.RegistrationPane;
 import me.belakede.thesis.client.boundary.javafx.task.AuthenticationTask;
-import me.belakede.thesis.client.configuration.UserConfiguration;
+import me.belakede.thesis.client.service.UserService;
 import org.controlsfx.control.NotificationPane;
 import org.controlsfx.control.PopOver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@Controller
 public class AuthController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
 
+    private final UserService userService;
     @FXML
     private VBox parent;
     @FXML
@@ -36,6 +40,11 @@ public class AuthController implements Initializable {
     @FXML
     private PasswordField password;
     private PopOver popOver;
+
+    @Autowired
+    public AuthController(UserService userService) {
+        this.userService = userService;
+    }
 
     public void initialize(URL location, ResourceBundle resources) {
         setupNotificationPane();
@@ -70,8 +79,8 @@ public class AuthController implements Initializable {
             notificationPane.show();
         });
         task.setOnSucceeded(event -> {
-            UserConfiguration.getInstance().setUsername(usernameText);
-            UserConfiguration.getInstance().setBaseUrl(serverAddressText);
+            userService.setUsername(usernameText);
+            userService.setBaseUrl(serverAddressText);
             LOGGER.info("Authentication succeed!");
             hide();
         });
