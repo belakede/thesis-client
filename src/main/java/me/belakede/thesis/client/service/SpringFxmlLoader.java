@@ -1,6 +1,8 @@
 package me.belakede.thesis.client.service;
 
+import com.google.common.base.CaseFormat;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Pane;
 import me.belakede.thesis.client.configuration.SuspectApplicationConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,5 +29,25 @@ public class SpringFxmlLoader {
             throw new RuntimeException(ioException);
         }
     }
+
+    public <T> void load(T instance) {
+        boolean pane = Pane.class.isAssignableFrom(instance.getClass());
+        if (pane) {
+            String filename = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, instance.getClass().getSimpleName()).concat(".fxml");
+            String fxmlFile = "/".concat(instance.getClass().getPackage().getName().replace(".", "/")).concat("/" + filename);
+            LOGGER.info("Try to loading {}", fxmlFile);
+            try (InputStream fxmlStream = getClass().getResourceAsStream(fxmlFile)) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setRoot(instance);
+                loader.setControllerFactory(APPLICATION_CONTEXT::getBean);
+                loader.load(fxmlStream);
+            } catch (Exception ex) {
+                LOGGER.warn("Cant load {}", fxmlFile, ex);
+                throw new RuntimeException(ex);
+            }
+        }
+        throw new RuntimeException("The specified instance is not a Pane");
+    }
+
 
 }
