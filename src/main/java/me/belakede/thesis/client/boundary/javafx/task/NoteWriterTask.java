@@ -1,7 +1,7 @@
 package me.belakede.thesis.client.boundary.javafx.task;
 
 import javafx.concurrent.Task;
-import me.belakede.thesis.client.configuration.UserConfiguration;
+import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Marker;
 import me.belakede.thesis.server.note.request.NoteRequest;
@@ -19,24 +19,27 @@ public class NoteWriterTask extends Task<Void> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NoteWriterTask.class);
 
+    private final UserService userService;
     private final Card card;
     private final String owner;
+    private final String roomId;
     private final Marker marker;
 
-    public NoteWriterTask(Card card, String owner, Marker marker) {
+    public NoteWriterTask(UserService userService, String roomId, Card card, String owner, Marker marker) {
         this.card = card;
         this.owner = owner;
         this.marker = marker;
+        this.roomId = roomId;
+        this.userService = userService;
     }
 
     @Override
     protected Void call() throws Exception {
-        UserConfiguration configuration = UserConfiguration.getInstance();
         Client client = ClientBuilder.newClient();
-        WebTarget webTarget = client.target(configuration.getBaseUrl() + "/notes");
+        WebTarget webTarget = client.target(userService.getUrl("/notes"));
         Response response = webTarget.request().accept(MediaType.APPLICATION_JSON_TYPE)
-                .header("Authorization", "Bearer " + configuration.getToken().getAccessToken())
-                .post(Entity.json(new NoteRequest(configuration.getRoomId(), card, owner, marker)));
+                .header("Authorization", "Bearer " + userService.getAccessToken())
+                .post(Entity.json(new NoteRequest(roomId, card, owner, marker)));
         if (response.getStatus() != 200) {
             LOGGER.warn("HTTP error code : {}", response.getStatus());
             LOGGER.warn("{}", response.toString());
