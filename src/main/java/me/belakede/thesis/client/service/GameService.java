@@ -1,6 +1,7 @@
 package me.belakede.thesis.client.service;
 
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import me.belakede.thesis.game.equipment.Figurine;
 import me.belakede.thesis.game.equipment.Suspect;
@@ -79,6 +80,7 @@ public class GameService {
     }
 
     private void refreshPlayersOrder() {
+        setPlayers(FXCollections.observableHashMap());
         int columnIndex = 1;
         for (Map.Entry<Suspect, String> entry : players.entrySet()) {
             playersOrder.put(entry.getValue(), columnIndex);
