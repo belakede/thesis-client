@@ -93,3 +93,8 @@
 .game-details-container .player.white {
     -fx-fill: derive(-fx-white, -20%);
 }
+
+.players-container {
+    -fx-spacing: 10;
+    -fx-padding: 5 0 10 10;
+}
