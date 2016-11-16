@@ -3,8 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.Pane?>
 <?import org.controlsfx.glyphfont.Glyph?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.Pane" stylesheets="@../css/note.css"
-         styleClass="note-field">
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.Pane" fx:id="parent"
+         fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.NoteFieldController"
+         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/note.css" styleClass="note-field">
     <Button fx:id="markerButton" styleClass="note-box-button">
         <graphic>
             <Glyph fx:id="markerGlyph" fontFamily="FontAwesome" icon="" fontSize="12"/>
