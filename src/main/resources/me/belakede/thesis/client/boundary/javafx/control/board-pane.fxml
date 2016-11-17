@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.TilePane?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.TilePane" stylesheets="@../css/board.css"
-         styleClass="board-container">
-</fx:root>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.TilePane" fx:id="parent"
+         fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.BoardPaneController"
+         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/board.css" styleClass="board-container"/>
