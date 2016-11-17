@@ -30,7 +30,7 @@ public class GameService {
     private final ObjectProperty<Board> board = new SimpleObjectProperty<>();
     private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
     private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
-    private final MapProperty<Figurine, Field> figurines = new SimpleMapProperty<>();
+    private final MapProperty<Figurine, Field> positions = new SimpleMapProperty<>();
     private final MapProperty<String, Integer> playersOrder = new SimpleMapProperty<>();
 
     public GameService() {
@@ -121,16 +121,16 @@ public class GameService {
         return players;
     }
 
-    public ObservableMap<Figurine, Field> getFigurines() {
-        return figurines.get();
+    public ObservableMap<Figurine, Field> getPositions() {
+        return positions.get();
     }
 
-    public void setFigurines(ObservableMap<Figurine, Field> figurines) {
-        this.figurines.set(figurines);
+    public void setPositions(ObservableMap<Figurine, Field> positions) {
+        this.positions.set(positions);
     }
 
-    public MapProperty<Figurine, Field> figurinesProperty() {
-        return figurines;
+    public MapProperty<Figurine, Field> positionsProperty() {
+        return positions;
     }
 
     public ObservableMap<String, Integer> getPlayersOrder() {
