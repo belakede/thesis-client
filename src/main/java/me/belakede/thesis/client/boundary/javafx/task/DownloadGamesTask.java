@@ -45,6 +45,7 @@ public class DownloadGamesTask extends Task<ObservableList<GameSummary>> {
     }
 
     private GameSummary transform(GamesResponse game) {
+        LOGGER.info("game: #{}, roomID: {}", game.getId(), game.getRoomId());
         return new GameSummary(game.getId(), game.getRoomId(), game.getTime(), game.getBoardType(), game.getStatus(), FXCollections.observableMap(game.getUsers()));
     }
 
