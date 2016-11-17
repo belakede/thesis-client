@@ -46,9 +46,14 @@ public class ChatBoxController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setupMessageSenderService();
         setupActionEvents();
         hookupChangeListeners();
         fixElementsWidth();
+    }
+
+    private void setupMessageSenderService() {
+        messageSenderService.setOnSucceeded(event -> textArea.setText(""));
     }
 
     private void setupActionEvents() {
@@ -79,6 +84,7 @@ public class ChatBoxController implements Initializable {
     }
 
     private void appendChatMessage(UserMessage m) {
+        LOGGER.info("{} sent the following message {}", m.getSender(), m.getMessage());
         ChatMessage chatMessage = new ChatMessage(m.getMessage(), m.getSender());
         chatMessage.getStyleClass().add(m.getFigurine().name().toLowerCase());
         messageContainer.getChildren().add(chatMessage);
@@ -87,6 +93,8 @@ public class ChatBoxController implements Initializable {
     private void sendMessage() {
         String text = textArea.getText().trim();
         messageSenderService.setMessageContent(text);
-        messageSenderService.restart();
+        LOGGER.info("Sending message: {}", messageSenderService.getMessageContent());
+        messageSenderService.reset();
+        messageSenderService.start();
     }
 }
