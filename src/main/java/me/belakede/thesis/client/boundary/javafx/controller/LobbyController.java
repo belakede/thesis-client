@@ -65,7 +65,10 @@ public class LobbyController implements Initializable {
             if (newValue != null) {
                 content.getChildren().clear();
                 if (!cache.containsKey(newValue)) {
-                    cache.put(newValue, new GameDetailsPane(newValue, () -> gamesPaneController.remove(newValue)));
+                    cache.put(newValue, new GameDetailsPane(newValue, () -> gamesPaneController.remove(newValue), () -> {
+                        runningGame.unbind();
+                        runningGame.setValue(Optional.ofNullable(newValue));
+                    }));
                 }
                 content.getChildren().add(cache.get(newValue));
             }
