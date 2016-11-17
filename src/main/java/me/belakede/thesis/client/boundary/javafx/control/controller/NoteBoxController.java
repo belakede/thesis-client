@@ -3,8 +3,11 @@ package me.belakede.thesis.client.boundary.javafx.control.controller;
 import com.google.common.base.CaseFormat;
 import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleMapProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,6 +34,10 @@ import java.util.*;
 public class NoteBoxController implements Initializable {
 
     private final MapProperty<Card, Integer> cardsOrder = new SimpleMapProperty<>();
+    private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
+    private final MapProperty<String, Integer> playersOrder = new SimpleMapProperty<>();
+    private final ListProperty<Note> notes = new SimpleListProperty<>();
+
     private final FontLoader fontLoader;
     private final GameService gameService;
     private final NoteService noteService;
@@ -43,31 +50,42 @@ public class NoteBoxController implements Initializable {
         this.gameService = gameService;
         this.noteService = noteService;
         this.fontLoader = Toolkit.getToolkit().getFontLoader();
+        this.cardsOrder.setValue(FXCollections.observableHashMap());
+        this.players.setValue(FXCollections.observableHashMap());
+        this.notes.setValue(FXCollections.observableArrayList());
+        this.playersOrder.setValue(FXCollections.observableHashMap());
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         hookupChangeListeners();
+        setupBindings();
     }
 
     private void hookupChangeListeners() {
-        gameService.getPlayers().addListener((MapChangeListener.Change<? extends Suspect, ? extends String> change) -> {
+        players.addListener((MapChangeListener.Change<? extends Suspect, ? extends String> change) -> {
             displayHeadLines();
             displayCardHeadlines();
             displayNoteFields();
         });
-        noteService.notesProperty().addListener((observable, oldValue, newValue) -> {
+        notes.addListener((observable, oldValue, newValue) -> {
             displayCardHeadlines();
             displayNoteFields();
         });
     }
 
+    private void setupBindings() {
+        players.bind(gameService.playersProperty());
+        notes.bind(noteService.notesProperty());
+        playersOrder.bind(gameService.playersOrderProperty());
+    }
+
     private void displayHeadLines() {
-        gameService.getPlayers().entrySet().forEach((entry -> {
+        players.entrySet().forEach((entry -> {
             Label headlineLabel = createHeadlineLabel(entry.getKey(), entry.getValue());
             Double boxWidth = calculateLabelWidth(entry.getValue(), headlineLabel.getFont());
             VBox headerBox = createPlayerHeaderBox(headlineLabel, boxWidth);
-            parent.add(headerBox, gameService.getPlayersOrder().get(entry.getValue()), 1);
+            parent.add(headerBox, playersOrder.get(entry.getValue()), 1);
         }));
     }
 
@@ -95,9 +113,9 @@ public class NoteBoxController implements Initializable {
     private void displayCardHeadlines() {
         int rowIndex = 2;
         rowIndex = createCardHeaderBoxes(rowIndex, Suspect.values());
-        parent.add(createSeparator(), 0, rowIndex - 1, gameService.getPlayers().size() + 1, 1);
+        parent.add(createSeparator(), 0, rowIndex - 1, players.size() + 1, 1);
         rowIndex = createCardHeaderBoxes(rowIndex, Room.values());
-        parent.add(createSeparator(), 0, rowIndex - 1, gameService.getPlayers().size() + 1, 1);
+        parent.add(createSeparator(), 0, rowIndex - 1, players.size() + 1, 1);
         rowIndex = createCardHeaderBoxes(rowIndex, Weapon.values());
     }
 
@@ -137,13 +155,14 @@ public class NoteBoxController implements Initializable {
     private void displayNoteFields() {
         Map<Card, List<String>> notes = createCardPlayerMap();
         noteService.getNotes().forEach(note -> {
+
             NoteField noteField = new NoteField(note.getOwner(), note.getCard(), note.getMarker());
-            parent.add(noteField, gameService.getPlayersOrder().get(note.getOwner()), cardsOrder.get(note.getCard()));
+            parent.add(noteField, playersOrder.get(note.getOwner()), cardsOrder.get(note.getCard()));
             correctNotes(notes, note);
         });
         notes.forEach((card, players) -> players.forEach(player -> {
             NoteField noteField = new NoteField(player, card, Marker.NONE);
-            parent.add(noteField, gameService.getPlayersOrder().get(player), cardsOrder.get(card));
+            parent.add(noteField, playersOrder.get(player), cardsOrder.get(card));
         }));
     }
 
@@ -158,15 +177,15 @@ public class NoteBoxController implements Initializable {
         Map<Card, List<String>> notes = new HashMap<>();
         Arrays.stream(Suspect.values()).forEach(suspect -> {
             notes.put(suspect, new ArrayList<>());
-            gameService.getPlayers().values().forEach(player -> notes.get(suspect).add(player));
+            players.values().forEach(player -> notes.get(suspect).add(player));
         });
         Arrays.stream(Room.values()).forEach(room -> {
             notes.put(room, new ArrayList<>());
-            gameService.getPlayers().values().forEach(player -> notes.get(room).add(player));
+            players.values().forEach(player -> notes.get(room).add(player));
         });
         Arrays.stream(Weapon.values()).forEach(weapon -> {
             notes.put(weapon, new ArrayList<>());
-            gameService.getPlayers().values().forEach(player -> notes.get(weapon).add(player));
+            players.values().forEach(player -> notes.get(weapon).add(player));
         });
         return notes;
     }
