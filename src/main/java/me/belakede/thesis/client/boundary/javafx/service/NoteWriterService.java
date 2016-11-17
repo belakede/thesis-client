@@ -94,14 +94,14 @@ public class NoteWriterService extends javafx.concurrent.Service<Void> {
 
     private void setupService() {
         setOnSucceeded(event -> {
-            LOGGER.info("Mark {}'s {} card with {}", getOwner(), getCard(), getMarker());
+            LOGGER.info("{}'s {} card has been marked with {}", getOwner(), getCard(), getMarker());
             setIcon(mapToIcon(getMarker()));
         });
     }
 
     private void hookupChaneListeners() {
         markerProperty().addListener((observable, oldValue, newValue) -> {
-            LOGGER.info("Try mark {}'s card with {}", getOwner(), getCard(), getMarker());
+            LOGGER.info("Marking {}'s {} card with {}", getOwner(), getCard(), getMarker());
             restart();
         });
     }
