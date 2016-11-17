@@ -42,6 +42,10 @@ public class SideBarController implements Initializable {
         setupBindings();
     }
 
+    public RotateConfigurationPane getRotateConfiguration() {
+        return rotateConfiguration;
+    }
+
     private void hookupChangeListeners() {
         figurine.addListener((observable, oldValue, newValue) -> {
             LOGGER.info("Figurine changed from {} to {}", oldValue, newValue);
