@@ -14,6 +14,8 @@ import me.belakede.thesis.client.boundary.javafx.control.controller.PlayersPaneC
 import me.belakede.thesis.client.boundary.javafx.model.GameSummary;
 import me.belakede.thesis.client.service.GameService;
 import me.belakede.thesis.server.game.domain.Status;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -25,6 +27,8 @@ import java.util.ResourceBundle;
 
 @Controller
 public class LobbyController implements Initializable {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LobbyController.class);
 
     private final Map<GameSummary, GameDetailsPane> cache = new HashMap<>();
     private final ObjectProperty<Optional<GameSummary>> runningGame = new SimpleObjectProperty<>();
@@ -69,8 +73,11 @@ public class LobbyController implements Initializable {
         runningGame.addListener((observable, oldValue, newValue) -> {
             if (newValue.isPresent()) {
                 gameService.setGameId(newValue.get().getId());
+                LOGGER.info("Running game changed to {}", gameService.getGameId());
                 gameService.setRoomId(newValue.get().getRoomId());
+                LOGGER.info("Room ID is: {}", gameService.getRoomId());
                 gameService.setPlayers(newValue.get().getPlayers());
+                LOGGER.info("Players: {}", gameService.getPlayers());
                 hide();
             }
         });
