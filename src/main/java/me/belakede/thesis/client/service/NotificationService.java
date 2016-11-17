@@ -7,10 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import me.belakede.thesis.server.game.response.GameStatusNotification;
-import me.belakede.thesis.server.game.response.Notification;
-import me.belakede.thesis.server.game.response.PlayerJoinedNotification;
-import me.belakede.thesis.server.game.response.PlayerStatusNotification;
+import me.belakede.thesis.server.game.response.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +17,7 @@ public class NotificationService {
     private final ListProperty<PlayerJoinedNotification> playerJoinedNotifications = new SimpleListProperty<>();
     private final ObjectProperty<PlayerStatusNotification> playerStatusNotification = new SimpleObjectProperty<>();
     private final ObjectProperty<GameStatusNotification> gameStatusNotification = new SimpleObjectProperty<>();
+    private final ObjectProperty<GamePausedNotification> gamePausedNotification = new SimpleObjectProperty<>();
 
     public NotificationService() {
         setNotifications(FXCollections.observableArrayList());
@@ -75,6 +73,18 @@ public class NotificationService {
         return gameStatusNotification;
     }
 
+    public GamePausedNotification getGamePausedNotification() {
+        return gamePausedNotification.get();
+    }
+
+    public void setGamePausedNotification(GamePausedNotification gamePausedNotification) {
+        this.gamePausedNotification.set(gamePausedNotification);
+    }
+
+    public ObjectProperty<GamePausedNotification> gamePausedNotificationProperty() {
+        return gamePausedNotification;
+    }
+
     public void add(Notification notification) {
         notifications.add(notification);
     }
@@ -90,6 +100,8 @@ public class NotificationService {
                             playerStatusNotification.set((PlayerStatusNotification) notification);
                         } else if (notification instanceof GameStatusNotification) {
                             gameStatusNotification.set((GameStatusNotification) notification);
+                        } else if (notification instanceof GamePausedNotification) {
+                            gamePausedNotification.set((GamePausedNotification) notification);
                         }
                     });
                 }
