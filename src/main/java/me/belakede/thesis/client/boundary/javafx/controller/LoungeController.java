@@ -19,7 +19,9 @@ import me.belakede.thesis.client.service.GameFlowService;
 import me.belakede.thesis.client.service.GameService;
 import me.belakede.thesis.client.service.NotificationService;
 import me.belakede.thesis.client.service.UserService;
+import me.belakede.thesis.game.equipment.Figurine;
 import me.belakede.thesis.game.equipment.Suspect;
+import me.belakede.thesis.game.field.Field;
 import me.belakede.thesis.server.game.response.PlayerJoinedNotification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -118,7 +120,20 @@ public class LoungeController implements Initializable {
                 }
             }
         });
-        notificationService.gameStatusNotificationProperty().addListener((observable, oldValue, newValue) -> hide());
+        notificationService.gameStatusNotificationProperty().addListener((observable, oldValue, newValue) -> {
+            gameService.boardProperty().addListener((observable1, oldValue1, newValue1) -> {
+                ObservableMap<Figurine, Field> positions = FXCollections.observableHashMap();
+                newValue.getBoardStatus().getPositions().forEach(fn -> {
+                    Figurine figurine = fn.getFigurine();
+                    Field field = newValue1.getField(fn.getPosition().getRow(), fn.getPosition().getColumn());
+                    positions.put(figurine, field);
+                });
+                gameService.setPositions(positions);
+            });
+            gameService.setBoardType(newValue.getBoardStatus().getBoardType());
+
+            hide();
+        });
     }
 
     private void openChannels() {
