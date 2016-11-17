@@ -1,5 +1,14 @@
 @import "colors.css";
 
+.chat-container {
+    -fx-min-width: 80;
+    -fx-pref-width: 80;
+    -fx-max-width: 80;
+    -fx-min-height: 80;
+    -fx-pref-height: 80;
+    -fx-max-height: 80;
+}
+
 .chat-container .chat-button {
     -fx-cursor: hand;
     -fx-border-width: 0;
