@@ -17,6 +17,12 @@
 
 .history-box {
     -fx-padding: 15;
+    -fx-min-width: 250;
+    -fx-pref-width: 250;
+    -fx-max-width: 250;
+    -fx-min-height: 400;
+    -fx-pref-height: 400;
+    -fx-max-height: 400;
 }
 .history-container .history-button.green:hover Glyph {
     -fx-text-fill: derive(-fx-green, -20%);
