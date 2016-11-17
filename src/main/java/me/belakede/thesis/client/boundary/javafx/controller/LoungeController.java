@@ -75,8 +75,10 @@ public class LoungeController implements Initializable {
 
     private void uploadPlayerBoxes() {
         gameService.getPlayers().entrySet().forEach(entry -> {
+            LOGGER.info("Creating playerBox for {}", entry);
             playerBoxes.put(entry.getValue(), createVBoxForUser(entry.getValue(), entry.getKey()));
         });
+        playerContainer.getChildren().addAll(playerBoxes.values());
     }
 
     private boolean isPartOfGame() {
