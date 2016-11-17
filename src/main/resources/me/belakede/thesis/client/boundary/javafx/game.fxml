@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
 <?import me.belakede.thesis.client.boundary.javafx.control.ChatPane?>
 <?import me.belakede.thesis.client.boundary.javafx.control.GamePane?>
 <?import me.belakede.thesis.client.boundary.javafx.control.HistoryPane?>
 <?import me.belakede.thesis.client.boundary.javafx.control.NotePane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml" stylesheets="@css/game.css"
+<?import org.controlsfx.glyphfont.Glyph?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:id="parent"
+            stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/game.css" styleClass="game-container"
             fx:controller="me.belakede.thesis.client.boundary.javafx.controller.GameController">
-    <GamePane fx:id="gamePane" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" minWidth="1280" minHeight="800"/>
+    <GamePane fx:id="gamePane" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" prefWidth="1280" prefHeight="800"/>
     <NotePane fx:id="notePane" AnchorPane.bottomAnchor="15" AnchorPane.leftAnchor="265"/>
+    <StackPane fx:id="sorryPane" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" styleClass="sorry-pane"
+               visible="false" prefWidth="1280" prefHeight="800">
+        <Glyph fontFamily="FontAwesome" icon="FROWN_ALT" fontSize="600"/>
+        <Text>Sorry, one or more players left the game.</Text>
+    </StackPane>
     <HistoryPane fx:id="historyPane" AnchorPane.bottomAnchor="15" AnchorPane.rightAnchor="75"/>
     <ChatPane fx:id="chatPane" AnchorPane.bottomAnchor="15" AnchorPane.rightAnchor="15"/>
 </AnchorPane>
