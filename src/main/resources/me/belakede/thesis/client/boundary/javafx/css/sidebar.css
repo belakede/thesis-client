@@ -2,12 +2,25 @@
 
 .sidebar {
     -fx-background-color: #dedede;
+    -fx-min-width: 250;
+    -fx-pref-width: 250;
+    -fx-max-width: 250;
 }
 .sidebar .logo  {
+    -fx-alignment: center;
     -fx-border-color: #000000;
+    -fx-border-width: 3;
     -fx-border-style: solid;
-    -fx-border-width: 1px;
     -fx-border-radius: 75;
+    -fx-background-radius: 75;
+    -fx-background-image: url("../img/logo-circle.png");
+    -fx-background-size: cover;
+    -fx-min-width: 125;
+    -fx-pref-width: 125;
+    -fx-max-width: 125;
+    -fx-min-height: 125;
+    -fx-pref-height: 125;
+    -fx-max-height: 125;
 }
 .sidebar .logo.mustard {
     -fx-effect: dropshadow(three-pass-box, -fx-mustard, 10, 0, 0, 0);
