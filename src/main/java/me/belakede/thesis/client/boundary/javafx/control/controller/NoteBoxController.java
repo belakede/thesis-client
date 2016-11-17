@@ -35,7 +35,6 @@ public class NoteBoxController implements Initializable {
 
     private final MapProperty<Card, Integer> cardsOrder = new SimpleMapProperty<>();
     private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
-    private final MapProperty<String, Integer> playersOrder = new SimpleMapProperty<>();
     private final ListProperty<Note> notes = new SimpleListProperty<>();
 
     private final FontLoader fontLoader;
@@ -53,7 +52,6 @@ public class NoteBoxController implements Initializable {
         this.cardsOrder.setValue(FXCollections.observableHashMap());
         this.players.setValue(FXCollections.observableHashMap());
         this.notes.setValue(FXCollections.observableArrayList());
-        this.playersOrder.setValue(FXCollections.observableHashMap());
     }
 
     @Override
@@ -77,7 +75,6 @@ public class NoteBoxController implements Initializable {
     private void setupBindings() {
         players.bind(gameService.playersProperty());
         notes.bind(noteService.notesProperty());
-        playersOrder.bind(gameService.playersOrderProperty());
     }
 
     private void displayHeadLines() {
@@ -85,7 +82,7 @@ public class NoteBoxController implements Initializable {
             Label headlineLabel = createHeadlineLabel(entry.getKey(), entry.getValue());
             Double boxWidth = calculateLabelWidth(entry.getValue(), headlineLabel.getFont());
             VBox headerBox = createPlayerHeaderBox(headlineLabel, boxWidth);
-            parent.add(headerBox, playersOrder.get(entry.getValue()), 1);
+            parent.add(headerBox, gameService.getPlayersOrder().get(entry.getValue()), 1);
         }));
     }
 
@@ -157,12 +154,12 @@ public class NoteBoxController implements Initializable {
         noteService.getNotes().forEach(note -> {
 
             NoteField noteField = new NoteField(note.getOwner(), note.getCard(), note.getMarker());
-            parent.add(noteField, playersOrder.get(note.getOwner()), cardsOrder.get(note.getCard()));
+            parent.add(noteField, gameService.getPlayersOrder().get(note.getOwner()), cardsOrder.get(note.getCard()));
             correctNotes(notes, note);
         });
         notes.forEach((card, players) -> players.forEach(player -> {
             NoteField noteField = new NoteField(player, card, Marker.NONE);
-            parent.add(noteField, playersOrder.get(player), cardsOrder.get(card));
+            parent.add(noteField, gameService.getPlayersOrder().get(player), cardsOrder.get(card));
         }));
     }
 
