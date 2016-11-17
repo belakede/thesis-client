@@ -41,7 +41,7 @@ public class JoinToGameTask extends Task<Void> {
         LOGGER.debug("WebTarget: {}", webTarget);
         EventInput eventInput = webTarget.request().accept(MediaType.APPLICATION_JSON_TYPE)
                 .header("Authorization", "Bearer " + userService.getAccessToken())
-                .post(null, EventInput.class);
+                .get(EventInput.class);
         while (!eventInput.isClosed()) {
             final InboundEvent inboundEvent = eventInput.read();
             if (inboundEvent == null) {
