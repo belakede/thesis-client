@@ -3,7 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.StackPane?>
 <?import org.controlsfx.glyphfont.Glyph?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane"
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane" fx:id="parent"
          fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.ChatPaneController"
          stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/chat.css" styleClass="chat-container">
     <Button styleClass="chat-button" fx:id="chatButton">
