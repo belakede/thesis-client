@@ -28,4 +28,8 @@ public class NotificationService {
         return notifications;
     }
 
+    public void add(Notification notification) {
+        notifications.add(notification);
+    }
+
 }
