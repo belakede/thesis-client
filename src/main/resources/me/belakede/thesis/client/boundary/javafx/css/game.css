@@ -1,0 +1,21 @@
+
+.sorry-pane Glyph {
+    -fx-text-fill: #d3d3d3;
+    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
+}
+
+.sorry-pane Text {
+    -fx-font-size: 64px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #818181;
+    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
+}
+
+.game-container {
+    -fx-min-width: 1280;
+    -fx-pref-width: 1280;
+    -fx-max-width: 1280;
+    -fx-min-height: 800;
+    -fx-pref-height: 800;
+    -fx-max-height: 800;
+}
