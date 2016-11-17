@@ -4,20 +4,30 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import me.belakede.thesis.game.board.Board;
+import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Figurine;
 import me.belakede.thesis.game.equipment.Suspect;
 import me.belakede.thesis.game.field.Field;
+import me.belakede.thesis.internal.game.util.Boards;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Map;
 
 @Service
 public class GameService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(GameService.class);
+
     private final LongProperty gameId = new SimpleLongProperty();
     private final StringProperty roomId = new SimpleStringProperty();
     private final ListProperty<Card> cards = new SimpleListProperty<>();
+    private final ObjectProperty<BoardType> boardType = new SimpleObjectProperty<>();
+    private final ObjectProperty<Board> board = new SimpleObjectProperty<>();
     private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
     private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
     private final MapProperty<Figurine, Field> figurines = new SimpleMapProperty<>();
@@ -61,6 +71,30 @@ public class GameService {
 
     public ListProperty<Card> cardsProperty() {
         return cards;
+    }
+
+    public BoardType getBoardType() {
+        return boardType.get();
+    }
+
+    public void setBoardType(BoardType boardType) {
+        this.boardType.set(boardType);
+    }
+
+    public ObjectProperty<BoardType> boardTypeProperty() {
+        return boardType;
+    }
+
+    public Board getBoard() {
+        return board.get();
+    }
+
+    public void setBoard(Board board) {
+        this.board.set(board);
+    }
+
+    public ObjectProperty<Board> boardProperty() {
+        return board;
     }
 
     public Figurine getFigurine() {
@@ -118,6 +152,14 @@ public class GameService {
             for (Map.Entry<Suspect, String> entry : newValue.entrySet()) {
                 getPlayersOrder().put(entry.getValue(), columnIndex);
                 columnIndex++;
+            }
+        });
+        boardTypeProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                Board board = Boards.getBoardByType(newValue);
+                setBoard(board);
+            } catch (IOException e) {
+                LOGGER.warn("{} board not found. ", newValue, e);
             }
         });
     }
