@@ -1,5 +1,6 @@
 package me.belakede.thesis.client.boundary.javafx.controller;
 
+import javafx.animation.TranslateTransition;
 import javafx.beans.property.MapProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
@@ -12,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import me.belakede.thesis.client.service.GameFlowService;
 import me.belakede.thesis.client.service.GameService;
 import me.belakede.thesis.client.service.NotificationService;
@@ -36,6 +38,9 @@ public class LoungeController implements Initializable {
     private final GameService gameService;
     private final GameFlowService gameFlowService;
     private final NotificationService notificationService;
+
+    @FXML
+    private VBox parent;
     @FXML
     private StackPane sorryPane;
     @FXML
@@ -108,6 +113,7 @@ public class LoungeController implements Initializable {
                 }
             }
         });
+        notificationService.gameStatusNotificationProperty().addListener((observable, oldValue, newValue) -> hide());
     }
 
     private void openChannels() {
@@ -134,4 +140,10 @@ public class LoungeController implements Initializable {
         return new Text(username);
     }
 
+    private void hide() {
+        TranslateTransition transition = new TranslateTransition(new Duration(400), parent);
+        transition.setToY(-(parent.getHeight()));
+        transition.setOnFinished(event -> parent.setVisible(false));
+        transition.play();
+    }
 }
