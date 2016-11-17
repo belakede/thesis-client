@@ -11,12 +11,14 @@ import me.belakede.thesis.game.equipment.Marker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 @Controller
+@Scope("prototype")
 public class MarkerPaneController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MarkerPaneController.class);
