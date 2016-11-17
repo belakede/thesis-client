@@ -18,6 +18,10 @@ public class GameService {
     private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
     private final MapProperty<String, Integer> playersOrder = new SimpleMapProperty<>();
 
+    public GameService() {
+        hookupChangeListeners();
+    }
+
     public long getGameId() {
         return gameId.get();
     }
@@ -60,7 +64,6 @@ public class GameService {
 
     public void setPlayers(ObservableMap<Suspect, String> players) {
         this.players.set(players);
-        refreshPlayersOrder();
     }
 
     public MapProperty<Suspect, String> playersProperty() {
@@ -79,12 +82,15 @@ public class GameService {
         return playersOrder;
     }
 
-    private void refreshPlayersOrder() {
-        setPlayersOrder(FXCollections.observableHashMap());
-        int columnIndex = 1;
-        for (Map.Entry<Suspect, String> entry : players.entrySet()) {
-            playersOrder.put(entry.getValue(), columnIndex);
-            columnIndex++;
-        }
+    private void hookupChangeListeners() {
+        playersProperty().addListener((observable, oldValue, newValue) -> {
+            int columnIndex = 0;
+            setPlayersOrder(FXCollections.observableHashMap());
+            for (Map.Entry<Suspect, String> entry : newValue.entrySet()) {
+                getPlayersOrder().put(entry.getValue(), columnIndex);
+                columnIndex++;
+            }
+        });
     }
+
 }
