@@ -4,18 +4,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.Circle?>
 <?import me.belakede.thesis.client.boundary.javafx.control.ActionPane?>
 <?import me.belakede.thesis.client.boundary.javafx.control.RotateConfigurationPane?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/sidebar.css"
-         prefWidth="250" minWidth="250" maxWidth="250" styleClass="sidebar">
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox"
+         fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.SideBarController"
+         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/sidebar.css" styleClass="sidebar">
     <AnchorPane>
-        <ImageView fx:id="imageView" AnchorPane.topAnchor="25" AnchorPane.leftAnchor="60" fitWidth="125" fitHeight="125"
-                   styleClass="logo">
-            <clip>
-                <Circle radius="62.5" centerX="62.5" centerY="65"/>
-            </clip>
-            <Image url="@../img/logo.png"/>
+        <ImageView fx:id="imageView" AnchorPane.topAnchor="25" AnchorPane.leftAnchor="60" styleClass="logo">
+            <Image url="@../img/logo-circle.png"/>
         </ImageView>
         <Separator AnchorPane.topAnchor="165" AnchorPane.leftAnchor="10" minWidth="230"/>
         <ActionPane fx:id="actionPane" AnchorPane.topAnchor="185" AnchorPane.leftAnchor="25" minWidth="200"
