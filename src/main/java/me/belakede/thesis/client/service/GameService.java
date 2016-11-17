@@ -2,7 +2,9 @@ package me.belakede.thesis.client.service;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Figurine;
 import me.belakede.thesis.game.equipment.Suspect;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ public class GameService {
 
     private final LongProperty gameId = new SimpleLongProperty();
     private final StringProperty roomId = new SimpleStringProperty();
+    private final ListProperty<Card> cards = new SimpleListProperty<>();
     private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
     private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
     private final MapProperty<String, Integer> playersOrder = new SimpleMapProperty<>();
@@ -44,6 +47,18 @@ public class GameService {
 
     public StringProperty roomIdProperty() {
         return roomId;
+    }
+
+    public ObservableList<Card> getCards() {
+        return cards.get();
+    }
+
+    public void setCards(ObservableList<Card> cards) {
+        this.cards.set(cards);
+    }
+
+    public ListProperty<Card> cardsProperty() {
+        return cards;
     }
 
     public Figurine getFigurine() {
