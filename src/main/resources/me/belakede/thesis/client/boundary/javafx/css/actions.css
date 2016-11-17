@@ -1,0 +1,10 @@
+
+.actions {
+    -fx-alignment: top-center;
+    -fx-spacing: 10;
+}
+
+.actions Button {
+    -fx-min-width: 180;
+    -fx-min-height: 40;
+}
