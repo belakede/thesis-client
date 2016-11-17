@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import me.belakede.thesis.client.boundary.javafx.service.DownloadNotesService;
 import me.belakede.thesis.client.service.GameFlowService;
 import me.belakede.thesis.client.service.GameService;
 import me.belakede.thesis.client.service.NotificationService;
@@ -38,6 +39,7 @@ public class LoungeController implements Initializable {
     private final GameService gameService;
     private final GameFlowService gameFlowService;
     private final NotificationService notificationService;
+    private final DownloadNotesService downloadNotesService;
 
     @FXML
     private VBox parent;
@@ -47,11 +49,12 @@ public class LoungeController implements Initializable {
     private HBox playerContainer;
 
     @Autowired
-    public LoungeController(UserService userService, GameService gameService, GameFlowService gameFlowService, NotificationService notificationService) {
+    public LoungeController(UserService userService, GameService gameService, GameFlowService gameFlowService, NotificationService notificationService, DownloadNotesService downloadNotesService) {
         this.userService = userService;
         this.gameService = gameService;
         this.gameFlowService = gameFlowService;
         this.notificationService = notificationService;
+        this.downloadNotesService = downloadNotesService;
     }
 
     public ObservableMap<String, VBox> getPlayerBoxes() {
@@ -73,6 +76,7 @@ public class LoungeController implements Initializable {
         if (isPartOfGame()) {
             hookupChangeListeners();
             openChannels();
+            downloadNotes();
         } else {
             displaySorryPane();
         }
@@ -118,6 +122,10 @@ public class LoungeController implements Initializable {
 
     private void openChannels() {
         gameFlowService.openChannels();
+    }
+
+    private void downloadNotes() {
+        downloadNotesService.start();
     }
 
     private VBox createVBoxForUser(String username, Suspect figurine) {
