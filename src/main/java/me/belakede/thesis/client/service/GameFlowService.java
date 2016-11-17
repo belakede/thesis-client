@@ -3,6 +3,7 @@ package me.belakede.thesis.client.service;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
+import me.belakede.thesis.client.boundary.javafx.task.JoinToGameTask;
 import me.belakede.thesis.client.boundary.javafx.task.MessageReceiverTask;
 import me.belakede.thesis.client.boundary.javafx.task.NoteRegistrationTask;
 import me.belakede.thesis.server.game.response.Notification;
@@ -14,11 +15,13 @@ public class GameFlowService {
 
     private final ListProperty<Notification> notifications = new SimpleListProperty<>();
 
+    private final JoinToGameTask joinToGameTask;
     private final MessageReceiverTask messageReceiverTask;
     private final NoteRegistrationTask noteRegistrationTask;
 
     @Autowired
-    public GameFlowService(MessageReceiverTask messageReceiverTask, NoteRegistrationTask noteRegistrationTask) {
+    public GameFlowService(JoinToGameTask joinToGameTask, MessageReceiverTask messageReceiverTask, NoteRegistrationTask noteRegistrationTask) {
+        this.joinToGameTask = joinToGameTask;
         this.messageReceiverTask = messageReceiverTask;
         this.noteRegistrationTask = noteRegistrationTask;
     }
@@ -36,6 +39,7 @@ public class GameFlowService {
     }
 
     public void openChannels() {
+        startDaemonThread(joinToGameTask);
         startDaemonThread(messageReceiverTask);
         startDaemonThread(noteRegistrationTask);
     }
