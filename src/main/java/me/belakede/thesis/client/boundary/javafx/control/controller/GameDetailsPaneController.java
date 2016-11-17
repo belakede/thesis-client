@@ -2,7 +2,6 @@ package me.belakede.thesis.client.boundary.javafx.control.controller;
 
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
@@ -60,8 +59,6 @@ public class GameDetailsPaneController implements Initializable {
     private Button remove;
     @FXML
     private Button start;
-    @FXML
-    private Button join;
 
     @Autowired
     public GameDetailsPaneController(UserService userService, StartGameService startGameService, RemoveGameService removeGameService) {
@@ -177,10 +174,6 @@ public class GameDetailsPaneController implements Initializable {
         start.visibleProperty().bind(start.disableProperty().not().or(removedProperty()));
         start.disableProperty().bind(statusProperty().isEqualTo(Status.IN_PROGRESS).or(removedProperty()));
         remove.disableProperty().bind(statusProperty().isEqualTo(Status.IN_PROGRESS).or(removedProperty()));
-        join.visibleProperty().bind(start.visibleProperty().not());
-        if (null != getPlayers()) {
-            join.disableProperty().bind(Bindings.createBooleanBinding(() -> playersProperty().getValue().values().contains(userService.getUsername()), playersProperty()).not());
-        }
     }
 
     private void hookupChangeListeners() {

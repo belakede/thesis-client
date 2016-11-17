@@ -48,13 +48,6 @@
                     <Glyph fontFamily="FontAwesome" icon="PLAY"/>
                 </graphic>
             </Button>
-            <Button visible="false" disable="true" prefWidth="75" fx:id="join" AnchorPane.topAnchor="10"
-                    AnchorPane.rightAnchor="10">
-                Join
-                <graphic>
-                    <Glyph fontFamily="FontAwesome" icon="SIGN_IN"/>
-                </graphic>
-            </Button>
         </AnchorPane>
     </bottom>
 </fx:root>
