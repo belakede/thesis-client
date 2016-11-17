@@ -12,10 +12,7 @@ import javafx.scene.layout.VBox;
 import me.belakede.thesis.client.boundary.javafx.control.ChatMessage;
 import me.belakede.thesis.client.boundary.javafx.model.UserMessage;
 import me.belakede.thesis.client.boundary.javafx.service.MessageSenderService;
-import me.belakede.thesis.client.boundary.javafx.task.MessageReceiverTask;
-import me.belakede.thesis.client.service.GameService;
 import me.belakede.thesis.client.service.MessageService;
-import me.belakede.thesis.client.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +26,6 @@ public class ChatBoxController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChatBoxController.class);
 
-    private final UserService userService;
-    private final GameService gameService;
     private final MessageService messageService;
     private final MessageSenderService messageSenderService;
 
@@ -44,9 +39,7 @@ public class ChatBoxController implements Initializable {
     private Button sendButton;
 
     @Autowired
-    public ChatBoxController(UserService userService, GameService gameService, MessageService messageService, MessageSenderService messageSenderService) {
-        this.userService = userService;
-        this.gameService = gameService;
+    public ChatBoxController(MessageService messageService, MessageSenderService messageSenderService) {
         this.messageService = messageService;
         this.messageSenderService = messageSenderService;
     }
@@ -55,7 +48,6 @@ public class ChatBoxController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setupActionEvents();
         hookupChangeListeners();
-        openCommunicationChannel();
         fixElementsWidth();
     }
 
@@ -64,6 +56,14 @@ public class ChatBoxController implements Initializable {
     }
 
     private void hookupChangeListeners() {
+        messageService.messagesProperty().addListener((ListChangeListener.Change<? extends UserMessage> change) -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    LOGGER.info("Arrived messages: {}", change.getAddedSubList());
+                    Platform.runLater(() -> change.getAddedSubList().forEach(this::appendChatMessage));
+                }
+            }
+        });
         textArea.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 sendMessage();
@@ -76,20 +76,6 @@ public class ChatBoxController implements Initializable {
             messageContainer.setPrefWidth(bounds.getWidth());
             messageContainer.setPrefHeight(bounds.getHeight());
         });
-    }
-
-    private void openCommunicationChannel() {
-        MessageReceiverTask messageReceiverTask = new MessageReceiverTask(userService, gameService, messageService);
-        messageService.messagesProperty().addListener((ListChangeListener.Change<? extends UserMessage> change) -> {
-            while (change.next()) {
-                if (change.wasAdded()) {
-                    Platform.runLater(() -> change.getAddedSubList().forEach(this::appendChatMessage));
-                }
-            }
-        });
-        Thread thread = new Thread(messageReceiverTask);
-        thread.setDaemon(true);
-        thread.start();
     }
 
     private void appendChatMessage(UserMessage m) {
