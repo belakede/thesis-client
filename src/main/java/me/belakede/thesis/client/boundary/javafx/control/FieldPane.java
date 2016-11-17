@@ -1,42 +1,16 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.fxml.FXML;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
-import me.belakede.thesis.game.field.Field;
+import me.belakede.thesis.client.boundary.javafx.control.controller.FieldPaneController;
+import me.belakede.thesis.client.service.SpringFxmlLoader;
 
 public class FieldPane extends StackPane {
 
-    private final SimpleObjectProperty<Field> field = new SimpleObjectProperty<>();
-    @FXML
-    private Pane content;
+    private static final SpringFxmlLoader SPRING_FXML_LOADER = new SpringFxmlLoader();
 
-    public FieldPane(Field field) {
-        load();
-        setField(field);
-        setStyleClasses();
-    }
-
-    public Field getField() {
-        return field.get();
-    }
-
-    public void setField(Field field) {
-        this.field.set(field);
-    }
-
-    public SimpleObjectProperty<Field> fieldProperty() {
-        return field;
-    }
-
-    private void load() {
-        ControlLoader.load(this);
-    }
-
-    private void setStyleClasses() {
-        content.getStyleClass().add(fieldProperty().getValue().getFieldType().name().toLowerCase());
+    public FieldPane(int row, int column) {
+        FieldPaneController controller = SPRING_FXML_LOADER.load(this);
+        controller.setField(row, column);
     }
 
 }
