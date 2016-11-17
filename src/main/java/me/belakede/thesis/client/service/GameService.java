@@ -84,7 +84,7 @@ public class GameService {
 
     private void hookupChangeListeners() {
         playersProperty().addListener((observable, oldValue, newValue) -> {
-            int columnIndex = 0;
+            int columnIndex = 1;
             setPlayersOrder(FXCollections.observableHashMap());
             for (Map.Entry<Suspect, String> entry : newValue.entrySet()) {
                 getPlayersOrder().put(entry.getValue(), columnIndex);
