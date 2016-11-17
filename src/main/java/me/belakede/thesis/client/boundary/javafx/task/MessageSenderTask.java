@@ -1,5 +1,7 @@
 package me.belakede.thesis.client.boundary.javafx.task;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.concurrent.Task;
 import me.belakede.thesis.client.service.GameService;
 import me.belakede.thesis.client.service.UserService;
@@ -16,15 +18,15 @@ import javax.ws.rs.core.Response;
 public class MessageSenderTask extends Task<Void> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageSenderTask.class);
+    private final StringProperty message = new SimpleStringProperty();
 
     private final UserService userService;
     private final GameService gameService;
-    private final String message;
 
-    public MessageSenderTask(UserService userService, GameService gameService, String message) {
+    public MessageSenderTask(UserService userService, GameService gameService, StringProperty message) {
         this.userService = userService;
         this.gameService = gameService;
-        this.message = message;
+        this.message.bind(message);
     }
 
     @Override
@@ -34,7 +36,7 @@ public class MessageSenderTask extends Task<Void> {
         LOGGER.debug("WebTarget: {}", webTarget);
         Response response = webTarget.request()
                 .header("Authorization", "Bearer " + userService.getAccessToken())
-                .post(Entity.json(new ChatRequest(gameService.getRoomId(), message)));
+                .post(Entity.json(new ChatRequest(gameService.getRoomId(), message.getValue())));
         if (response.getStatus() == 200) {
             LOGGER.info("User was successfully created!");
         } else {

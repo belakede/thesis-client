@@ -36,6 +36,6 @@ public class MessageSenderService extends javafx.concurrent.Service<Void> {
 
     @Override
     protected Task<Void> createTask() {
-        return new MessageSenderTask(userService, gameService, getMessage());
+        return new MessageSenderTask(userService, gameService, messageContent);
     }
 }
