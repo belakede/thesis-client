@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import me.belakede.thesis.client.boundary.javafx.control.ChatPane;
 import me.belakede.thesis.client.boundary.javafx.control.GamePane;
 import me.belakede.thesis.client.boundary.javafx.control.HistoryPane;
@@ -27,6 +29,8 @@ public class GameController implements Initializable {
     private final NotificationService notificationService;
 
     @FXML
+    private AnchorPane parent;
+    @FXML
     private GamePane gamePane;
     @FXML
     private NotePane notePane;
@@ -34,6 +38,8 @@ public class GameController implements Initializable {
     private HistoryPane historyPane;
     @FXML
     private ChatPane chatPane;
+    @FXML
+    private StackPane sorryPane;
 
     @Autowired
     public GameController(NotificationService notificationService) {
@@ -41,6 +47,7 @@ public class GameController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+        hookupChangeListeners();
         try {
             Game game = GameBuilder.create().boardType(BoardType.DEFAULT).mystery().players(4).positions().build();
             ObservableList<Card> cards = FXCollections.observableList(Arrays.asList(Weapon.CANDLESTICK, Room.DINING_ROOM, Weapon.LEAD_PIPE, Suspect.PEACOCK, Room.BILLIARD_ROOM));
@@ -51,6 +58,16 @@ public class GameController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void hookupChangeListeners() {
+        notificationService.gamePausedNotificationProperty().addListener((observable, oldValue, newValue) -> {
+            gamePane.setDisable(true);
+            notePane.setDisable(true);
+            gamePane.setVisible(false);
+            notePane.setVisible(false);
+            sorryPane.setVisible(true);
+        });
     }
 
 }
