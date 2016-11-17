@@ -18,7 +18,11 @@
                 <Text text="Welcome" styleClass="welcome-text" GridPane.columnIndex="0" GridPane.rowIndex="0"
                       GridPane.columnSpan="2"/>
                 <Label text="Server address: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                <TextField fx:id="serverAddress" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <ChoiceBox fx:id="protocol"/>
+                    <TextField fx:id="serverAddress" prefWidth="120"/>
+                    <TextField fx:id="port" prefWidth="45"/>
+                </HBox>
                 <Label text="User Name:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
                 <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                 <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
