@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import me.belakede.thesis.server.game.response.GameStatusNotification;
 import me.belakede.thesis.server.game.response.Notification;
 import me.belakede.thesis.server.game.response.PlayerJoinedNotification;
 import me.belakede.thesis.server.game.response.PlayerStatusNotification;
@@ -18,6 +19,7 @@ public class NotificationService {
     private final ListProperty<Notification> notifications = new SimpleListProperty<>();
     private final ListProperty<PlayerJoinedNotification> playerJoinedNotifications = new SimpleListProperty<>();
     private final ObjectProperty<PlayerStatusNotification> playerStatusNotification = new SimpleObjectProperty<>();
+    private final ObjectProperty<GameStatusNotification> gameStatusNotification = new SimpleObjectProperty<>();
 
     public NotificationService() {
         setNotifications(FXCollections.observableArrayList());
@@ -61,6 +63,18 @@ public class NotificationService {
         return playerStatusNotification;
     }
 
+    public GameStatusNotification getGameStatusNotification() {
+        return gameStatusNotification.get();
+    }
+
+    public void setGameStatusNotification(GameStatusNotification gameStatusNotification) {
+        this.gameStatusNotification.set(gameStatusNotification);
+    }
+
+    public ObjectProperty<GameStatusNotification> gameStatusNotificationProperty() {
+        return gameStatusNotification;
+    }
+
     public void add(Notification notification) {
         notifications.add(notification);
     }
@@ -74,6 +88,8 @@ public class NotificationService {
                             playerJoinedNotifications.add((PlayerJoinedNotification) notification);
                         } else if (notification instanceof PlayerStatusNotification) {
                             playerStatusNotification.set((PlayerStatusNotification) notification);
+                        } else if (notification instanceof GameStatusNotification) {
+                            gameStatusNotification.set((GameStatusNotification) notification);
                         }
                     });
                 }
