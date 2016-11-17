@@ -34,7 +34,9 @@ public class JoinToGameTask extends Task<Void> {
 
     @Override
     protected Void call() throws Exception {
-        Client client = ClientBuilder.newBuilder().register(JacksonContextResolver.class, SseFeature.class).build();
+        Client client = ClientBuilder.newClient();
+        client.register(JacksonContextResolver.class);
+        client.register(SseFeature.class);
         WebTarget webTarget = client.target(userService.getUrl("/game/join"));
         LOGGER.debug("WebTarget: {}", webTarget);
         EventInput eventInput = webTarget.request().accept(MediaType.APPLICATION_JSON_TYPE)
