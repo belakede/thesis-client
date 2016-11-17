@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.HBox?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.HBox" stylesheets="@../css/card.css"
-         spacing="15" styleClass="card-container">
-    <padding>
-        <Insets top="15" right="15" bottom="15" left="15"/>
-    </padding>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.HBox" fx:id="parent"
+         fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.CardPaneController"
+         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/card.css" styleClass="card-container">
 </fx:root>
