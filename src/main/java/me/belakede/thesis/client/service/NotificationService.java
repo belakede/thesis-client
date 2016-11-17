@@ -1,12 +1,15 @@
 package me.belakede.thesis.client.service;
 
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import me.belakede.thesis.server.game.response.Notification;
 import me.belakede.thesis.server.game.response.PlayerJoinedNotification;
+import me.belakede.thesis.server.game.response.PlayerStatusNotification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +17,7 @@ public class NotificationService {
 
     private final ListProperty<Notification> notifications = new SimpleListProperty<>();
     private final ListProperty<PlayerJoinedNotification> playerJoinedNotifications = new SimpleListProperty<>();
+    private final ObjectProperty<PlayerStatusNotification> playerStatusNotification = new SimpleObjectProperty<>();
 
     public NotificationService() {
         setNotifications(FXCollections.observableArrayList());
@@ -45,6 +49,18 @@ public class NotificationService {
         return playerJoinedNotifications;
     }
 
+    public PlayerStatusNotification getPlayerStatusNotification() {
+        return playerStatusNotification.get();
+    }
+
+    public void setPlayerStatusNotification(PlayerStatusNotification playerStatusNotification) {
+        this.playerStatusNotification.set(playerStatusNotification);
+    }
+
+    public ObjectProperty<PlayerStatusNotification> playerStatusNotificationProperty() {
+        return playerStatusNotification;
+    }
+
     public void add(Notification notification) {
         notifications.add(notification);
     }
@@ -56,6 +72,8 @@ public class NotificationService {
                     change.getAddedSubList().forEach(notification -> {
                         if (notification instanceof PlayerJoinedNotification) {
                             playerJoinedNotifications.add((PlayerJoinedNotification) notification);
+                        } else if (notification instanceof PlayerStatusNotification) {
+                            playerStatusNotification.set((PlayerStatusNotification) notification);
                         }
                     });
                 }
