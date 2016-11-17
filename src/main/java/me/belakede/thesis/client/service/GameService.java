@@ -7,6 +7,7 @@ import javafx.collections.ObservableMap;
 import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Figurine;
 import me.belakede.thesis.game.equipment.Suspect;
+import me.belakede.thesis.game.field.Field;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -19,6 +20,7 @@ public class GameService {
     private final ListProperty<Card> cards = new SimpleListProperty<>();
     private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
     private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
+    private final MapProperty<Figurine, Field> figurines = new SimpleMapProperty<>();
     private final MapProperty<String, Integer> playersOrder = new SimpleMapProperty<>();
 
     public GameService() {
@@ -83,6 +85,18 @@ public class GameService {
 
     public MapProperty<Suspect, String> playersProperty() {
         return players;
+    }
+
+    public ObservableMap<Figurine, Field> getFigurines() {
+        return figurines.get();
+    }
+
+    public void setFigurines(ObservableMap<Figurine, Field> figurines) {
+        this.figurines.set(figurines);
+    }
+
+    public MapProperty<Figurine, Field> figurinesProperty() {
+        return figurines;
     }
 
     public ObservableMap<String, Integer> getPlayersOrder() {
