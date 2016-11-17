@@ -7,7 +7,10 @@ import me.belakede.thesis.client.boundary.javafx.model.Note;
 import me.belakede.thesis.client.service.GameService;
 import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.internal.game.util.Cards;
+import me.belakede.thesis.server.note.response.NoteResponse;
 import me.belakede.thesis.server.note.response.NotesResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -15,6 +18,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 
 public class NoteDownloaderTask extends Task<ObservableList<Note>> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(NoteDownloaderTask.class);
 
     private final UserService userService;
     private final GameService gameService;
@@ -35,10 +40,16 @@ public class NoteDownloaderTask extends Task<ObservableList<Note>> {
                 .get(NotesResponse.class);
 
         response.getNotes().stream()
-                .map(nr -> new Note(Cards.valueOf(nr.getCard()).get(), nr.getOwner(), nr.getMarker()))
+                .map(this::createNote)
                 .forEach(notes::add);
 
         return notes;
+    }
+
+    private Note createNote(NoteResponse nr) {
+        Note note = new Note(Cards.valueOf(nr.getCard()).get(), nr.getOwner(), nr.getMarker());
+        LOGGER.debug("Note downloaded: {}", note);
+        return note;
     }
 
 }
