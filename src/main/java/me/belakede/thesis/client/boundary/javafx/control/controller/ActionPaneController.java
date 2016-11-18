@@ -5,7 +5,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import me.belakede.thesis.client.boundary.javafx.control.CardPane;
 import me.belakede.thesis.client.boundary.javafx.control.SuggestionPane;
+import me.belakede.thesis.client.service.NotificationService;
+import me.belakede.thesis.client.service.UserService;
 import org.controlsfx.control.PopOver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
@@ -13,6 +16,9 @@ import java.util.ResourceBundle;
 
 @Controller
 public class ActionPaneController implements Initializable {
+
+    private final UserService userService;
+    private final NotificationService notificationService;
 
     @FXML
     private Button roll;
@@ -27,6 +33,12 @@ public class ActionPaneController implements Initializable {
     private PopOver suspectPopOver;
     private PopOver accusePopOver;
 
+    @Autowired
+    public ActionPaneController(UserService userService, NotificationService notificationService) {
+        this.userService = userService;
+        this.notificationService = notificationService;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupCardPane();
@@ -34,6 +46,13 @@ public class ActionPaneController implements Initializable {
         setupSuspectPopOver();
         setupAccusePopOver();
         setupActionEvents();
+        hookupChangeListeners();
+    }
+
+    private void hookupChangeListeners() {
+        notificationService.currentPlayerNotificationProperty().addListener((observable, oldValue, newValue) -> {
+            toggleButtons(userService.getUsername().equals(newValue.getCurrent()));
+        });
     }
 
 
@@ -67,5 +86,12 @@ public class ActionPaneController implements Initializable {
         popOver.setArrowLocation(PopOver.ArrowLocation.LEFT_CENTER);
         popOver.setDetachable(false);
         popOver.setDetached(false);
+    }
+
+    private void toggleButtons(boolean value) {
+        roll.setDisable(value);
+        suspect.setDisable(value);
+        cardPane.setDisable(value);
+        accuse.setDisable(value);
     }
 }
