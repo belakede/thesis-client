@@ -4,6 +4,7 @@ import javafx.concurrent.Task;
 import me.belakede.thesis.client.service.NotificationService;
 import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.jackson.JacksonContextResolver;
+import me.belakede.thesis.server.game.response.HeartBeatNotification;
 import me.belakede.thesis.server.game.response.Notification;
 import org.glassfish.jersey.media.sse.EventInput;
 import org.glassfish.jersey.media.sse.InboundEvent;
@@ -50,7 +51,11 @@ public class JoinToGameTask extends Task<Void> {
             }
             LOGGER.info("Notification arrived: {}", inboundEvent.toString());
             Notification notification = inboundEvent.readData(Notification.class, MediaType.APPLICATION_JSON_TYPE);
-            notificationService.add(notification);
+            if (notification instanceof HeartBeatNotification) {
+                LOGGER.trace("Heartbeat");
+            } else {
+                notificationService.add(notification);
+            }
         }
         LOGGER.info("Channel closed!");
         return null;
