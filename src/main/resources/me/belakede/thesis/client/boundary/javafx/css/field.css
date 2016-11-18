@@ -1,5 +1,6 @@
 
 .field-container .field {
+    -fx-alignment: center;
     -fx-border-color: #000000;
     -fx-border-style: solid;
     -fx-border-width: 0.25;
