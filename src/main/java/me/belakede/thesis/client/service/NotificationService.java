@@ -145,6 +145,5 @@ public class NotificationService {
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             LOGGER.warn("Specified method not found. Please check you have set method with {} parameter", notification.getClass());
         }
-        LOGGER.info("Unknown notification: {}", notification);
     }
 }
