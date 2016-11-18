@@ -49,11 +49,11 @@ public class JoinToGameTask extends Task<Void> {
                 LOGGER.warn("Connection lost! InboundEvent is null!");
                 break;
             }
-            LOGGER.info("Notification arrived: {}", inboundEvent.toString());
             Notification notification = inboundEvent.readData(Notification.class, MediaType.APPLICATION_JSON_TYPE);
             if (notification instanceof HeartBeatNotification) {
                 LOGGER.trace("Heartbeat");
             } else {
+                LOGGER.info("Notification arrived: {}", notification);
                 notificationService.add(notification);
             }
         }
