@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
@@ -58,10 +57,8 @@ public class BoardPaneController implements Initializable {
     private void setFields() {
         int size = gameService.getBoardType().getSize();
         IntStream.range(0, size)
-                .mapToObj(i -> IntStream.range(0, size)
-                        .mapToObj(j -> new FieldPane(i, j))
-                        .collect(Collectors.toList()))
-                .forEach(fieldPanes -> parent.getChildren().addAll(fieldPanes));
+                .forEach(i -> IntStream.range(0, size)
+                        .forEach(j -> parent.getChildren().add(new FieldPane(i, j))));
     }
 
     private void setDimension() {
