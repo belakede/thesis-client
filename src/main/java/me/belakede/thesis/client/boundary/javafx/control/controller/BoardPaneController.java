@@ -7,8 +7,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.TilePane;
 import me.belakede.thesis.client.boundary.javafx.control.FieldPane;
 import me.belakede.thesis.client.service.GameService;
-import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.game.equipment.BoardType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -20,17 +21,16 @@ import java.util.stream.IntStream;
 @Controller
 public class BoardPaneController implements Initializable {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(BoardPaneController.class);
     private final ObjectProperty<BoardType> boardType = new SimpleObjectProperty<>();
 
-    private final UserService userService;
     private final GameService gameService;
 
     @FXML
     private TilePane parent;
 
     @Autowired
-    public BoardPaneController(UserService userService, GameService gameService) {
-        this.userService = userService;
+    public BoardPaneController(GameService gameService) {
         this.gameService = gameService;
     }
 
@@ -42,6 +42,7 @@ public class BoardPaneController implements Initializable {
 
     private void hookupChangeListeners() {
         boardType.addListener((observable, oldValue, newValue) -> {
+            LOGGER.info("Board type has been changed from {} to {}", oldValue, newValue);
             if (null != newValue) {
                 setFields();
                 setDimension();
