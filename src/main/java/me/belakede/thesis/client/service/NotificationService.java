@@ -8,11 +8,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import me.belakede.thesis.server.game.response.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 @Service
 public class NotificationService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(NotificationService.class);
     private final ListProperty<Notification> notifications = new SimpleListProperty<>();
     private final ListProperty<PlayerJoinedNotification> playerJoinedNotifications = new SimpleListProperty<>();
     private final ObjectProperty<PlayerStatusNotification> playerStatusNotification = new SimpleObjectProperty<>();
@@ -106,20 +112,39 @@ public class NotificationService {
         notifications.addListener((ListChangeListener.Change<? extends Notification> change) -> {
             while (change.next()) {
                 if (change.wasAdded()) {
-                    change.getAddedSubList().forEach(notification -> {
-                        if (notification instanceof PlayerJoinedNotification) {
-                            playerJoinedNotifications.add((PlayerJoinedNotification) notification);
-                        } else if (notification instanceof PlayerStatusNotification) {
-                            playerStatusNotification.set((PlayerStatusNotification) notification);
-                        } else if (notification instanceof GameStatusNotification) {
-                            gameStatusNotification.set((GameStatusNotification) notification);
-                        } else if (notification instanceof GamePausedNotification) {
-                            gamePausedNotification.set((GamePausedNotification) notification);
-                        }
-                    });
+                    change.getAddedSubList().forEach(this::set);
                 }
             }
         });
     }
 
+    private void set(PlayerJoinedNotification notification) {
+        playerJoinedNotifications.add(notification);
+    }
+
+    private void set(PlayerStatusNotification notification) {
+        playerStatusNotification.set(notification);
+    }
+
+    private void set(GameStatusNotification notification) {
+        gameStatusNotification.set(notification);
+    }
+
+    private void set(GamePausedNotification notification) {
+        gamePausedNotification.set(notification);
+    }
+
+    private void set(CurrentPlayerNotification notification) {
+        currentPlayerNotification.set(notification);
+    }
+
+    private void set(Notification notification) {
+        try {
+            Method setMethod = getClass().getDeclaredMethod("set", notification.getClass());
+            setMethod.invoke(this, notification);
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            LOGGER.warn("Specified method not found. Please check you have set method with {} parameter", notification.getClass());
+        }
+        LOGGER.info("Unknown notification: {}", notification);
+    }
 }
