@@ -1,6 +1,8 @@
 package me.belakede.thesis.client.boundary.javafx.task;
 
 import javafx.concurrent.Task;
+import me.belakede.thesis.client.boundary.javafx.model.Note;
+import me.belakede.thesis.client.service.NoteService;
 import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Marker;
@@ -20,33 +22,43 @@ public class NoteWriterTask extends Task<Void> {
     private static final Logger LOGGER = LoggerFactory.getLogger(NoteWriterTask.class);
 
     private final UserService userService;
+    private final NoteService noteService;
+    private final Note note;
     private final Card card;
     private final String owner;
     private final String roomId;
     private final Marker marker;
 
-    public NoteWriterTask(UserService userService, String roomId, Card card, String owner, Marker marker) {
+    public NoteWriterTask(UserService userService, NoteService noteService, String roomId, Card card, String owner, Marker marker) {
         this.card = card;
         this.owner = owner;
         this.marker = marker;
         this.roomId = roomId;
         this.userService = userService;
+        this.noteService = noteService;
+        this.note = new Note(card, owner, marker);
     }
 
     @Override
     protected Void call() throws Exception {
-        Client client = ClientBuilder.newClient();
-        WebTarget webTarget = client.target(userService.getUrl("/notes"));
-        Response response = webTarget.request().accept(MediaType.APPLICATION_JSON_TYPE)
-                .header("Authorization", "Bearer " + userService.getAccessToken())
-                .post(Entity.json(new NoteRequest(roomId, card, owner, marker)));
-        if (response.getStatus() != 200) {
-            LOGGER.warn("HTTP error code : {}", response.getStatus());
-            LOGGER.warn("{}", response.toString());
-            throw new RuntimeException("Note registration failed!");
-        } else {
-            LOGGER.info("Note was successfully stored!");
+        if (!needToWrite()) {
+            Client client = ClientBuilder.newClient();
+            WebTarget webTarget = client.target(userService.getUrl("/notes"));
+            Response response = webTarget.request().accept(MediaType.APPLICATION_JSON_TYPE)
+                    .header("Authorization", "Bearer " + userService.getAccessToken())
+                    .post(Entity.json(new NoteRequest(roomId, card, owner, marker)));
+            if (response.getStatus() != 200) {
+                LOGGER.warn("HTTP error code : {}", response.getStatus());
+                LOGGER.warn("{}", response.toString());
+                throw new RuntimeException("Note registration failed!");
+            } else {
+                LOGGER.info("Note was successfully stored!");
+            }
         }
         return null;
+    }
+
+    private boolean needToWrite() {
+        return !noteService.notesProperty().contains(note);
     }
 }

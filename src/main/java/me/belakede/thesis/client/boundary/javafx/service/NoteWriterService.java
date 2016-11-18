@@ -7,6 +7,7 @@ import javafx.beans.property.StringProperty;
 import javafx.concurrent.Task;
 import me.belakede.thesis.client.boundary.javafx.task.NoteWriterTask;
 import me.belakede.thesis.client.service.GameService;
+import me.belakede.thesis.client.service.NoteService;
 import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Marker;
@@ -29,11 +30,13 @@ public class NoteWriterService extends javafx.concurrent.Service<Void> {
     private final ObjectProperty<Object> icon = new SimpleObjectProperty<>();
 
     private final UserService userService;
+    private final NoteService noteService;
     private final GameService gameService;
 
     @Autowired
-    public NoteWriterService(UserService userService, GameService gameService) {
+    public NoteWriterService(UserService userService, NoteService noteService, GameService gameService) {
         this.userService = userService;
+        this.noteService = noteService;
         this.gameService = gameService;
         setupService();
         hookupChaneListeners();
@@ -89,7 +92,7 @@ public class NoteWriterService extends javafx.concurrent.Service<Void> {
 
     @Override
     protected Task<Void> createTask() {
-        return new NoteWriterTask(userService, gameService.getRoomId(), getCard(), getOwner(), getMarker());
+        return new NoteWriterTask(userService, noteService, gameService.getRoomId(), getCard(), getOwner(), getMarker());
     }
 
     private void setupService() {

@@ -54,4 +54,25 @@ public class Note {
     public SimpleObjectProperty<Marker> markerProperty() {
         return marker;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Note note = (Note) o;
+
+        if (!card.equals(note.card)) return false;
+        if (!owner.equals(note.owner)) return false;
+        return marker.equals(note.marker);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = card.hashCode();
+        result = 31 * result + owner.hashCode();
+        result = 31 * result + marker.hashCode();
+        return result;
+    }
 }
