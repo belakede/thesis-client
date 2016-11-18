@@ -1,10 +1,6 @@
 @import "colors.css";
 
-.figurine-container {
-    -fx-alignment: center;
-}
-
-.figurine-container .figurine {
+.figurine {
     -fx-alignment: center;
     -fx-border-radius: 11;
     -fx-background-radius: 11;
@@ -15,7 +11,7 @@
     -fx-max-height: 22;
     -fx-max-width: 22;
 }
-.figurine-container .figurine VBox {
+.figurine VBox {
     -fx-alignment: center;
     -fx-border-color: #ffffff;
     -fx-border-radius: 5;
@@ -30,45 +26,45 @@
     -fx-max-width: 10;
 }
 
-.figurine-container .figurine.mustard {
+.figurine.mustard {
     -fx-background-color: derive(-fx-mustard, 20%);
 }
-.figurine-container .figurine.mustard VBox {
+.figurine.mustard VBox {
     -fx-border-color: derive(-fx-mustard, -80%);
     -fx-background-color: derive(-fx-mustard, -30%);
 }
-.figurine-container .figurine.green {
+.figurine.green {
     -fx-background-color: derive(-fx-green, 20%);
 }
-.figurine-container .figurine.green VBox {
+.figurine.green VBox {
     -fx-border-color: derive(-fx-green, -80%);
     -fx-background-color: derive(-fx-green, -30%);
 }
-.figurine-container .figurine.white {
+.figurine.white {
     -fx-background-color: derive(-fx-white, 20%);
 }
-.figurine-container .figurine.white VBox {
+.figurine.white VBox {
     -fx-border-color: derive(-fx-white, -80%);
     -fx-background-color: derive(-fx-white, -30%);
 }
-.figurine-container .figurine.peacock {
+.figurine.peacock {
     -fx-background-color: derive(-fx-peacock, 20%);
 }
-.figurine-container .figurine.peacock VBox {
+.figurine.peacock VBox {
     -fx-border-color: derive(-fx-peacock, -80%);
     -fx-background-color: derive(-fx-peacock, -30%);
 }
-.figurine-container .figurine.plum {
+.figurine.plum {
     -fx-background-color: derive(-fx-plum, 20%);
 }
-.figurine-container .figurine.plum VBox {
+.figurine.plum VBox {
     -fx-border-color: derive(-fx-plum, -80%);
     -fx-background-color: derive(-fx-plum, -30%);
 }
-.figurine-container .figurine.scarlet {
+.figurine.scarlet {
     -fx-background-color: derive(-fx-scarlet, 20%);
 }
-.figurine-container .figurine.scarlet VBox {
+.figurine.scarlet VBox {
     -fx-border-color: derive(-fx-scarlet, -80%);
     -fx-background-color: derive(-fx-scarlet, -30%);
 }
