@@ -1,21 +1,17 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
-import javafx.fxml.FXML;
-import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Circle;
-import me.belakede.thesis.client.boundary.javafx.util.ControlLoader;
+import javafx.scene.layout.VBox;
+import me.belakede.thesis.client.boundary.javafx.control.controller.FigurinePaneController;
+import me.belakede.thesis.client.service.SpringFxmlLoader;
+import me.belakede.thesis.game.equipment.Figurine;
 
-public class FigurinePane extends StackPane {
+public class FigurinePane extends VBox {
 
-    @FXML
-    private Circle content;
+    private static final SpringFxmlLoader SPRING_FXML_LOADER = new SpringFxmlLoader();
 
-    public FigurinePane() {
-        load();
-    }
-
-    private void load() {
-        ControlLoader.load(this);
+    public FigurinePane(Figurine figurine) {
+        FigurinePaneController controller = SPRING_FXML_LOADER.load(this);
+        controller.setFigurine(figurine);
     }
 
 }
