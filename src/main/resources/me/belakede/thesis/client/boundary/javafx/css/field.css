@@ -3,6 +3,12 @@
     -fx-border-color: #000000;
     -fx-border-style: solid;
     -fx-border-width: 0.25;
+    -fx-min-width: 25;
+    -fx-pref-width: 25;
+    -fx-max-width: 25;
+    -fx-min-height: 25;
+    -fx-pref-height: 25;
+    -fx-max-height: 25;
 }
 
 .field-container .field.wall,
