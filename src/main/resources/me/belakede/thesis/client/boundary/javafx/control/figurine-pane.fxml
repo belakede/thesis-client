@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" fx:id="parent"
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane" fx:id="parent"
          fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.FigurinePaneController"
          stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/figurine.css" styleClass="figurine">
     <VBox/>

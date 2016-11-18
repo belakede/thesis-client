@@ -1,11 +1,11 @@
 package me.belakede.thesis.client.boundary.javafx.control;
 
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 import me.belakede.thesis.client.boundary.javafx.control.controller.FigurinePaneController;
 import me.belakede.thesis.client.service.SpringFxmlLoader;
 import me.belakede.thesis.game.equipment.Figurine;
 
-public class FigurinePane extends VBox {
+public class FigurinePane extends StackPane {
 
     private static final SpringFxmlLoader SPRING_FXML_LOADER = new SpringFxmlLoader();
 

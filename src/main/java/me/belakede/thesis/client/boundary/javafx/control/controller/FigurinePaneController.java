@@ -4,7 +4,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 import me.belakede.thesis.game.equipment.Figurine;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ public class FigurinePaneController implements Initializable {
     private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
 
     @FXML
-    private VBox parent;
+    private StackPane parent;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
