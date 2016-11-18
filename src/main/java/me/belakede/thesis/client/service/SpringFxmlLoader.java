@@ -20,7 +20,7 @@ public class SpringFxmlLoader {
 
     public Object load(URL url) {
         try (InputStream fxmlStream = url.openStream()) {
-            LOGGER.info("Loading: {}", fxmlStream);
+            LOGGER.trace("Loading: {}", fxmlStream);
             FXMLLoader loader = new FXMLLoader();
             loader.setControllerFactory(APPLICATION_CONTEXT::getBean);
             return loader.load(fxmlStream);
@@ -35,7 +35,7 @@ public class SpringFxmlLoader {
         if (pane) {
             String filename = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, instance.getClass().getSimpleName()).concat(".fxml");
             String fxmlFile = "/".concat(instance.getClass().getPackage().getName().replace(".", "/")).concat("/" + filename);
-            LOGGER.info("Try to loading {}", fxmlFile);
+            LOGGER.trace("Try to loading {}", fxmlFile);
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
                 loader.setRoot(instance);
