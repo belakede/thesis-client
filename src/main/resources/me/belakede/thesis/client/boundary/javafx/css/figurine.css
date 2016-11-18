@@ -13,10 +13,8 @@
 }
 .figurine VBox {
     -fx-alignment: center;
-    -fx-border-color: #ffffff;
     -fx-border-radius: 5;
     -fx-border-width: 1;
-    -fx-background-color: #000000;
     -fx-background-radius: 5;
     -fx-min-height: 10;
     -fx-min-width: 10;
@@ -68,4 +66,51 @@
     -fx-border-color: derive(-fx-scarlet, -80%);
     -fx-background-color: derive(-fx-scarlet, -30%);
 }
-
+.figurine.candlestick,
+.figurine.knife,
+.figurine.lead-pipe,
+.figurine.revolver,
+.figurine.rope,
+.figurine.wrench {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-min-height: 25;
+    -fx-min-width: 25;
+    -fx-pref-height: 25;
+    -fx-pref-width: 25;
+    -fx-max-height: 25;
+    -fx-max-width: 25;
+}
+.figurine.candlestick VBox,
+.figurine.knife VBox,
+.figurine.lead-pipe VBox,
+.figurine.revolver VBox,
+.figurine.rope VBox,
+.figurine.wrench VBox {
+    -fx-min-height: 25;
+    -fx-min-width: 75;
+    -fx-pref-height: 25;
+    -fx-pref-width: 75;
+    -fx-max-height: 25;
+    -fx-max-width: 75;
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+}
+.figurine.candlestick VBox {
+    -fx-background-image: url("../img/candlestick.png");
+}
+.figurine.knife VBox {
+    -fx-background-image: url("../img/knife.png");
+}
+.figurine.lead-pipe VBox {
+    -fx-background-image: url("../img/lead-pipe.png");
+}
+.figurine.revolver VBox {
+    -fx-background-image: url("../img/revolver.png");
+}
+.figurine.rope VBox {
+    -fx-background-image: url("../img/rope.png");
+}
+.figurine.wrench VBox {
+    -fx-background-image: url("../img/wrench.png");
+}
