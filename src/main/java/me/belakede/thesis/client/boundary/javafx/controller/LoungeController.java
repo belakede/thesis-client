@@ -123,11 +123,11 @@ public class LoungeController implements Initializable {
         });
         notificationService.gameStatusNotificationProperty().addListener((observable, oldValue, newValue) -> {
             gameService.boardProperty().addListener((observable1, oldValue1, newValue1) -> {
-                ObservableMap<Figurine, Field> positions = FXCollections.observableHashMap();
+                ObservableMap<Field, Figurine> positions = FXCollections.observableHashMap();
                 newValue.getBoardStatus().getPositions().forEach(fn -> {
                     Figurine figurine = fn.getFigurine();
                     Field field = newValue1.getField(fn.getPosition().getRow(), fn.getPosition().getColumn());
-                    positions.put(figurine, field);
+                    positions.put(field, figurine);
                 });
                 gameService.setPositions(positions);
             });
