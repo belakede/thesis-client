@@ -15,6 +15,8 @@ import java.util.ResourceBundle;
 public class ActionPaneController implements Initializable {
 
     @FXML
+    private Button roll;
+    @FXML
     private Button suspect;
     @FXML
     private Button show;
