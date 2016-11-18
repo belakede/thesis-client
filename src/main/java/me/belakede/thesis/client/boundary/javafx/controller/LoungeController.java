@@ -112,6 +112,7 @@ public class LoungeController implements Initializable {
         notificationService.playerStatusNotificationProperty().addListener((observable, oldValue, newValue) -> {
             newValue.getAlreadyWaiting().forEach(player -> getPlayerBoxes().get(player).getStyleClass().add("online"));
             gameService.setCards(FXCollections.observableArrayList(newValue.getCardSet()));
+            gameService.setFigurine(newValue.getFigurine());
         });
         notificationService.playerJoinedNotificationsProperty().addListener((ListChangeListener.Change<? extends PlayerJoinedNotification> change) -> {
             while (change.next()) {
