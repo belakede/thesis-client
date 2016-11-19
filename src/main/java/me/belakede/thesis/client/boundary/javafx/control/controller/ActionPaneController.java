@@ -54,6 +54,9 @@ public class ActionPaneController implements Initializable {
         notificationService.currentPlayerNotificationProperty().addListener((observable, oldValue, newValue) -> {
             toggleButtons(userService.getUsername().equals(newValue.getCurrent()));
         });
+        notificationService.showYourCardNotificationProperty().addListener((observable, oldValue, newValue) -> {
+            show.setDisable(false);
+        });
     }
 
     private void setupCardPane() {
