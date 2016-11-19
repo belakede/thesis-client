@@ -25,6 +25,7 @@ public class NotificationService {
     private final ObjectProperty<GameStatusNotification> gameStatusNotification = new SimpleObjectProperty<>();
     private final ObjectProperty<GamePausedNotification> gamePausedNotification = new SimpleObjectProperty<>();
     private final ObjectProperty<CurrentPlayerNotification> currentPlayerNotification = new SimpleObjectProperty<>();
+    private final ObjectProperty<ShowYourCardNotification> showYourCardNotification = new SimpleObjectProperty<>();
 
     public NotificationService() {
         setNotifications(FXCollections.observableArrayList());
@@ -104,6 +105,18 @@ public class NotificationService {
         return currentPlayerNotification;
     }
 
+    public ShowYourCardNotification getShowYourCardNotification() {
+        return showYourCardNotification.get();
+    }
+
+    public void setShowYourCardNotification(ShowYourCardNotification showYourCardNotification) {
+        this.showYourCardNotification.set(showYourCardNotification);
+    }
+
+    public ObjectProperty<ShowYourCardNotification> showYourCardNotificationProperty() {
+        return showYourCardNotification;
+    }
+
     public void add(Notification notification) {
         notifications.add(notification);
     }
@@ -136,6 +149,10 @@ public class NotificationService {
 
     private void set(CurrentPlayerNotification notification) {
         currentPlayerNotification.set(notification);
+    }
+
+    private void set(ShowYourCardNotification notification) {
+        showYourCardNotification.set(notification);
     }
 
     private void set(Notification notification) {
