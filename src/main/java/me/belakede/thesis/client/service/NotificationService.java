@@ -136,23 +136,23 @@ public class NotificationService {
     }
 
     private void set(PlayerStatusNotification notification) {
-        playerStatusNotification.set(notification);
+        setPlayerStatusNotification(notification);
     }
 
     private void set(GameStatusNotification notification) {
-        gameStatusNotification.set(notification);
+        setGameStatusNotification(notification);
     }
 
     private void set(GamePausedNotification notification) {
-        gamePausedNotification.set(notification);
+        setGamePausedNotification(notification);
     }
 
     private void set(CurrentPlayerNotification notification) {
-        currentPlayerNotification.set(notification);
+        setCurrentPlayerNotification(notification);
     }
 
     private void set(ShowYourCardNotification notification) {
-        showYourCardNotification.set(notification);
+        setShowYourCardNotification(notification);
     }
 
     private void set(Notification notification) {
