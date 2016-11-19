@@ -46,6 +46,7 @@ public class ActionPaneController implements Initializable {
         setupSuspectPopOver();
         setupAccusePopOver();
         setupActionEvents();
+        initButtons();
         hookupChangeListeners();
     }
 
@@ -55,10 +56,10 @@ public class ActionPaneController implements Initializable {
         });
     }
 
-
     private void setupCardPane() {
         cardPane = new CardPane();
     }
+
 
     private void setupCardPopOver() {
         cardPopOver = new PopOver(cardPane);
@@ -81,6 +82,12 @@ public class ActionPaneController implements Initializable {
         accuse.setOnAction(event -> accusePopOver.show(accuse));
     }
 
+    private void initButtons() {
+        if (notificationService.getCurrentPlayerNotification() != null) {
+            toggleButtons(userService.getUsername().equals(notificationService.getCurrentPlayerNotification().getCurrent()));
+        }
+    }
+
     private void setupPopOver(PopOver popOver) {
         popOver.setAnimated(true);
         popOver.setArrowLocation(PopOver.ArrowLocation.LEFT_CENTER);
@@ -91,7 +98,7 @@ public class ActionPaneController implements Initializable {
     private void toggleButtons(boolean value) {
         roll.setDisable(value);
         suspect.setDisable(value);
-        cardPane.setDisable(value);
+        show.setDisable(value);
         accuse.setDisable(value);
     }
 }
