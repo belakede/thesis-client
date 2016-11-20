@@ -53,8 +53,8 @@ public class ActionPaneController implements Initializable {
         setupSuspectPopOver();
         setupAccusePopOver();
         setupActionEvents();
-        initButtons();
         hookupChangeListeners();
+        initButtons();
     }
 
     private void hookupChangeListeners() {
@@ -113,7 +113,7 @@ public class ActionPaneController implements Initializable {
 
     private void initButtons() {
         if (notificationService.getCurrentPlayerNotification() != null) {
-            toggleButtons(userService.getUsername().equals(notificationService.getCurrentPlayerNotification().getCurrent()));
+            toggleButtons(!userService.getUsername().equals(notificationService.getCurrentPlayerNotification().getCurrent()));
         }
     }
 
