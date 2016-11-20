@@ -191,6 +191,7 @@ public class NotificationService {
 
     private void set(Notification notification) {
         try {
+            LOGGER.debug("Notification type is {}", notification.getClass());
             Method setMethod = getClass().getDeclaredMethod("set", notification.getClass());
             setMethod.invoke(this, notification);
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
