@@ -8,9 +8,13 @@ import me.belakede.thesis.game.equipment.Figurine;
 public class FigurinePane extends StackPane {
 
     private static final SpringFxmlLoader SPRING_FXML_LOADER = new SpringFxmlLoader();
+    private FigurinePaneController controller;
 
-    public FigurinePane(Figurine figurine) {
-        FigurinePaneController controller = SPRING_FXML_LOADER.load(this);
+    public FigurinePane() {
+        controller = SPRING_FXML_LOADER.load(this);
+    }
+
+    public void setFigurine(Figurine figurine) {
         controller.setFigurine(figurine);
     }
 
