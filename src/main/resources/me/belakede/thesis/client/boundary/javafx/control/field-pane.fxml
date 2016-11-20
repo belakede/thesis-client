@@ -5,5 +5,5 @@
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane"
          fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.FieldPaneController"
          stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/field.css" styleClass="field-container">
-    <Pane fx:id="content" styleClass="field"/>
+    <Pane fx:id="content" styleClass="field" disable="true"/>
 </fx:root>
