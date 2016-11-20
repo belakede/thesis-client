@@ -2,37 +2,18 @@ package me.belakede.thesis.client.service;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener.Change;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
-import me.belakede.thesis.game.board.Board;
-import me.belakede.thesis.game.equipment.BoardType;
-import me.belakede.thesis.game.equipment.Card;
-import me.belakede.thesis.game.equipment.Figurine;
 import me.belakede.thesis.game.equipment.Suspect;
-import me.belakede.thesis.game.field.Field;
-import me.belakede.thesis.internal.game.util.Boards;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.Map;
 
 @Service
 public class GameService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GameService.class);
-
     private final LongProperty gameId = new SimpleLongProperty();
     private final StringProperty roomId = new SimpleStringProperty();
-    private final ListProperty<Card> cards = new SimpleListProperty<>();
-    private final ObjectProperty<BoardType> boardType = new SimpleObjectProperty<>();
-    private final ObjectProperty<Board> board = new SimpleObjectProperty<>();
-    private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
-    private final ObjectProperty<Field> field = new SimpleObjectProperty<>();
     private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
-    private final MapProperty<Field, Figurine> positions = new SimpleMapProperty<>();
     private final MapProperty<String, Integer> playersOrder = new SimpleMapProperty<>();
 
     public GameService() {
@@ -63,66 +44,6 @@ public class GameService {
         return roomId;
     }
 
-    public ObservableList<Card> getCards() {
-        return cards.get();
-    }
-
-    public void setCards(ObservableList<Card> cards) {
-        this.cards.set(cards);
-    }
-
-    public ListProperty<Card> cardsProperty() {
-        return cards;
-    }
-
-    public BoardType getBoardType() {
-        return boardType.get();
-    }
-
-    public void setBoardType(BoardType boardType) {
-        this.boardType.set(boardType);
-    }
-
-    public ObjectProperty<BoardType> boardTypeProperty() {
-        return boardType;
-    }
-
-    public Board getBoard() {
-        return board.get();
-    }
-
-    public void setBoard(Board board) {
-        this.board.set(board);
-    }
-
-    public ObjectProperty<Board> boardProperty() {
-        return board;
-    }
-
-    public Figurine getFigurine() {
-        return figurine.get();
-    }
-
-    public void setFigurine(Figurine figurine) {
-        this.figurine.set(figurine);
-    }
-
-    public ObjectProperty<Figurine> figurineProperty() {
-        return figurine;
-    }
-
-    public Field getField() {
-        return field.get();
-    }
-
-    public void setField(Field field) {
-        this.field.set(field);
-    }
-
-    public ObjectProperty<Field> fieldProperty() {
-        return field;
-    }
-
     public ObservableMap<Suspect, String> getPlayers() {
         return players.get();
     }
@@ -133,18 +54,6 @@ public class GameService {
 
     public MapProperty<Suspect, String> playersProperty() {
         return players;
-    }
-
-    public ObservableMap<Field, Figurine> getPositions() {
-        return positions.get();
-    }
-
-    public void setPositions(ObservableMap<Field, Figurine> positions) {
-        this.positions.set(positions);
-    }
-
-    public MapProperty<Field, Figurine> positionsProperty() {
-        return positions;
     }
 
     public ObservableMap<String, Integer> getPlayersOrder() {
@@ -159,10 +68,6 @@ public class GameService {
         return playersOrder;
     }
 
-    public boolean isAvailableFromCurrentPosition(Field field, int maxStep) {
-        return getBoard().availableFields(getField(), maxStep).contains(field);
-    }
-
     private void hookupChangeListeners() {
         playersProperty().addListener((observable, oldValue, newValue) -> {
             int columnIndex = 1;
@@ -170,21 +75,6 @@ public class GameService {
             for (Map.Entry<Suspect, String> entry : newValue.entrySet()) {
                 getPlayersOrder().put(entry.getValue(), columnIndex);
                 columnIndex++;
-            }
-        });
-        boardTypeProperty().addListener((observable, oldValue, newValue) -> {
-            try {
-                Board board = Boards.getBoardByType(newValue);
-                setBoard(board);
-            } catch (IOException e) {
-                LOGGER.warn("{} board not found. ", newValue, e);
-            }
-        });
-        positionsProperty().addListener((Change<? extends Field, ? extends Figurine> change) -> {
-            if (change.wasAdded()) {
-                if (getFigurine() != null && getFigurine().equals(change.getValueAdded())) {
-                    setField(change.getKey());
-                }
             }
         });
     }
