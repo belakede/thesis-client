@@ -23,7 +23,7 @@ public class SuspectClientApplication extends Application {
         Parent root = (Parent) SPRING_FXML_LOADER.load(getClass().getResource("boundary/javafx/main-frame.fxml"));
         Scene scene = new Scene(root, 1280, 800);
 
-        stage.setTitle("Test Application");
+        stage.setTitle("Suspect");
         stage.setMinWidth(1280);
         stage.setMinHeight(800);
         stage.setResizable(false);
