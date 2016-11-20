@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
 import me.belakede.thesis.client.boundary.javafx.control.CardBox;
-import me.belakede.thesis.client.service.GameService;
+import me.belakede.thesis.client.service.PlayerService;
 import me.belakede.thesis.game.equipment.Card;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,14 +19,14 @@ import java.util.ResourceBundle;
 public class CardPaneController implements Initializable {
 
     private final ListProperty<Card> cards = new SimpleListProperty<>();
-    private final GameService gameService;
+    private final PlayerService playerService;
     @FXML
     private HBox parent;
 
 
     @Autowired
-    public CardPaneController(GameService gameService) {
-        this.gameService = gameService;
+    public CardPaneController(PlayerService playerService) {
+        this.playerService = playerService;
     }
 
     @Override
@@ -58,6 +58,6 @@ public class CardPaneController implements Initializable {
     }
 
     private void setupBindings() {
-        cardsProperty().bind(gameService.cardsProperty());
+        cardsProperty().bind(playerService.cardsProperty());
     }
 }

@@ -9,7 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.transform.Rotate;
 import me.belakede.thesis.client.boundary.javafx.control.RotateConfigurationPane;
-import me.belakede.thesis.client.service.GameService;
+import me.belakede.thesis.client.service.PlayerService;
 import me.belakede.thesis.game.equipment.Figurine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public class SideBarController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SideBarController.class);
     private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
-    private final GameService gameService;
+    private final PlayerService playerService;
 
     @FXML
     private ImageView imageView;
@@ -32,8 +32,8 @@ public class SideBarController implements Initializable {
     private RotateConfigurationPane rotateConfiguration;
 
     @Autowired
-    public SideBarController(GameService gameService) {
-        this.gameService = gameService;
+    public SideBarController(PlayerService playerService) {
+        this.playerService = playerService;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class SideBarController implements Initializable {
     }
 
     private void setupBindings() {
-        figurine.bind(gameService.figurineProperty());
+        figurine.bind(playerService.figurineProperty());
     }
 
     public void bindSize(ReadOnlyDoubleProperty value) {

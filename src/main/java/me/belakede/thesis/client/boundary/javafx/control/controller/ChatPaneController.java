@@ -7,7 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import me.belakede.thesis.client.boundary.javafx.control.ChatBox;
-import me.belakede.thesis.client.service.GameService;
+import me.belakede.thesis.client.service.PlayerService;
 import me.belakede.thesis.game.equipment.Figurine;
 import org.controlsfx.control.PopOver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 public class ChatPaneController implements Initializable {
 
     private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
-    private final GameService gameService;
+    private final PlayerService playerService;
 
     @FXML
     private StackPane parent;
@@ -29,8 +29,8 @@ public class ChatPaneController implements Initializable {
     private PopOver popOver;
 
     @Autowired
-    public ChatPaneController(GameService gameService) {
-        this.gameService = gameService;
+    public ChatPaneController(PlayerService playerService) {
+        this.playerService = playerService;
     }
 
     @Override
@@ -59,6 +59,6 @@ public class ChatPaneController implements Initializable {
     }
 
     private void setupBindings() {
-        figurine.bind(gameService.figurineProperty());
+        figurine.bind(playerService.figurineProperty());
     }
 }
