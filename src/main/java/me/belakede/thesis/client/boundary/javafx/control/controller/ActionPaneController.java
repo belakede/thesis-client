@@ -5,6 +5,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import me.belakede.thesis.client.boundary.javafx.control.CardPane;
 import me.belakede.thesis.client.boundary.javafx.control.SuggestionPane;
+import me.belakede.thesis.client.boundary.javafx.task.NextTask;
+import me.belakede.thesis.client.boundary.javafx.task.QuitTask;
 import me.belakede.thesis.client.boundary.javafx.task.RollTask;
 import me.belakede.thesis.client.service.NotificationService;
 import me.belakede.thesis.client.service.UserService;
@@ -29,6 +31,10 @@ public class ActionPaneController implements Initializable {
     private Button show;
     @FXML
     private Button accuse;
+    @FXML
+    private Button next;
+    @FXML
+    private Button quit;
     private CardPane cardPane;
     private PopOver cardPopOver;
     private PopOver suspectPopOver;
@@ -53,7 +59,7 @@ public class ActionPaneController implements Initializable {
 
     private void hookupChangeListeners() {
         notificationService.currentPlayerNotificationProperty().addListener((observable, oldValue, newValue) -> {
-            toggleButtons(userService.getUsername().equals(newValue.getCurrent()));
+            toggleButtons(!userService.getUsername().equals(newValue.getCurrent()));
         });
         notificationService.showYourCardNotificationProperty().addListener((observable, oldValue, newValue) -> {
             show.setDisable(false);
@@ -91,6 +97,18 @@ public class ActionPaneController implements Initializable {
         suspect.setOnAction(event -> suspectPopOver.show(suspect));
         show.setOnAction(event -> cardPopOver.show(show));
         accuse.setOnAction(event -> accusePopOver.show(accuse));
+        next.setOnAction(event -> {
+            NextTask task = new NextTask(userService);
+            Thread thread = new Thread(task);
+            thread.setDaemon(true);
+            thread.start();
+        });
+        quit.setOnAction(event -> {
+            QuitTask task = new QuitTask(userService);
+            Thread thread = new Thread(task);
+            thread.setDaemon(true);
+            thread.start();
+        });
     }
 
     private void initButtons() {
@@ -111,5 +129,6 @@ public class ActionPaneController implements Initializable {
         suspect.setDisable(value);
         show.setDisable(value);
         accuse.setDisable(value);
+        next.setDisable(value);
     }
 }
