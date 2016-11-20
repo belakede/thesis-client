@@ -159,6 +159,10 @@ public class GameService {
         return playersOrder;
     }
 
+    public boolean isAvailableFromCurrentPosition(Field field, int maxStep) {
+        return getBoard().availableFields(getField(), maxStep).contains(field);
+    }
+
     private void hookupChangeListeners() {
         playersProperty().addListener((observable, oldValue, newValue) -> {
             int columnIndex = 1;
