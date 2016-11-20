@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import me.belakede.thesis.client.boundary.javafx.control.CardPane;
 import me.belakede.thesis.client.boundary.javafx.control.SuggestionPane;
+import me.belakede.thesis.client.boundary.javafx.task.RollTask;
 import me.belakede.thesis.client.service.NotificationService;
 import me.belakede.thesis.client.service.UserService;
 import org.controlsfx.control.PopOver;
@@ -80,6 +81,13 @@ public class ActionPaneController implements Initializable {
     }
 
     private void setupActionEvents() {
+        roll.setOnAction(event -> {
+            RollTask task = new RollTask(userService);
+            task.setOnSucceeded(e -> roll.setDisable(true));
+            Thread thread = new Thread(task);
+            thread.setDaemon(true);
+            thread.start();
+        });
         suspect.setOnAction(event -> suspectPopOver.show(suspect));
         show.setOnAction(event -> cardPopOver.show(show));
         accuse.setOnAction(event -> accusePopOver.show(accuse));
