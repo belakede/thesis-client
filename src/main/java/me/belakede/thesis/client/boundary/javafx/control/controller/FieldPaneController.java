@@ -80,6 +80,8 @@ public class FieldPaneController implements Initializable {
                     figurinePane.setFigurine(change.getKey());
                     figurinePane.setVisible(true);
                 }
+                parent.getStyleClass().remove("available");
+                parent.setDisable(true);
             }
         });
         rollService.secondProperty().addListener((observable, oldValue, newValue) -> {
