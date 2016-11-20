@@ -6,9 +6,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
 import me.belakede.thesis.client.boundary.javafx.control.FigurinePane;
+import me.belakede.thesis.client.boundary.javafx.task.MoveTask;
 import me.belakede.thesis.client.service.GameService;
+import me.belakede.thesis.client.service.NotificationService;
+import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.game.equipment.Figurine;
 import me.belakede.thesis.game.field.Field;
+import me.belakede.thesis.server.game.response.PairOfDiceNotification;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -20,20 +26,27 @@ import java.util.ResourceBundle;
 @Scope("prototype")
 public class FieldPaneController implements Initializable {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(FieldPaneController.class);
+
     private final SimpleObjectProperty<Field> field = new SimpleObjectProperty<>();
     private final GameService gameService;
+    private final UserService userService;
+    private final NotificationService notificationService;
 
     @FXML
     private Pane content;
 
     @Autowired
-    public FieldPaneController(GameService gameService) {
+    public FieldPaneController(GameService gameService, UserService userService, NotificationService notificationService) {
         this.gameService = gameService;
+        this.userService = userService;
+        this.notificationService = notificationService;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         hookupChangeListeners();
+        setupActionEvent();
     }
 
     public Field getField() {
@@ -59,6 +72,14 @@ public class FieldPaneController implements Initializable {
             }
             content.getStyleClass().add(newValue.getFieldType().name().toLowerCase());
         });
+        notificationService.pairOfDiceNotificationProperty().addListener((observable, oldValue, newValue) -> {
+            LOGGER.info("Pair of dice notification arrived: {}", newValue);
+            if (gameService.isAvailableFromCurrentPosition(getField(), newValue.getFirst() + newValue.getSecond())) {
+                content.setDisable(false);
+            } else {
+                content.setDisable(true);
+            }
+        });
         gameService.getPositions().addListener((Change<? extends Field, ? extends Figurine> change) -> {
             if (change.getKey().equals(getField())) {
                 if (change.wasAdded()) {
@@ -68,6 +89,19 @@ public class FieldPaneController implements Initializable {
                 }
             }
         });
+    }
+
+    private void setupActionEvent() {
+        content.setOnMouseClicked(event -> {
+            if (!content.isDisabled()) {
+                MoveTask task = new MoveTask(userService, getField().getRow(), getField().getColumn());
+                task.setOnSucceeded(e -> notificationService.setPairOfDiceNotification(new PairOfDiceNotification(0, 0)));
+                Thread thread = new Thread(task);
+                thread.setDaemon(true);
+                thread.start();
+            }
+        });
+
     }
 
 }
