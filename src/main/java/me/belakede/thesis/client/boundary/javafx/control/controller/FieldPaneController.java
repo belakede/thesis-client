@@ -1,18 +1,15 @@
 package me.belakede.thesis.client.boundary.javafx.control.controller;
 
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.MapChangeListener.Change;
+import javafx.collections.MapChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import me.belakede.thesis.client.boundary.javafx.control.FigurinePane;
 import me.belakede.thesis.client.boundary.javafx.task.MoveTask;
-import me.belakede.thesis.client.service.GameService;
-import me.belakede.thesis.client.service.NotificationService;
-import me.belakede.thesis.client.service.UserService;
+import me.belakede.thesis.client.service.*;
 import me.belakede.thesis.game.equipment.Figurine;
 import me.belakede.thesis.game.field.Field;
-import me.belakede.thesis.server.game.response.PairOfDiceNotification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,24 +26,73 @@ public class FieldPaneController implements Initializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(FieldPaneController.class);
 
     private final SimpleObjectProperty<Field> field = new SimpleObjectProperty<>();
-    private final GameService gameService;
+    private final PositionService positionService;
+    private final PlayerService playerService;
+    private final BoardService boardService;
     private final UserService userService;
-    private final NotificationService notificationService;
+    private final RollService rollService;
 
     @FXML
-    private Pane content;
+    private StackPane parent;
+    @FXML
+    private FigurinePane figurinePane;
 
     @Autowired
-    public FieldPaneController(GameService gameService, UserService userService, NotificationService notificationService) {
-        this.gameService = gameService;
+    public FieldPaneController(PositionService positionService, PlayerService playerService, BoardService boardService, UserService userService, RollService rollService) {
+        this.positionService = positionService;
+        this.playerService = playerService;
+        this.boardService = boardService;
         this.userService = userService;
-        this.notificationService = notificationService;
+        this.rollService = rollService;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         hookupChangeListeners();
-        setupActionEvent();
+        setupActionEvents();
+    }
+
+    private void setupActionEvents() {
+        parent.setOnMouseClicked(event -> {
+            if (!parent.isDisabled()) {
+                MoveTask task = new MoveTask(userService, getField().getRow(), getField().getColumn());
+                Thread thread = new Thread(task);
+                thread.setDaemon(true);
+                thread.start();
+            }
+        });
+    }
+
+
+    private void hookupChangeListeners() {
+        fieldProperty().addListener((observable, oldValue, newValue) -> {
+            Figurine figurine = positionService.getInversePositions().get(newValue);
+            if (figurine != null) {
+                figurinePane.setFigurine(figurine);
+                figurinePane.setVisible(true);
+            }
+        });
+        positionService.positionsProperty().addListener((MapChangeListener.Change<? extends Figurine, ? extends Field> change) -> {
+            if (change.wasAdded() && change.wasRemoved()) {
+                if (getField().equals(change.getValueRemoved())) {
+                    figurinePane.setVisible(false);
+                } else if (getField().equals(change.getValueAdded())) {
+                    figurinePane.setFigurine(change.getKey());
+                    figurinePane.setVisible(true);
+                }
+            }
+        });
+        rollService.secondProperty().addListener((observable, oldValue, newValue) -> {
+            if (playerService.isCurrent()) {
+                if (boardService.isAvailable(playerService.getField(), getField(), rollService.getFirst() + rollService.getSecond())) {
+                    parent.getStyleClass().add("available");
+                    parent.setDisable(false);
+                } else {
+                    parent.getStyleClass().remove("available");
+                    parent.setDisable(true);
+                }
+            }
+        });
     }
 
     public Field getField() {
@@ -62,46 +108,12 @@ public class FieldPaneController implements Initializable {
     }
 
     public void setField(int row, int column) {
-        setField(gameService.getBoard().getField(row, column));
+        if (boardService.getBoard() == null) {
+            boardService.boardProperty().addListener((observable, oldValue, newValue) -> {
+                setField(newValue.getField(row, column));
+            });
+        } else {
+            setField(boardService.getField(row, column));
+        }
     }
-
-    private void hookupChangeListeners() {
-        fieldProperty().addListener((observable, oldValue, newValue) -> {
-            if (gameService.getPositions().containsKey(newValue)) {
-                content.getChildren().add(new FigurinePane(gameService.getPositions().get(newValue)));
-            }
-            content.getStyleClass().add(newValue.getFieldType().name().toLowerCase());
-        });
-        notificationService.pairOfDiceNotificationProperty().addListener((observable, oldValue, newValue) -> {
-            LOGGER.info("Pair of dice notification arrived: {}", newValue);
-            if (gameService.isAvailableFromCurrentPosition(getField(), newValue.getFirst() + newValue.getSecond())) {
-                content.setDisable(false);
-            } else {
-                content.setDisable(true);
-            }
-        });
-        gameService.getPositions().addListener((Change<? extends Field, ? extends Figurine> change) -> {
-            if (change.getKey().equals(getField())) {
-                if (change.wasAdded()) {
-                    content.getChildren().add(new FigurinePane(change.getValueAdded()));
-                } else {
-                    content.getChildren().clear();
-                }
-            }
-        });
-    }
-
-    private void setupActionEvent() {
-        content.setOnMouseClicked(event -> {
-            if (!content.isDisabled()) {
-                MoveTask task = new MoveTask(userService, getField().getRow(), getField().getColumn());
-                task.setOnSucceeded(e -> notificationService.setPairOfDiceNotification(new PairOfDiceNotification(0, 0)));
-                Thread thread = new Thread(task);
-                thread.setDaemon(true);
-                thread.start();
-            }
-        });
-
-    }
-
 }
