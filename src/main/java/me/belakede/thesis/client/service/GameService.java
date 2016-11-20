@@ -2,6 +2,7 @@ package me.belakede.thesis.client.service;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import me.belakede.thesis.game.board.Board;
@@ -29,6 +30,7 @@ public class GameService {
     private final ObjectProperty<BoardType> boardType = new SimpleObjectProperty<>();
     private final ObjectProperty<Board> board = new SimpleObjectProperty<>();
     private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
+    private final ObjectProperty<Field> field = new SimpleObjectProperty<>();
     private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
     private final MapProperty<Field, Figurine> positions = new SimpleMapProperty<>();
     private final MapProperty<String, Integer> playersOrder = new SimpleMapProperty<>();
@@ -109,6 +111,18 @@ public class GameService {
         return figurine;
     }
 
+    public Field getField() {
+        return field.get();
+    }
+
+    public void setField(Field field) {
+        this.field.set(field);
+    }
+
+    public ObjectProperty<Field> fieldProperty() {
+        return field;
+    }
+
     public ObservableMap<Suspect, String> getPlayers() {
         return players.get();
     }
@@ -160,6 +174,13 @@ public class GameService {
                 setBoard(board);
             } catch (IOException e) {
                 LOGGER.warn("{} board not found. ", newValue, e);
+            }
+        });
+        positionsProperty().addListener((Change<? extends Field, ? extends Figurine> change) -> {
+            if (change.wasAdded()) {
+                if (getFigurine() != null && getFigurine().equals(change.getValueAdded())) {
+                    setField(change.getKey());
+                }
             }
         });
     }
