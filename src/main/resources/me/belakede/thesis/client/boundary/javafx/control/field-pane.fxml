@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane"
+<?import me.belakede.thesis.client.boundary.javafx.control.FigurinePane?>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane" fx:id="parent" disable="true"
          fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.FieldPaneController"
-         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/field.css" styleClass="field-container">
-    <Pane fx:id="content" styleClass="field" disable="true"/>
+         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/field.css" styleClass="field">
+    <FigurinePane fx:id="figurinePane"/>
 </fx:root>
