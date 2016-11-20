@@ -27,6 +27,7 @@ public class NotificationService {
     private final ObjectProperty<CurrentPlayerNotification> currentPlayerNotification = new SimpleObjectProperty<>();
     private final ObjectProperty<ShowYourCardNotification> showYourCardNotification = new SimpleObjectProperty<>();
     private final ObjectProperty<PairOfDiceNotification> pairOfDiceNotification = new SimpleObjectProperty<>();
+    private final ObjectProperty<FigurineNotification> figurineNotification = new SimpleObjectProperty<>();
 
     public NotificationService() {
         setNotifications(FXCollections.observableArrayList());
@@ -130,6 +131,18 @@ public class NotificationService {
         return pairOfDiceNotification;
     }
 
+    public FigurineNotification getFigurineNotification() {
+        return figurineNotification.get();
+    }
+
+    public void setFigurineNotification(FigurineNotification figurineNotification) {
+        this.figurineNotification.set(figurineNotification);
+    }
+
+    public ObjectProperty<FigurineNotification> figurineNotificationProperty() {
+        return figurineNotification;
+    }
+
     public void add(Notification notification) {
         notifications.add(notification);
     }
@@ -170,6 +183,10 @@ public class NotificationService {
 
     private void set(PairOfDiceNotification notification) {
         setPairOfDiceNotification(notification);
+    }
+
+    private void set(FigurineNotification notification) {
+        setFigurineNotification(notification);
     }
 
     private void set(Notification notification) {
