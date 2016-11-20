@@ -4,7 +4,13 @@
     -fx-spacing: 10;
 }
 
+.actions HBox,
 .actions Button {
     -fx-min-width: 180;
     -fx-min-height: 40;
+}
+
+.actions HBox Button {
+    -fx-min-width: 85;
+    -fx-spacing: 10;
 }
