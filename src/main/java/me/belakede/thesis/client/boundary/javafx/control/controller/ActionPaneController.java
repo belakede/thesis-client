@@ -5,6 +5,7 @@ import javafx.collections.MapChangeListener.Change;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import me.belakede.thesis.client.boundary.javafx.control.AccusePane;
 import me.belakede.thesis.client.boundary.javafx.control.CardPane;
 import me.belakede.thesis.client.boundary.javafx.control.SuggestionPane;
 import me.belakede.thesis.client.boundary.javafx.model.SuggestionType;
@@ -110,7 +111,7 @@ public class ActionPaneController implements Initializable {
     }
 
     private void setupAccusePopOver() {
-        accusePopOver = new PopOver(new SuggestionPane(SuggestionType.ACCUSE));
+        accusePopOver = new PopOver(new AccusePane());
         setupPopOver(accusePopOver);
     }
 
