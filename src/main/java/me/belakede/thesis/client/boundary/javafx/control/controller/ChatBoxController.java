@@ -49,7 +49,6 @@ public class ChatBoxController implements Initializable {
         setupMessageSenderService();
         setupActionEvents();
         hookupChangeListeners();
-        fixElementsWidth();
     }
 
     private void setupMessageSenderService() {
@@ -69,17 +68,14 @@ public class ChatBoxController implements Initializable {
                 }
             }
         });
+        messageContainer.heightProperty().addListener((observable, oldValue, newValue) -> {
+            LOGGER.debug("Message container grows: {}", newValue);
+            scrollPane.setVvalue(1.0);
+        });
         textArea.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 sendMessage();
             }
-        });
-    }
-
-    private void fixElementsWidth() {
-        scrollPane.viewportBoundsProperty().addListener((ov, oldBounds, bounds) -> {
-            messageContainer.setPrefWidth(bounds.getWidth());
-            messageContainer.setPrefHeight(bounds.getHeight());
         });
     }
 
