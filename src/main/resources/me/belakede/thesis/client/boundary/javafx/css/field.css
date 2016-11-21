@@ -20,13 +20,16 @@
 }
 
 .field.end {
+    -fx-background-color: rgba(0, 153, 153, 0.4);
     -fx-border-color: #000000;
     -fx-border-style: solid;
     -fx-border-width: 0.25;
 }
+.field.end:hover {
+    -fx-background-color: rgba(0, 153, 153, 0.9);
+}
 
 .field.available,
-.field.end:hover,
 .field.simple:hover {
     -fx-background-color: rgba(255, 255, 255, 0.5);
 }
