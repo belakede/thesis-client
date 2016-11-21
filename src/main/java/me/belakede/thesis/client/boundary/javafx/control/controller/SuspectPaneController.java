@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import me.belakede.thesis.client.boundary.javafx.control.SuspectPane;
 import me.belakede.thesis.client.boundary.javafx.task.SuspectTask;
 import me.belakede.thesis.client.service.BoardService;
 import me.belakede.thesis.client.service.PlayerService;
@@ -27,7 +26,7 @@ import java.util.ResourceBundle;
 @Controller
 public class SuspectPaneController implements Initializable {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SuspectPane.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SuspectPaneController.class);
     private final UserService userService;
     private final BoardService boardService;
     private final PlayerService playerService;
