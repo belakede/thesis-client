@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Figurine;
 import me.belakede.thesis.game.field.Field;
+import me.belakede.thesis.game.field.FieldType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,14 @@ public class PlayerService {
         setCurrent(false);
         setupBindings();
         hookupChangeListeners();
+    }
+
+    public boolean standOnRoomField() {
+        return FieldType.ROOM.equals(getField().getFieldType());
+    }
+
+    public boolean standOnEndField() {
+        return FieldType.END.equals(getField().getFieldType());
     }
 
     private void setupBindings() {
