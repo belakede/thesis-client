@@ -55,7 +55,6 @@
 
 .chat-box .message-container {
     -fx-spacing: 10;
-    -fx-spacing: 10;
 }
 
 .chat-box .message-composer {
@@ -78,6 +77,10 @@
     -fx-border-width: 0;
 }
 
+.chat-box .chat-message {
+    -fx-spacing: 10;
+    -fx-padding: 10;
+}
 
 .chat-message .content {
     -fx-background-radius: 9;
@@ -87,37 +90,37 @@
     -fx-padding: 5;
 }
 
-.chat-message .content.green:hover {
+.chat-message.green .content {
     -fx-background-color: derive(-fx-green, 25%);
     -fx-border-color: -fx-green;
 }
 
-.chat-message .content.mustard:hover {
+.chat-message.mustard .content {
     -fx-background-color: derive(-fx-mustard, 25%);
     -fx-border-color: -fx-mustard;
 }
 
-.chat-message .content.peacock:hover {
+.chat-message.peacock .content {
     -fx-background-color: derive(-fx-peacock, 25%);
     -fx-border-color: -fx-peacock;
 }
 
-.chat-message .content.plum:hover {
+.chat-message.plum .content {
     -fx-background-color: derive(-fx-plum, 25%);
     -fx-border-color: -fx-plum;
 }
 
-.chat-message .content.scarlet:hover {
+.chat-message.scarlet .content {
     -fx-background-color: derive(-fx-scarlet, 25%);
     -fx-border-color: -fx-scarlet;
 }
 
-.chat-message .content.white:hover {
+.chat-message.white .content {
     -fx-background-color: derive(-fx-white, 25%);
     -fx-border-color: -fx-white;
 }
 
-.chat-message .sender.green {
+.chat-message.green .sender {
     -fx-text-fill: -fx-green;
 }
 
