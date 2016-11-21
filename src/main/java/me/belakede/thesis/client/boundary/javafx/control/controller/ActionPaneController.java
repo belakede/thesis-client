@@ -1,5 +1,6 @@
 package me.belakede.thesis.client.boundary.javafx.control.controller;
 
+import javafx.collections.MapChangeListener.Change;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -8,10 +9,9 @@ import me.belakede.thesis.client.boundary.javafx.control.SuggestionPane;
 import me.belakede.thesis.client.boundary.javafx.task.NextTask;
 import me.belakede.thesis.client.boundary.javafx.task.QuitTask;
 import me.belakede.thesis.client.boundary.javafx.task.RollTask;
-import me.belakede.thesis.client.service.NotificationService;
-import me.belakede.thesis.client.service.PlayerService;
-import me.belakede.thesis.client.service.RollService;
-import me.belakede.thesis.client.service.UserService;
+import me.belakede.thesis.client.service.*;
+import me.belakede.thesis.game.equipment.Figurine;
+import me.belakede.thesis.game.field.Field;
 import org.controlsfx.control.PopOver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +25,7 @@ public class ActionPaneController implements Initializable {
     private final UserService userService;
     private final RollService rollService;
     private final PlayerService playerService;
+    private final PositionService positionService;
     private final NotificationService notificationService;
 
     @FXML
@@ -45,10 +46,11 @@ public class ActionPaneController implements Initializable {
     private PopOver accusePopOver;
 
     @Autowired
-    public ActionPaneController(UserService userService, RollService rollService, PlayerService playerService, NotificationService notificationService) {
+    public ActionPaneController(UserService userService, RollService rollService, PlayerService playerService, PositionService positionService, NotificationService notificationService) {
         this.userService = userService;
         this.rollService = rollService;
         this.playerService = playerService;
+        this.positionService = positionService;
         this.notificationService = notificationService;
     }
 
@@ -69,6 +71,12 @@ public class ActionPaneController implements Initializable {
         });
         rollService.secondProperty().addListener((observable, oldValue, newValue) -> {
             roll.setDisable(true);
+        });
+        positionService.positionsProperty().addListener((Change<? extends Figurine, ? extends Field> change) -> {
+            if (change.wasAdded() && change.getKey().equals(playerService.getFigurine())) {
+                accuse.setDisable(!playerService.standOnEndField());
+                suspect.setDisable(!playerService.standOnRoomField());
+            }
         });
         notificationService.showYourCardNotificationProperty().addListener((observable, oldValue, newValue) -> {
             show.setDisable(false);
