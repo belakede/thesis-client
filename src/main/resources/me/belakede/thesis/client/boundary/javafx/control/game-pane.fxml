@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.*?>
 <?import me.belakede.thesis.client.boundary.javafx.control.BoardPane?>
 <?import me.belakede.thesis.client.boundary.javafx.control.SideBar?>
+<?import org.controlsfx.control.NotificationPane?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.BorderPane"
          fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.GamePaneController"
          stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/game.css" styleClass="game-container">
@@ -10,6 +11,17 @@
         <SideBar fx:id="sideBar"/>
     </left>
     <center>
-        <BoardPane fx:id="boardPane"/>
+        <AnchorPane>
+            <BorderPane AnchorPane.topAnchor="50" AnchorPane.leftAnchor="0" styleClass="board-pane-holder">
+                <center>
+                    <BoardPane fx:id="boardPane"/>
+                </center>
+            </BorderPane>
+            <NotificationPane fx:id="notificationPane" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+                <content>
+                    <VBox/>
+                </content>
+            </NotificationPane>
+        </AnchorPane>
     </center>
 </fx:root>
