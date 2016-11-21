@@ -1,54 +1,43 @@
 package me.belakede.thesis.client.service;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import me.belakede.thesis.game.equipment.PairOfDice;
+import me.belakede.thesis.internal.game.equipment.DefaultPairOfDice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RollService {
 
-    private final IntegerProperty first = new SimpleIntegerProperty();
-    private final IntegerProperty second = new SimpleIntegerProperty();
+    private final ListProperty<PairOfDice> rolls = new SimpleListProperty<>();
     private final NotificationService notificationService;
 
     @Autowired
     public RollService(NotificationService notificationService) {
         this.notificationService = notificationService;
-        setFirst(0);
-        setSecond(0);
+        setRolls(FXCollections.observableArrayList());
         hookupChangeListeners();
+    }
+
+    public ObservableList<PairOfDice> getRolls() {
+        return rolls.get();
+    }
+
+    public void setRolls(ObservableList<PairOfDice> rolls) {
+        this.rolls.set(rolls);
+    }
+
+    public ListProperty<PairOfDice> rollsProperty() {
+        return rolls;
     }
 
     private void hookupChangeListeners() {
         notificationService.pairOfDiceNotificationProperty().addListener((observable, oldValue, newValue) -> {
-            setFirst(newValue.getFirst());
-            setSecond(newValue.getSecond());
+            getRolls().add(DefaultPairOfDice.create(newValue.getFirst(), newValue.getSecond()));
         });
-    }
-
-    public int getFirst() {
-        return first.get();
-    }
-
-    public void setFirst(int first) {
-        this.first.set(first);
-    }
-
-    public IntegerProperty firstProperty() {
-        return first;
-    }
-
-    public int getSecond() {
-        return second.get();
-    }
-
-    public void setSecond(int second) {
-        this.second.set(second);
-    }
-
-    public IntegerProperty secondProperty() {
-        return second;
     }
 
 }
