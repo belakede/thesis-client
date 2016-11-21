@@ -154,7 +154,7 @@ public class GamesPaneController implements Initializable {
         loginButton.setDisable(true);
 
         players.getSelectionModel().getSelectedItems().addListener((ListChangeListener.Change<? extends String> c) -> {
-            loginButton.setDisable(players.getSelectionModel().getSelectedItems().size() < 2);
+            loginButton.setDisable(players.getSelectionModel().getSelectedItems().size() < 2 || players.getSelectionModel().getSelectedItems().size() > 6);
         });
 
         dialog.getDialogPane().setContent(players);
