@@ -3,6 +3,7 @@ package me.belakede.thesis.client.service;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import me.belakede.thesis.game.board.Board;
+import me.belakede.thesis.game.board.RoomField;
 import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.field.Field;
 import me.belakede.thesis.internal.game.util.Boards;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class BoardService {
@@ -38,6 +40,10 @@ public class BoardService {
 
     public Field getField(int row, int column) {
         return getBoard().getField(row, column);
+    }
+
+    public Optional<RoomField> getRoomField(Field field) {
+        return getBoard().getRoomFields().stream().filter(rf -> rf.getFields().contains(field)).findFirst();
     }
 
     private void hookupChangeListeners() {
