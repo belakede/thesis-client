@@ -14,6 +14,7 @@ public class GameService {
     private final LongProperty gameId = new SimpleLongProperty();
     private final StringProperty roomId = new SimpleStringProperty();
     private final MapProperty<Suspect, String> players = new SimpleMapProperty<>();
+    private final MapProperty<String, Suspect> reversedPlayers = new SimpleMapProperty<>();
     private final MapProperty<String, Integer> playersOrder = new SimpleMapProperty<>();
 
     public GameService() {
@@ -56,6 +57,18 @@ public class GameService {
         return players;
     }
 
+    public ObservableMap<String, Suspect> getReversedPlayers() {
+        return reversedPlayers.get();
+    }
+
+    public MapProperty<String, Suspect> reversedPlayersProperty() {
+        return reversedPlayers;
+    }
+
+    public void setReversePlayers(ObservableMap<String, Suspect> reversedPlayers) {
+        this.reversedPlayers.set(reversedPlayers);
+    }
+
     public ObservableMap<String, Integer> getPlayersOrder() {
         return playersOrder.get();
     }
@@ -72,7 +85,9 @@ public class GameService {
         playersProperty().addListener((observable, oldValue, newValue) -> {
             int columnIndex = 1;
             setPlayersOrder(FXCollections.observableHashMap());
+            setReversePlayers(FXCollections.observableHashMap());
             for (Map.Entry<Suspect, String> entry : newValue.entrySet()) {
+                getReversedPlayers().put(entry.getValue(), entry.getKey());
                 getPlayersOrder().put(entry.getValue(), columnIndex);
                 columnIndex++;
             }
