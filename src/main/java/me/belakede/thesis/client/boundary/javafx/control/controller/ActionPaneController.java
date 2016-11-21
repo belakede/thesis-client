@@ -67,13 +67,18 @@ public class ActionPaneController implements Initializable {
 
     private void hookupChangeListeners() {
         playerService.currentProperty().addListener((observable, oldValue, newValue) -> {
-            toggleButtons(!newValue);
+            initButtons();
         });
         rollService.secondProperty().addListener((observable, oldValue, newValue) -> {
-            roll.setDisable(true);
+            if (playerService.isCurrent()) {
+                roll.setDisable(true);
+                accuse.setDisable(!playerService.standOnEndField());
+                suspect.setDisable(!playerService.standOnRoomField());
+                show.setDisable(true);
+            }
         });
         positionService.positionsProperty().addListener((Change<? extends Figurine, ? extends Field> change) -> {
-            if (change.wasAdded() && change.getKey().equals(playerService.getFigurine())) {
+            if (playerService.isCurrent() && change.wasAdded() && change.getKey().equals(playerService.getFigurine())) {
                 accuse.setDisable(!playerService.standOnEndField());
                 suspect.setDisable(!playerService.standOnRoomField());
             }
@@ -129,8 +134,14 @@ public class ActionPaneController implements Initializable {
     }
 
     private void initButtons() {
-        if (notificationService.getCurrentPlayerNotification() != null) {
-            toggleButtons(!userService.getUsername().equals(notificationService.getCurrentPlayerNotification().getCurrent()));
+        if (!playerService.isCurrent()) {
+            toggleButtons(!playerService.isCurrent());
+        } else {
+            roll.setDisable(false);
+            accuse.setDisable(!playerService.standOnEndField());
+            suspect.setDisable(!playerService.standOnRoomField());
+            show.setDisable(true);
+            next.setDisable(false);
         }
     }
 
