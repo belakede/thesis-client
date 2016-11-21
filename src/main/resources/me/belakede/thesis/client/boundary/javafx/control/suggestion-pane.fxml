@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.GridPane" stylesheets="@../css/suggestion.css"
-         hgap="10" vgap="15"
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.GridPane"
+         fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.SuggestionPaneController"
+         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/suggestion.css"
          styleClass="suggestion-container">
-    <padding>
-        <Insets top="25" right="25" bottom="25" left="25"/>
-    </padding>
     <Text text="I suggest" styleClass="suggest-text" GridPane.columnIndex="0" GridPane.rowIndex="0"
           GridPane.columnSpan="3"/>
     <Label text="it was" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
