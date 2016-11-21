@@ -9,6 +9,7 @@ import me.belakede.thesis.client.boundary.javafx.task.NextTask;
 import me.belakede.thesis.client.boundary.javafx.task.QuitTask;
 import me.belakede.thesis.client.boundary.javafx.task.RollTask;
 import me.belakede.thesis.client.service.NotificationService;
+import me.belakede.thesis.client.service.PlayerService;
 import me.belakede.thesis.client.service.UserService;
 import org.controlsfx.control.PopOver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.util.ResourceBundle;
 public class ActionPaneController implements Initializable {
 
     private final UserService userService;
+    private final PlayerService playerService;
     private final NotificationService notificationService;
 
     @FXML
@@ -41,8 +43,9 @@ public class ActionPaneController implements Initializable {
     private PopOver accusePopOver;
 
     @Autowired
-    public ActionPaneController(UserService userService, NotificationService notificationService) {
+    public ActionPaneController(UserService userService, PlayerService playerService, NotificationService notificationService) {
         this.userService = userService;
+        this.playerService = playerService;
         this.notificationService = notificationService;
     }
 
@@ -58,8 +61,8 @@ public class ActionPaneController implements Initializable {
     }
 
     private void hookupChangeListeners() {
-        notificationService.currentPlayerNotificationProperty().addListener((observable, oldValue, newValue) -> {
-            toggleButtons(!userService.getUsername().equals(newValue.getCurrent()));
+        playerService.currentProperty().addListener((observable, oldValue, newValue) -> {
+            toggleButtons(!newValue);
         });
         notificationService.showYourCardNotificationProperty().addListener((observable, oldValue, newValue) -> {
             show.setDisable(false);
