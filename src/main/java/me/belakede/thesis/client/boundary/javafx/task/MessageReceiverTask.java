@@ -5,7 +5,6 @@ import me.belakede.thesis.client.boundary.javafx.model.UserMessage;
 import me.belakede.thesis.client.service.GameService;
 import me.belakede.thesis.client.service.MessageService;
 import me.belakede.thesis.client.service.UserService;
-import me.belakede.thesis.game.equipment.Suspect;
 import me.belakede.thesis.jackson.JacksonContextResolver;
 import me.belakede.thesis.server.chat.request.ChatRequest;
 import me.belakede.thesis.server.chat.response.Message;
@@ -57,7 +56,7 @@ public class MessageReceiverTask extends Task<Void> {
             }
             LOGGER.info("UserMessage arrived: {}", inboundEvent.toString());
             Message message = inboundEvent.readData(Message.class, MediaType.APPLICATION_JSON_TYPE);
-            messageService.add(new UserMessage(message.getSender(), message.getContent(), message.getTime(), Suspect.PEACOCK));
+            messageService.add(new UserMessage(message.getSender(), message.getContent(), message.getTime(), gameService.getReversedPlayers().get(message.getSender())));
         }
         LOGGER.info("Channel closed!");
         return null;
