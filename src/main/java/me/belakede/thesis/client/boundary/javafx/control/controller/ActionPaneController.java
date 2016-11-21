@@ -7,8 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import me.belakede.thesis.client.boundary.javafx.control.AccusePane;
 import me.belakede.thesis.client.boundary.javafx.control.CardPane;
-import me.belakede.thesis.client.boundary.javafx.control.SuggestionPane;
-import me.belakede.thesis.client.boundary.javafx.model.SuggestionType;
+import me.belakede.thesis.client.boundary.javafx.control.SuspectPane;
 import me.belakede.thesis.client.boundary.javafx.task.NextTask;
 import me.belakede.thesis.client.boundary.javafx.task.QuitTask;
 import me.belakede.thesis.client.boundary.javafx.task.RollTask;
@@ -106,7 +105,7 @@ public class ActionPaneController implements Initializable {
     }
 
     private void setupSuspectPopOver() {
-        suspectPopOver = new PopOver(new SuggestionPane(SuggestionType.SUSPECT));
+        suspectPopOver = new PopOver(new SuspectPane());
         setupPopOver(suspectPopOver);
     }
 
