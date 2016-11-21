@@ -50,11 +50,15 @@
     -fx-min-width: 250;
     -fx-pref-width: 250;
     -fx-max-width: 250;
+    -fx-min-height: 325;
+    -fx-pref-height: 325;
+    -fx-max-height: 325;
     -fx-hbar-policy: never;
 }
 
 .chat-box .message-container {
     -fx-spacing: 10;
+    -fx-alignment: top-left;
 }
 
 .chat-box .message-composer {

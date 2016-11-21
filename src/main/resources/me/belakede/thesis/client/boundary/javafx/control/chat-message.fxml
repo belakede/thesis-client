@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/chat.css" spacing="5"
-         minWidth="180" maxWidth="180" minHeight="60" styleClass="chat-message">
+         minWidth="180" maxWidth="180" minHeight="60" styleClass="chat-message" VBox.vgrow="ALWAYS">
     <HBox styleClass="content" alignment="BASELINE_LEFT">
         <Text fx:id="messageText" wrappingWidth="180"/>
     </HBox>

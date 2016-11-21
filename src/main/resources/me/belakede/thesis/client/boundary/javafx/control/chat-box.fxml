@@ -3,17 +3,15 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import org.controlsfx.glyphfont.Glyph?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.BorderPane"
          fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.ChatBoxController"
          stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/chat.css"
          styleClass="chat-box">
     <center>
-        <ScrollPane fx:id="scrollPane">
-            <VBox fx:id="messageContainer" styleClass="message-container"/>
+        <ScrollPane fx:id="scrollPane" vvalue="1.0">
+            <VBox fx:id="messageContainer" styleClass="message-container" VBox.vgrow="ALWAYS"/>
         </ScrollPane>
     </center>
     <bottom>
