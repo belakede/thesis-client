@@ -12,6 +12,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class SpringFxmlLoader {
 
@@ -31,13 +33,18 @@ public class SpringFxmlLoader {
     }
 
     public <T, C> C load(T instance) {
+        return load(instance, new Locale("en"));
+    }
+
+    public <T, C> C load(T instance, Locale locale) {
         boolean pane = Pane.class.isAssignableFrom(instance.getClass());
         if (pane) {
             String filename = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, instance.getClass().getSimpleName()).concat(".fxml");
             String fxmlFile = "/".concat(instance.getClass().getPackage().getName().replace(".", "/")).concat("/" + filename);
             LOGGER.trace("Try to loading {}", fxmlFile);
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+                ResourceBundle resourceBundle = ResourceBundle.getBundle("bundles/bundles", locale);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile), resourceBundle);
                 loader.setRoot(instance);
                 loader.setControllerFactory(APPLICATION_CONTEXT::getBean);
                 loader.load();
