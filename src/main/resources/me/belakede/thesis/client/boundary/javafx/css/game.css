@@ -19,3 +19,18 @@
     -fx-pref-height: 800;
     -fx-max-height: 800;
 }
+
+.game-container NotificationPane VBox {
+    -fx-min-width: 1030;
+    -fx-pref-width: 1030;
+    -fx-max-width: 1030;
+    -fx-min-height: 50;
+    -fx-pref-height: 50;
+    -fx-max-height: 50;
+}
+
+.game-container AnchorPane .board-pane-holder {
+    -fx-min-width: 1030;
+    -fx-pref-width: 1030;
+    -fx-max-width: 1030;
+}
