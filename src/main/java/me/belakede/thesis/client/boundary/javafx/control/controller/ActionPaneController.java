@@ -1,5 +1,6 @@
 package me.belakede.thesis.client.boundary.javafx.control.controller;
 
+import javafx.collections.ListChangeListener;
 import javafx.collections.MapChangeListener.Change;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +12,7 @@ import me.belakede.thesis.client.boundary.javafx.task.QuitTask;
 import me.belakede.thesis.client.boundary.javafx.task.RollTask;
 import me.belakede.thesis.client.service.*;
 import me.belakede.thesis.game.equipment.Figurine;
+import me.belakede.thesis.game.equipment.PairOfDice;
 import me.belakede.thesis.game.field.Field;
 import org.controlsfx.control.PopOver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,12 +71,14 @@ public class ActionPaneController implements Initializable {
         playerService.currentProperty().addListener((observable, oldValue, newValue) -> {
             initButtons();
         });
-        rollService.secondProperty().addListener((observable, oldValue, newValue) -> {
+        rollService.rollsProperty().addListener((ListChangeListener.Change<? extends PairOfDice> change) -> {
             if (playerService.isCurrent()) {
-                roll.setDisable(true);
-                accuse.setDisable(!playerService.standOnEndField());
-                suspect.setDisable(!playerService.standOnRoomField());
-                show.setDisable(true);
+                while (change.next()) {
+                    roll.setDisable(true);
+                    accuse.setDisable(!playerService.standOnEndField());
+                    suspect.setDisable(!playerService.standOnRoomField());
+                    show.setDisable(true);
+                }
             }
         });
         positionService.positionsProperty().addListener((Change<? extends Figurine, ? extends Field> change) -> {

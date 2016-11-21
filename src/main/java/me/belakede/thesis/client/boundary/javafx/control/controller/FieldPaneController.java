@@ -1,6 +1,7 @@
 package me.belakede.thesis.client.boundary.javafx.control.controller;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ListChangeListener.Change;
 import javafx.collections.MapChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,6 +10,7 @@ import me.belakede.thesis.client.boundary.javafx.control.FigurinePane;
 import me.belakede.thesis.client.boundary.javafx.task.MoveTask;
 import me.belakede.thesis.client.service.*;
 import me.belakede.thesis.game.equipment.Figurine;
+import me.belakede.thesis.game.equipment.PairOfDice;
 import me.belakede.thesis.game.field.Field;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,14 +86,18 @@ public class FieldPaneController implements Initializable {
                 parent.setDisable(true);
             }
         });
-        rollService.secondProperty().addListener((observable, oldValue, newValue) -> {
+        rollService.rollsProperty().addListener((Change<? extends PairOfDice> change) -> {
             if (playerService.isCurrent()) {
-                if (boardService.isAvailable(playerService.getField(), getField(), rollService.getFirst() + rollService.getSecond())) {
-                    parent.getStyleClass().add("available");
-                    parent.setDisable(false);
-                } else {
-                    parent.getStyleClass().remove("available");
-                    parent.setDisable(true);
+                while (change.next()) {
+                    change.getAddedSubList().forEach(pairOfDice -> {
+                        if (boardService.isAvailable(playerService.getField(), getField(), pairOfDice.getResult())) {
+                            parent.getStyleClass().add("available");
+                            parent.setDisable(false);
+                        } else {
+                            parent.getStyleClass().remove("available");
+                            parent.setDisable(true);
+                        }
+                    });
                 }
             }
         });
