@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.*?>
 <?import org.controlsfx.control.NotificationPane?>
 <?import org.controlsfx.control.ToggleSwitch?>
 <?import org.controlsfx.glyphfont.Glyph?>
@@ -17,6 +17,14 @@
                     <HBox AnchorPane.bottomAnchor="15" AnchorPane.leftAnchor="15">
                         <ToggleSwitch text="Recording" fx:id="recordingSwitch"/>
                     </HBox>
+                    <StackPane visible="false" fx:id="countDown" styleClass="countdown" AnchorPane.topAnchor="25"
+                               AnchorPane.rightAnchor="25">
+                        <Text visible="false">1</Text>
+                        <Text visible="false">2</Text>
+                        <Text visible="false">3</Text>
+                        <Text visible="false">4</Text>
+                        <Text visible="false">5</Text>
+                    </StackPane>
                 </AnchorPane>
                 <StackPane fx:id="sorryPane" styleClass="sorry-pane" visible="false" prefWidth="1280" prefHeight="800">
                     <Glyph fontFamily="FontAwesome" icon="FROWN_ALT" fontSize="600"/>

@@ -1,6 +1,9 @@
 package me.belakede.thesis.client.boundary.javafx.controller;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.beans.property.MapProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
@@ -9,6 +12,7 @@ import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -48,6 +52,8 @@ public class LoungeController implements Initializable {
     private HBox playerContainer;
     @FXML
     private ToggleSwitch recordingSwitch;
+    @FXML
+    private StackPane countDown;
 
     @Autowired
     public LoungeController(UserService userService, GameService gameService, GameFlowService gameFlowService, SnapshotService snapshotService, NotificationService notificationService, DownloadNotesService downloadNotesService) {
@@ -123,9 +129,24 @@ public class LoungeController implements Initializable {
             }
         });
         notificationService.gameStatusNotificationProperty().addListener((observable, oldValue, newValue) -> {
-            // TODO wait 5 second - count down.
-            hide();
+            Platform.runLater(() -> initCountDown());
         });
+    }
+
+    private void initCountDown() {
+        countDown.setVisible(true);
+        final Timeline timeline = new Timeline();
+        timeline.setAutoReverse(false);
+        timeline.setCycleCount(5);
+        timeline.getKeyFrames().addAll(new KeyFrame(Duration.seconds(0.1), (e) -> {
+            Node node = countDown.getChildren().get(countDown.getChildren().size() - 1);
+            node.setVisible(true);
+        }), new KeyFrame(Duration.seconds(0.9), (e) -> {
+            Node node = countDown.getChildren().get(countDown.getChildren().size() - 1);
+            countDown.getChildren().remove(node);
+        }));
+        timeline.setOnFinished(event -> hide());
+        timeline.play();
     }
 
     private void openChannels() {

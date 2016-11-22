@@ -5,6 +5,7 @@
     -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
 }
 
+.countdown Text,
 .sorry-pane Text {
     -fx-font-size: 64px;
     -fx-font-family: "Arial Black";
