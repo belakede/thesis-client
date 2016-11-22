@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.NotificationPane?>
+<?import org.controlsfx.control.ToggleSwitch?>
 <?import org.controlsfx.glyphfont.Glyph?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:id="parent"
       stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/lounge.css"
       fx:controller="me.belakede.thesis.client.boundary.javafx.controller.LoungeController">
     <NotificationPane fx:id="notificationPane">
         <content>
-            <StackPane>
-                <HBox prefWidth="1280" prefHeight="800" spacing="50" alignment="CENTER" fx:id="playerContainer"/>
+            <StackPane prefWidth="1280" prefHeight="800">
+                <AnchorPane prefWidth="1280" prefHeight="800">
+                    <HBox prefWidth="1280" prefHeight="800" spacing="50" alignment="CENTER" fx:id="playerContainer"
+                          AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"/>
+                    <HBox AnchorPane.bottomAnchor="15" AnchorPane.leftAnchor="15">
+                        <ToggleSwitch text="Recording" fx:id="recordingSwitch"/>
+                    </HBox>
+                </AnchorPane>
                 <StackPane fx:id="sorryPane" styleClass="sorry-pane" visible="false" prefWidth="1280" prefHeight="800">
                     <Glyph fontFamily="FontAwesome" icon="FROWN_ALT" fontSize="600"/>
                     <Text>Sorry, it's not your game.</Text>

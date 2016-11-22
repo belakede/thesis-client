@@ -15,12 +15,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.service.DownloadNotesService;
-import me.belakede.thesis.client.service.GameFlowService;
-import me.belakede.thesis.client.service.GameService;
-import me.belakede.thesis.client.service.NotificationService;
-import me.belakede.thesis.client.service.UserService;
+import me.belakede.thesis.client.service.*;
 import me.belakede.thesis.game.equipment.Suspect;
 import me.belakede.thesis.server.game.response.PlayerJoinedNotification;
+import org.controlsfx.control.ToggleSwitch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +36,7 @@ public class LoungeController implements Initializable {
     private final UserService userService;
     private final GameService gameService;
     private final GameFlowService gameFlowService;
+    private final SnapshotService snapshotService;
     private final NotificationService notificationService;
     private final DownloadNotesService downloadNotesService;
 
@@ -47,12 +46,15 @@ public class LoungeController implements Initializable {
     private StackPane sorryPane;
     @FXML
     private HBox playerContainer;
+    @FXML
+    private ToggleSwitch recordingSwitch;
 
     @Autowired
-    public LoungeController(UserService userService, GameService gameService, GameFlowService gameFlowService, NotificationService notificationService, DownloadNotesService downloadNotesService) {
+    public LoungeController(UserService userService, GameService gameService, GameFlowService gameFlowService, SnapshotService snapshotService, NotificationService notificationService, DownloadNotesService downloadNotesService) {
         this.userService = userService;
         this.gameService = gameService;
         this.gameFlowService = gameFlowService;
+        this.snapshotService = snapshotService;
         this.notificationService = notificationService;
         this.downloadNotesService = downloadNotesService;
     }
@@ -99,6 +101,9 @@ public class LoungeController implements Initializable {
     }
 
     private void hookupChangeListeners() {
+        recordingSwitch.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            snapshotService.setEnabled(newValue);
+        });
         playerBoxesProperty().addListener(new MapChangeListener<String, VBox>() {
             @Override
             public void onChanged(Change<? extends String, ? extends VBox> change) {
