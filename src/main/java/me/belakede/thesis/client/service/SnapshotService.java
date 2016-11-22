@@ -3,10 +3,7 @@ package me.belakede.thesis.client.service;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringExpression;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.SimpleLongProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
@@ -29,6 +26,7 @@ public class SnapshotService {
     private final LongProperty numberOfSnapshots = new SimpleLongProperty();
     private final StringProperty directory = new SimpleStringProperty();
     private final StringProperty filename = new SimpleStringProperty();
+    private final BooleanProperty enabled = new SimpleBooleanProperty();
     private final GameService gameService;
 
     private StringExpression directoryExpression;
@@ -37,23 +35,38 @@ public class SnapshotService {
     @Autowired
     public SnapshotService(GameService gameService) {
         this.gameService = gameService;
+        setEnabled(false);
         setNumberOfSnapshots(1);
         hookupChangeListeners();
         setupBindings();
     }
 
     public void saveAsPng(Pane parent) {
-        Platform.runLater(() -> {
-            WritableImage image = parent.snapshot(new SnapshotParameters(), null);
-            LOGGER.info("Creating {}", getFilename());
-            File file = new File(getFilename());
-            try {
-                ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
-                incrementNumberOfSnapshots();
-            } catch (IOException e) {
-                LOGGER.warn("Can't create png file");
-            }
-        });
+        if (isEnabled()) {
+            Platform.runLater(() -> {
+                WritableImage image = parent.snapshot(new SnapshotParameters(), null);
+                LOGGER.info("Creating {}", getFilename());
+                File file = new File(getFilename());
+                try {
+                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+                    incrementNumberOfSnapshots();
+                } catch (IOException e) {
+                    LOGGER.warn("Can't create png file");
+                }
+            });
+        }
+    }
+
+    public boolean isEnabled() {
+        return enabled.get();
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled.set(enabled);
+    }
+
+    public BooleanProperty enabledProperty() {
+        return enabled;
     }
 
     private void hookupChangeListeners() {
