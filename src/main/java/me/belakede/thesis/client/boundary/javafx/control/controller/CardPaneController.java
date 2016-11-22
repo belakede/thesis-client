@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
 import me.belakede.thesis.client.boundary.javafx.control.CardBox;
+import me.belakede.thesis.client.service.NotificationService;
 import me.belakede.thesis.client.service.PlayerService;
 import me.belakede.thesis.game.equipment.Card;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,15 @@ public class CardPaneController implements Initializable {
 
     private final MapProperty<Card, CardBox> cardBoxes = new SimpleMapProperty<>();
     private final PlayerService playerService;
+    private final NotificationService notificationService;
 
     @FXML
     private HBox parent;
 
     @Autowired
-    public CardPaneController(PlayerService playerService) {
+    public CardPaneController(PlayerService playerService, NotificationService notificationService) {
         this.playerService = playerService;
+        this.notificationService = notificationService;
     }
 
     @Override
@@ -62,6 +65,14 @@ public class CardPaneController implements Initializable {
                 uploadCardBoxes(newValue);
             }
         });
+        notificationService.suspicionNotificationProperty().addListener((observable, oldValue, newValue) -> {
+            enableCardBox(newValue.getSuspect());
+            enableCardBox(newValue.getRoom());
+            enableCardBox(newValue.getWeapon());
+        });
+        notificationService.cardNotificationProperty().addListener((observable, oldValue, newValue) -> {
+            cardBoxes.values().forEach(cardBox -> cardBox.setDisable(true));
+        });
     }
 
     private void uploadCardBoxes(ObservableList<Card> newValue) {
@@ -79,4 +90,10 @@ public class CardPaneController implements Initializable {
         return cardBox;
     }
 
+    private void enableCardBox(Card card) {
+        CardBox cardBox = getCardBoxes().get(card);
+        if (cardBox != null) {
+            cardBox.setDisable(false);
+        }
+    }
 }
