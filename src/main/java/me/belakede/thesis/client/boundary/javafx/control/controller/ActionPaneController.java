@@ -89,6 +89,9 @@ public class ActionPaneController implements Initializable {
                 suspect.setDisable(!FieldType.ROOM.equals((change.getValueAdded().getFieldType())));
             }
         });
+        notificationService.suspicionNotificationProperty().addListener((observable, oldValue, newValue) -> {
+            suspect.setDisable(true);
+        });
         notificationService.showYourCardNotificationProperty().addListener((observable, oldValue, newValue) -> {
             show.setDisable(false);
         });
