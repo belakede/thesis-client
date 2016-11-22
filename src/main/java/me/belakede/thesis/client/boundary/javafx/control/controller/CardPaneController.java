@@ -66,11 +66,17 @@ public class CardPaneController implements Initializable {
 
     private void uploadCardBoxes(ObservableList<Card> newValue) {
         setCardBoxes(FXCollections.observableHashMap());
-        newValue.forEach(card -> getCardBoxes().put(card, new CardBox(card)));
+        newValue.forEach(card -> getCardBoxes().put(card, createCardBox(card)));
         Platform.runLater(() -> {
             parent.getChildren().clear();
             parent.getChildren().addAll(getCardBoxes().values());
         });
+    }
+
+    private CardBox createCardBox(Card card) {
+        CardBox cardBox = new CardBox(card);
+        cardBox.setDisable(true);
+        return cardBox;
     }
 
 }
