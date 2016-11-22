@@ -40,7 +40,12 @@ public class FigurinePaneController implements Initializable {
 
     private void hookupChangeListeners() {
         figurineProperty().addListener((observable, oldValue, newValue) -> {
-            parent.getStyleClass().add(newValue.name().toLowerCase().replace("_", "-"));
+            parent.getStyleClass().remove(figurineToStyleClass(oldValue));
+            parent.getStyleClass().add(figurineToStyleClass(newValue));
         });
+    }
+
+    private String figurineToStyleClass(Figurine figurine) {
+        return figurine.name().toLowerCase().replace("_", "-");
     }
 }
