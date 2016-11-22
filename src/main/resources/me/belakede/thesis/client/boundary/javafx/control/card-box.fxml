@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Group?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.StackPane" stylesheets="@../css/card.css"
-         styleClass="card-box">
-    <Group>
-        <Rectangle width="90" height="160" arcHeight="15" arcWidth="15"/>
-        <TextFlow layoutX="5" layoutY="5" minWidth="80" maxWidth="80" prefWidth="80" textAlignment="CENTER">
-            <Text fx:id="label"></Text>
-        </TextFlow>
-    </Group>
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.AnchorPane" fx:id="parent"
+         fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.CardBoxController"
+         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/card.css" styleClass="card-box">
+    <VBox styleClass="title" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+        <Text fx:id="label"/>
+    </VBox>
+    <VBox styleClass="image" AnchorPane.topAnchor="45" AnchorPane.leftAnchor="4"/>
+    <VBox styleClass="title, upside-down" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0">
+        <Text fx:id="labelUpsideDown"/>
+    </VBox>
 </fx:root>

@@ -1,19 +1,124 @@
+@import "colors.css";
+
 .card-container {
     -fx-spacing: 15;
     -fx-padding: 15;
 }
 
-.card-container:hover .card {
-    -fx-fill: #aaaaaa;
-    -fx-stroke: #1e90ff;
+.card-box {
+    -fx-background-radius: 9;
+    -fx-border-color: #111111;
+    -fx-border-style: solid;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-pref-height: 190;
+    -fx-pref-width: 110;
+    -fx-min-height: 190;
+    -fx-min-width: 110;
+    -fx-max-height: 190;
+    -fx-max-width: 110;
 }
 
-.card-box Rectangle {
-    -fx-strokeType: INSIDE;
-    -fx-stroke: #000000;
+.card-box .title {
+    -fx-alignment: center;
+    -fx-background-color: #111111;
+    -fx-background-radius: 3 3 0 0;
+    -fx-pref-height: 25;
+    -fx-pref-width: 109;
+    -fx-min-height: 25;
+    -fx-min-width: 109;
+    -fx-max-height: 25;
+    -fx-max-width: 109;
+    -fx-padding: 5;
+}
+
+.card-box .image {
+    -fx-alignment: center;
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-border-radius: 60;
+    -fx-border-color: #000000;
+    -fx-border-width: 4;
+    -fx-pref-height: 100;
+    -fx-pref-width: 100;
+    -fx-min-height: 100;
+    -fx-min-width: 100;
+    -fx-max-height: 100;
+    -fx-max-width: 100;
+}
+
+.card-box .title.upside-down {
+    -fx-rotate: 180;
+    -fx-background-radius: 3 3 0 0;
+}
+
+.card-box .title Text {
     -fx-fill: #ffffff;
 }
-.card-box Text {
-    -fx-fill: #000000;
-    -fx-font-weight: bold;
+
+.card-box.rope .image {
+    -fx-background-image: url("../img/rope.png");
+}
+
+.card-box.lead-pipe .image {
+    -fx-background-image: url("../img/lead-pipe.png");
+}
+
+.card-box.wrench .image {
+    -fx-background-image: url("../img/wrench.png");
+}
+
+.card-box.knife .image {
+    -fx-background-image: url("../img/knife.png");
+}
+
+.card-box.candlestick .image {
+    -fx-background-image: url("../img/candlestick.png");
+}
+
+.card-box.revolver .image {
+    -fx-background-image: url("../img/revolver.png");
+}
+
+.card-box.green .image {
+    -fx-background-image: url("../img/logo-circle.png");
+    -fx-effect: dropshadow(three-pass-box, -fx-green, 10, 0, 0, 0);
+}
+
+.card-box.mustard .image {
+    -fx-background-image: url("../img/logo-circle.png");
+    -fx-effect: dropshadow(three-pass-box, -fx-mustard, 10, 0, 0, 0);
+}
+
+.card-box.peacock .image {
+    -fx-background-image: url("../img/logo-circle.png");
+    -fx-effect: dropshadow(three-pass-box, -fx-peacock, 10, 0, 0, 0);
+}
+
+.card-box.plum .image {
+    -fx-background-image: url("../img/logo-circle.png");
+    -fx-effect: dropshadow(three-pass-box, -fx-plum, 10, 0, 0, 0);
+}
+
+.card-box.scarlet .image {
+    -fx-background-image: url("../img/logo-circle.png");
+    -fx-effect: dropshadow(three-pass-box, -fx-scarlet, 10, 0, 0, 0);
+}
+
+.card-box.white .image {
+    -fx-background-image: url("../img/logo-circle.png");
+}
+
+.card-box:hover {
+    -fx-cursor: hand;
+    -fx-rotate: 10;
+}
+
+.card-box:hover .image {
+    -fx-effect: dropshadow(three-pass-box, #000000, 10, 0, 0, 0);
+}
+
+.card-box:disabled {
+    -fx-opacity: 0.2;
 }
