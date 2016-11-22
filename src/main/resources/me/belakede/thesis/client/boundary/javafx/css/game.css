@@ -1,14 +1,7 @@
-
-.sorry-pane Glyph {
-    -fx-text-fill: #d3d3d3;
-    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
-}
+@import "lounge.css";
 
 .sorry-pane Text {
     -fx-font-size: 48px;
-    -fx-font-family: "Arial Black";
-    -fx-fill: #818181;
-    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
 }
 
 .game-container {

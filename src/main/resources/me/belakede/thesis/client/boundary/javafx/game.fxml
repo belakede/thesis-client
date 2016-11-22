@@ -17,6 +17,10 @@
         <Glyph fontFamily="FontAwesome" icon="FROWN_ALT" fontSize="600"/>
         <Text>Sorry, one or more players left the game.</Text>
     </StackPane>
+    <StackPane fx:id="endPane" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" styleClass="end-pane"
+               visible="false" prefWidth="1280" prefHeight="800">
+        <HBox prefWidth="1280" prefHeight="800" spacing="50" alignment="CENTER" fx:id="playerContainer"/>
+    </StackPane>
     <HistoryPane fx:id="historyPane" AnchorPane.bottomAnchor="15" AnchorPane.rightAnchor="75"/>
     <ChatPane fx:id="chatPane" AnchorPane.bottomAnchor="15" AnchorPane.rightAnchor="15"/>
 </AnchorPane>
