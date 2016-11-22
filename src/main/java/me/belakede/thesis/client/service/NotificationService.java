@@ -31,6 +31,7 @@ public class NotificationService {
     private final ObjectProperty<FigurineNotification> figurineNotification = new SimpleObjectProperty<>();
     private final ObjectProperty<SuspicionNotification> suspicionNotification = new SimpleObjectProperty<>();
     private final ObjectProperty<AccusationNotification> accusationNotification = new SimpleObjectProperty<>();
+    private final ObjectProperty<CardNotification> cardNotification = new SimpleObjectProperty<>();
 
     public NotificationService() {
         setNotifications(FXCollections.observableArrayList());
@@ -182,6 +183,18 @@ public class NotificationService {
         return accusationNotification;
     }
 
+    public CardNotification getCardNotification() {
+        return cardNotification.get();
+    }
+
+    public void setCardNotification(CardNotification cardNotification) {
+        this.cardNotification.set(cardNotification);
+    }
+
+    public ObjectProperty<CardNotification> cardNotificationProperty() {
+        return cardNotification;
+    }
+
     public void add(Notification notification) {
         notifications.add(notification);
     }
@@ -238,6 +251,10 @@ public class NotificationService {
 
     private void set(AccusationNotification notification) {
         setAccusationNotification(notification);
+    }
+
+    private void set(CardNotification notification) {
+        setCardNotification(notification);
     }
 
     private void set(Notification notification) {
