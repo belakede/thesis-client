@@ -1,8 +1,11 @@
 package me.belakede.thesis.client.boundary.javafx.control.controller;
 
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
+import javafx.application.Platform;
+import javafx.beans.property.MapProperty;
+import javafx.beans.property.SimpleMapProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
@@ -18,11 +21,11 @@ import java.util.ResourceBundle;
 @Controller
 public class CardPaneController implements Initializable {
 
-    private final ListProperty<Card> cards = new SimpleListProperty<>();
+    private final MapProperty<Card, CardBox> cardBoxes = new SimpleMapProperty<>();
     private final PlayerService playerService;
+
     @FXML
     private HBox parent;
-
 
     @Autowired
     public CardPaneController(PlayerService playerService) {
@@ -31,33 +34,43 @@ public class CardPaneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initCardBoxex();
         hookupChangeListeners();
-        setupBindings();
-
     }
 
-    public ObservableList<Card> getCards() {
-        return cards.get();
+    public ObservableMap<Card, CardBox> getCardBoxes() {
+        return cardBoxes.get();
     }
 
-    public void setCards(ObservableList<Card> cards) {
-        this.cards.set(cards);
+    public void setCardBoxes(ObservableMap<Card, CardBox> cardBoxes) {
+        this.cardBoxes.set(cardBoxes);
     }
 
-    public ListProperty<Card> cardsProperty() {
-        return cards;
+    public MapProperty<Card, CardBox> cardBoxesProperty() {
+        return cardBoxes;
+    }
+
+    private void initCardBoxex() {
+        if (playerService.getCards() != null) {
+            uploadCardBoxes(playerService.getCards());
+        }
     }
 
     private void hookupChangeListeners() {
-        cardsProperty().addListener((observable, oldValue, newValue) -> {
+        playerService.cardsProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                parent.getChildren().clear();
-                newValue.stream().map(CardBox::new).forEach(card -> parent.getChildren().add(card));
+                uploadCardBoxes(newValue);
             }
         });
     }
 
-    private void setupBindings() {
-        cardsProperty().bind(playerService.cardsProperty());
+    private void uploadCardBoxes(ObservableList<Card> newValue) {
+        setCardBoxes(FXCollections.observableHashMap());
+        newValue.forEach(card -> getCardBoxes().put(card, new CardBox(card)));
+        Platform.runLater(() -> {
+            parent.getChildren().clear();
+            parent.getChildren().addAll(getCardBoxes().values());
+        });
     }
+
 }
