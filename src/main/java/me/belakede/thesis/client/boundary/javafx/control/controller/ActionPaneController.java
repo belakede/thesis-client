@@ -90,7 +90,14 @@ public class ActionPaneController implements Initializable {
             }
         });
         notificationService.suspicionNotificationProperty().addListener((observable, oldValue, newValue) -> {
-            suspect.setDisable(true);
+            if (playerService.isCurrent()) {
+                suspect.setDisable(true);
+            }
+        });
+        notificationService.accusationNotificationProperty().addListener((observable, oldValue, newValue) -> {
+            if (playerService.isCurrent()) {
+                accuse.setDisable(true);
+            }
         });
         notificationService.showYourCardNotificationProperty().addListener((observable, oldValue, newValue) -> {
             show.setDisable(false);
