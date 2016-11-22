@@ -23,6 +23,7 @@ public class NotificationService {
     private final ListProperty<PlayerJoinedNotification> playerJoinedNotifications = new SimpleListProperty<>();
     private final ObjectProperty<PlayerStatusNotification> playerStatusNotification = new SimpleObjectProperty<>();
     private final ObjectProperty<GameStatusNotification> gameStatusNotification = new SimpleObjectProperty<>();
+    private final ObjectProperty<GameEndedNotification> gameEndedNotification = new SimpleObjectProperty<>();
     private final ObjectProperty<GamePausedNotification> gamePausedNotification = new SimpleObjectProperty<>();
     private final ObjectProperty<CurrentPlayerNotification> currentPlayerNotification = new SimpleObjectProperty<>();
     private final ObjectProperty<ShowYourCardNotification> showYourCardNotification = new SimpleObjectProperty<>();
@@ -83,6 +84,18 @@ public class NotificationService {
 
     public ObjectProperty<GameStatusNotification> gameStatusNotificationProperty() {
         return gameStatusNotification;
+    }
+
+    public GameEndedNotification getGameEndedNotification() {
+        return gameEndedNotification.get();
+    }
+
+    public void setGameEndedNotification(GameEndedNotification gameEndedNotification) {
+        this.gameEndedNotification.set(gameEndedNotification);
+    }
+
+    public ObjectProperty<GameEndedNotification> gameEndedNotificationProperty() {
+        return gameEndedNotification;
     }
 
     public GamePausedNotification getGamePausedNotification() {
@@ -193,6 +206,10 @@ public class NotificationService {
 
     private void set(GameStatusNotification notification) {
         setGameStatusNotification(notification);
+    }
+
+    private void set(GameEndedNotification notification) {
+        setGameEndedNotification(notification);
     }
 
     private void set(GamePausedNotification notification) {
