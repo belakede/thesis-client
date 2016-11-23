@@ -6,10 +6,12 @@ import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.control.BoardPane;
 import me.belakede.thesis.client.boundary.javafx.control.SideBar;
+import me.belakede.thesis.client.boundary.javafx.controller.LoungeController;
 import me.belakede.thesis.client.service.NotificationService;
 import org.controlsfx.control.NotificationPane;
 import org.controlsfx.glyphfont.FontAwesome;
@@ -27,32 +29,52 @@ public class GamePaneController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GamePaneController.class);
     private final NotificationService notificationService;
+    private final LoungeController loungeController;
 
     @FXML
     private NotificationPane notificationPane;
     @FXML
     private SideBar sideBar;
     @FXML
-    private BoardPane boardPane;
+    private BorderPane boardPaneHolder;
 
     @Autowired
-    public GamePaneController(NotificationService notificationService) {
+    public GamePaneController(NotificationService notificationService, LoungeController loungeController) {
         this.notificationService = notificationService;
+        this.loungeController = loungeController;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         hookupChangeListeners();
-        transformBoard();
+        initBoardPane();
     }
 
-    private void hookupChangeListeners() {
+    private void initBoardPane() {
+        if (loungeController.getBoardPane() != null) {
+            setBoardPane(loungeController.getBoardPane());
+        }
+    }
+
+    public void setBoardPane(BoardPane boardPane) {
+        boardPaneHolder.setCenter(boardPane);
+        transformBoard(boardPane);
+        bindSideBarAndBoardPane(boardPane);
+    }
+
+    private void bindSideBarAndBoardPane(BoardPane boardPane) {
         sideBar.bindSize(boardPane.widthProperty());
         sideBar.getRotates().addListener((ListChangeListener.Change<? extends Rotate> change) -> {
             while (change.next()) {
                 boardPane.getTransforms().clear();
                 boardPane.getTransforms().addAll(change.getAddedSubList());
             }
+        });
+    }
+
+    private void hookupChangeListeners() {
+        loungeController.boardPaneProperty().addListener((observable, oldValue, newValue) -> {
+            setBoardPane(newValue);
         });
         notificationService.pairOfDiceNotificationProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> {
@@ -92,7 +114,7 @@ public class GamePaneController implements Initializable {
         timeline.play();
     }
 
-    private void transformBoard() {
+    private void transformBoard(BoardPane boardPane) {
         boardPane.getTransforms().addAll(sideBar.getRotates());
     }
 }

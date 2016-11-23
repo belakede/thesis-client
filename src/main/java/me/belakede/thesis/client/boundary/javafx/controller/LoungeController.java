@@ -5,7 +5,9 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.property.MapProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleMapProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.MapChangeListener;
@@ -18,6 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import me.belakede.thesis.client.boundary.javafx.control.BoardPane;
 import me.belakede.thesis.client.boundary.javafx.service.DownloadNotesService;
 import me.belakede.thesis.client.service.*;
 import me.belakede.thesis.game.equipment.Suspect;
@@ -37,6 +40,7 @@ public class LoungeController implements Initializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoungeController.class);
 
     private final MapProperty<String, VBox> playerBoxes = new SimpleMapProperty<>();
+    private final ObjectProperty<BoardPane> boardPane = new SimpleObjectProperty<>();
     private final UserService userService;
     private final GameService gameService;
     private final GameFlowService gameFlowService;
@@ -75,6 +79,18 @@ public class LoungeController implements Initializable {
 
     public MapProperty<String, VBox> playerBoxesProperty() {
         return playerBoxes;
+    }
+
+    public BoardPane getBoardPane() {
+        return boardPane.get();
+    }
+
+    public void setBoardPane(BoardPane boardPane) {
+        this.boardPane.set(boardPane);
+    }
+
+    public ObjectProperty<BoardPane> boardPaneProperty() {
+        return boardPane;
     }
 
     @Override
@@ -130,6 +146,7 @@ public class LoungeController implements Initializable {
         });
         notificationService.gameStatusNotificationProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> initCountDown());
+            setBoardPane(new BoardPane());
         });
     }
 
