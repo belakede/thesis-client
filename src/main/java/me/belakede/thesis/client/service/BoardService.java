@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class BoardService {
@@ -30,12 +32,12 @@ public class BoardService {
         hookupChangeListeners();
     }
 
-    public boolean isAvailable(Field from, Field to, int maxSteps) {
-        boolean result = false;
+    public Set<Field> getAvailableFields(Field from, int maxSteps) {
+        Set<Field> fields = new HashSet<>();
         if (getBoard() != null) {
-            result = getBoard().availableFields(from, maxSteps).contains(to);
+            fields.addAll(getBoard().availableFields(from, maxSteps));
         }
-        return result;
+        return fields;
     }
 
     public Field getField(int row, int column) {
