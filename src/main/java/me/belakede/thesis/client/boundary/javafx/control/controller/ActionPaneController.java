@@ -170,6 +170,7 @@ public class ActionPaneController implements Initializable {
                 switch (playerService.getLastAction()) {
                     case ACCUSE:
                         accuse.setDisable(!playerService.standOnEndField());
+                    case SHOW:
                     case SUSPECT:
                         suspect.setDisable(!playerService.standOnRoomField());
                     case MOVE:
