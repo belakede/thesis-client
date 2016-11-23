@@ -56,28 +56,31 @@ public class GamePaneController implements Initializable {
         });
         notificationService.pairOfDiceNotificationProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> {
-                notificationPane.setGraphic(new Glyph("FontAwesome", FontAwesome.Glyph.CUBE));
-                notificationPane.setText(newValue.toString());
-                notificationPane.setOnShown(event -> hideNotificationPane());
-                notificationPane.show();
+                showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.CUBE), newValue.toString());
             });
         });
         notificationService.figurineNotificationProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> {
-                notificationPane.setGraphic(new Glyph("FontAwesome", FontAwesome.Glyph.MAP_MARKER));
-                notificationPane.setText(newValue.toString());
-                notificationPane.setOnShown(event -> hideNotificationPane());
-                notificationPane.show();
+                showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.MAP_MARKER), newValue.toString());
             });
         });
         notificationService.currentPlayerNotificationProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> {
-                notificationPane.setGraphic(new Glyph("FontAwesome", FontAwesome.Glyph.USER));
-                notificationPane.setText(newValue.toString());
-                notificationPane.setOnShown(event -> hideNotificationPane());
-                notificationPane.show();
+                showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.USER), newValue.toString());
             });
         });
+        notificationService.cardNotificationProperty().addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(() -> {
+                showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.PHOTO), newValue.toString());
+            });
+        });
+    }
+
+    private void showNotification(Glyph fontAwesome, String value) {
+        notificationPane.setGraphic(fontAwesome);
+        notificationPane.setText(value);
+        notificationPane.setOnShown(event -> hideNotificationPane());
+        notificationPane.show();
     }
 
     private void hideNotificationPane() {
