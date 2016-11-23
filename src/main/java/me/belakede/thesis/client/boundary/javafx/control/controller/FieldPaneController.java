@@ -1,7 +1,6 @@
 package me.belakede.thesis.client.boundary.javafx.control.controller;
 
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.ListChangeListener.Change;
 import javafx.collections.MapChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +9,6 @@ import me.belakede.thesis.client.boundary.javafx.control.FigurinePane;
 import me.belakede.thesis.client.boundary.javafx.task.MoveTask;
 import me.belakede.thesis.client.service.*;
 import me.belakede.thesis.game.equipment.Figurine;
-import me.belakede.thesis.game.equipment.PairOfDice;
 import me.belakede.thesis.game.field.Field;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +17,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 @Controller
@@ -86,19 +85,13 @@ public class FieldPaneController implements Initializable {
                 parent.setDisable(true);
             }
         });
-        rollService.rollsProperty().addListener((Change<? extends PairOfDice> change) -> {
-            if (playerService.isCurrent()) {
-                while (change.next()) {
-                    change.getAddedSubList().forEach(pairOfDice -> {
-                        if (boardService.isAvailable(playerService.getField(), getField(), pairOfDice.getResult())) {
-                            parent.getStyleClass().add("available");
-                            parent.setDisable(false);
-                        } else {
-                            parent.getStyleClass().remove("available");
-                            parent.setDisable(true);
-                        }
-                    });
-                }
+        playerService.availableFieldsProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.contains(getField())) {
+                parent.getStyleClass().add("available");
+                parent.setDisable(false);
+            } else {
+                parent.getStyleClass().removeAll(Collections.singleton("available"));
+                parent.setDisable(true);
             }
         });
     }
