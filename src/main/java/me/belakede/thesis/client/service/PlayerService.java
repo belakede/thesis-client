@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import me.belakede.thesis.game.equipment.*;
 import me.belakede.thesis.game.field.Field;
 import me.belakede.thesis.game.field.FieldType;
+import me.belakede.thesis.server.game.domain.Action;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class PlayerService {
     private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
     private final ObjectProperty<Field> field = new SimpleObjectProperty<>();
     private final ListProperty<Card> cards = new SimpleListProperty<>();
+    private final ObjectProperty<Action> lastAction = new SimpleObjectProperty<>();
     private final BooleanProperty current = new SimpleBooleanProperty();
     private final BooleanProperty next = new SimpleBooleanProperty();
     private final NotificationService notificationService;
@@ -74,6 +76,9 @@ public class PlayerService {
             LOGGER.info("Current player is: {}", newValue.getCurrent());
             setCurrent(getUsername().equals(newValue.getCurrent()));
             setNext(getUsername().equals(newValue.getNext()));
+            if (getUsername().equals(newValue.getCurrent())) {
+                setLastAction(newValue.getAction());
+            }
         });
     }
 
@@ -123,6 +128,18 @@ public class PlayerService {
 
     public ListProperty<Card> cardsProperty() {
         return cards;
+    }
+
+    public Action getLastAction() {
+        return lastAction.get();
+    }
+
+    public void setLastAction(Action lastAction) {
+        this.lastAction.set(lastAction);
+    }
+
+    public ObjectProperty<Action> lastActionProperty() {
+        return lastAction;
     }
 
     public boolean isCurrent() {
