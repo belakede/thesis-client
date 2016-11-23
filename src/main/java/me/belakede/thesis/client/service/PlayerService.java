@@ -13,6 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Service
 public class PlayerService {
 
@@ -28,14 +32,17 @@ public class PlayerService {
     private final BooleanProperty next = new SimpleBooleanProperty();
     private final NotificationService notificationService;
     private final PositionService positionService;
+    private final BoardService boardService;
     private final UserService userService;
 
     @Autowired
-    public PlayerService(NotificationService notificationService, PositionService positionService, UserService userService) {
+    public PlayerService(NotificationService notificationService, PositionService positionService, BoardService boardService, UserService userService) {
         this.notificationService = notificationService;
         this.positionService = positionService;
+        this.boardService = boardService;
         this.userService = userService;
         setCards(FXCollections.observableArrayList());
+        setAvailableFields(FXCollections.observableArrayList());
         setCurrent(false);
         setupBindings();
         hookupChangeListeners();
@@ -80,6 +87,13 @@ public class PlayerService {
             if (getUsername().equals(newValue.getCurrent())) {
                 setLastAction(newValue.getAction());
             }
+        });
+        notificationService.pairOfDiceNotificationProperty().addListener((observable, oldValue, newValue) -> {
+            Set<Field> availableFields = boardService.getAvailableFields(getField(), newValue.getFirst() + newValue.getSecond());
+            List<Field> fields = availableFields.stream()
+                    .filter(field -> !positionService.getPositions().values().contains(field))
+                    .collect(Collectors.toList());
+            setAvailableFields(FXCollections.observableArrayList(fields));
         });
     }
 
