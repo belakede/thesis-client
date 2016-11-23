@@ -3,4 +3,4 @@ spring:
     web-environment: false
 logging:
   level:
-    me.belakede.thesis: DEBUG
+    me.belakede.thesis: INFO
