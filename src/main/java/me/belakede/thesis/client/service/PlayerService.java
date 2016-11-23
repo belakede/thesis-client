@@ -22,6 +22,7 @@ public class PlayerService {
     private final ObjectProperty<Field> field = new SimpleObjectProperty<>();
     private final ListProperty<Card> cards = new SimpleListProperty<>();
     private final BooleanProperty current = new SimpleBooleanProperty();
+    private final BooleanProperty next = new SimpleBooleanProperty();
     private final NotificationService notificationService;
     private final PositionService positionService;
     private final UserService userService;
@@ -72,6 +73,7 @@ public class PlayerService {
         notificationService.currentPlayerNotificationProperty().addListener((observable, oldValue, newValue) -> {
             LOGGER.info("Current player is: {}", newValue.getCurrent());
             setCurrent(getUsername().equals(newValue.getCurrent()));
+            setNext(getUsername().equals(newValue.getNext()));
         });
     }
 
@@ -133,5 +135,17 @@ public class PlayerService {
 
     public BooleanProperty currentProperty() {
         return current;
+    }
+
+    public boolean isNext() {
+        return next.get();
+    }
+
+    public void setNext(boolean next) {
+        this.next.set(next);
+    }
+
+    public BooleanProperty nextProperty() {
+        return next;
     }
 }
