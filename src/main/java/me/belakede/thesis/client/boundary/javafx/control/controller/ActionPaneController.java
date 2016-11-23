@@ -98,6 +98,19 @@ public class ActionPaneController implements Initializable {
                 accuse.setDisable(true);
             }
         });
+        playerService.lastActionProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                switch (newValue) {
+                    case ACCUSE:
+                        accuse.setDisable(true);
+                    case SUSPECT:
+                        suspect.setDisable(true);
+                    case MOVE:
+                    case ROLL:
+                        roll.setDisable(true);
+                }
+            }
+        });
     }
 
     private void setupCardPane() {
@@ -153,6 +166,17 @@ public class ActionPaneController implements Initializable {
             accuse.setDisable(!playerService.standOnEndField());
             suspect.setDisable(!playerService.standOnRoomField());
             next.setDisable(false);
+            if (playerService.getLastAction() != null) {
+                switch (playerService.getLastAction()) {
+                    case ACCUSE:
+                        accuse.setDisable(!playerService.standOnEndField());
+                    case SUSPECT:
+                        suspect.setDisable(!playerService.standOnRoomField());
+                    case MOVE:
+                    case ROLL:
+                        roll.setDisable(true);
+                }
+            }
         }
     }
 
