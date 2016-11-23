@@ -4,8 +4,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener.Change;
 import javafx.collections.ObservableList;
-import me.belakede.thesis.game.equipment.Card;
-import me.belakede.thesis.game.equipment.Figurine;
+import me.belakede.thesis.game.equipment.*;
 import me.belakede.thesis.game.field.Field;
 import me.belakede.thesis.game.field.FieldType;
 import org.slf4j.Logger;
@@ -36,6 +35,10 @@ public class PlayerService {
         setCurrent(false);
         setupBindings();
         hookupChangeListeners();
+    }
+
+    public boolean hasAnyOfThem(Suspect suspect, Room room, Weapon weapon) {
+        return getCards().contains(suspect) || getCards().contains(room) || getCards().contains(weapon);
     }
 
     public boolean standOnRoomField() {

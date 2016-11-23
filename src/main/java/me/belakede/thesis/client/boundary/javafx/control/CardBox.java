@@ -8,10 +8,15 @@ import me.belakede.thesis.game.equipment.Card;
 public class CardBox extends AnchorPane {
 
     private static final SpringFxmlLoader SPRING_FXML_LOADER = new SpringFxmlLoader();
+    private final CardBoxController controller;
 
     public CardBox(Card card) {
-        CardBoxController controller = SPRING_FXML_LOADER.load(this);
+        controller = SPRING_FXML_LOADER.load(this);
         controller.setCard(card);
+    }
+
+    public Card getCard() {
+        return controller.getCard();
     }
 
 }
