@@ -23,6 +23,7 @@ import me.belakede.thesis.client.boundary.javafx.control.NoteField;
 import me.belakede.thesis.client.boundary.javafx.model.Note;
 import me.belakede.thesis.client.service.GameService;
 import me.belakede.thesis.client.service.NoteService;
+import me.belakede.thesis.client.service.PlayerService;
 import me.belakede.thesis.game.equipment.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,14 +40,16 @@ public class NoteBoxController implements Initializable {
 
     private final FontLoader fontLoader;
     private final GameService gameService;
+    private final PlayerService playerService;
     private final NoteService noteService;
 
     @FXML
     private GridPane parent;
 
     @Autowired
-    public NoteBoxController(GameService gameService, NoteService noteService) {
+    public NoteBoxController(GameService gameService, PlayerService playerService, NoteService noteService) {
         this.gameService = gameService;
+        this.playerService = playerService;
         this.noteService = noteService;
         this.fontLoader = Toolkit.getToolkit().getFontLoader();
         this.cardsOrder.setValue(FXCollections.observableHashMap());
@@ -152,13 +155,21 @@ public class NoteBoxController implements Initializable {
     private void displayNoteFields() {
         Map<Card, List<String>> notes = createCardPlayerMap();
         noteService.getNotes().forEach(note -> {
-
             NoteField noteField = new NoteField(note.getOwner(), note.getCard(), note.getMarker());
             parent.add(noteField, gameService.getPlayersOrder().get(note.getOwner()), cardsOrder.get(note.getCard()));
             correctNotes(notes, note);
         });
         notes.forEach((card, players) -> players.forEach(player -> {
-            NoteField noteField = new NoteField(player, card, Marker.NONE);
+            Marker marker;
+            if (playerService.getUsername().equals(player)) {
+                marker = (playerService.getCards().contains(card)) ? Marker.YES : Marker.NOT;
+            } else {
+                marker = (playerService.getCards().contains(card)) ? Marker.NOT : Marker.NONE;
+            }
+            NoteField noteField = new NoteField(player, card, marker);
+            if (!Marker.NONE.equals(marker)) {
+                noteField.setDisable(true);
+            }
             parent.add(noteField, gameService.getPlayersOrder().get(player), cardsOrder.get(card));
         }));
     }
