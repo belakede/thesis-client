@@ -169,7 +169,6 @@ public class GameDetailsPaneController implements Initializable {
         idText.textProperty().bind(gameIdProperty().asString("#%d"));
         createdText.textProperty().bind(createdProperty().asString());
         start.visibleProperty().bind(start.disableProperty().not().or(removedProperty()));
-        start.disableProperty().bind(statusProperty().isEqualTo(Status.IN_PROGRESS).or(removedProperty()));
         remove.disableProperty().bind(statusProperty().isEqualTo(Status.IN_PROGRESS).or(removedProperty()));
     }
 
@@ -185,6 +184,7 @@ public class GameDetailsPaneController implements Initializable {
         }).forEach(player -> playersPane.getChildren().add(player)));
         statusProperty().addListener((observable, oldValue, newValue) -> {
             statusGlyph.setIcon(statusToIcon(newValue));
+            start.setDisable(!(Status.PAUSED.equals(newValue) || Status.CREATED.equals(newValue)));
             if (Status.IN_PROGRESS.equals(newValue)) {
                 rotateStatusGlyph();
             }
