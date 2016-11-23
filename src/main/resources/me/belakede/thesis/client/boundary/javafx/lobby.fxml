@@ -16,6 +16,8 @@
                     <VBox styleClass="sidebar">
                         <Text text="Games" styleClass="headline"/>
                         <GamesPane/>
+                        <Text text="Boards" styleClass="headline"/>
+                        <BoardsPane/>
                     </VBox>
                 </left>
                 <center>
@@ -26,8 +28,6 @@
                 </center>
                 <right>
                     <VBox styleClass="sidebar">
-                        <Text text="Boards" styleClass="headline"/>
-                        <BoardsPane/>
                         <Text text="Players" styleClass="headline"/>
                         <PlayersPane/>
                     </VBox>

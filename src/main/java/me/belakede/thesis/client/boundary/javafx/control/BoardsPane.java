@@ -39,7 +39,7 @@ public class BoardsPane extends VBox {
         popOver.setDetachable(false);
         popOver.setAutoHide(true);
         popOver.setAnimated(true);
-        popOver.setArrowLocation(PopOver.ArrowLocation.RIGHT_TOP);
+        popOver.setArrowLocation(PopOver.ArrowLocation.LEFT_TOP);
         popOver.setHeaderAlwaysVisible(false);
     }
 
