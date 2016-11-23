@@ -70,12 +70,14 @@ public class CardPaneController implements Initializable {
             }
         });
         notificationService.suspicionNotificationProperty().addListener((observable, oldValue, newValue) -> {
-            if (playerService.hasAnyOfThem(newValue.getSuspect(), newValue.getRoom(), newValue.getWeapon())) {
-                enableCardBox(newValue.getSuspect());
-                enableCardBox(newValue.getRoom());
-                enableCardBox(newValue.getWeapon());
-            } else {
-                sendEmptyShowRequest();
+            if (playerService.isNext()) {
+                if (playerService.hasAnyOfThem(newValue.getSuspect(), newValue.getRoom(), newValue.getWeapon())) {
+                    enableCardBox(newValue.getSuspect());
+                    enableCardBox(newValue.getRoom());
+                    enableCardBox(newValue.getWeapon());
+                } else {
+                    sendEmptyShowRequest();
+                }
             }
         });
         notificationService.cardNotificationProperty().addListener((observable, oldValue, newValue) -> {
