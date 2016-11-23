@@ -21,6 +21,7 @@ public class PlayerService {
     private final StringProperty username = new SimpleStringProperty();
     private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
     private final ObjectProperty<Field> field = new SimpleObjectProperty<>();
+    private final ListProperty<Field> availableFields = new SimpleListProperty<>();
     private final ListProperty<Card> cards = new SimpleListProperty<>();
     private final ObjectProperty<Action> lastAction = new SimpleObjectProperty<>();
     private final BooleanProperty current = new SimpleBooleanProperty();
@@ -116,6 +117,18 @@ public class PlayerService {
 
     public ObjectProperty<Field> fieldProperty() {
         return field;
+    }
+
+    public ObservableList<Field> getAvailableFields() {
+        return availableFields.get();
+    }
+
+    public void setAvailableFields(ObservableList<Field> availableFields) {
+        this.availableFields.set(availableFields);
+    }
+
+    public ListProperty<Field> availableFieldsProperty() {
+        return availableFields;
     }
 
     public ObservableList<Card> getCards() {
