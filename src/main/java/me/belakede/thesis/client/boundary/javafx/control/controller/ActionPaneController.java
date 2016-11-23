@@ -79,7 +79,6 @@ public class ActionPaneController implements Initializable {
                     roll.setDisable(true);
                     accuse.setDisable(!playerService.standOnEndField());
                     suspect.setDisable(!playerService.standOnRoomField());
-                    show.setDisable(true);
                 }
             }
         });
@@ -98,9 +97,6 @@ public class ActionPaneController implements Initializable {
             if (playerService.isCurrent()) {
                 accuse.setDisable(true);
             }
-        });
-        notificationService.showYourCardNotificationProperty().addListener((observable, oldValue, newValue) -> {
-            show.setDisable(false);
         });
     }
 
@@ -156,7 +152,6 @@ public class ActionPaneController implements Initializable {
             roll.setDisable(false);
             accuse.setDisable(!playerService.standOnEndField());
             suspect.setDisable(!playerService.standOnRoomField());
-            show.setDisable(true);
             next.setDisable(false);
         }
     }
@@ -171,7 +166,6 @@ public class ActionPaneController implements Initializable {
     private void toggleButtons(boolean value) {
         roll.setDisable(value);
         suspect.setDisable(value);
-        show.setDisable(value);
         accuse.setDisable(value);
         next.setDisable(value);
     }
