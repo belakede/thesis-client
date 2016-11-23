@@ -69,11 +69,25 @@ public class SnapshotService {
         return enabled;
     }
 
+    public String getDirectory() {
+        return directory.get();
+    }
+
+    public void setDirectory(String directory) {
+        this.directory.set(directory);
+    }
+
     private void hookupChangeListeners() {
         directoryProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                removePreviouslyCreatedDirectory(newValue);
-                createDirectory(newValue);
+            if (newValue != null && isEnabled()) {
+                initDirectory(newValue);
+            }
+        });
+        enabledProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue && getDirectory() != null) {
+                initDirectory(getDirectory());
+            } else if (getDirectory() != null) {
+                removePreviouslyCreatedDirectory(getDirectory());
             }
         });
     }
@@ -83,6 +97,11 @@ public class SnapshotService {
         directoryProperty().bind(directoryExpression);
         filenameExpression = Bindings.format("%s/snapshot_%06d.png", directoryProperty(), numberOfSnapshotsProperty());
         filenameProperty().bind(filenameExpression);
+    }
+
+    private void initDirectory(String directory) {
+        removePreviouslyCreatedDirectory(directory);
+        createDirectory(directory);
     }
 
     private void removePreviouslyCreatedDirectory(String directory) {
