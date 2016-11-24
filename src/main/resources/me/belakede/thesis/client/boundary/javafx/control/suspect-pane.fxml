@@ -7,12 +7,12 @@
          fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.SuspectPaneController"
          stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/suggestion.css"
          styleClass="suggestion-container">
-    <Text text="I suggest" styleClass="suggest-text" GridPane.columnIndex="0" GridPane.rowIndex="0"
+    <Text text="%I suggest" styleClass="suggest-text" GridPane.columnIndex="0" GridPane.rowIndex="0"
           GridPane.columnSpan="3"/>
-    <Label text="it was" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Label text="%it was" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
     <ChoiceBox fx:id="suspect" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-    <Label text="with the" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Label text="%with the" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
     <ChoiceBox fx:id="weapon" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
-    <Button fx:id="submit" text="Suspect" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="5"
+    <Button fx:id="submit" text="%Suspect" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="5"
             GridPane.halignment="LEFT"/>
 </fx:root>
