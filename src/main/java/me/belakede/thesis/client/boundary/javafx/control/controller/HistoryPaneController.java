@@ -21,9 +21,9 @@ public class HistoryPaneController implements Initializable {
 
     private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
     private final PlayerService playerService;
-
     @FXML
     public StackPane parent;
+    private ResourceBundle resources;
     @FXML
     private Button historyButton;
     private PopOver popOver;
@@ -35,6 +35,7 @@ public class HistoryPaneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setResources(resources);
         setupPopover();
         hookupChangeListeners();
         setupBindings();
@@ -43,7 +44,7 @@ public class HistoryPaneController implements Initializable {
     private void setupPopover() {
         popOver = new PopOver(new HistoryBox());
         popOver.setAnimated(true);
-        popOver.setTitle("History");
+        popOver.setTitle(getResources().getString("History"));
         popOver.setHeaderAlwaysVisible(true);
         popOver.setDetachable(false);
         popOver.setDetached(false);
@@ -62,5 +63,13 @@ public class HistoryPaneController implements Initializable {
 
     private void setupBindings() {
         figurine.bind(playerService.figurineProperty());
+    }
+
+    public ResourceBundle getResources() {
+        return resources;
+    }
+
+    public void setResources(ResourceBundle resources) {
+        this.resources = resources;
     }
 }

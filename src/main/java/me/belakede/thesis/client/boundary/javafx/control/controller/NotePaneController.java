@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 public class NotePaneController implements Initializable {
 
     private final PlayerService playerService;
+    private ResourceBundle resources;
 
     @FXML
     private StackPane parent;
@@ -31,6 +32,7 @@ public class NotePaneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setResources(resources);
         setupPopover();
         hookupChangeListeners();
     }
@@ -48,11 +50,18 @@ public class NotePaneController implements Initializable {
     private void setupPopover() {
         popOver = new PopOver(new NoteBox());
         popOver.setAnimated(true);
-        popOver.setTitle("Notes");
+        popOver.setTitle(getResources().getString("Notes"));
         popOver.setDetached(false);
         popOver.setDetachable(false);
         popOver.setHeaderAlwaysVisible(true);
         popOver.setArrowLocation(PopOver.ArrowLocation.BOTTOM_LEFT);
     }
 
+    private ResourceBundle getResources() {
+        return resources;
+    }
+
+    private void setResources(ResourceBundle resources) {
+        this.resources = resources;
+    }
 }

@@ -22,6 +22,7 @@ public class RotateConfigurationPaneController implements Initializable {
     private final ObservableList<Rotate> rotates = FXCollections.observableArrayList();
     private final DoubleProperty size = new SimpleDoubleProperty();
     private final DoubleProperty pivot = new SimpleDoubleProperty();
+    private ResourceBundle resources;
 
     @FXML
     private Slider roll;
@@ -30,6 +31,7 @@ public class RotateConfigurationPaneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setResources(resources);
         hookupChangeListeners();
     }
 
@@ -72,7 +74,14 @@ public class RotateConfigurationPaneController implements Initializable {
     private void hookupChangeListeners() {
         pivot.bind(sizeProperty().divide(2.0));
         roll.valueProperty().addListener((observable, oldValue, newValue) -> roll.setValue(newValue.intValue()));
-        rollValue.textProperty().bind(roll.valueProperty().asString("Roll with %.0f deg"));
+        rollValue.textProperty().bind(roll.valueProperty().asString(getResources().getString("Roll with %.0f deg")));
     }
 
+    public ResourceBundle getResources() {
+        return resources;
+    }
+
+    public void setResources(ResourceBundle resources) {
+        this.resources = resources;
+    }
 }

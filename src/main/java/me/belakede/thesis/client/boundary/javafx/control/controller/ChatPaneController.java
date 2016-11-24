@@ -21,6 +21,7 @@ public class ChatPaneController implements Initializable {
 
     private final ObjectProperty<Figurine> figurine = new SimpleObjectProperty<>();
     private final PlayerService playerService;
+    private ResourceBundle resources;
 
     @FXML
     private StackPane parent;
@@ -35,6 +36,7 @@ public class ChatPaneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setResources(resources);
         setupPopover();
         hookupChangeListeners();
         setupBindings();
@@ -43,7 +45,7 @@ public class ChatPaneController implements Initializable {
     private void setupPopover() {
         popOver = new PopOver(new ChatBox());
         popOver.setAnimated(true);
-        popOver.setTitle("Chat");
+        popOver.setTitle(getResources().getString("Chat"));
         popOver.setHeaderAlwaysVisible(true);
         popOver.setArrowLocation(PopOver.ArrowLocation.BOTTOM_RIGHT);
     }
@@ -60,5 +62,13 @@ public class ChatPaneController implements Initializable {
 
     private void setupBindings() {
         figurine.bind(playerService.figurineProperty());
+    }
+
+    public ResourceBundle getResources() {
+        return resources;
+    }
+
+    public void setResources(ResourceBundle resources) {
+        this.resources = resources;
     }
 }
