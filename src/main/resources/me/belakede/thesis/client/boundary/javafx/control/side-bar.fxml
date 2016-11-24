@@ -19,6 +19,6 @@
         <Separator AnchorPane.topAnchor="435" AnchorPane.leftAnchor="10" minWidth="230"/>
         <RotateConfigurationPane fx:id="rotateConfiguration" AnchorPane.topAnchor="455" AnchorPane.leftAnchor="25"
                                  alignment="TOP_CENTER" minWidth="200" prefWidth="200" maxWidth="200"/>
-        <Separator AnchorPane.topAnchor="525" AnchorPane.leftAnchor="10" minWidth="230"/>
+        <Separator AnchorPane.topAnchor="555" AnchorPane.leftAnchor="10" minWidth="230"/>
     </AnchorPane>
 </fx:root>
