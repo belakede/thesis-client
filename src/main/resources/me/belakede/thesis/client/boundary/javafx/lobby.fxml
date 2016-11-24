@@ -14,21 +14,21 @@
             <BorderPane styleClass="container">
                 <left>
                     <VBox styleClass="sidebar">
-                        <Text text="Games" styleClass="headline"/>
+                        <Text text="%Games" styleClass="headline"/>
                         <GamesPane/>
-                        <Text text="Boards" styleClass="headline"/>
+                        <Text text="%Boards" styleClass="headline"/>
                         <BoardsPane/>
                     </VBox>
                 </left>
                 <center>
                     <VBox styleClass="content">
-                        <Text text="Details" styleClass="headline"/>
+                        <Text text="%Details" styleClass="headline"/>
                         <VBox fx:id="content"/>
                     </VBox>
                 </center>
                 <right>
                     <VBox styleClass="sidebar">
-                        <Text text="Players" styleClass="headline"/>
+                        <Text text="%Players" styleClass="headline"/>
                         <PlayersPane/>
                     </VBox>
                 </right>
