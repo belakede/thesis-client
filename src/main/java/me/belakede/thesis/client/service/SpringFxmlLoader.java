@@ -36,7 +36,7 @@ public class SpringFxmlLoader {
     }
 
     public <T, C> C load(T instance) {
-        return load(instance, new Locale("en"));
+        return load(instance, DEFAULT_LOCALE);
     }
 
     public <T, C> C load(T instance, Locale locale) {

@@ -10,8 +10,7 @@
          fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.PlayersPaneController">
     <ListView fx:id="playersView" prefHeight="300" minHeight="300"/>
     <HBox styleClass="actions">
-        <Button fx:id="refreshButton">
-            Refresh
+        <Button fx:id="refreshButton" text="%Refresh">
             <graphic>
                 <Glyph fontFamily="FontAwesome" icon="REFRESH"/>
             </graphic>
