@@ -5,23 +5,24 @@
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.NotificationPane?>
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" fx:id="parent"
-         stylesheets="@../css/auth.css">
+         fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.RegistrationPaneController"
+         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/auth.css">
     <NotificationPane fx:id="notificationPane">
         <content>
             <GridPane styleClass="login-frame" alignment="center" hgap="10" vgap="10">
                 <padding>
                     <Insets top="50" right="25" bottom="25" left="25"/>
                 </padding>
-                <Label text="Server address: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label text="%Server address" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                 <TextField fx:id="serverAddress" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                <Label text="User Name:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Label text="%Username" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
                 <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <Label text="%Password" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
                 <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                <Label text="Repeat password:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                <Label text="%Repeat password" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
                 <PasswordField fx:id="passwordAgain" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
                 <HBox spacing="10" alignment="BOTTOM_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                    <Button fx:id="submit" text="Sign In"/>
+                    <Button fx:id="submit" text="%Register"/>
                 </HBox>
             </GridPane>
         </content>
