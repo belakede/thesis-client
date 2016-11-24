@@ -21,6 +21,7 @@ public class CardBoxController implements Initializable {
 
     private final ObjectProperty<Card> card = new SimpleObjectProperty<>();
     private final UserService userService;
+    private ResourceBundle resources;
 
     @FXML
     private AnchorPane parent;
@@ -35,6 +36,7 @@ public class CardBoxController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setResources(resources);
         setupBindings();
         hookupChangeListeners();
     }
@@ -51,6 +53,14 @@ public class CardBoxController implements Initializable {
         return card;
     }
 
+    public ResourceBundle getResources() {
+        return resources;
+    }
+
+    public void setResources(ResourceBundle resources) {
+        this.resources = resources;
+    }
+
     private void setupBindings() {
         labelUpsideDown.textProperty().bind(label.textProperty());
     }
@@ -61,12 +71,8 @@ public class CardBoxController implements Initializable {
                 parent.getStyleClass().removeAll(Collections.singleton(createStyleClassFromCard(oldValue)));
             }
             parent.getStyleClass().add(createStyleClassFromCard(newValue));
-            label.setText(createTextFromCard(newValue));
+            label.setText(getResources().getString(newValue.name()));
         });
-    }
-
-    private String createTextFromCard(Card card) {
-        return card.name().toLowerCase().replace('_', ' ');
     }
 
     private String createStyleClassFromCard(Card card) {

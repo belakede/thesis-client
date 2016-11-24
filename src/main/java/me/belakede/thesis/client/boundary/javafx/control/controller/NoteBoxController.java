@@ -1,6 +1,5 @@
 package me.belakede.thesis.client.boundary.javafx.control.controller;
 
-import com.google.common.base.CaseFormat;
 import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
 import javafx.beans.property.ListProperty;
@@ -45,6 +44,7 @@ public class NoteBoxController implements Initializable {
 
     @FXML
     private GridPane parent;
+    private ResourceBundle resources;
 
     @Autowired
     public NoteBoxController(GameService gameService, PlayerService playerService, NoteService noteService) {
@@ -59,6 +59,7 @@ public class NoteBoxController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setResources(resources);
         hookupChangeListeners();
         setupBindings();
     }
@@ -137,12 +138,7 @@ public class NoteBoxController implements Initializable {
     }
 
     private String convertCardToHuman(String name) {
-        List<String> nameParts = new ArrayList<>(Arrays.asList(name.split("_")));
-        StringBuilder builder = new StringBuilder();
-        builder.append(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, nameParts.get(0)));
-        nameParts.remove(0);
-        nameParts.forEach(part -> builder.append(" ").append(part.toLowerCase()));
-        return builder.toString();
+        return getResources().getString(name);
     }
 
     private VBox createCardHeaderBox(String card) {
@@ -196,5 +192,13 @@ public class NoteBoxController implements Initializable {
             players.values().forEach(player -> notes.get(weapon).add(player));
         });
         return notes;
+    }
+
+    public ResourceBundle getResources() {
+        return resources;
+    }
+
+    public void setResources(ResourceBundle resources) {
+        this.resources = resources;
     }
 }
