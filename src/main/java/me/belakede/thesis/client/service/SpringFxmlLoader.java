@@ -19,11 +19,14 @@ public class SpringFxmlLoader {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SpringFxmlLoader.class);
     private static final ApplicationContext APPLICATION_CONTEXT = new AnnotationConfigApplicationContext(SuspectApplicationConfiguration.class);
+    private static final Locale DEFAULT_LOCALE = new Locale("en");
 
     public Object load(URL url) {
         try (InputStream fxmlStream = url.openStream()) {
             LOGGER.trace("Loading: {}", fxmlStream);
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("bundles/bundles", DEFAULT_LOCALE);
             FXMLLoader loader = new FXMLLoader();
+            loader.setResources(resourceBundle);
             loader.setControllerFactory(APPLICATION_CONTEXT::getBean);
             return loader.load(fxmlStream);
         } catch (IOException ioException) {

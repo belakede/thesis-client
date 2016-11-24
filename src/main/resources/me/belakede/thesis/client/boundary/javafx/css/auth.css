@@ -1,5 +1,6 @@
 .login-frame {
     -fx-background-color: #ffffff;
+    -fx-padding: 25 25 10 25;
 }
 
 .login-frame .label {
