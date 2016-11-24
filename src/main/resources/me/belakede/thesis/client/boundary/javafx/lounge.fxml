@@ -15,7 +15,7 @@
                     <HBox prefWidth="1280" prefHeight="800" spacing="50" alignment="CENTER" fx:id="playerContainer"
                           AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"/>
                     <HBox AnchorPane.bottomAnchor="15" AnchorPane.leftAnchor="15">
-                        <ToggleSwitch text="Recording" fx:id="recordingSwitch"/>
+                        <ToggleSwitch text="%Recording" fx:id="recordingSwitch"/>
                     </HBox>
                     <StackPane visible="false" fx:id="countDown" styleClass="countdown" AnchorPane.topAnchor="25"
                                AnchorPane.rightAnchor="25">
@@ -28,7 +28,7 @@
                 </AnchorPane>
                 <StackPane fx:id="sorryPane" styleClass="sorry-pane" visible="false" prefWidth="1280" prefHeight="800">
                     <Glyph fontFamily="FontAwesome" icon="FROWN_ALT" fontSize="600"/>
-                    <Text>Sorry, it's not your game.</Text>
+                    <Text text="%Sorry, it's not your game."/>
                 </StackPane>
             </StackPane>
         </content>
