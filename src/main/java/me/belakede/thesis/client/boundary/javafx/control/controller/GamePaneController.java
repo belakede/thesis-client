@@ -57,7 +57,7 @@ public class GamePaneController implements Initializable {
     }
 
     public void setBoardPane(BoardPane boardPane) {
-        boardPaneHolder.setCenter(boardPane);
+        Platform.runLater(() -> boardPaneHolder.setCenter(boardPane));
         transformBoard(boardPane);
         bindSideBarAndBoardPane(boardPane);
     }
