@@ -89,11 +89,15 @@ public class PlayerService {
             }
         });
         notificationService.pairOfDiceNotificationProperty().addListener((observable, oldValue, newValue) -> {
-            Set<Field> availableFields = boardService.getAvailableFields(getField(), newValue.getFirst() + newValue.getSecond());
-            List<Field> fields = availableFields.stream()
-                    .filter(field -> !positionService.getPositions().values().contains(field))
-                    .collect(Collectors.toList());
-            setAvailableFields(FXCollections.observableArrayList(fields));
+            if (isCurrent()) {
+                Set<Field> availableFields = boardService.getAvailableFields(getField(), newValue.getFirst() + newValue.getSecond());
+                List<Field> fields = availableFields.stream()
+                        .filter(field -> !positionService.getPositions().values().contains(field))
+                        .collect(Collectors.toList());
+                setAvailableFields(FXCollections.observableArrayList(fields));
+            } else {
+                setAvailableFields(FXCollections.emptyObservableList());
+            }
         });
     }
 
