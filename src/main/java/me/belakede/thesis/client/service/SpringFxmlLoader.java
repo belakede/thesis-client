@@ -19,7 +19,7 @@ public class SpringFxmlLoader {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SpringFxmlLoader.class);
     private static final ApplicationContext APPLICATION_CONTEXT = new AnnotationConfigApplicationContext(SuspectApplicationConfiguration.class);
-    private static final Locale DEFAULT_LOCALE = new Locale("hu");
+    private static final Locale DEFAULT_LOCALE = new Locale("en");
 
     public Object load(URL url) {
         try (InputStream fxmlStream = url.openStream()) {
