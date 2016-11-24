@@ -10,14 +10,12 @@
          fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.GamesPaneController">
     <ListView fx:id="gamesView"/>
     <HBox styleClass="actions">
-        <Button fx:id="createButton">
-            Create
+        <Button fx:id="createButton" text="%Create">
             <graphic>
                 <Glyph fontFamily="FontAwesome" icon="PLUS"/>
             </graphic>
         </Button>
-        <Button fx:id="refreshButton">
-            Refresh
+        <Button fx:id="refreshButton" text="%Refresh">
             <graphic>
                 <Glyph fontFamily="FontAwesome" icon="REFRESH"/>
             </graphic>
