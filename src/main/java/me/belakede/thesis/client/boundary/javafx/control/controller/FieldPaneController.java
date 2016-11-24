@@ -10,6 +10,7 @@ import me.belakede.thesis.client.boundary.javafx.task.MoveTask;
 import me.belakede.thesis.client.service.*;
 import me.belakede.thesis.game.equipment.Figurine;
 import me.belakede.thesis.game.field.Field;
+import me.belakede.thesis.game.field.FieldType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,9 @@ public class FieldPaneController implements Initializable {
             if (figurine != null) {
                 figurinePane.setFigurine(figurine);
                 figurinePane.setVisible(true);
+            }
+            if (FieldType.END.equals(newValue.getFieldType())) {
+                parent.getStyleClass().add("end");
             }
         });
         positionService.positionsProperty().addListener((MapChangeListener.Change<? extends Figurine, ? extends Field> change) -> {

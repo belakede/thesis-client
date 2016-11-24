@@ -11,29 +11,17 @@
     -fx-pref-height: 25;
     -fx-max-height: 25;
 }
-
-.field.wall,
-.field.room {
-    -fx-border-color: transparent;
-    -fx-border-style: solid;
-    -fx-border-width: 0.25;
-}
-
 .field.end {
-    -fx-background-color: rgba(0, 153, 153, 0.4);
-    -fx-border-color: #000000;
-    -fx-border-style: solid;
-    -fx-border-width: 0.25;
-}
-.field.end:hover {
-    -fx-background-color: rgba(0, 153, 153, 0.9);
+    -fx-background-color: rgba(255, 0, 0, 0.25);
 }
 
-.field.available,
-.field.simple:hover {
+.field.available {
     -fx-background-color: rgba(255, 255, 255, 0.5);
 }
 
+.field.end.available {
+    -fx-background-color: rgba(255, 0, 0, 0.5);
+}
 .field.available:hover {
     -fx-background-color: rgba(255, 255, 125, 0.5);
 }
