@@ -15,10 +15,12 @@
     <StackPane fx:id="sorryPane" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" styleClass="sorry-pane"
                visible="false" prefWidth="1280" prefHeight="800">
         <Glyph fontFamily="FontAwesome" icon="FROWN_ALT" fontSize="600"/>
-        <Text>Sorry, one or more players left the game.</Text>
+        <Text text="%Sorry, one or more players left the game." styleClass="sorry-text"/>
     </StackPane>
-    <StackPane fx:id="endPane" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" styleClass="end-pane"
+    <StackPane fx:id="endPane" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" styleClass="sorry-pane, end-pane"
                visible="false" prefWidth="1280" prefHeight="800">
+        <Glyph fontFamily="FontAwesome" icon="TROPHY" fontSize="600"/>
+        <Text text="%And now the game is ended" styleClass="sorry-text"/>
         <HBox prefWidth="1280" prefHeight="800" spacing="50" alignment="CENTER" fx:id="playerContainer"/>
     </StackPane>
     <HistoryPane fx:id="historyPane" AnchorPane.bottomAnchor="15" AnchorPane.rightAnchor="75"/>
