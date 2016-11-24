@@ -5,7 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.glyphfont.Glyph?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.BorderPane" stylesheets="@../css/lobby.css"
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.BorderPane"
+         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/lobby.css"
          fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.GameDetailsPaneController"
          styleClass="game-details-container">
     <top>
@@ -36,14 +37,12 @@
     </center>
     <bottom>
         <AnchorPane>
-            <Button prefWidth="75" fx:id="remove" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10">
-                Remove
+            <Button prefWidth="100" fx:id="remove" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10" text="%Remove">
                 <graphic>
                     <Glyph fontFamily="FontAwesome" icon="REMOVE"/>
                 </graphic>
             </Button>
-            <Button prefWidth="75" fx:id="start" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10">
-                Start
+            <Button prefWidth="100" fx:id="start" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10" text="%Start">
                 <graphic>
                     <Glyph fontFamily="FontAwesome" icon="PLAY"/>
                 </graphic>
