@@ -7,10 +7,10 @@
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox"
          fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.ActionPaneController"
          stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/actions.css" styleClass="actions">
-    <Button fx:id="roll" text="Roll"/>
-    <Button fx:id="suspect" text="Suspect"/>
-    <Button fx:id="show" text="Show"/>
-    <Button fx:id="accuse" text="Accuse"/>
+    <Button fx:id="roll" text="%Roll"/>
+    <Button fx:id="suspect" text="%Suspect"/>
+    <Button fx:id="show" text="%Cards"/>
+    <Button fx:id="accuse" text="%Accuse"/>
     <HBox>
         <Button fx:id="next">
             <graphic>
