@@ -3,11 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.layout.VBox?>
-<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@../css/lobby.css"
-         fx:id="parent" spacing="10" styleClass="boards-container">
+<fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox"
+         fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.BoardsPaneController"
+         stylesheets="@/me/belakede/thesis/client/boundary/javafx/css/lobby.css" styleClass="boards-container"
+         fx:id="parent" spacing="10">
     <padding>
         <Insets top="5" right="0" bottom="10" left="10"/>
     </padding>
-    <Hyperlink fx:id="defaultBoard">Default</Hyperlink>
-    <Hyperlink fx:id="advancedBoard">Advanced</Hyperlink>
+    <Hyperlink fx:id="defaultBoard" text="%Default"/>
+    <Hyperlink fx:id="advancedBoard" text="%Advanced"/>
 </fx:root>
