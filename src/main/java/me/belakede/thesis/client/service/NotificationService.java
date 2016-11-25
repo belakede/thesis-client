@@ -31,12 +31,13 @@ public class NotificationService {
     private final ObjectProperty<FigurineNotification> figurineNotification = new SimpleObjectProperty<>();
     private final ListProperty<SuspicionNotification> suspicionNotifications = new SimpleListProperty<>();
     private final ObjectProperty<AccusationNotification> accusationNotification = new SimpleObjectProperty<>();
-    private final ObjectProperty<CardNotification> cardNotification = new SimpleObjectProperty<>();
+    private final ListProperty<CardNotification> cardNotifications = new SimpleListProperty<>();
 
     public NotificationService() {
         setNotifications(FXCollections.observableArrayList());
         setPlayerJoinedNotifications(FXCollections.observableArrayList());
         setSuspicionNotifications(FXCollections.observableArrayList());
+        setCardNotifications(FXCollections.observableArrayList());
         setHookupChangeListeners();
     }
 
@@ -184,16 +185,16 @@ public class NotificationService {
         return accusationNotification;
     }
 
-    public CardNotification getCardNotification() {
-        return cardNotification.get();
+    public ObservableList<CardNotification> getCardNotifications() {
+        return cardNotifications.get();
     }
 
-    public void setCardNotification(CardNotification cardNotification) {
-        this.cardNotification.set(cardNotification);
+    public void setCardNotifications(ObservableList<CardNotification> cardNotifications) {
+        this.cardNotifications.set(cardNotifications);
     }
 
-    public ObjectProperty<CardNotification> cardNotificationProperty() {
-        return cardNotification;
+    public ListProperty<CardNotification> cardNotificationsProperty() {
+        return cardNotifications;
     }
 
     public void add(Notification notification) {
@@ -255,7 +256,7 @@ public class NotificationService {
     }
 
     private void set(CardNotification notification) {
-        setCardNotification(notification);
+        getCardNotifications().add(notification);
     }
 
     private void set(Notification notification) {

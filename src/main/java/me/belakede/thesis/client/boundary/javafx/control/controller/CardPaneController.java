@@ -16,6 +16,7 @@ import me.belakede.thesis.client.service.NotificationService;
 import me.belakede.thesis.client.service.PlayerService;
 import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.game.equipment.Card;
+import me.belakede.thesis.server.game.response.CardNotification;
 import me.belakede.thesis.server.game.response.SuspicionNotification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -89,7 +90,7 @@ public class CardPaneController implements Initializable {
                 }
             }
         });
-        notificationService.cardNotificationProperty().addListener((observable, oldValue, newValue) -> {
+        notificationService.cardNotificationsProperty().addListener((ListChangeListener.Change<? extends CardNotification> change) -> {
             cardBoxes.values().forEach(cardBox -> cardBox.setDisable(true));
         });
     }
