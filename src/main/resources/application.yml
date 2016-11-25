@@ -3,4 +3,4 @@ spring:
     web-environment: false
 logging:
   level:
-    me.belakede.thesis: INFO
+    root: WARN
