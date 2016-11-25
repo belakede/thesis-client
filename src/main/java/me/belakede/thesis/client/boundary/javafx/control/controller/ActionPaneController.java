@@ -90,17 +90,23 @@ public class ActionPaneController implements Initializable {
         });
         notificationService.suspicionNotificationProperty().addListener((observable, oldValue, newValue) -> {
             if (playerService.isCurrent()) {
+                roll.setDisable(true);
                 suspect.setDisable(true);
+                accuse.setDisable(true);
             }
         });
         notificationService.accusationNotificationProperty().addListener((observable, oldValue, newValue) -> {
             if (playerService.isCurrent()) {
+                roll.setDisable(true);
+                suspect.setDisable(true);
                 accuse.setDisable(true);
             }
         });
         notificationService.cardNotificationProperty().addListener((observable, oldValue, newValue) -> {
             if (playerService.isCurrent()) {
+                roll.setDisable(true);
                 suspect.setDisable(true);
+                accuse.setDisable(true);
             }
         });
         playerService.lastActionProperty().addListener((observable, oldValue, newValue) -> {
