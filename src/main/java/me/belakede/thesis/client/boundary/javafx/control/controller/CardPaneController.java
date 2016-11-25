@@ -69,6 +69,9 @@ public class CardPaneController implements Initializable {
                 uploadCardBoxes(newValue);
             }
         });
+        notificationService.currentPlayerNotificationProperty().addListener((observable, oldValue, newValue) -> {
+            cardBoxes.values().forEach(cardBox -> cardBox.setDisable(true));
+        });
         notificationService.suspicionNotificationProperty().addListener((observable, oldValue, newValue) -> {
             if (playerService.isNext()) {
                 if (playerService.hasAnyOfThem(newValue.getSuspect(), newValue.getRoom(), newValue.getWeapon())) {
