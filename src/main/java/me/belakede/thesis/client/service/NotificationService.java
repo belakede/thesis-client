@@ -29,13 +29,14 @@ public class NotificationService {
     private final ObjectProperty<ShowYourCardNotification> showYourCardNotification = new SimpleObjectProperty<>();
     private final ObjectProperty<PairOfDiceNotification> pairOfDiceNotification = new SimpleObjectProperty<>();
     private final ObjectProperty<FigurineNotification> figurineNotification = new SimpleObjectProperty<>();
-    private final ObjectProperty<SuspicionNotification> suspicionNotification = new SimpleObjectProperty<>();
+    private final ListProperty<SuspicionNotification> suspicionNotifications = new SimpleListProperty<>();
     private final ObjectProperty<AccusationNotification> accusationNotification = new SimpleObjectProperty<>();
     private final ObjectProperty<CardNotification> cardNotification = new SimpleObjectProperty<>();
 
     public NotificationService() {
         setNotifications(FXCollections.observableArrayList());
         setPlayerJoinedNotifications(FXCollections.observableArrayList());
+        setSuspicionNotifications(FXCollections.observableArrayList());
         setHookupChangeListeners();
     }
 
@@ -159,16 +160,16 @@ public class NotificationService {
         return figurineNotification;
     }
 
-    public SuspicionNotification getSuspicionNotification() {
-        return suspicionNotification.get();
+    public ObservableList<SuspicionNotification> getSuspicionNotifications() {
+        return suspicionNotifications.get();
     }
 
-    public void setSuspicionNotification(SuspicionNotification suspicionNotification) {
-        this.suspicionNotification.set(suspicionNotification);
+    public void setSuspicionNotifications(ObservableList<SuspicionNotification> suspicionNotifications) {
+        this.suspicionNotifications.set(suspicionNotifications);
     }
 
-    public ObjectProperty<SuspicionNotification> suspicionNotificationProperty() {
-        return suspicionNotification;
+    public ListProperty<SuspicionNotification> suspicionNotificationsProperty() {
+        return suspicionNotifications;
     }
 
     public AccusationNotification getAccusationNotification() {
@@ -246,7 +247,7 @@ public class NotificationService {
     }
 
     private void set(SuspicionNotification notification) {
-        setSuspicionNotification(notification);
+        getSuspicionNotifications().add(notification);
     }
 
     private void set(AccusationNotification notification) {

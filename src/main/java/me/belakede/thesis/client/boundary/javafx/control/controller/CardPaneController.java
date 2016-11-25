@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.beans.property.MapProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import me.belakede.thesis.client.service.NotificationService;
 import me.belakede.thesis.client.service.PlayerService;
 import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.game.equipment.Card;
+import me.belakede.thesis.server.game.response.SuspicionNotification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -72,14 +74,18 @@ public class CardPaneController implements Initializable {
         notificationService.currentPlayerNotificationProperty().addListener((observable, oldValue, newValue) -> {
             cardBoxes.values().forEach(cardBox -> cardBox.setDisable(true));
         });
-        notificationService.suspicionNotificationProperty().addListener((observable, oldValue, newValue) -> {
-            if (playerService.isNext()) {
-                if (playerService.hasAnyOfThem(newValue.getSuspect(), newValue.getRoom(), newValue.getWeapon())) {
-                    enableCardBox(newValue.getSuspect());
-                    enableCardBox(newValue.getRoom());
-                    enableCardBox(newValue.getWeapon());
-                } else {
-                    sendEmptyShowRequest();
+        notificationService.suspicionNotificationsProperty().addListener((ListChangeListener.Change<? extends SuspicionNotification> change) -> {
+            while (change.next()) {
+                if (playerService.isNext() && change.wasAdded()) {
+                    change.getAddedSubList().forEach(newValue -> {
+                        if (playerService.hasAnyOfThem(newValue.getSuspect(), newValue.getRoom(), newValue.getWeapon())) {
+                            enableCardBox(newValue.getSuspect());
+                            enableCardBox(newValue.getRoom());
+                            enableCardBox(newValue.getWeapon());
+                        } else {
+                            sendEmptyShowRequest();
+                        }
+                    });
                 }
             }
         });

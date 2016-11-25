@@ -16,6 +16,7 @@ import me.belakede.thesis.game.equipment.Figurine;
 import me.belakede.thesis.game.equipment.PairOfDice;
 import me.belakede.thesis.game.field.Field;
 import me.belakede.thesis.game.field.FieldType;
+import me.belakede.thesis.server.game.response.SuspicionNotification;
 import org.controlsfx.control.PopOver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -88,11 +89,13 @@ public class ActionPaneController implements Initializable {
                 suspect.setDisable(!FieldType.ROOM.equals((change.getValueAdded().getFieldType())));
             }
         });
-        notificationService.suspicionNotificationProperty().addListener((observable, oldValue, newValue) -> {
-            if (playerService.isCurrent()) {
-                roll.setDisable(true);
-                suspect.setDisable(true);
-                accuse.setDisable(true);
+        notificationService.suspicionNotificationsProperty().addListener((ListChangeListener.Change<? extends SuspicionNotification> change) -> {
+            while (change.next()) {
+                if (playerService.isCurrent() && change.wasAdded()) {
+                    roll.setDisable(true);
+                    suspect.setDisable(true);
+                    accuse.setDisable(true);
+                }
             }
         });
         notificationService.accusationNotificationProperty().addListener((observable, oldValue, newValue) -> {
