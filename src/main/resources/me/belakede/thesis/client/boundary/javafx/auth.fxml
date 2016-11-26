@@ -9,24 +9,43 @@
       fx:controller="me.belakede.thesis.client.boundary.javafx.controller.AuthController">
     <NotificationPane fx:id="notificationPane">
         <content>
-            <GridPane styleClass="login-frame" alignment="center" hgap="10" vgap="10">
-                <Text text="%Welcome" styleClass="welcome-text" GridPane.columnIndex="0" GridPane.rowIndex="0"
-                      GridPane.columnSpan="2"/>
-                <Label text="%Server address" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <ChoiceBox fx:id="protocol"/>
-                    <TextField fx:id="serverAddress" prefWidth="120"/>
-                    <TextField fx:id="port" prefWidth="45"/>
-                </HBox>
-                <Label text="%Username" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                <Label text="%Password" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-                <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                    <Hyperlink text="%Register" onAction="#register"/>
-                    <Button text="%Sign in" onAction="#submit"/>
-                </HBox>
-            </GridPane>
+            <AnchorPane prefWidth="800" prefHeight="1280">
+                <VBox AnchorPane.topAnchor="150" AnchorPane.leftAnchor="490" styleClass="login-box">
+                    <VBox styleClass="login-logo"/>
+                    <Text text="%Welcome" styleClass="welcome-text"/>
+                    <GridPane styleClass="login-form">
+                        <Label text="%Server address" styleClass="label" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                               GridPane.columnSpan="2"/>
+
+                        <TextField fx:id="serverAddress" text="http://" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                                   prefWidth="190"/>
+                        <TextField fx:id="port" text="8080" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                   prefWidth="70"/>
+
+                        <Label text="%Username" styleClass="label" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                               GridPane.columnSpan="2"/>
+
+                        <TextField fx:id="username" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                                   GridPane.columnSpan="2"/>
+
+                        <Label text="%Password" styleClass="label" GridPane.columnIndex="0" GridPane.rowIndex="4"
+                               GridPane.columnSpan="2"/>
+
+                        <PasswordField fx:id="password" GridPane.columnIndex="0" GridPane.rowIndex="5"
+                                       GridPane.columnSpan="2"/>
+
+                        <AnchorPane GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2">
+                            <Hyperlink text="%Register" onAction="#register" AnchorPane.topAnchor="15"
+                                       AnchorPane.leftAnchor="0"/>
+                            <Button text="%Sign in" onAction="#submit" AnchorPane.topAnchor="15"
+                                    AnchorPane.rightAnchor="0"/>
+                        </AnchorPane>
+                    </GridPane>
+                </VBox>
+                <VBox AnchorPane.bottomAnchor="25" AnchorPane.rightAnchor="25">
+                    <Text>Language:</Text>
+                </VBox>
+            </AnchorPane>
         </content>
     </NotificationPane>
 </VBox>

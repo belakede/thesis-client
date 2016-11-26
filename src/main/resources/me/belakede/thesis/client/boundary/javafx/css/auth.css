@@ -1,18 +1,46 @@
-.login-frame {
-    -fx-background-color: #ffffff;
-    -fx-padding: 25 25 10 25;
+AnchorPane {
+    -fx-background-color: #fefefe;
 }
 
-.login-frame .label {
-    -fx-font-size: 12px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #333333;
-    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.5), 0, 0, 0, 1);
+.login-box {
+    -fx-alignment: top-center;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-padding: 25 15 25 15;
+    -fx-pref-width: 300;
+    -fx-pref-height: 430;
+    -fx-spacing: 15;
 }
 
-.login-frame .welcome-text {
-    -fx-font-size: 32px;
-    -fx-font-family: "Arial Black";
+.login-box .login-logo {
+    -fx-background-image: url("../img/logo-circle.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-border-color: #000000;
+    -fx-border-width: 4;
+    -fx-border-radius: 125;
+    -fx-max-width: 125;
+    -fx-max-height: 125;
+    -fx-min-width: 125;
+    -fx-min-height: 124;
+    -fx-pref-width: 125;
+    -fx-pref-height: 125;
+}
+
+.login-box .welcome-text {
     -fx-fill: #818181;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 32px;
     -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
+}
+
+.login-box .login-form {
+    -fx-hgap: 5;
+    -fx-vgap: 5;
+    -fx-pref-width: 270;
+}
+
+.login-box TextField,
+.login-box PasswordField {
+    -fx-border-insets: 7px;
 }

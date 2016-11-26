@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -32,8 +31,6 @@ public class AuthController implements Initializable {
 
     private final UserService userService;
     @FXML
-    public ChoiceBox<String> protocol;
-    @FXML
     public TextField port;
     @FXML
     private VBox parent;
@@ -53,20 +50,15 @@ public class AuthController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-        setupProtocol();
         setupDefaultValues();
         setupNotificationPane();
         setupPopOver();
     }
 
-    private void setupProtocol() {
-        protocol.getItems().addAll("http://", "https://");
-    }
 
     private void setupDefaultValues() {
         port.setText("8080");
-        serverAddress.setText("localhost");
-        protocol.getSelectionModel().select("http://");
+        serverAddress.setText("http://localhost");
     }
 
     private void setupPopOver() {
@@ -88,7 +80,7 @@ public class AuthController implements Initializable {
     public void submit(ActionEvent actionEvent) {
         String usernameText = username.getText().trim();
         String passwordText = password.getText().trim();
-        String serverAddressText = protocol.getSelectionModel().getSelectedItem() + serverAddress.getText().trim() + ":" + port.getText().trim();
+        String serverAddressText = serverAddress.getText().trim() + ":" + port.getText().trim();
 
         Task<Token> task = new AuthenticationTask(serverAddressText, usernameText, passwordText);
         task.setOnFailed(event -> {
