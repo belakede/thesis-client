@@ -37,7 +37,7 @@ public class AuthController implements Initializable {
     @FXML
     public TextField port;
     @FXML
-    public ChoiceBox<String> languageBox;
+    public ChoiceBox<Locale> languageBox;
     @FXML
     private VBox parent;
     @FXML
@@ -65,12 +65,13 @@ public class AuthController implements Initializable {
 
     private void hookupChangeListeners() {
         languageBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            DEFAULT_LOCALE.set("magyar".equals(newValue) ? new Locale("hu") : new Locale("en"));
+            DEFAULT_LOCALE.setValue(newValue);
         });
     }
 
     private void initLanguageBox() {
-        languageBox.getItems().addAll("magyar", "English");
+        languageBox.getItems().addAll(new Locale("hu"), new Locale("en"));
+        languageBox.setValue(new Locale("en"));
     }
 
 
