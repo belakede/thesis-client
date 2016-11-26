@@ -1,6 +1,8 @@
 package me.belakede.thesis.client.service;
 
 import com.google.common.base.CaseFormat;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import me.belakede.thesis.client.configuration.SuspectApplicationConfiguration;
@@ -17,14 +19,14 @@ import java.util.ResourceBundle;
 
 public class SpringFxmlLoader {
 
+    public static final ObjectProperty<Locale> DEFAULT_LOCALE = new SimpleObjectProperty<>(new Locale("en"));
     private static final Logger LOGGER = LoggerFactory.getLogger(SpringFxmlLoader.class);
     private static final ApplicationContext APPLICATION_CONTEXT = new AnnotationConfigApplicationContext(SuspectApplicationConfiguration.class);
-    private static final Locale DEFAULT_LOCALE = new Locale("en");
 
     public Object load(URL url) {
         try (InputStream fxmlStream = url.openStream()) {
             LOGGER.trace("Loading: {}", fxmlStream);
-            ResourceBundle resourceBundle = ResourceBundle.getBundle("bundles/bundles", DEFAULT_LOCALE);
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("bundles/bundles", DEFAULT_LOCALE.get());
             FXMLLoader loader = new FXMLLoader();
             loader.setResources(resourceBundle);
             loader.setControllerFactory(APPLICATION_CONTEXT::getBean);
@@ -36,7 +38,7 @@ public class SpringFxmlLoader {
     }
 
     public <T, C> C load(T instance) {
-        return load(instance, DEFAULT_LOCALE);
+        return load(instance, DEFAULT_LOCALE.get());
     }
 
     public <T, C> C load(T instance, Locale locale) {
