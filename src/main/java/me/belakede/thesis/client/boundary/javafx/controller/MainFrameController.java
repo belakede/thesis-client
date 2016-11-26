@@ -24,11 +24,23 @@ public class MainFrameController implements Initializable {
     private StackPane parent;
 
     public void initialize(URL location, ResourceBundle resources) {
+        hookupChangeListeners();
+        displayPaneInChain();
+    }
+
+    private void displayPaneInChain() {
         nestedLoader("auth", ((observable, oldValue, newValue)
                 -> nestedLoader("lobby", (observable1, oldValue1, newValue1)
                 -> nestedLoader("lounge", (observable2, oldValue2, newValue2)
                 -> nestedLoader("game", (observable3, oldValue3, newValue3)
                 -> Platform.exit())))));
+    }
+
+    private void hookupChangeListeners() {
+        SpringFxmlLoader.DEFAULT_LOCALE.addListener((observable, oldValue, newValue) -> {
+            parent.getChildren().clear();
+            displayPaneInChain();
+        });
     }
 
     private void nestedLoader(String name, ChangeListener<Boolean> changeListener) {

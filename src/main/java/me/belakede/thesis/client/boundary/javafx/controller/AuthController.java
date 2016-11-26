@@ -23,7 +23,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
+
+import static me.belakede.thesis.client.service.SpringFxmlLoader.DEFAULT_LOCALE;
 
 @Controller
 public class AuthController implements Initializable {
@@ -62,11 +65,7 @@ public class AuthController implements Initializable {
 
     private void hookupChangeListeners() {
         languageBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if ("magyar".equals(newValue)) {
-                // TODO: change language to hungarian
-            } else {
-                // TODO: change language to English
-            }
+            DEFAULT_LOCALE.set("magyar".equals(newValue) ? new Locale("hu") : new Locale("en"));
         });
     }
 
