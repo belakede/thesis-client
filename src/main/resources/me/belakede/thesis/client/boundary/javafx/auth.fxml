@@ -42,9 +42,10 @@
                         </AnchorPane>
                     </GridPane>
                 </VBox>
-                <VBox AnchorPane.bottomAnchor="25" AnchorPane.rightAnchor="25">
+                <HBox AnchorPane.topAnchor="25" AnchorPane.rightAnchor="25" styleClass="language-box">
                     <Text>Language:</Text>
-                </VBox>
+                    <ChoiceBox fx:id="languageBox"/>
+                </HBox>
             </AnchorPane>
         </content>
     </NotificationPane>

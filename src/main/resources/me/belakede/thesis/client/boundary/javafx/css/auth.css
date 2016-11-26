@@ -44,3 +44,8 @@ AnchorPane {
 .login-box PasswordField {
     -fx-border-insets: 7px;
 }
+
+.language-box {
+    -fx-alignment: center-right;
+    -fx-spacing: 10;
+}

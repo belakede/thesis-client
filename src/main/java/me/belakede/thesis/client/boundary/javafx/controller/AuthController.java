@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -33,6 +34,8 @@ public class AuthController implements Initializable {
     @FXML
     public TextField port;
     @FXML
+    public ChoiceBox<String> languageBox;
+    @FXML
     private VBox parent;
     @FXML
     private NotificationPane notificationPane;
@@ -50,9 +53,25 @@ public class AuthController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+        initLanguageBox();
         setupDefaultValues();
         setupNotificationPane();
         setupPopOver();
+        hookupChangeListeners();
+    }
+
+    private void hookupChangeListeners() {
+        languageBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if ("magyar".equals(newValue)) {
+                // TODO: change language to hungarian
+            } else {
+                // TODO: change language to English
+            }
+        });
+    }
+
+    private void initLanguageBox() {
+        languageBox.getItems().addAll("magyar", "English");
     }
 
 
