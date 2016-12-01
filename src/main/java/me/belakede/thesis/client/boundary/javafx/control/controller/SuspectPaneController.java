@@ -71,7 +71,6 @@ public class SuspectPaneController implements Initializable {
                 Thread thread = new Thread(task);
                 thread.setDaemon(true);
                 thread.start();
-
             } else {
                 LOGGER.warn("Your current field is {} which not a room field", playerService.getField());
             }

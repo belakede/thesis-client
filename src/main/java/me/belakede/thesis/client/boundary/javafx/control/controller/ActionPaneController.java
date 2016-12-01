@@ -96,6 +96,7 @@ public class ActionPaneController implements Initializable {
                     roll.setDisable(true);
                     suspect.setDisable(true);
                     accuse.setDisable(true);
+                    suspectPopOver.hide();
                 }
             }
         });
@@ -104,6 +105,7 @@ public class ActionPaneController implements Initializable {
                 roll.setDisable(true);
                 suspect.setDisable(true);
                 accuse.setDisable(true);
+                accusePopOver.hide();
             }
         });
         notificationService.cardNotificationsProperty().addListener((ListChangeListener.Change<? extends CardNotification> change) -> {
