@@ -1,6 +1,7 @@
 @import "colors.css";
 
-.chat-container {
+.chat-container,
+.chat-container AnchorPane {
     -fx-min-width: 80;
     -fx-pref-width: 80;
     -fx-max-width: 80;
@@ -8,7 +9,6 @@
     -fx-pref-height: 80;
     -fx-max-height: 80;
 }
-
 .chat-container .chat-button {
     -fx-cursor: hand;
     -fx-border-width: 0;
@@ -33,6 +33,33 @@
     -fx-text-fill: derive(-fx-white, -20%);
 }
 
+.chat-container Cirlce {
+    -fx-stroke-width: 0;
+}
+
+.chat-container Circle.green {
+    -fx-fill: derive(-fx-green, -20%);
+}
+
+.chat-container Circle.mustard {
+    -fx-fill: derive(-fx-mustard, -20%);
+}
+
+.chat-container Circle.peacock {
+    -fx-fill: derive(-fx-peacock, -20%);
+}
+
+.chat-container Circle.plum {
+    -fx-fill: derive(-fx-plum, -20%);
+}
+
+.chat-container Circle.scarlet {
+    -fx-fill: derive(-fx-scarlet, -20%);
+}
+
+.chat-container Circle.white {
+    -fx-fill: derive(-fx-white, -20%);
+}
 .chat-container .message-container .chat-message {
     -fx-padding: 10;
 }
