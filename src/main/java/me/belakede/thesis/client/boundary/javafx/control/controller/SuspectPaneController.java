@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.util.StringConverter;
+import me.belakede.thesis.client.boundary.javafx.converter.SuspectStringConverter;
 import me.belakede.thesis.client.boundary.javafx.converter.WeaponStringConverter;
 import me.belakede.thesis.client.boundary.javafx.task.SuspectTask;
 import me.belakede.thesis.client.service.BoardService;
@@ -56,17 +56,7 @@ public class SuspectPaneController implements Initializable {
     }
 
     private void fillChoiceBoxes() {
-        suspect.setConverter(new StringConverter<Suspect>() {
-            @Override
-            public String toString(Suspect object) {
-                return getResourceBundle().getString(object.name());
-            }
-
-            @Override
-            public Suspect fromString(String string) {
-                return getResourceBundle().keySet().stream().filter(key -> string.equals(getResourceBundle().getString(key))).map(Suspect::valueOf).findFirst().get();
-            }
-        });
+        suspect.setConverter(new SuspectStringConverter(getResourceBundle()));
         weapon.setConverter(new WeaponStringConverter(getResourceBundle()));
         suspect.setItems(FXCollections.observableArrayList(Suspect.values()));
         weapon.setItems(FXCollections.observableArrayList(Weapon.values()));
