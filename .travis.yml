@@ -1,7 +1,9 @@
 language: java
+sudo: required
 jdk:
   - oraclejdk8
 before_install:
+  - sudo apt-get update && sudo apt-get install oracle-java8-installer
   - git clone git@github.com:belakede/thesis-core.git /tmp/thesis-core
   - mvn install -Dmaven.test.skip=true -f /tmp/thesis-core/pom.xml
   - git clone git@github.com:belakede/thesis-channel.git /tmp/thesis-channel
