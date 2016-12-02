@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import me.belakede.thesis.client.boundary.javafx.converter.RoomStringConverter;
+import me.belakede.thesis.client.boundary.javafx.converter.SuspectStringConverter;
+import me.belakede.thesis.client.boundary.javafx.converter.WeaponStringConverter;
 import me.belakede.thesis.client.boundary.javafx.task.AccuseTask;
 import me.belakede.thesis.client.service.UserService;
 import me.belakede.thesis.game.equipment.Room;
@@ -24,6 +27,7 @@ public class AccusePaneController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccusePaneController.class);
     private final UserService userService;
+    private ResourceBundle resourceBundle;
 
     @FXML
     private ChoiceBox<Suspect> suspect;
@@ -41,11 +45,15 @@ public class AccusePaneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setResourceBundle(resources);
         fillChoiceBoxes();
         setupActionListeners();
     }
 
     private void fillChoiceBoxes() {
+        suspect.setConverter(new SuspectStringConverter(getResourceBundle()));
+        room.setConverter(new RoomStringConverter(getResourceBundle()));
+        weapon.setConverter(new WeaponStringConverter(getResourceBundle()));
         suspect.setItems(FXCollections.observableArrayList(Suspect.values()));
         room.setItems(FXCollections.observableArrayList(Room.values()));
         weapon.setItems(FXCollections.observableArrayList(Weapon.values()));
@@ -66,4 +74,11 @@ public class AccusePaneController implements Initializable {
         });
     }
 
+    public ResourceBundle getResourceBundle() {
+        return resourceBundle;
+    }
+
+    public void setResourceBundle(ResourceBundle resourceBundle) {
+        this.resourceBundle = resourceBundle;
+    }
 }
