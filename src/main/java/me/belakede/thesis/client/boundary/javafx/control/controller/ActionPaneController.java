@@ -1,5 +1,6 @@
 package me.belakede.thesis.client.boundary.javafx.control.controller;
 
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.MapChangeListener.Change;
 import javafx.fxml.FXML;
@@ -97,6 +98,14 @@ public class ActionPaneController implements Initializable {
                     suspect.setDisable(true);
                     accuse.setDisable(true);
                     suspectPopOver.hide();
+                }
+            }
+        });
+        notificationService.showYourCardNotificationProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                if (!cardPopOver.isShowing()) {
+                    Platform.runLater(() -> cardPopOver.show(show));
+                    notificationService.setShowYourCardNotification(null);
                 }
             }
         });
