@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.util.StringConverter;
+import me.belakede.thesis.client.boundary.javafx.converter.WeaponStringConverter;
 import me.belakede.thesis.client.boundary.javafx.task.SuspectTask;
 import me.belakede.thesis.client.service.BoardService;
 import me.belakede.thesis.client.service.PlayerService;
@@ -30,6 +32,7 @@ public class SuspectPaneController implements Initializable {
     private final UserService userService;
     private final BoardService boardService;
     private final PlayerService playerService;
+    private ResourceBundle resourceBundle;
 
     @FXML
     private ChoiceBox<Suspect> suspect;
@@ -47,11 +50,24 @@ public class SuspectPaneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setResourceBundle(resources);
         fillChoiceBoxes();
         setupActionListeners();
     }
 
     private void fillChoiceBoxes() {
+        suspect.setConverter(new StringConverter<Suspect>() {
+            @Override
+            public String toString(Suspect object) {
+                return getResourceBundle().getString(object.name());
+            }
+
+            @Override
+            public Suspect fromString(String string) {
+                return getResourceBundle().keySet().stream().filter(key -> string.equals(getResourceBundle().getString(key))).map(Suspect::valueOf).findFirst().get();
+            }
+        });
+        weapon.setConverter(new WeaponStringConverter(getResourceBundle()));
         suspect.setItems(FXCollections.observableArrayList(Suspect.values()));
         weapon.setItems(FXCollections.observableArrayList(Weapon.values()));
     }
@@ -77,4 +93,11 @@ public class SuspectPaneController implements Initializable {
         });
     }
 
+    public ResourceBundle getResourceBundle() {
+        return resourceBundle;
+    }
+
+    public void setResourceBundle(ResourceBundle resourceBundle) {
+        this.resourceBundle = resourceBundle;
+    }
 }
