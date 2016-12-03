@@ -39,6 +39,7 @@ public class ActionPaneController implements Initializable {
     private final PlayerService playerService;
     private final PositionService positionService;
     private final NotificationService notificationService;
+    private ResourceBundle resourceBundle;
 
     @FXML
     private Button roll;
@@ -68,6 +69,7 @@ public class ActionPaneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setResourceBundle(resources);
         setupCardPane();
         setupCardPopOver();
         setupSuspectPopOver();
@@ -187,10 +189,10 @@ public class ActionPaneController implements Initializable {
         });
         quit.setOnAction(event -> {
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-            confirm.setTitle("Confirmation Dialog");
+            confirm.setTitle(getResourceBundle().getString("Confirmation Dialog"));
             confirm.setGraphic(new Glyph("FontAwesome", FontAwesome.Glyph.SIGN_OUT));
-            confirm.setHeaderText("Are you sure you want to leave the game?");
-            confirm.setContentText("The game is still running. Are you sure you want to leave?");
+            confirm.setHeaderText(getResourceBundle().getString("Are you sure you want to leave the game?"));
+            confirm.setContentText(getResourceBundle().getString("The game is still running. Are you sure you want to leave?"));
             Optional<ButtonType> buttonType = confirm.showAndWait();
             if (buttonType.isPresent() && ButtonType.OK.equals(buttonType.get())) {
                 QuitTask task = new QuitTask(userService);
@@ -236,5 +238,13 @@ public class ActionPaneController implements Initializable {
         suspect.setDisable(value);
         accuse.setDisable(value);
         next.setDisable(value);
+    }
+
+    public ResourceBundle getResourceBundle() {
+        return resourceBundle;
+    }
+
+    public void setResourceBundle(ResourceBundle resourceBundle) {
+        this.resourceBundle = resourceBundle;
     }
 }
