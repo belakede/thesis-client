@@ -43,7 +43,7 @@
                     </GridPane>
                 </VBox>
                 <HBox AnchorPane.topAnchor="25" AnchorPane.rightAnchor="25" styleClass="language-box">
-                    <Text>Language:</Text>
+                    <Text text="%Language"/>
                     <ChoiceBox fx:id="languageBox"/>
                 </HBox>
             </AnchorPane>

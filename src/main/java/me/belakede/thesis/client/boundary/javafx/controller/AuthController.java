@@ -75,7 +75,7 @@ public class AuthController implements Initializable {
 
     private void initLanguageBox() {
         languageBox.getItems().addAll(new Locale("hu"), new Locale("en"));
-        languageBox.setValue(new Locale("en"));
+        languageBox.setValue(DEFAULT_LOCALE.getValue());
     }
 
 
