@@ -5,7 +5,9 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.MapChangeListener.Change;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import me.belakede.thesis.client.boundary.javafx.control.AccusePane;
 import me.belakede.thesis.client.boundary.javafx.control.CardPane;
 import me.belakede.thesis.client.boundary.javafx.control.SuspectPane;
@@ -20,10 +22,13 @@ import me.belakede.thesis.game.field.FieldType;
 import me.belakede.thesis.server.game.response.CardNotification;
 import me.belakede.thesis.server.game.response.SuspicionNotification;
 import org.controlsfx.control.PopOver;
+import org.controlsfx.glyphfont.FontAwesome;
+import org.controlsfx.glyphfont.Glyph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 @Controller
@@ -181,10 +186,18 @@ public class ActionPaneController implements Initializable {
             thread.start();
         });
         quit.setOnAction(event -> {
-            QuitTask task = new QuitTask(userService);
-            Thread thread = new Thread(task);
-            thread.setDaemon(true);
-            thread.start();
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("Confirmation Dialog");
+            confirm.setGraphic(new Glyph("FontAwesome", FontAwesome.Glyph.SIGN_OUT));
+            confirm.setHeaderText("Are you sure you want to leave the game?");
+            confirm.setContentText("The game is still running. Are you sure you want to leave?");
+            Optional<ButtonType> buttonType = confirm.showAndWait();
+            if (buttonType.isPresent() && ButtonType.OK.equals(buttonType.get())) {
+                QuitTask task = new QuitTask(userService);
+                Thread thread = new Thread(task);
+                thread.setDaemon(true);
+                thread.start();
+            }
         });
     }
 
