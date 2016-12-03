@@ -9,10 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.MediaType;
+import java.util.Optional;
 
 import static me.belakede.thesis.client.configuration.ClientConfiguration.*;
 
-public class AuthenticationTask extends Task<Token> {
+public class AuthenticationTask extends Task<Optional<Token>> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationTask.class);
 
@@ -27,7 +28,7 @@ public class AuthenticationTask extends Task<Token> {
     }
 
     @Override
-    protected Token call() throws Exception {
+    protected Optional<Token> call() throws Exception {
         Client client = Client.create();
         Token result = null;
         WebResource webResource = client.resource(server + "/oauth/token");
@@ -44,16 +45,13 @@ public class AuthenticationTask extends Task<Token> {
                 .header("Authorization", getBasicAccessAuthenticationHeader())
                 .post(ClientResponse.class, request);
 
-        if (response.getStatus() != 200) {
-            LOGGER.warn("HTTP error code : {}", response.getStatus());
-            LOGGER.warn("{}", response.toString());
-            throw new RuntimeException("Authentication failed!");
-        } else {
+        if (response.getStatus() == 200) {
+            LOGGER.warn("HTTP status code : {}", response.getStatus());
             result = response.getEntity(Token.class);
             LOGGER.info("Access Token: {}", result.getAccessToken());
             LOGGER.info("Token has been stored!");
         }
-        return result;
+        return Optional.ofNullable(result);
     }
 
 }

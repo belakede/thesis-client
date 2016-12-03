@@ -17,6 +17,8 @@ import me.belakede.thesis.client.domain.Token;
 import me.belakede.thesis.client.service.UserService;
 import org.controlsfx.control.NotificationPane;
 import org.controlsfx.control.PopOver;
+import org.controlsfx.glyphfont.FontAwesome;
+import org.controlsfx.glyphfont.Glyph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ import org.springframework.stereotype.Controller;
 
 import java.net.URL;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static me.belakede.thesis.client.service.SpringFxmlLoader.DEFAULT_LOCALE;
@@ -101,22 +104,32 @@ public class AuthController implements Initializable {
         String passwordText = password.getText().trim();
         String serverAddressText = serverAddress.getText().trim() + ":" + port.getText().trim();
 
-        Task<Token> task = new AuthenticationTask(serverAddressText, usernameText, passwordText);
+        Task<Optional<Token>> task = new AuthenticationTask(serverAddressText, usernameText, passwordText);
         task.setOnFailed(event -> {
-            LOGGER.warn("Authentication failed!");
-            notificationPane.setText("Authentication failed! ");
-            notificationPane.show();
+            LOGGER.warn("Authentication failed: Server not found!");
+            showNotification("Server not found!");
         });
         task.setOnSucceeded(event -> {
-            userService.setToken(task.getValue());
-            userService.setUsername(usernameText);
-            userService.setBaseUrl(serverAddressText);
-            LOGGER.info("Authentication succeed!");
-            hide();
+            if (task.getValue().isPresent()) {
+                LOGGER.info("Authentication succeed!");
+                userService.setToken(task.getValue().get());
+                userService.setUsername(usernameText);
+                userService.setBaseUrl(serverAddressText);
+                hide();
+            } else {
+                LOGGER.warn("Authentication failed: Username or password is incorrect!");
+                showNotification("The username or password is incorrect.");
+            }
         });
         Thread thread = new Thread(task);
         thread.setDaemon(true);
         thread.start();
+    }
+
+    private void showNotification(String message) {
+        notificationPane.setText(message);
+        notificationPane.setGraphic(new Glyph("FontAweomse", FontAwesome.Glyph.EXCLAMATION_TRIANGLE));
+        notificationPane.show();
     }
 
     public void register(ActionEvent event) {
