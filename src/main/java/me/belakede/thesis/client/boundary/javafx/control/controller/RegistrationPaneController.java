@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 public class RegistrationPaneController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationPaneController.class);
+    private ResourceBundle resourceBundle;
 
     @FXML
     private VBox parent;
@@ -38,6 +39,7 @@ public class RegistrationPaneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setResourceBundle(resources);
         setupNotificationPane();
         setupActionEvents();
     }
@@ -51,19 +53,19 @@ public class RegistrationPaneController implements Initializable {
         submit.setOnAction(event -> {
             if (password.getText().isEmpty() || password.getText().length() < 5 || !password.getText().equals(passwordAgain.getText())) {
                 LOGGER.info("Missing or wrong password!");
-                notificationPane.setText("Missing or wrong password!");
+                notificationPane.setText(getResourceBundle().getString("Missing or wrong password!"));
                 notificationPane.show();
             } else {
                 Task task = new RegistrationTask(serverAddress.getText(), username.getText(), password.getText());
                 task.setOnFailed(failedEvent -> {
                     LOGGER.info("Registration failed!");
-                    notificationPane.setText("Registration failed!");
+                    notificationPane.setText(getResourceBundle().getString("Registration failed! Please check the server address and the username."));
                     notificationPane.show();
                 });
                 task.setOnSucceeded(succeededEvent -> {
                     LOGGER.info("Registration succeeded!");
                     submit.setDisable(true);
-                    notificationPane.setText("Registration succeeded!");
+                    notificationPane.setText(getResourceBundle().getString("Registration succeeded!"));
                     notificationPane.getContent().setDisable(true);
                     notificationPane.show();
                 });
@@ -72,5 +74,13 @@ public class RegistrationPaneController implements Initializable {
                 thread.start();
             }
         });
+    }
+
+    public ResourceBundle getResourceBundle() {
+        return resourceBundle;
+    }
+
+    public void setResourceBundle(ResourceBundle resourceBundle) {
+        this.resourceBundle = resourceBundle;
     }
 }
