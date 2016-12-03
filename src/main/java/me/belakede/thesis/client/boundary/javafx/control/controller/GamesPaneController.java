@@ -33,6 +33,7 @@ public class GamesPaneController implements Initializable {
     private final ObjectProperty<GameSummary> selectedGame = new SimpleObjectProperty<>();
     private final UserService userService;
     private final DownloadGamesService downloadGamesService;
+    private ResourceBundle resourceBundle;
 
     @FXML
     private ListView<GameSummary> gamesView;
@@ -50,6 +51,7 @@ public class GamesPaneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setResourceBundle(resources);
         setupActionEvents();
         hookupChangeListeners();
         downloadGames();
@@ -132,20 +134,21 @@ public class GamesPaneController implements Initializable {
 
     private Optional<BoardType> selectBoardType() {
         ChoiceDialog<BoardType> dialog = new ChoiceDialog<>(BoardType.DEFAULT, BoardType.values());
-        dialog.setTitle("Board Type");
-        dialog.setHeaderText("Select board type");
+        dialog.setTitle(getResourceBundle().getString("Board Type"));
+        dialog.setHeaderText(getResourceBundle().getString("Select board type"));
         dialog.setGraphic(new Glyph("FontAwesome", FontAwesome.Glyph.AREA_CHART));
-        dialog.setContentText("Choose your letter:");
+        dialog.setContentText(getResourceBundle().getString("Choose board type:"));
         return dialog.showAndWait();
     }
 
     private Optional<ObservableList<String>> addPlayers() {
         Dialog<ObservableList<String>> dialog = new Dialog<>();
-        dialog.setTitle("Players");
-        dialog.setHeaderText("Select minimum 2 players for the game");
+        dialog.setTitle(getResourceBundle().getString("Players"));
+        dialog.setHeaderText(getResourceBundle().getString("Select minimum 2 players for the game"));
         dialog.setGraphic(new Glyph("FontAwesome", FontAwesome.Glyph.USERS));
-        ButtonType addButtonType = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+        ButtonType addButtonType = new ButtonType(getResourceBundle().getString("Add"), ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType(getResourceBundle().getString("Cancel"), ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButtonType, cancelButtonType);
 
         ListView<String> players = new ListView<>(getPlayers());
         players.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -171,4 +174,11 @@ public class GamesPaneController implements Initializable {
         return dialog.showAndWait();
     }
 
+    public ResourceBundle getResourceBundle() {
+        return resourceBundle;
+    }
+
+    public void setResourceBundle(ResourceBundle resourceBundle) {
+        this.resourceBundle = resourceBundle;
+    }
 }
