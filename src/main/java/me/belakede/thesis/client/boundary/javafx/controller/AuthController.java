@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.control.RegistrationPane;
+import me.belakede.thesis.client.boundary.javafx.converter.LanguageStringConverter;
+import me.belakede.thesis.client.boundary.javafx.model.Language;
 import me.belakede.thesis.client.boundary.javafx.task.AuthenticationTask;
 import me.belakede.thesis.client.domain.Token;
 import me.belakede.thesis.client.service.UserService;
@@ -25,7 +27,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -39,7 +40,7 @@ public class AuthController implements Initializable {
     @FXML
     public TextField port;
     @FXML
-    public ChoiceBox<Locale> languageBox;
+    public ChoiceBox<Language> languageBox;
     private ResourceBundle resourceBundle;
     @FXML
     private VBox parent;
@@ -69,13 +70,14 @@ public class AuthController implements Initializable {
 
     private void hookupChangeListeners() {
         languageBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            DEFAULT_LOCALE.setValue(newValue);
+            DEFAULT_LOCALE.setValue(newValue.getLocale());
         });
     }
 
     private void initLanguageBox() {
-        languageBox.getItems().addAll(new Locale("hu"), new Locale("en"));
-        languageBox.setValue(DEFAULT_LOCALE.getValue());
+        languageBox.getItems().addAll(Language.values());
+        languageBox.setConverter(new LanguageStringConverter());
+        languageBox.setValue(Language.valueOf(DEFAULT_LOCALE.getValue()));
     }
 
 
