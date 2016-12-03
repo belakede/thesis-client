@@ -35,12 +35,12 @@ import static me.belakede.thesis.client.service.SpringFxmlLoader.DEFAULT_LOCALE;
 public class AuthController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
-
     private final UserService userService;
     @FXML
     public TextField port;
     @FXML
     public ChoiceBox<Locale> languageBox;
+    private ResourceBundle resourceBundle;
     @FXML
     private VBox parent;
     @FXML
@@ -59,6 +59,7 @@ public class AuthController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+        setResourceBundle(resources);
         initLanguageBox();
         setupDefaultValues();
         setupNotificationPane();
@@ -85,7 +86,7 @@ public class AuthController implements Initializable {
 
     private void setupPopOver() {
         popOver = new PopOver(new RegistrationPane());
-        popOver.setTitle("Register");
+        popOver.setTitle(getResourceBundle().getString("Register"));
         popOver.setDetachable(false);
         popOver.setDetached(false);
         popOver.setArrowLocation(PopOver.ArrowLocation.BOTTOM_CENTER);
@@ -107,7 +108,7 @@ public class AuthController implements Initializable {
         Task<Optional<Token>> task = new AuthenticationTask(serverAddressText, usernameText, passwordText);
         task.setOnFailed(event -> {
             LOGGER.warn("Authentication failed: Server not found!");
-            showNotification("Server not found!");
+            showNotification(getResourceBundle().getString("Server not found!"));
         });
         task.setOnSucceeded(event -> {
             if (task.getValue().isPresent()) {
@@ -118,7 +119,7 @@ public class AuthController implements Initializable {
                 hide();
             } else {
                 LOGGER.warn("Authentication failed: Username or password is incorrect!");
-                showNotification("The username or password is incorrect.");
+                showNotification(getResourceBundle().getString("The username or password is incorrect."));
             }
         });
         Thread thread = new Thread(task);
@@ -141,5 +142,13 @@ public class AuthController implements Initializable {
         transition.setToY(-(parent.getHeight()));
         transition.setOnFinished(event -> parent.setVisible(false));
         transition.play();
+    }
+
+    public ResourceBundle getResourceBundle() {
+        return resourceBundle;
+    }
+
+    public void setResourceBundle(ResourceBundle resourceBundle) {
+        this.resourceBundle = resourceBundle;
     }
 }
