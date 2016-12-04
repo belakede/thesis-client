@@ -3,8 +3,7 @@ package me.belakede.thesis.client.boundary.javafx.control.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
-import me.belakede.thesis.client.service.NotificationService;
-import me.belakede.thesis.server.game.response.Notification;
+import me.belakede.thesis.client.service.NotificationConverterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -14,14 +13,14 @@ import java.util.ResourceBundle;
 @Controller
 public class HistoryBoxController implements Initializable {
 
-    private final NotificationService notificationService;
+    private final NotificationConverterService notificationConverterService;
 
     @FXML
-    private ListView<Notification> eventList;
+    private ListView<String> eventList;
 
     @Autowired
-    public HistoryBoxController(NotificationService notificationService) {
-        this.notificationService = notificationService;
+    public HistoryBoxController(NotificationConverterService notificationConverterService) {
+        this.notificationConverterService = notificationConverterService;
     }
 
     @Override
@@ -30,6 +29,6 @@ public class HistoryBoxController implements Initializable {
     }
 
     private void bindEvents() {
-        eventList.itemsProperty().bind(notificationService.notificationsProperty());
+        eventList.itemsProperty().bind(notificationConverterService.notificationsProperty());
     }
 }

@@ -12,6 +12,7 @@ import javafx.util.Duration;
 import me.belakede.thesis.client.boundary.javafx.control.BoardPane;
 import me.belakede.thesis.client.boundary.javafx.control.SideBar;
 import me.belakede.thesis.client.boundary.javafx.controller.LoungeController;
+import me.belakede.thesis.client.service.NotificationConverterService;
 import me.belakede.thesis.client.service.NotificationService;
 import me.belakede.thesis.client.service.PlayerService;
 import me.belakede.thesis.server.game.response.CardNotification;
@@ -32,6 +33,7 @@ public class GamePaneController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GamePaneController.class);
     private final NotificationService notificationService;
+    private final NotificationConverterService notificationConverterService;
     private final PlayerService playerService;
     private final LoungeController loungeController;
 
@@ -43,8 +45,9 @@ public class GamePaneController implements Initializable {
     private BorderPane boardPaneHolder;
 
     @Autowired
-    public GamePaneController(NotificationService notificationService, PlayerService playerService, LoungeController loungeController) {
+    public GamePaneController(NotificationService notificationService, NotificationConverterService notificationConverterService, PlayerService playerService, LoungeController loungeController) {
         this.notificationService = notificationService;
+        this.notificationConverterService = notificationConverterService;
         this.playerService = playerService;
         this.loungeController = loungeController;
     }
@@ -83,22 +86,22 @@ public class GamePaneController implements Initializable {
         });
         notificationService.pairOfDiceNotificationProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> {
-                showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.CUBE), newValue.toString());
+                showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.CUBE), notificationConverterService.readText(newValue));
             });
         });
         notificationService.figurineNotificationProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> {
-                showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.MAP_MARKER), newValue.toString());
+                showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.MAP_MARKER), notificationConverterService.readText(newValue));
             });
         });
         notificationService.currentPlayerNotificationProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> {
-                showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.USER), newValue.toString());
+                showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.USER), notificationConverterService.readText(newValue));
             });
         });
         notificationService.accusationNotificationProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> {
-                showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.CROSSHAIRS), newValue.toString());
+                showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.CROSSHAIRS), notificationConverterService.readText(newValue));
             });
         });
         notificationService.playerOutNotificationsProperty().addListener((ListChangeListener<PlayerOutNotification>) change -> {
@@ -106,7 +109,7 @@ public class GamePaneController implements Initializable {
                 if (change.wasAdded()) {
                     change.getAddedSubList().forEach(newValue -> {
                         Platform.runLater(() -> {
-                            showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.FROWN_ALT), newValue.toString());
+                            showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.FROWN_ALT), notificationConverterService.readText(newValue));
                         });
                     });
                     if (playerService.isCurrent()) {
@@ -121,7 +124,7 @@ public class GamePaneController implements Initializable {
                 if (change.wasAdded()) {
                     change.getAddedSubList().forEach(newValue -> {
                         Platform.runLater(() -> {
-                            showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.PHOTO), newValue.toString());
+                            showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.PHOTO), notificationConverterService.readText(newValue));
                         });
                     });
                 }
