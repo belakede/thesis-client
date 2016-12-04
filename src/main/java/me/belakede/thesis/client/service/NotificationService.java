@@ -31,12 +31,14 @@ public class NotificationService {
     private final ObjectProperty<FigurineNotification> figurineNotification = new SimpleObjectProperty<>();
     private final ListProperty<SuspicionNotification> suspicionNotifications = new SimpleListProperty<>();
     private final ObjectProperty<AccusationNotification> accusationNotification = new SimpleObjectProperty<>();
+    private final ListProperty<PlayerOutNotification> playerOutNotifications = new SimpleListProperty<>();
     private final ListProperty<CardNotification> cardNotifications = new SimpleListProperty<>();
 
     public NotificationService() {
         setNotifications(FXCollections.observableArrayList());
         setPlayerJoinedNotifications(FXCollections.observableArrayList());
         setSuspicionNotifications(FXCollections.observableArrayList());
+        setPlayerOutNotifications(FXCollections.observableArrayList());
         setCardNotifications(FXCollections.observableArrayList());
         setHookupChangeListeners();
     }
@@ -185,6 +187,18 @@ public class NotificationService {
         return accusationNotification;
     }
 
+    public ObservableList<PlayerOutNotification> getPlayerOutNotifications() {
+        return playerOutNotifications.get();
+    }
+
+    public void setPlayerOutNotifications(ObservableList<PlayerOutNotification> playerOutNotifications) {
+        this.playerOutNotifications.set(playerOutNotifications);
+    }
+
+    public ListProperty<PlayerOutNotification> playerOutNotificationsProperty() {
+        return playerOutNotifications;
+    }
+
     public ObservableList<CardNotification> getCardNotifications() {
         return cardNotifications.get();
     }
@@ -253,6 +267,10 @@ public class NotificationService {
 
     private void set(AccusationNotification notification) {
         setAccusationNotification(notification);
+    }
+
+    private void set(PlayerOutNotification notification) {
+        getPlayerOutNotifications().add(notification);
     }
 
     private void set(CardNotification notification) {
