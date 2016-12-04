@@ -13,6 +13,7 @@ import me.belakede.thesis.client.boundary.javafx.control.BoardPane;
 import me.belakede.thesis.client.boundary.javafx.control.SideBar;
 import me.belakede.thesis.client.boundary.javafx.controller.LoungeController;
 import me.belakede.thesis.client.service.NotificationService;
+import me.belakede.thesis.client.service.PlayerService;
 import me.belakede.thesis.server.game.response.CardNotification;
 import me.belakede.thesis.server.game.response.PlayerOutNotification;
 import org.controlsfx.control.NotificationPane;
@@ -31,6 +32,7 @@ public class GamePaneController implements Initializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GamePaneController.class);
     private final NotificationService notificationService;
+    private final PlayerService playerService;
     private final LoungeController loungeController;
 
     @FXML
@@ -41,8 +43,9 @@ public class GamePaneController implements Initializable {
     private BorderPane boardPaneHolder;
 
     @Autowired
-    public GamePaneController(NotificationService notificationService, LoungeController loungeController) {
+    public GamePaneController(NotificationService notificationService, PlayerService playerService, LoungeController loungeController) {
         this.notificationService = notificationService;
+        this.playerService = playerService;
         this.loungeController = loungeController;
     }
 
@@ -106,6 +109,10 @@ public class GamePaneController implements Initializable {
                             showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.FROWN_ALT), newValue.toString());
                         });
                     });
+                    if (playerService.isCurrent()) {
+                        sideBar.setDisable(true);
+                        boardPaneHolder.setDisable(true);
+                    }
                 }
             }
         });
