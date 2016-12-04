@@ -14,6 +14,7 @@ import me.belakede.thesis.client.boundary.javafx.control.SideBar;
 import me.belakede.thesis.client.boundary.javafx.controller.LoungeController;
 import me.belakede.thesis.client.service.NotificationService;
 import me.belakede.thesis.server.game.response.CardNotification;
+import me.belakede.thesis.server.game.response.PlayerOutNotification;
 import org.controlsfx.control.NotificationPane;
 import org.controlsfx.glyphfont.FontAwesome;
 import org.controlsfx.glyphfont.Glyph;
@@ -96,6 +97,17 @@ public class GamePaneController implements Initializable {
             Platform.runLater(() -> {
                 showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.CROSSHAIRS), newValue.toString());
             });
+        });
+        notificationService.playerOutNotificationsProperty().addListener((ListChangeListener<PlayerOutNotification>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    change.getAddedSubList().forEach(newValue -> {
+                        Platform.runLater(() -> {
+                            showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.FROWN_ALT), newValue.toString());
+                        });
+                    });
+                }
+            }
         });
         notificationService.cardNotificationsProperty().addListener((ListChangeListener.Change<? extends CardNotification> change) -> {
             while (change.next()) {
