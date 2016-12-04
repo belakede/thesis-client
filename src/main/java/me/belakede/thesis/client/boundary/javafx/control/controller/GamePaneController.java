@@ -92,6 +92,11 @@ public class GamePaneController implements Initializable {
                 showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.USER), newValue.toString());
             });
         });
+        notificationService.accusationNotificationProperty().addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(() -> {
+                showNotification(new Glyph("FontAwesome", FontAwesome.Glyph.CROSSHAIRS), newValue.toString());
+            });
+        });
         notificationService.cardNotificationsProperty().addListener((ListChangeListener.Change<? extends CardNotification> change) -> {
             while (change.next()) {
                 if (change.wasAdded()) {
