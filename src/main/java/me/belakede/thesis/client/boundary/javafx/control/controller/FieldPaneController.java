@@ -1,5 +1,6 @@
 package me.belakede.thesis.client.boundary.javafx.control.controller;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.MapChangeListener;
 import javafx.fxml.FXML;
@@ -91,11 +92,15 @@ public class FieldPaneController implements Initializable {
         });
         playerService.availableFieldsProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.contains(getField())) {
-                parent.getStyleClass().add("available");
-                parent.setDisable(false);
+                Platform.runLater(() -> {
+                    parent.getStyleClass().add("available");
+                    parent.setDisable(false);
+                });
             } else {
-                parent.getStyleClass().removeAll(Collections.singleton("available"));
-                parent.setDisable(true);
+                Platform.runLater(() -> {
+                    parent.getStyleClass().removeAll(Collections.singleton("available"));
+                    parent.setDisable(true);
+                });
             }
         });
     }
