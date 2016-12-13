@@ -16,6 +16,7 @@ import me.belakede.thesis.game.board.RoomField;
 import me.belakede.thesis.game.equipment.Room;
 import me.belakede.thesis.game.equipment.Suspect;
 import me.belakede.thesis.game.equipment.Weapon;
+import me.belakede.thesis.internal.game.util.Cards;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,8 @@ public class SuspectPaneController implements Initializable {
     private ChoiceBox<Weapon> weapon;
     @FXML
     private Button submit;
+    @FXML
+    private Button hint;
 
     @Autowired
     public SuspectPaneController(UserService userService, BoardService boardService, PlayerService playerService) {
@@ -80,6 +83,10 @@ public class SuspectPaneController implements Initializable {
             } else {
                 LOGGER.warn("Your current field is {} which not a room field", playerService.getField());
             }
+        });
+        hint.setOnAction(event -> {
+            suspect.getSelectionModel().select(Cards.getRandomSuspect().get());
+            weapon.getSelectionModel().select(Cards.getRandomWeapon().get());
         });
     }
 
