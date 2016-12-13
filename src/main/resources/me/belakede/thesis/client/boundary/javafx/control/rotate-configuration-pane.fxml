@@ -7,7 +7,7 @@
 <fx:root xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox"
          fx:controller="me.belakede.thesis.client.boundary.javafx.control.controller.RotateConfigurationPaneController">
     <VBox spacing="10" minWidth="180" prefWidth="180" maxWidth="180">
-        <Label fx:id="rollValue" text="%Roll"/>
+        <Label fx:id="rollValue" text="%Rotate"/>
         <Slider fx:id="roll" min="-180" max="180" value="0" showTickMarks="true" blockIncrement="45"
                 majorTickUnit="30" minWidth="180" maxWidth="180"/>
         <ToggleSwitch fx:id="autoRotate" text="%Auto rotation" selected="true"/>
