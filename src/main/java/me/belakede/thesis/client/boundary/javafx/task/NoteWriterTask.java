@@ -41,7 +41,7 @@ public class NoteWriterTask extends Task<Void> {
 
     @Override
     protected Void call() throws Exception {
-        if (!needToWrite()) {
+        if (needToWrite()) {
             Client client = ClientBuilder.newClient();
             WebTarget webTarget = client.target(userService.getUrl("/notes"));
             Response response = webTarget.request().accept(MediaType.APPLICATION_JSON_TYPE)
