@@ -16,5 +16,5 @@
     <Button fx:id="hint" text="%Hint" GridPane.columnIndex="1" GridPane.rowIndex="4"
             GridPane.halignment="LEFT"/>
     <Button fx:id="submit" text="%Suspect" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.columnSpan="4"
-            GridPane.halignment="RIGHT"/>
+            GridPane.halignment="RIGHT" styleClass="submit"/>
 </fx:root>

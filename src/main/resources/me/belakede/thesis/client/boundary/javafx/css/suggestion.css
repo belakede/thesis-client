@@ -13,6 +13,9 @@
     -fx-pref-width: 130;
 }
 .suggestion-container Button {
-    -fx-pref-width: 205;
     -fx-padding: 10;
+}
+
+.suggestion-container Button.submit {
+    -fx-pref-width: 205;
 }
